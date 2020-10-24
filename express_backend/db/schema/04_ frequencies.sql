@@ -5,4 +5,4 @@ CREATE TABLE frequencies(
   type_of VARCHAR NOT NULL,
   interval INTEGER,
   reoccurence_id INTEGER REFERENCES reocurrences(id) ON DELETE CASCADE
-)
+);

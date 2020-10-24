@@ -1,8 +1,8 @@
 INSERT INTO
-  users(first_name, last_name, email, password)
+  users(first_name, last_name, email, password, location)
 VALUES
-  ('Bert', 'Racoon', 'skate@evergreen.com', 'password'),
-  ('Ralph', 'Racoon', 'scarfmodel@evergreen.com', 'password'),
-  ('Cedric', ' Sneer', 'glasses@sneercie.com', 'password'),
-  ('Cyril', 'Sneer', 'ceo@sneercie.com','password'),
-  ('Sophia', 'Tutu', 'gymnast5star@nintendo.com', 'password');
+  ('Bert', 'Racoon', 'skate@evergreen.com', 'password', point(49.24713, -123.10867)),
+  ('Ralph', 'Racoon', 'scarfmodel@evergreen.com', 'password',point(43.69854, -79.41188)),
+  ('Cedric', ' Sneer', 'glasses@sneerinc.com', 'password',point(43.70415, -79.38875)),
+  ('Cyril', 'Sneer', 'ceo@sneerinc.com','password',point(43.67969, -79.29683)),
+  ('Sophia', 'Tutu', 'gymnast5star@evergreen.com', 'password',point(43.68757, -79.35871));

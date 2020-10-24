@@ -5,8 +5,8 @@ CREATE TABLE trips(
     title VARCHAR(255) NOT NULL,
     start_time DATE,
     end_time DATE,
-    end_time DATE,
-    created_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW(),
     is_active BOOLEAN DEFAULT TRUE NOT NULL,
+    destination POINT NOT NULL,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
