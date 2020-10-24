@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS items CASCADE;
+
+CREATE TABLE items (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR,
+  description VARCHAR
+)
