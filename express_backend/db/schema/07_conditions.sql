@@ -4,4 +4,4 @@ CREATE TABLE conditions (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR,
   description VARCHAR
-)
+);
