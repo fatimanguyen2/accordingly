@@ -8,5 +8,6 @@ CREATE TABLE trips(
     created_at TIMESTAMP DEFAULT NOW(),
     is_active BOOLEAN DEFAULT TRUE NOT NULL,
     destination POINT NOT NULL,
+    is_outdoor BOOLEAN NOT NULL,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );

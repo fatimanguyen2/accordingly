@@ -9,6 +9,7 @@ CREATE TABLE reocurrences(
     end_time TIME NOT NULL,
     created_at TIMESTAMP DEFAULT now(),
     destination POINT NOT NULL,
+    is_outdoor BOOLEAN NOT NULL,
     is_active BOOLEAN DEFAULT TRUE NOT NULL,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
