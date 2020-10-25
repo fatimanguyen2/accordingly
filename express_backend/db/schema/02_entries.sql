@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS entries CASCADE;
+
+CREATE TABLE entries(
+  id SERIAL PRIMARY KEY NOT NULL,
+  title VARCHAR(255),
+  is_outdoor BOOLEAN,
+  created_at TIMESTAMP DEFAULT now(),
+  is_active BOOLEAN DEFAULT TRUE NOT NULL,
+  user_id INTEGER REFERENCES entries(id) ON DELETE CASCADE
+);

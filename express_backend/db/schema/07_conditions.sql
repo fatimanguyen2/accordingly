@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS items CASCADE;
+DROP TABLE IF EXISTS conditions CASCADE;
 
-CREATE TABLE items (
+CREATE TABLE conditions (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR,
   description VARCHAR
-)
+);
