@@ -11,12 +11,15 @@ export default function RecommendationItem(props) {
   // };
   return (
     <li>
-      <div onClick={() => setChecked(!checked)}>
-        <input type='checkbox' checked={checked}/> Hello
-      </div>
       <div>
-      <ItemToggle toggle = {() => setToggle(!toggle)}/>
+        <div onClick={() => setChecked(!checked)}>
+          <input type='checkbox' checked={checked}/> {props.name}
+        </div>
+        <div>
+          <ItemToggle toggle = {() => setToggle(!toggle)}/>
+        </div>
       </div>
+      {toggle && <div><p>{props.description}</p></div>}
     </li>
   );
 };

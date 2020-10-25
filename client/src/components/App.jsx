@@ -28,7 +28,7 @@ function App() {
                 <EventList events={events} />
             </section>
             <DepartureTime departureTime='8:24pm' />
-            <RecommendationItem/>
+            <RecommendationItem name='Sunscreen' description='It is sunny outside.'/>
         </main>
     );
 }
