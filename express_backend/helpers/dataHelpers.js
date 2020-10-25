@@ -1,3 +1,4 @@
+const moment = require('moment');
 
 const getPostsByUsers = (usersPosts) => {
   const postsByUsers = {};
@@ -24,8 +25,19 @@ const getPostsByUsers = (usersPosts) => {
 };
 
 const computeWeekly = (reoc, day) => {
-  
-}
+  const fromInitial =  moment().week() - moment(reoc.initial).week()
+  return (moment(reoc.initial).day() === moment().day() && fromInitial % reoc.interval === 0)
+};
+
+const computeMonthly = (reoc, day) => {
+  const fromInitial =  moment().month() - moment(reoc.initial).month()
+  return (moment(reoc.initial).date() === moment().date() && fromInitial % reoc.interval === 0)
+};
+
+const computeYearly = (reoc, day) => {
+  const fromInitial =  moment().year() - moment(reoc.initial).year()
+  return (moment(reoc.initial).dayOfYear() === moment().dayOfYear() && fromInitial % reoc.interval === 0)
+};
 
 const computeReocs = (reocs, day) => {
 
@@ -43,10 +55,6 @@ const computeReocs = (reocs, day) => {
     }
   })
 }
-
-const install = [{type_of: 'daily'}, {type_of: 'weekly'}]
-
-console.log(computeReocs(install))
 
 module.exports = {
   getPostsByUsers,

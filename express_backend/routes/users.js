@@ -15,7 +15,10 @@ module.exports = ({ getUsers, addUser, getUserDay}) => {
 
   router.get('/:id/day', function (req, res) {
     getUserDay(req.params.id)
-      .then(day => res.json(day))
+      .then(rawDay => {
+        const parsedDay
+      
+        })
       .catch(err => res.json({ msg: err.message }))
   })
 
