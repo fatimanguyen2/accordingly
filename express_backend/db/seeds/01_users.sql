@@ -1,5 +1,5 @@
 INSERT INTO
-  users(first_name, last_name, email, password, location)
+  users(first_name, last_name, email, password, home_location)
 VALUES
   ('Bert', 'Racoon', 'skate@evergreen.com', 'password', point(49.24713, -123.10867)),
   ('Ralph', 'Racoon', 'scarfmodel@evergreen.com', 'password', point(43.69854, -79.41188)),
