@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import WeatherRing from './WeatherRing'
 import EventList from './EventList'
 import DepartureTime from './DepartureTime';
+import RecommendationItem from './RecommendationItem'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                 <EventList events={events} />
             </section>
             <DepartureTime departureTime='8:24pm' />
+            <RecommendationItem/>
         </main>
     );
 }
