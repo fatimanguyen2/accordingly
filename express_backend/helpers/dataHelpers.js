@@ -1,3 +1,4 @@
+
 const getPostsByUsers = (usersPosts) => {
   const postsByUsers = {};
 
@@ -22,6 +23,32 @@ const getPostsByUsers = (usersPosts) => {
   return Object.values(postsByUsers);
 };
 
+const computeWeekly = (reoc, day) => {
+  
+}
+
+const computeReocs = (reocs, day) => {
+
+  return reocs.filter((reoc) => {
+
+    switch (reoc.type_of) {
+      case 'daily':
+        return true;
+      case 'weekly':
+        return computeWeekly(reoc);
+      case 'monthly':
+        return computeMonthly(reoc);
+      case 'yearly':
+        return computeYearly(reoc);
+    }
+  })
+}
+
+const install = [{type_of: 'daily'}, {type_of: 'weekly'}]
+
+console.log(computeReocs(install))
+
 module.exports = {
   getPostsByUsers,
+  computeReocs,
 };
