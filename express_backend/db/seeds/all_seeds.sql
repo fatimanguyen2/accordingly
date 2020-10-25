@@ -32,6 +32,19 @@ VALUES
 ('2008-02-29', null, '9:00:00', '19:00:00', point(43.67559, -79.23953), 5);
 
 INSERT INTO
+  frequencies(type_of, interval, initial, reocurrence_id)
+VALUES
+('weekly', 1, '2020-03-09', 1),
+('weekly', 1, '2020-03-09', 1),
+('weekly', 1, '2020-03-09', 1),
+('weekly', 1, '2020-03-09', 1),
+('weekly', 1, '2020-03-09', 1),
+('daily', 1,'2020-03-05', 2),
+('weekly', 2, '2020-08-23', 3),
+('weekly', 4, '2020-09-01', 4),
+('monthly', 1, '2008-02-15', 5);
+
+INSERT INTO
   trips(start_time, end_time, destination, entry_id)
 VALUES
 ('2020-11-08 14:30:00', '2020-11-08 17:30:00',point(43.67969, -79.29683), 6),
