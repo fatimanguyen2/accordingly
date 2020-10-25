@@ -10,10 +10,10 @@ import DepartureTime from './DepartureTime';
 
 function App() {
     const events = [
-        {id: 1, title: 'work', startTime: '9:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png'},
-        {id: 2, title: 'lunch', startTime: '10:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png'},
-        {id: 3, title: 'meeting', startTime: '11:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png'},
-        {id: 4, title: 'meeting', startTime: '13:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png'}
+        { id: 1, title: 'work', startTime: '9:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' },
+        { id: 2, title: 'lunch', startTime: '10:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' },
+        { id: 3, title: 'meeting', startTime: '11:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' },
+        { id: 4, title: 'meeting', startTime: '13:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' }
     ];
     return (
         <main>
@@ -24,9 +24,9 @@ function App() {
                 maxTemp='29'
             />
             <section>
-                <EventList events = {events}/>
+                <EventList events={events} />
             </section>
-            <DepartureTime departureTime='8:24pm'/>
+            <DepartureTime departureTime='8:24pm' />
         </main>
     );
 }
