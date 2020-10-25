@@ -1,0 +1,28 @@
+INSERT INTO
+  items(name, description)
+VALUES
+('Water', 'Bring hydration in warm temperatur day'),
+('A lot of Water', 'Hydration is really important during hot day'),
+('Short Sleeves', 'Warm temperature allows light clothing'),
+('Long sleeves', 'Lower temperature require mor complete coverage'),
+('Light clothing', 'Warm enough for one layer'),
+('Extra layer', 'Warm cloth or light coat recommended'),
+('Winter Coat', 'Cold temperature requires quality coat'),
+('Shorts', 'Warm temperature allows light clothing'),
+('Light gloves', 'Keeping hand covered in cool temperature'),
+('Heavy gloves', 'Protects extremities in cold environment'),
+('Headwear', 'Cool enough to cover ears and head lightly'),
+('Winter Headwear', 'Cold temperature requires quality headwear'),
+('Light scarf', 'Cool enough to cover neck'),
+('Winter scarf', 'Neck protection during cold temperature'),
+('Breathable shoes', 'Feet comfort in warmer temperatures'),
+('Insulated footwear', 'Cold weather warrants warm footwear'),
+('Lip Balm', 'Dry conditions can be hard on sensible skin'),
+('Umbrella', 'To not get rained on'),
+('Waterproof footwear', 'Keeping feet dry navigating wet ground and puddles'),
+('Sunscreen', 'To protect agains sunburn due to high UV index'),
+('Sunglasses', 'Eye protection during sunny day'),
+('Filter mask', 'Current air quality suggests precaution'),
+('Windbreaker', 'Temperature and windspeed indicate biting wind'),
+('Black Ice Warning', 'Conditions suggest risk of falls'),
+('Reflective Clothing', 'Poor visibility is mitigated by bright clothing');

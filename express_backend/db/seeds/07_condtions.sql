@@ -1,10 +1,10 @@
 INSERT INTO
-  trips(name, description)
+  conditions(name, description)
 VALUES
 ('hot', 'Temperature above 25C'),
 ('warm', 'Temperature between 18C and 24C'),
 ('temperate', 'Temperature between 10C and 18C'),
-('cool', 'Temperature between 0C and 18C'),
+('cool', 'Temperature between 0C and 10C'),
 ('cold', 'Temperature between -10C and 0C'),
 ('very_cold', 'Temperature below -10C'),
 ('humid', 'Humidity above 60%'),
@@ -17,4 +17,4 @@ VALUES
 ('windy', 'Windspeed above 20km/h'),
 ('cold_wind', 'Windspeed above 20km/h and temperature below 15C'),
 ('slippery', 'presence of black ice'),
-('low_visib', 'Visibility under 100 meters')
+('low_visib', 'Visibility under 100 meters');

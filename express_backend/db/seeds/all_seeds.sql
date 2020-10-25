@@ -1,5 +1,5 @@
 INSERT INTO
-  users(first_name, last_name, email, password, home_location)
+  users(first_name, last_name, email, password, location)
 VALUES
   ('Bert', 'Racoon', 'skate@evergreen.com', 'password', point(49.24713, -123.10867)),
   ('Ralph', 'Racoon', 'scarfmodel@evergreen.com', 'password', point(43.69854, -79.41188)),
@@ -52,3 +52,85 @@ VALUES
 ('2020-12-13 18:00:00', '2020-12-13 21:30:00',point(43.67969, -79.29683), 8),
 ('2020-11-17 13:45:00', '2020-11-17 18:30:00',point(43.66858, -79.35459), 9),
 ('2020-09-05 11:00:00', '2020-09-05 21:30:00',point(44.22624, -76.49317), 10);
+
+INSERT INTO
+  items(name, description)
+VALUES
+('Water', 'Bring hydration in warm temperatur day'),
+('A lot of Water', 'Hydration is really important during hot day'),
+('Short Sleeves', 'Warm temperature allows light clothing'),
+('Long sleeves', 'Lower temperature require mor complete coverage'),
+('Light clothing', 'Warm enough for one layer'),
+('Extra layer', 'Warm cloth or light coat recommended'),
+('Winter Coat', 'Cold temperature requires quality coat'),
+('Shorts', 'Warm temperature allows light clothing'),
+('Light gloves', 'Keeping hand covered in cool temperature'),
+('Heavy gloves', 'Protects extremities in cold environment'),
+('Headwear', 'Cool enough to cover ears and head lightly'),
+('Winter Headwear', 'Cold temperature requires quality headwear'),
+('Light scarf', 'Cool enough to cover neck'),
+('Winter scarf', 'Neck protection during cold temperature'),
+('Breathable shoes', 'Feet comfort in warmer temperatures'),
+('Insulated footwear', 'Cold weather warrants warm footwear'),
+('Lip Balm', 'Dry conditions can be hard on sensible skin'),
+('Umbrella', 'To not get rained on'),
+('Waterproof footwear', 'Keeping feet dry navigating wet ground and puddles'),
+('Sunscreen', 'To protect agains sunburn due to high UV index'),
+('Sunglasses', 'Eye protection during sunny day'),
+('Filter mask', 'Current air quality suggests precaution'),
+('Windbreaker', 'Temperature and windspeed indicate biting wind'),
+('Black Ice Warning', 'Conditions suggest risk of falls'),
+('Reflective Clothing', 'Poor visibility is mitigated by bright clothing');
+
+INSERT INTO
+  conditions(name, description)
+VALUES
+('hot', 'Temperature above 25C'),
+('warm', 'Temperature between 18C and 24C'),
+('temperate', 'Temperature between 10C and 18C'),
+('cool', 'Temperature between 0C and 10C'),
+('cold', 'Temperature between -10C and 0C'),
+('very_cold', 'Temperature below -10C'),
+('humid', 'Humidity above 60%'),
+('moderate_hum', 'Humidity between 40% and 60%'),
+('dry', 'Humidity below 40%'),
+('rainy', 'Precipitaction mor intense than "drizzle"'),
+('wet_ground', 'Precipitation above 2.6mm/hr'),
+('uv_moderate', 'UV index between 3 and 6'),
+('uv_heavy', 'UV index above 6'),
+('windy', 'Windspeed above 20km/h'),
+('cold_wind', 'Windspeed above 20km/h and temperature below 15C'),
+('slippery', 'presence of black ice'),
+('low_visib', 'Visibility under 100 meters');
+
+INSERT INTO
+  item_condition(item_id, condition_id)
+VALUES
+(1,2),
+(2,1),
+(3,1),
+(3,2),
+(4,4),
+(5,1),
+(5,2),
+(6,5),
+(7,6),
+(8,1),
+(8,2),
+(9,5),
+(10,6),
+(11,5),
+(12,6),
+(13,5),
+(14,6),
+(15, 1),
+(16, 6),
+(17, 9),
+(18, 10),
+(19,11),
+(20,12),
+(21,13),
+(22,14),
+(23,15),
+(24,16),
+(25,17);
