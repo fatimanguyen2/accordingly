@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 module.exports = (db) => {
   const getUsers = () => {
     const query = {
@@ -50,6 +52,8 @@ module.exports = (db) => {
   }
 
   const getUserDay = (user, day) => {
+    const now = moment().format("'YYYY-MM-D'")
+
     const queryTrips = (`
     SELECT title AS entry, is_outdoor, trips.* FROM entries
     JOIN trips on trips.entry_id = entries.id
@@ -75,11 +79,44 @@ module.exports = (db) => {
     .catch(err => err);
   }
 
+  const computeWeekly = (reoc, day) => {
+    const fromInitial =  moment().week() - moment(reoc.initial).week()
+    return (moment(reoc.initial).day() === moment().day() && fromInitial % reoc.interval === 0)
+  };
+  
+  const computeMonthly = (reoc, day) => {
+    const fromInitial =  moment().month() - moment(reoc.initial).month()
+    return (moment(reoc.initial).date() === moment().date() && fromInitial % reoc.interval === 0)
+  };
+  
+  const computeYearly = (reoc, day) => {
+    const fromInitial =  moment().year() - moment(reoc.initial).year()
+    return (moment(reoc.initial).dayOfYear() === moment().dayOfYear() && fromInitial % reoc.interval === 0)
+  };
+  
+  const computeReocs = (reocs, day) => {
+  
+    return reocs.filter((reoc) => {
+  
+      switch (reoc.type_of) {
+        case 'daily':
+          return true;
+        case 'weekly':
+          return computeWeekly(reoc);
+        case 'monthly':
+          return computeMonthly(reoc);
+        case 'yearly':
+          return computeYearly(reoc);
+      }
+    })
+  }
+
   return {
     getUserDay,
     getUsers,
     getUserByEmail,
     addUser,
-    getUsersPosts
+    getUsersPosts,
+    computeReocs
   };
 };

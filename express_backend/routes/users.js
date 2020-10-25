@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const {getPostsByUsers} = require('../helpers/dataHelpers');
-const db = require('../db');
 
 
-module.exports = ({ getUsers, addUser, getUserDay}) => {
+
+
+module.exports = ({ getUsers, addUser, getUserDay, computeReocs }, { getEventOfDay }) => {
 
   /* GET users listing. */
   // router.get('/', function (req, res) {
@@ -16,8 +16,8 @@ module.exports = ({ getUsers, addUser, getUserDay}) => {
   router.get('/:id/day', function (req, res) {
     getUserDay(req.params.id)
       .then(rawDay => {
-        const parsedDay
-      
+        const parsedDay = rawDay[0].concat(computeReocs(rawDay[1]));
+        res.json(getEventOfDay(parsedDay))   
         })
       .catch(err => res.json({ msg: err.message }))
   })

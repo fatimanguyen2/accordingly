@@ -1,4 +1,4 @@
-const moment = require('moment');
+
 
 const getPostsByUsers = (usersPosts) => {
   const postsByUsers = {};
@@ -24,39 +24,21 @@ const getPostsByUsers = (usersPosts) => {
   return Object.values(postsByUsers);
 };
 
-const computeWeekly = (reoc, day) => {
-  const fromInitial =  moment().week() - moment(reoc.initial).week()
-  return (moment(reoc.initial).day() === moment().day() && fromInitial % reoc.interval === 0)
-};
-
-const computeMonthly = (reoc, day) => {
-  const fromInitial =  moment().month() - moment(reoc.initial).month()
-  return (moment(reoc.initial).date() === moment().date() && fromInitial % reoc.interval === 0)
-};
-
-const computeYearly = (reoc, day) => {
-  const fromInitial =  moment().year() - moment(reoc.initial).year()
-  return (moment(reoc.initial).dayOfYear() === moment().dayOfYear() && fromInitial % reoc.interval === 0)
-};
-
-const computeReocs = (reocs, day) => {
-
-  return reocs.filter((reoc) => {
-
-    switch (reoc.type_of) {
-      case 'daily':
-        return true;
-      case 'weekly':
-        return computeWeekly(reoc);
-      case 'monthly':
-        return computeMonthly(reoc);
-      case 'yearly':
-        return computeYearly(reoc);
+const getEventOfDay = (day) => {
+  return day.map(event => {
+    const { entry, start_time, end_time, destination } = event;
+    return {
+      entry,
+      start_time,
+      end_time,
+      destination
     }
   })
 }
 
+
+
 module.exports = {
   getPostsByUsers,
-  computeReocs,
+  getEventOfDay
 };
