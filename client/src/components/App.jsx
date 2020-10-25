@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 import WeatherRing from './WeatherRing'
 import EventList from './EventList'
+import DepartureTime from './DepartureTime';
 
 
 function App() {
@@ -16,17 +17,16 @@ function App() {
     ];
     return (
         <main>
-            <section>
-                <WeatherRing
-                    mainWeather='Sunny'
-                    feelsLikeTemp='23'
-                    minTemp='18'
-                    maxTemp='29'
-                />
-            </section>
+            <WeatherRing
+                mainWeather='Sunny'
+                feelsLikeTemp='23'
+                minTemp='18'
+                maxTemp='29'
+            />
             <section>
                 <EventList events = {events}/>
             </section>
+            <DepartureTime departureTime='8:24pm'/>
         </main>
     );
 }
