@@ -4,21 +4,21 @@ const router = express.Router();
 
 
 
-module.exports = ({ getUsers, addUser, getUserDay, computeReocs }, { getEventOfDay }) => {
+module.exports = ({ getUserEvents }, { createEventList }, { getTrip }) => {
 
-  /* GET users listing. */
-  // router.get('/', function (req, res) {
-  //   getUsers()
-  //     .then(users => res.json(users))
-  //     .catch(err => res.json({ msg: err.message }))
-  // });
-
-  router.get('/:id/day', function (req, res) {
-    getUserDay(req.params.id)
-      .then(rawDay => {
-        const parsedDay = rawDay[0].concat(computeReocs(rawDay[1]));
-        res.json(getEventOfDay(parsedDay))   
+  router.get('/:id/events', function (req, res) {
+    getUserEvents(req.params.id)
+      .then(rawEvents => {
+        
+        createEventList(rawEvents)
+        res.json(createEventList(rawEvents))
         })
+      .catch(err => res.json({ msg: err.message }))
+  })
+
+  router.get('/:id/today/recommandations', function (req, res) {
+    getTrip()
+      .then(res => cp)
       .catch(err => res.json({ msg: err.message }))
   })
 

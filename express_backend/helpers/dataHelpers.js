@@ -1,34 +1,16 @@
-const request = require('request');
+const moment = require('moment');
 
-const getPostsByUsers = (usersPosts) => {
-  const postsByUsers = {};
-
-  for (let post of usersPosts) {
-    if (!postsByUsers[post.user_id]) {
-      postsByUsers[post.user_id] = {
-        userId: post.user_id,
-        firstName: post.first_name,
-        lastName: post.last_name,
-        email: post.email,
-        posts: [],
-      };
-    }
-
-    postsByUsers[post.user_id].posts.push({
-      title: post.title,
-      content: post.content,
-    });
-
+const createEventList = (rawEvents) => {
+  return {
+    today: rawEvents[0].concat(checkReocsToday(rawEvents[2])),
+    repeating : rawEvents[1].map(event => ({...event, next_event: getNextEvent(event) })),
+    future : rawEvents[2]
   }
-
-  return Object.values(postsByUsers);
-};
+}
 
 const getEventOfDay = (day) => {
   return day.map(event => {
     const { entry, start_time, end_time, destination } = event;
-
-
     return {
       entry,
       start_time,
@@ -38,30 +20,64 @@ const getEventOfDay = (day) => {
   })
 }
 
-// MAPQUEST developerAPI
-// Key = 	AiWSvQStB39c9CB4ftDVnYgHANMxQbEx
+const groupByEntry = (events) => {
+  const group = {}
+}
 
-const locationToAddress = (location) => {
-  request(`http://www.mapquestapi.com/geocoding/v1/reverse?key=AiWSvQStB39c9CB4ftDVnYgHANMxQbEx&location=${location.x},${location.y}`, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      console.log(JSON.parse(body).results[0].locations[0])
-      const { street, adminAera5, adminAera3, adminAera1, postalCode } = (JSON.parse(body).results[0].locations[0])
-      return {
-        street,
-        city: adminAera5,
-        state: adminAera3,
-        country: adminAera1,
-        postalcode: postalCode
-      }
+
+const checkDayToday = (reoc, day) => {
+  const fromInitial =  moment().dayOfYear() - moment(reoc.initial).dayOfYear()
+  return (fromInitial % reoc.interval === 0)
+};
+
+const checkWeeklyToday = (reoc, day) => {
+  const fromInitial =  moment().week() - moment(reoc.initial).week()
+  return (moment(reoc.initial).day() === moment().day() && fromInitial % reoc.interval === 0)
+};
+
+const checkMonthlyToday = (reoc, day) => {
+  const fromInitial =  moment().month() - moment(reoc.initial).month()
+  return (moment(reoc.initial).date() === moment().date() && fromInitial % reoc.interval === 0)
+};
+
+const checkYearlyToday = (reoc, day) => {
+  const fromInitial =  moment().year() - moment(reoc.initial).year()
+  return (moment(reoc.initial).dayOfYear() === moment().dayOfYear() && fromInitial % reoc.interval === 0)
+};
+
+const checkReocsToday = (reocs, day) => {
+
+  return reocs.filter((reoc) => {
+
+    switch (reoc.type_of) {
+      case 'daily':
+        return checkDayToday(reoc);
+      case 'weekly':
+        return checkWeeklyToday(reoc);
+      case 'monthly':
+        return checkMonthlyToday(reoc);
+      case 'yearly':
+        return checkYearlyToday(reoc);
     }
   })
 }
 
-
-
+const getNextEvent = (reoc) => {
+  switch (reoc.type_of) {
+    case 'daily':
+      return moment(reoc.initial).add(reoc.interval,'d')
+    case 'weekly':
+      return moment(reoc.initial).add(reoc.interval,'w')
+    case 'monthly':
+      return moment(reoc.initial).add(reoc.interval,'M')
+    case 'yearly':
+      return moment(reoc.initial).add(reoc.interval,'y')
+  }
+}
 
 module.exports = {
-  getPostsByUsers,
   getEventOfDay,
-  locationToAddress
+  createEventList,
+  checkReocsToday,
+  getNextEvent
 };

@@ -4,6 +4,5 @@ CREATE TABLE trips(
     id SERIAL PRIMARY KEY NOT NULL,
     start_time TIMESTAMP,
     end_time TIMESTAMP,
-    destination POINT NOT NULL,
     entry_id INTEGER REFERENCES entries(id) ON DELETE CASCADE
 );

@@ -42,7 +42,7 @@ const events = {
       "type_of": "weekly",
       "initial": "2020-03-09T04:00:00.000Z",
       "interval": 1,
-      "reocurrence_id": 1
+      "recurrence_id": 1
     },
     {
       "entry": "commute",
@@ -54,7 +54,7 @@ const events = {
       "type_of": "weekly",
       "initial": "2020-03-09T04:00:00.000Z",
       "interval": 1,
-      "reocurrence_id": 1
+      "recurrence_id": 1
     }],
     future:
     [{
