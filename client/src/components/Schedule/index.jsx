@@ -74,6 +74,8 @@ export default function Schedule(props) {
     <div>
       <DepartureTime departureTime='8:24 am' />
       <EventList events={events.today}>Today:</EventList>
+      <EventList events={events.repeating}>Repeating:</EventList>
+      <EventList events={events.future}>Future:</EventList>
     </div>
   );
 };
