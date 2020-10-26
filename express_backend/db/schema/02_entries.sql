@@ -5,6 +5,7 @@ CREATE TABLE entries(
   title VARCHAR(255),
   is_outdoor BOOLEAN,
   created_at TIMESTAMP DEFAULT now(),
+  destination POINT NOT NULL,
   is_active BOOLEAN DEFAULT TRUE NOT NULL,
   user_id INTEGER REFERENCES entries(id) ON DELETE CASCADE
 );

@@ -14,27 +14,27 @@ module.exports = (db) => {
     AND (start_time > ${now} AND start_time < ${now})
     `)
 
-    const queryReocurrence = (`
-    SELECT title AS entry, entries.id, is_outdoor, reocurrences.*, frequencies.* FROM entries
-    JOIN reocurrences ON reocurrences.entry_id = entries.id
-    JOIN frequencies ON reocurrence_id = reocurrences.id
+    const queryrecurrence = (`
+    SELECT title AS entry, entries.id, is_outdoor, recurrences.*, frequencies.* FROM entries
+    JOIN recurrences ON recurrences.entry_id = entries.id
+    JOIN frequencies ON recurrence_id = recurrences.id
     WHERE user_id = ${user} 
     AND entries.is_active = TRUE 
     AND start_date < ${now}
     `)
 
     const queryFuture = (`
-    SELECT title AS entry, entries.id, is_outdoor, reocurrences.*, frequencies.* FROM entries
-    JOIN reocurrences ON reocurrences.entry_id = entries.id
-    JOIN frequencies ON reocurrence_id = reocurrences.id
+    SELECT title AS entry, entries.id, is_outdoor, recurrences.*, frequencies.* FROM entries
+    JOIN recurrences ON recurrences.entry_id = entries.id
+    JOIN frequencies ON recurrence_id = recurrences.id
     WHERE user_id = ${user} 
     AND entries.is_active = TRUE 
     AND start_date > ${now}
     `)
 
     const today = db.query(queryToday)
-    const reocs = db.query(queryReocurrence)
-    const future = db.query(queryReocurrence)
+    const reocs = db.query(queryrecurrence)
+    const future = db.query(queryrecurrence)
 
     return Promise.all([today, reocs, future])
       .then(results => [results[0].rows, results[1].rows, results[2].rows])

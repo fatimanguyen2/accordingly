@@ -1,5 +1,5 @@
 INSERT INTO
-  frequencies(type_of, interval, initial, reocurrence_id)
+  frequencies(type_of, interval, initial, recurrence_id)
 VALUES
 ('weekly', 1, '2020-03-09', 1),
 ('weekly', 1, '2020-03-10', 1),

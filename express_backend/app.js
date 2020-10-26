@@ -6,7 +6,7 @@ const logger = require('morgan');
 const db = require('./db');
 const dbHelpers = require('./models')(db);
 const dataHelpers = require('./helpers/dataHelpers')
-const mapQ = require('./apis/mapquest_api_calls')
+const mapQ = require('./APIs/mapquest_api_calls')
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
