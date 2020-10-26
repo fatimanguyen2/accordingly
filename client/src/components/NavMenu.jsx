@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 const classnames = require('classnames');
 
 export const NavMenu = (props) => {
@@ -21,7 +22,7 @@ export const NavMenu = (props) => {
         {props.loggedIn && <li><a>Settings</a></li>}
         {props.loggedIn && <li>
           <a>Refresh</a>
-          <span>1 min ago</span>
+          <span>{moment(1603740043000).fromNow()}</span>
         </li>}
       </ul>
     </button>
