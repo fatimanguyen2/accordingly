@@ -6,7 +6,7 @@ import DepartureTime from '../DepartureTime';
 import RecommendationList from './RecommendationList'
 
 
-function Home(props) {
+export const Home = (props) => {
     const suggestions = {
         upcoming: [{ id: 1, name: 'hat', description: 'Keep that head sheltered from the cold' }, { id: 2, name: 'suncreen', description: 'It is sunny outside' }],
         later: [{ id: 3, name: 'top', description: 'layer up' }, { id: 4, name: 'gloves', description: 'It is cold' }]
@@ -64,6 +64,4 @@ function Home(props) {
             </section>
         </div>
     );
-}
-
-export default Home;
+};

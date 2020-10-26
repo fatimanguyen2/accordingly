@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 // import useApplicationData from '../hooks/useApplicationData';
 // import { SET_USERS } from '../reducers/dataReducer';
 
-import Home from './Home'
+import { Home } from './Home'
+import { NavMenu } from './NavMenu'
+
 import Schedule from './Schedule'
 // Data needed for HOME component
 // const suggestions = {
@@ -25,8 +27,9 @@ import Schedule from './Schedule'
 function App() {
     return (
         <main>
-           {/* <Home/> */}
+           <Home/>
            <Schedule/>
+           <NavMenu/>
         </main>
     );
 }
