@@ -10,9 +10,11 @@ import RecommendationList from './RecommendationList'
 
 
 function App() {
-    const suggestions = {upcoming: [{id:1, name: 'hat', description: 'Keep that head sheltered from the cold'}, {id:2, name: 'suncreen', description: 'It is sunny outside'}], later: [{id:3, name: 'top', description: 'layer up'}, {id:2, name: 'suncreen', description: 'It is sunny outside'}]}
+    const suggestions = {
+        upcoming: [{id:1, name: 'hat', description: 'Keep that head sheltered from the cold'},{id:2, name: 'suncreen', description: 'It is sunny outside'}],
+        later: [{id:3, name: 'top', description: 'layer up'}, {id:2, name: 'suncreen', description: 'It is sunny outside'}]}
     
-    const [recommendations, setRecommendations] = useState({...suggestions, done: []})
+    const [recommendations, setRecommendations] = useState({...suggestions, done: [{id:5, name: 'umbrella', description: 'rainy rainy'}]})
     
     const events = [
         { id: 1, title: 'work', startTime: '9:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' },
@@ -21,11 +23,18 @@ function App() {
         { id: 4, title: 'meeting', startTime: '13:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' }
     ];
 
-    const getItem = (id, array) => {array.find(element => element.id === id)};
-    
+    const getItem = (id, array) => array.find(element => element.id === id);
+
+    // USE PREV BEFORE SPREADING??????
     const handleChecked = (id, type) => {
-        if (type === 'upcoming' || type === 'later') {
-            console.log(id, type)
+        const item = getItem(id, recommendations[type]);
+        // const filteredArr = recommendations[type].filter(item => item.id !== id);
+        // const doneArr = [...recommendations.done, item];
+
+        if (type === 'upcoming') {
+            setRecommendations(prev => ({...prev, upcoming: prev[type].filter(item => item.id !== id), done: [...prev.done, item]}));
+        } else if (type === 'later') {
+            setRecommendations(prev => ({...prev, later: prev[type].filter(item => item.id !== id), done: [...prev.done, item]}));
         }
     };
     return (
