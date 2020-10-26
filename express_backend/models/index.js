@@ -7,36 +7,36 @@ module.exports = (db) => {
     // const nowTest = "'2020-10-30'"
 
     const queryToday = (`
-    SELECT title AS entry, entries.id, is_outdoor, trips.* FROM entries
+    SELECT title AS entry, entries.id, destination, is_outdoor, trips.* FROM entries
     JOIN trips on trips.entry_id = entries.id
     WHERE user_id = ${user} 
     AND entries.is_active = TRUE 
     AND (start_time > ${now} AND start_time < ${now})
     `)
 
-    const queryReocurrence = (`
-    SELECT title AS entry, entries.id, is_outdoor, reocurrences.*, frequencies.* FROM entries
-    JOIN reocurrences ON reocurrences.entry_id = entries.id
-    JOIN frequencies ON reocurrence_id = reocurrences.id
+    const queryRecurrence = (`
+    SELECT title AS entry, entries.id, is_outdoor, destination, recurrences.*, frequencies.* FROM entries
+    JOIN recurrences ON recurrences.entry_id = entries.id
+    JOIN frequencies ON recurrence_id = recurrences.id
     WHERE user_id = ${user} 
     AND entries.is_active = TRUE 
     AND start_date < ${now}
     `)
 
     const queryFuture = (`
-    SELECT title AS entry, entries.id, is_outdoor, reocurrences.*, frequencies.* FROM entries
-    JOIN reocurrences ON reocurrences.entry_id = entries.id
-    JOIN frequencies ON reocurrence_id = reocurrences.id
+    SELECT title AS entry, entries.id, is_outdoor, destination, recurrences.*, frequencies.* FROM entries
+    JOIN recurrences ON recurrences.entry_id = entries.id
+    JOIN frequencies ON recurrence_id = recurrences.id
     WHERE user_id = ${user} 
     AND entries.is_active = TRUE 
     AND start_date > ${now}
     `)
 
     const today = db.query(queryToday)
-    const reocs = db.query(queryReocurrence)
-    const future = db.query(queryReocurrence)
+    const recs = db.query(queryRecurrence)
+    const future = db.query(queryFuture)
 
-    return Promise.all([today, reocs, future])
+    return Promise.all([today, recs, future])
       .then(results => [results[0].rows, results[1].rows, results[2].rows])
       .catch(err => err);
   }
