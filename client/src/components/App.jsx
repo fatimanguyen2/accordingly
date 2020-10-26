@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 // import { SET_USERS } from '../reducers/dataReducer';
 
 import Home from './Home'
+import NavMenu from 'NavMenu'
 
 // const suggestions = {
 //     upcoming: [{ id: 1, name: 'hat', description: 'Keep that head sheltered from the cold' }, { id: 2, name: 'suncreen', description: 'It is sunny outside' }],
@@ -28,6 +29,7 @@ function App() {
     return (
         <main>
            <Home/>
+           <NavMenu/>
         </main>
     );
 }
