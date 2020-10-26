@@ -4,6 +4,8 @@ import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock, faTrash } from '@fortawesome/free-solid-svg-icons';
 
+import RepeatList from './RepeatList'
+
 
 export default function EventListItem(props) {
   const [toggle, setToggle] = useState(false);
@@ -28,9 +30,14 @@ export default function EventListItem(props) {
               <p> {date} {props.endTime} </p>
             </div>
           </div>
-          <div>
-            <p> {props.reoccurenceId? 'Repeats' : 'Does not Repeat'} </p>
-          </div>
+          {
+            props.reoccurences ?
+              <div>
+                <p>Repeats</p>
+                <RepeatList reoccurences={props.reoccurences} />
+              </div>
+              : <div><p> Does not Repeat </p></div>
+          }
           <div>
             <button>Edit</button>
             <button><FontAwesomeIcon icon={faTrash} /></button>

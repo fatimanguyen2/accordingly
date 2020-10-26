@@ -27,10 +27,16 @@ const events = {
       "date": 'timestamp',
       "destination": '8469 Boul. Saint-Michel, Montreal QC H1Z 3E7',
       "entry_id": 1,
-      "type_of": "weekly",
-      "initial": "2020-03-09T04:00:00.000Z",
-      "interval": 1,
-      "reocurrence_id": 1
+      'reoccurence': [
+        {"type_of": "weekly",
+        "initial": "2020-03-09T04:00:00.000Z",
+        "interval": 1,
+        "reocurrence_id": 1},
+        {"type_of": "weekly",
+        "initial": "2020-03-09T04:00:00.000Z",
+        "interval": 1,
+        "reocurrence_id": 1}
+      ]
     }],
     repeating:
     [{

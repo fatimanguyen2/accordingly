@@ -11,7 +11,7 @@ export default function EventList(props){
       endTime = {event.endTime}
       weatherIcon = {event.weatherIcon} 
       destination = {event.destination}
-      reoccurenceId = {event.reocurrence_id}
+      reoccurences = {event.reocurrences}
     />
   })
   return (
