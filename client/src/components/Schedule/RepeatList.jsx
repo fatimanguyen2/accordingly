@@ -1,13 +1,20 @@
 import React from 'react';
 
-import RepeatItemList from './RepeatItemList'
+import RepeatListItem from './RepeatListItem'
 
 export default function RepeatList(props) {
-  const items = props.recurrences.map(reoccurence => {
-    return <RepeatItemList/>
+  const items = props.recurrences.map(reccurence => {
+    return <RepeatListItem
+    key={reccurence.reocurrence_id}
+    frequency={reccurence.type_of}
+    initial={reccurence.initial}
+    interval={reccurence.interval}
+    />
   });
   return (
-    <ul>
+    <div>
+      <p>Repeats</p>
       {items}
-    </ul>);
+    </div>
+  )
 };

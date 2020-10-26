@@ -26,9 +26,13 @@ const events = {
         "interval": 1,
         "reocurrence_id": 1},
         {"type_of": "weekly",
-        "initial": "2020-03-09T04:00:00.000Z",
+        "initial": "2020-03-11T04:00:00.000Z",
         "interval": 1,
-        "reocurrence_id": 1}
+        "reocurrence_id": 2},
+        {"type_of": "weekly",
+        "initial": "2020-03-14T04:00:00.000Z",
+        "interval": 2,
+        "reocurrence_id": 3}
       ]
     }],
     repeating:
