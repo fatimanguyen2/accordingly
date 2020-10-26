@@ -3,7 +3,7 @@ import ItemToggle from './ItemToggle'
 
 export default function RecommendationItem(props) {
   const [toggle, setToggle] = useState(false);
-  const [checked, setChecked] = useState(false);
+  const [checked, setCheck] = useState(false);
 
   // const toggleHandler = () => {
   //   toggle? setToggle(false) : setToggle(true);
@@ -12,8 +12,8 @@ export default function RecommendationItem(props) {
   return (
     <li>
       <div>
-        <div onClick={() => setChecked(!checked)}>
-          <input type='checkbox' checked={checked}/> {props.name}
+        <div onClick={() => setCheck(!checked)}>
+          <input type='checkbox' checked={checked} onChange={() => setCheck(prev => prev)}/> {props.name}
         </div>
         <div>
           <ItemToggle toggle = {() => setToggle(!toggle)}/>

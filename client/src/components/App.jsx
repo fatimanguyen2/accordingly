@@ -6,16 +6,21 @@ import React, { useEffect, useState } from 'react';
 import WeatherRing from './WeatherRing'
 import EventList from './EventList'
 import DepartureTime from './DepartureTime';
-import RecommendationItem from './RecommendationItem'
+import RecommendationList from './RecommendationList'
 
 
 function App() {
+    const suggestions = {upcoming: [{id:1, name: 'hat', description: 'Keep that head sheltered from the cold'}, {id:2, name: 'suncreen', description: 'It is sunny outside'}], later: [{id:3, name: 'top', description: 'layer up'}, {id:2, name: 'suncreen', description: 'It is sunny outside'}]}
+    
+    const [recommendations, setRecommendations] = useState({...suggestions, done: []})
+    
     const events = [
         { id: 1, title: 'work', startTime: '9:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' },
         { id: 2, title: 'lunch', startTime: '10:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' },
         { id: 3, title: 'meeting', startTime: '11:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' },
         { id: 4, title: 'meeting', startTime: '13:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' }
     ];
+    
     return (
         <main>
             <WeatherRing
@@ -28,7 +33,11 @@ function App() {
                 <EventList events={events} />
             </section>
             <DepartureTime departureTime='8:24pm' />
-            <RecommendationItem name='Sunscreen' description='It is sunny outside.'/>
+            <section>
+                <RecommendationList recommendations={recommendations.upcoming}>Upcoming: </RecommendationList>
+                <RecommendationList recommendations={recommendations.later}>Later: </RecommendationList>
+                <RecommendationList recommendations={recommendations.done}>Done: </RecommendationList>
+            </section>
         </main>
     );
 }
