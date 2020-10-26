@@ -20,14 +20,18 @@ const locationToAddress = (location) => {
   })
 }
 
-const getTrip = ({from, to, wayOfTrans = 'pedestrian'} ) => {
-  request(`${host}directions/v2/route?key=${key}&from=${from.x},${from.y}&to=from=${to.x},${to.y}&routetype=${wayOfTrans}`, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+
+const getTrip = ({from, to, traveMode = 'pedestrian'} ) => {
+  request(`${host}directions/v2/route?key=${key}&from=${from.x},${from.y}&to=from=${to.x},${to.y}&routetype=${traveMode}`, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+      console.log(`${host}directions/v2/pathfromroute?key=${key}&from=${from.x},${from.y}&to=from=${to.x},${to.y}&routetype=${wayOfTrans}`)
       console.log(JSON.parse(body))
       return {
         
       }
+    } else {
     }
+    
   })
 }
 

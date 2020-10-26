@@ -4,20 +4,25 @@ const router = express.Router();
 
 
 
-module.exports = ({ getUserEvents }, { createEventList }, { getTrip }) => {
+module.exports = ({ getUserEvents }, { createEventList }, { getTrip }, { getWeather }) => {
 
   router.get('/:id/events', function (req, res) {
     getUserEvents(req.params.id)
       .then(rawEvents => {
-        console.log(rawEvents)
         res.json(createEventList(rawEvents))
         })
       .catch(err => res.json({ msg: err.message }))
   })
 
-  router.get('/:id/today/recommandations', function (req, res) {
-    getTrip()
-      .then(res => cp)
+  const test = {
+    x: 43.70564,
+    y: -79.42154
+}
+
+
+  router.get('/:id/recommendations', function (req, res) {
+    getWeather(test)
+      .then(data => res.json(data.data))
       .catch(err => res.json({ msg: err.message }))
   })
 

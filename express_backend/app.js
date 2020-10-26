@@ -5,11 +5,13 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const db = require('./db');
 const dbHelpers = require('./models')(db);
-const dataHelpers = require('./helpers/dataHelpers')
-const mapQ = require('./APIs/mapquest_api_calls')
+const dataHelpers = require('./helpers/dataHelpers');
+const mapQ = require('./APIs/mapquest');
+const openW = require('./APIs/open_weather');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const { request } = require('express');
 
 const app = express();
 
@@ -24,7 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/api/users', usersRouter(dbHelpers, dataHelpers, mapQ));
+app.use('/api/users', usersRouter(dbHelpers, dataHelpers, mapQ, openW));
 
 
 // catch 404 and forward to error handler
