@@ -27,13 +27,15 @@ import Schedule from './Schedule'
 function App() {
 
     const events = {
+        departureTime:'8:24pm',
         today: [
             {
                 "entry": "commute",
                 "start_time": "08:00:00",
                 "end_time": "04:00:00",
                 "date": 'timestamp',
-                "destination": '8469 Boul. Saint-Michel, Montreal QC H1Z 3E7'
+                "destination": '8469 Boul. Saint-Michel, Montreal QC H1Z 3E7',
+                "weather": "sunny"
             },
             {
                 "entry": "commute",
@@ -41,6 +43,7 @@ function App() {
                 "end_time": "04:00:00",
                 "date": 'timestamp',
                 "destination": '8469 Boul. Saint-Michel, Montreal QC H1Z 3E7',
+                "weather": "cloudy",
                 "entry_id": 1,
                 "type_of": "weekly",
                 "initial": "2020-03-09T04:00:00.000Z",
@@ -54,6 +57,7 @@ function App() {
                 "end_time": "04:00:00",
                 "date": 'timestamp',
                 "destination": '8469 Boul. Saint-Michel, Montreal QC H1Z 3E7',
+                "weather": "rainy",
                 "entry_id": 1,
                 "recurrences": [
                     {
@@ -94,6 +98,7 @@ function App() {
                 "end_time": "04:00:00",
                 "date": 'timestamp',
                 "destination": '8469 Boul. Saint-Michel, Montreal QC H1Z 3E7',
+                "weather": "windy",
                 "entry_id": 1,
                 "type_of": "weekly",
                 "initial": "2020-03-09T04:00:00.000Z",
@@ -106,11 +111,25 @@ function App() {
                 "start_time": "08:00:00",
                 "end_time": "04:00:00",
                 "date": 'timestamp',
-                "destination": '8469 Boul. Saint-Michel, Montreal QC H1Z 3E7'
+                "destination": '8469 Boul. Saint-Michel, Montreal QC H1Z 3E7',
+                "weather": null
             }]
     }
 
-    const [state, setState] = useState(false);
+    weather = {
+        mainWeather:'Sunny',
+        feelsLikeTemp:'23',
+        minTemp:'18',
+        maxTemp:'29',
+    };
+
+    const [state, setState] = useState({
+        view: 'home',
+        loggedIn: false,
+        weather,
+        events,
+        time: 1603740043000
+    });
 
     return (
         <main>
