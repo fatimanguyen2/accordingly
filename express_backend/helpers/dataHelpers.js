@@ -21,7 +21,7 @@ const getEventOfDay = (day) => {
 }
 
 const groupByEntry = (events) => {
-  const group = 
+  const group = {}
 }
 
 
