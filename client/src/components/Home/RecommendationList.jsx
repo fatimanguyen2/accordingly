@@ -15,7 +15,7 @@ export default function RecommendationList(props) {
 
   return (
     <ul>
-      {props.children}
+      <h2>{props.children}</h2>
       {items}
     </ul>
   );

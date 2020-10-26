@@ -2,6 +2,7 @@ import React from 'react';
 const classnames = require('classnames');
 
 export const NavMenu = (props) => {
+
   return (
     <button
       className = {
@@ -10,7 +11,13 @@ export const NavMenu = (props) => {
         'button--expand':false,
         })
       }>
-      {props.loggedIn ? 'Home' : 'Login'}
+      <ul>
+        {props.loggedIn ? <li>Home</li> : <li>Login</li>}
+        {!props.loggedIn && <li>Register</li>}
+        <li>About</li>
+        {props.loggedIn && <li>Settings</li>}
+        {props.loggedIn && <li>Refresh</li>}
+      </ul>
     </button>
   );
 };
