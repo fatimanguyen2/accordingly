@@ -20,7 +20,14 @@ function App() {
         { id: 3, title: 'meeting', startTime: '11:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' },
         { id: 4, title: 'meeting', startTime: '13:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' }
     ];
+
+    const getItem = (id, array) => {array.find(element => element.id === id)};
     
+    const handleChecked = (id, type) => {
+        if (type === 'upcoming' || type === 'later') {
+            console.log(id, type)
+        }
+    };
     return (
         <main>
             <WeatherRing
@@ -34,9 +41,9 @@ function App() {
             </section>
             <DepartureTime departureTime='8:24pm' />
             <section>
-                <RecommendationList recommendations={recommendations.upcoming}>Upcoming: </RecommendationList>
-                <RecommendationList recommendations={recommendations.later}>Later: </RecommendationList>
-                <RecommendationList recommendations={recommendations.done}>Done: </RecommendationList>
+                <RecommendationList recommendations={recommendations.upcoming} handleChecked={handleChecked} type='upcoming'>Upcoming: </RecommendationList>
+                <RecommendationList recommendations={recommendations.later} handleChecked={handleChecked} type='later'>Later: </RecommendationList>
+                <RecommendationList recommendations={recommendations.done} handleChecked={handleChecked} type='done'>Done: </RecommendationList>
             </section>
         </main>
     );

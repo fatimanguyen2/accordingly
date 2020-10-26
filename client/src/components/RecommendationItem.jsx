@@ -5,14 +5,18 @@ export default function RecommendationItem(props) {
   const [toggle, setToggle] = useState(false);
   const [checked, setCheck] = useState(false);
 
-  // const toggleHandler = () => {
-  //   toggle? setToggle(false) : setToggle(true);
-  //   console.log(toggle);
-  // };
+  const onClick = () => {
+    setCheck(!checked);
+    if (!checked) {
+      props.handleChecked(props.id, props.type);
+    } else if (checked && props.type === 'done') {
+      console.log('in done');
+    }
+  };
   return (
     <li>
       <div>
-        <div onClick={() => setCheck(!checked)}>
+        <div onClick={onClick}>
           <input type='checkbox' checked={checked} onChange={() => setCheck(prev => prev)}/> {props.name}
         </div>
         <div>
