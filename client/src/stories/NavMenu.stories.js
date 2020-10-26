@@ -9,8 +9,7 @@ export default {
 
 const Template = (args) => <NavMenu {...args} />;
 
-export const Collapsed = Template.bind({});
-Collapsed.args = {
-  primary: true,
-  label: 'Button',
+export const LoggedOut = Template.bind({});
+LoggedOut.args = {
+  loggedIn: false,
 };
