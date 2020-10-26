@@ -9,8 +9,7 @@ module.exports = ({ getUserEvents }, { createEventList }, { getTrip }) => {
   router.get('/:id/events', function (req, res) {
     getUserEvents(req.params.id)
       .then(rawEvents => {
-        
-        createEventList(rawEvents)
+        console.log(rawEvents)
         res.json(createEventList(rawEvents))
         })
       .catch(err => res.json({ msg: err.message }))

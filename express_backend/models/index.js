@@ -24,12 +24,11 @@ module.exports = (db) => {
     `)
 
     const queryFuture = (`
-    SELECT title AS entry, entries.id, is_outdoor, destination, recurrences.*, frequencies.* FROM entries
-    JOIN recurrences ON recurrences.entry_id = entries.id
-    JOIN frequencies ON recurrence_id = recurrences.id
+    SELECT title AS entry, entries.id, destination, is_outdoor, trips.* FROM entries
+    JOIN trips on trips.entry_id = entries.id
     WHERE user_id = ${user} 
     AND entries.is_active = TRUE 
-    AND start_date > ${now}
+    AND start_time > ${now}
     `)
 
     const today = db.query(queryToday)
@@ -40,9 +39,6 @@ module.exports = (db) => {
       .then(results => [results[0].rows, results[1].rows, results[2].rows])
       .catch(err => err);
   }
-
-
-
 
   return {
     getUserEvents
