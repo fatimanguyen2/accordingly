@@ -4,14 +4,14 @@ const router = express.Router();
 
 
 
-module.exports = ({ getUserEvents, computeReocs, getNextEvent }, {  }, { getTrip }) => {
+module.exports = ({ getUserEvents }, { createEventList }, { getTrip }) => {
 
   router.get('/:id/events', function (req, res) {
     getUserEvents(req.params.id)
       .then(rawEvents => {
         
-        
-        res.json(rawEvents)
+        createEventList(rawEvents)
+        res.json(createEventList(rawEvents))
         })
       .catch(err => res.json({ msg: err.message }))
   })

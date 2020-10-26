@@ -41,60 +41,10 @@ module.exports = (db) => {
       .catch(err => err);
   }
 
-  const checkDay = (reoc, day) => {
-    const fromInitial =  moment().dayOfYear() - moment(reoc.initial).dayOfYear()
-    return (fromInitial % reoc.interval === 0)
-  };
 
-  const checkWeekly = (reoc, day) => {
-    const fromInitial =  moment().week() - moment(reoc.initial).week()
-    return (moment(reoc.initial).day() === moment().day() && fromInitial % reoc.interval === 0)
-  };
-  
-  const checkMonthly = (reoc, day) => {
-    const fromInitial =  moment().month() - moment(reoc.initial).month()
-    return (moment(reoc.initial).date() === moment().date() && fromInitial % reoc.interval === 0)
-  };
-  
-  const checkYearly = (reoc, day) => {
-    const fromInitial =  moment().year() - moment(reoc.initial).year()
-    return (moment(reoc.initial).dayOfYear() === moment().dayOfYear() && fromInitial % reoc.interval === 0)
-  };
-  
-  const checkReocsToday = (reocs, day) => {
-  
-    return reocs.filter((reoc) => {
-  
-      switch (reoc.type_of) {
-        case 'daily':
-          return checkDay(reoc);
-        case 'weekly':
-          return checkWeekly(reoc);
-        case 'monthly':
-          return checkMonthly(reoc);
-        case 'yearly':
-          return checkYearly(reoc);
-      }
-    })
-  }
-
-  const getNextEvent = (reoc) => {
-    switch (reoc.type_of) {
-      case 'daily':
-        return moment(reoc.initial).add(reoc.interval,'d')
-      case 'weekly':
-        return moment(reoc.initial).add(reoc.interval,'w')
-      case 'monthly':
-        return moment(reoc.initial).add(reoc.interval,'M')
-      case 'yearly':
-        return moment(reoc.initial).add(reoc.interval,'y')
-    }
-  }
 
 
   return {
-    getUserEvents,
-    checkReocsToday,
-    getNextEvent
+    getUserEvents
   };
 };
