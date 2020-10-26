@@ -27,9 +27,9 @@ import Schedule from './Schedule'
 function App() {
     return (
         <main>
-           <Home/>
+           {/* <Home/> */}
            <Schedule/>
-           <NavMenu/>
+           {/* <NavMenu/> */}
         </main>
     );
 }

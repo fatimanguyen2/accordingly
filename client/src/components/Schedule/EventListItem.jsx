@@ -31,12 +31,12 @@ export default function EventListItem(props) {
             </div>
           </div>
           {
-            props.reoccurences ?
+            props.recurrences?
               <div>
                 <p>Repeats</p>
-                <RepeatList reoccurences={props.reoccurences} />
+                <RepeatList recurrences={props.recurrences} />
               </div>
-              : <div><p> Does not Repeat </p></div>
+              : <div><p> Does not repeat </p></div>
           }
           <div>
             <button>Edit</button>

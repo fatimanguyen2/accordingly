@@ -6,12 +6,12 @@ export default function EventList(props){
   let events = props.events.map(event => {
     return <EventListItem
       key = {event.entry_id}
-      title = {event.title}
-      startTime = {event.startTime}
-      endTime = {event.endTime}
+      title = {event.entry}
+      startTime = {event.start_time}
+      endTime = {event.end_time}
       weatherIcon = {event.weatherIcon} 
       destination = {event.destination}
-      reoccurences = {event.reocurrences}
+      recurrences = {event.recurrences}
     />
   })
   return (
