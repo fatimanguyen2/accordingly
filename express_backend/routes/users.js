@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 
-module.exports = ({ getUserEvents }, { createEventList }, { getTrip }, { getWeather }) => {
+module.exports = ({ getUserEvents }, { createEventList, checkReocsToday }, { getTrip, locationToAddress }, { getWeather }) => {
 
   router.get('/:id/events', function (req, res) {
     getUserEvents(req.params.id)
@@ -21,8 +21,14 @@ module.exports = ({ getUserEvents }, { createEventList }, { getTrip }, { getWeat
 
 
   router.get('/:id/recommendations', function (req, res) {
-    getWeather(test)
-      .then(data => res.json(data.data))
+    // getUserEvents(req.params.id)
+    //   .then(data => res.json(data[0].concat(checkReocsToday(data[1]))))
+
+    locationToAddress(test)
+    .then(data => res.json(data))
+
+    // getWeather(test)
+      // .then(data => res.json(data))
       .catch(err => res.json({ msg: err.message }))
   })
 

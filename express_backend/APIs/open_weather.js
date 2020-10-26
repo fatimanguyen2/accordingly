@@ -5,7 +5,8 @@ const exclusions = 'minutely,daily'
 
 const getWeather = (location) => {
   return axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${location.x}&lon=${location.y}&exclude=${exclusions}&appid=${key}`)
-    .then(data => data)
+    .then(response => response.data)
+    .catch(err => err);
   }
 
 
