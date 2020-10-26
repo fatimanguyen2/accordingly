@@ -1,5 +1,5 @@
 INSERT INTO
-  entries(title, is_outdoor, user_id)
+  entries(title, is_outdoor, destination, user_id)
 VALUES
 ('commute', TRUE, point(49.23010, -123.10867), 2),
 ('morning run', TRUE, point(49.259432, -123.100795), 2),

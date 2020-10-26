@@ -1,5 +1,5 @@
 INSERT INTO
-  trips(start_time, end_time, destination, entry_id)
+  trips(start_time, end_time, entry_id)
 VALUES
 ('2020-11-08 14:30:00', '2020-11-08 17:30:00', 6),
 ('2020-11-01 10:00:00', '2020-11-01 17:30:00', 7),
