@@ -1,0 +1,7 @@
++ react-is@16.13.1
++ react@16.14.0
++ react-dom@16.14.0
++ typescript@4.0.3
+updated 4 packages and audited 2607 packages in 20.824s
+found 1474 low severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details
