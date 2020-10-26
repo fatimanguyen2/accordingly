@@ -8,7 +8,7 @@ export default function RecommendationList(props) {
       id={item.id}
       name={item.name}
       description={item.description}
-      handleChecked={props.handleChecked}
+      handleCheck={props.handleCheck}
       type={props.type}
     />
   });

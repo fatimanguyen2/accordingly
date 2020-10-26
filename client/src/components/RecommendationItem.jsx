@@ -7,10 +7,8 @@ export default function RecommendationItem(props) {
 
   const onClick = () => {
     setCheck(!checked);
-    if (!checked) {
-      props.handleChecked(props.id, props.type);
-    } else if (checked && props.type === 'done') {
-      console.log('in done');
+    if (!checked || (checked && props.type === 'done')) {
+      props.handleCheck(props.id, props.type);
     }
   };
   return (

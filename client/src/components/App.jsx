@@ -11,10 +11,10 @@ import RecommendationList from './RecommendationList'
 
 function App() {
     const suggestions = {
-        upcoming: [{id:1, name: 'hat', description: 'Keep that head sheltered from the cold'},{id:2, name: 'suncreen', description: 'It is sunny outside'}],
-        later: [{id:3, name: 'top', description: 'layer up'}, {id:2, name: 'suncreen', description: 'It is sunny outside'}]}
+        upcoming: [{id:1, name: 'hat', description: 'Keep that head sheltered from the cold'}, {id:2, name: 'suncreen', description: 'It is sunny outside'}],
+        later: [{id:3, name: 'top', description: 'layer up'}, {id:4, name: 'gloves', description: 'It is cold'}]}
     
-    const [recommendations, setRecommendations] = useState({...suggestions, done: [{id:5, name: 'umbrella', description: 'rainy rainy'}]})
+    const [recommendations, setRecommendations] = useState({...suggestions, done: []})
     
     const events = [
         { id: 1, title: 'work', startTime: '9:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' },
@@ -24,17 +24,27 @@ function App() {
     ];
 
     const getItem = (id, array) => array.find(element => element.id === id);
+    const getSuggestionCategory = (id, object) => {
+        for (const category in object) {
+            const result = object[category].find(item => item.id === id);
+            if (result) {
+                return category
+            };
+        }
+    };
 
     // USE PREV BEFORE SPREADING??????
-    const handleChecked = (id, type) => {
+    const handleCheck = (id, type) => {
         const item = getItem(id, recommendations[type]);
         // const filteredArr = recommendations[type].filter(item => item.id !== id);
         // const doneArr = [...recommendations.done, item];
+        const category = getSuggestionCategory(id, suggestions);
 
-        if (type === 'upcoming') {
-            setRecommendations(prev => ({...prev, upcoming: prev[type].filter(item => item.id !== id), done: [...prev.done, item]}));
-        } else if (type === 'later') {
-            setRecommendations(prev => ({...prev, later: prev[type].filter(item => item.id !== id), done: [...prev.done, item]}));
+        // if item gets checked and is in upcoming/later list, remove from that list and add to done list
+        if (type === 'upcoming' || type === 'later') {
+            setRecommendations(prev => ({...prev, [type]: prev[type].filter(item => item.id !== id), done: [...prev.done, item]}));
+        } else { //if item is unchecked from done list, move it back to original list(upcoming/later) or remove if no longer relevant
+            setRecommendations(prev => ({...prev, done: prev[type].filter(item => item.id !== id), [category]: [...prev[category], item]}));
         }
     };
     return (
@@ -50,9 +60,9 @@ function App() {
             </section>
             <DepartureTime departureTime='8:24pm' />
             <section>
-                <RecommendationList recommendations={recommendations.upcoming} handleChecked={handleChecked} type='upcoming'>Upcoming: </RecommendationList>
-                <RecommendationList recommendations={recommendations.later} handleChecked={handleChecked} type='later'>Later: </RecommendationList>
-                <RecommendationList recommendations={recommendations.done} handleChecked={handleChecked} type='done'>Done: </RecommendationList>
+                <RecommendationList recommendations={recommendations.upcoming} handleCheck={handleCheck} type='upcoming'>Upcoming: </RecommendationList>
+                <RecommendationList recommendations={recommendations.later} handleCheck={handleCheck} type='later'>Later: </RecommendationList>
+                <RecommendationList recommendations={recommendations.done} handleCheck={handleCheck} type='done'>Done: </RecommendationList>
             </section>
         </main>
     );
