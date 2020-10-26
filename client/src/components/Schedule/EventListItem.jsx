@@ -1,13 +1,18 @@
 import React, {useState, Fragment} from 'react';
+import moment from 'moment';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMapMarkerAlt, faClock} from '@fortawesome/free-solid-svg-icons';
-{/* <FontAwesomeIcon icon={faCaretDown}/> */}
 
 
 export default function EventListItem(props) {
-  const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(false);
+  const now = moment().format('dddd, MMM Do');
+
   return (
-    <li onClick={() => setToggle(!toggle)}>
+    <li onClick={() => {
+      console.log(now)
+      setToggle(!toggle)}}>
       <div>
         <img src={props.weatherIcon} alt='Weather icon' />
         <p>{props.startTime} {props.title}</p>
@@ -21,8 +26,8 @@ export default function EventListItem(props) {
         <div>
           <FontAwesomeIcon icon={faClock}/>
           <div>
-            <p> {props.startTime} </p>
-            <p> {props.endTime} </p>
+            <p> {now} {props.startTime} </p>
+            <p> {now} {props.endTime} </p>
           </div>
         </div>
       </Fragment>
