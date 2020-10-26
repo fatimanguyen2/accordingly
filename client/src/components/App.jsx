@@ -116,7 +116,7 @@ function App() {
             }]
     }
 
-    weather = {
+    const weather = {
         mainWeather:'Sunny',
         feelsLikeTemp:'23',
         minTemp:'18',
@@ -135,7 +135,7 @@ function App() {
         <main>
             <Home />
             <Schedule />
-            <NavMenu />
+            <NavMenu loggedIn = {state.loggedIn} time = {state.time}/>
         </main>
     );
 }

@@ -7,17 +7,23 @@ export const NavMenu = (props) => {
   const [collapse, setCollapse] = useState(false);
 
   const onClick = () => {
-    props.handleCheck(props.id, props.type);
+    setCollapse(state => {
+      return !state;
+    });
   };
 
   return (
-    <button
-      className = {
-        classnames('button', {
-        'button--collapse':collapse,
-        'button--expand':!collapse,
-        })
-      }>
+    <div>
+      <button
+        onClick={onClick}
+        className = {
+          classnames('button', {
+          'button--collapse':collapse,
+          'button--expand':!collapse,
+          })
+        }>
+          Menu
+      </button>
       {!collapse &&
         <ul>
           {props.loggedIn ? <li><a>Home</a></li> : <li><a>Login</a></li>}
@@ -27,10 +33,10 @@ export const NavMenu = (props) => {
           {props.loggedIn && <li><a>Settings</a></li>}
           {props.loggedIn && <li>
             <a>Refresh</a>
-            <span>{moment(1603740043000).fromNow()}</span>
+            <span>{moment(props.time).fromNow()}</span>
           </li>}
         </ul>
       }
-    </button>
+    </div>
   );
 };

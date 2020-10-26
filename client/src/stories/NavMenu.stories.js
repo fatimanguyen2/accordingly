@@ -11,5 +11,10 @@ const Template = (args) => <NavMenu {...args} />;
 
 export const LoggedOut = Template.bind({});
 LoggedOut.args = {
+  loggedIn: false,
+};
+
+export const LoggedIn = Template.bind({});
+LoggedIn.args = {
   loggedIn: true,
 };
