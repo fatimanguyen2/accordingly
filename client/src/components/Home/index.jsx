@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import WeatherRing from './WeatherRing'
 import EventList from './EventList'
-import DepartureTime from './DepartureTime';
+import DepartureTime from '../DepartureTime';
 import RecommendationList from './RecommendationList'
 
 
@@ -56,7 +56,7 @@ function Home(props) {
             <section>
                 <EventList events={events} />
             </section>
-            <DepartureTime departureTime='8:24pm' />
+            <DepartureTime departureTime='8:24 am' />
             <section>
                 <RecommendationList recommendations={recommendations.upcoming} handleCheck={handleCheck} type='upcoming'>Upcoming: </RecommendationList>
                 <RecommendationList recommendations={recommendations.later} handleCheck={handleCheck} type='later'>Later: </RecommendationList>
