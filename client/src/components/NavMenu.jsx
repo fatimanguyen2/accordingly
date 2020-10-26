@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 const classnames = require('classnames');
 
 export const NavMenu = (props) => {
+
+  const [collapse, setCollapse] = useState(false);
 
   return (
     <button
@@ -12,11 +14,15 @@ export const NavMenu = (props) => {
         })
       }>
       <ul>
-        {props.loggedIn ? <li>Home</li> : <li>Login</li>}
-        {!props.loggedIn && <li>Register</li>}
-        <li>About</li>
-        {props.loggedIn && <li>Settings</li>}
-        {props.loggedIn && <li>Refresh</li>}
+        {props.loggedIn ? <li><a>Home</a></li> : <li><a>Login</a></li>}
+        {!props.loggedIn && <li><a>Register</a></li>}
+        {props.loggedIn && <li><a>Schedule</a></li>}
+        <li><a>About</a></li>
+        {props.loggedIn && <li><a>Settings</a></li>}
+        {props.loggedIn && <li>
+          <a>Refresh</a>
+          <span>1 min ago</span>
+        </li>}
       </ul>
     </button>
   );

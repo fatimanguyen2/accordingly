@@ -25,11 +25,98 @@ import Schedule from './Schedule'
 // departureTime='8:24pm'
 
 function App() {
+
+    const events = {
+        today: [
+            {
+                "entry": "commute",
+                "start_time": "08:00:00",
+                "end_time": "04:00:00",
+                "date": 'timestamp',
+                "destination": '8469 Boul. Saint-Michel, Montreal QC H1Z 3E7'
+            },
+            {
+                "entry": "commute",
+                "start_time": "08:00:00",
+                "end_time": "04:00:00",
+                "date": 'timestamp',
+                "destination": '8469 Boul. Saint-Michel, Montreal QC H1Z 3E7',
+                "entry_id": 1,
+                "type_of": "weekly",
+                "initial": "2020-03-09T04:00:00.000Z",
+                "interval": 1,
+                "recurrences_id": 1
+            }],
+        repeating:
+            [{
+                "entry": "commute",
+                "start_time": "08:00:00",
+                "end_time": "04:00:00",
+                "date": 'timestamp',
+                "destination": '8469 Boul. Saint-Michel, Montreal QC H1Z 3E7',
+                "entry_id": 1,
+                "recurrences": [
+                    {
+                        "type_of": "weekly",
+                        "is_from_start_date": true, //start date +7 days based
+                        "initial": "2020-03-09T04:00:00.000Z",
+                        "interval": 2,
+                        "recurrences_id": 1
+                    },
+                    {
+                        "type_of": "weekly",
+                        "is_from_start_date": false, //weekday based
+                        "initial": "2020-03-10T04:00:00.000Z",
+                        "interval": 1,
+                        "recurrences_id": 2
+                    }
+                    ,
+                    {
+                        "type_of": "weekly",
+                        "is_from_start_date": false, //weekday based
+                        "initial": "2020-03-11T04:00:00.000Z",
+                        "interval": 1,
+                        "recurrences_id": 3
+                    },
+                    {
+                        "type_of": "weekly",
+                        "is_from_start_date": false, //weekday based
+                        "initial": "2020-03-12T04:00:00.000Z",
+                        "interval": 1,
+                        "recurrences_id": 4
+                    }
+                ]
+
+            },
+            {
+                "entry": "commute",
+                "start_time": "08:00:00",
+                "end_time": "04:00:00",
+                "date": 'timestamp',
+                "destination": '8469 Boul. Saint-Michel, Montreal QC H1Z 3E7',
+                "entry_id": 1,
+                "type_of": "weekly",
+                "initial": "2020-03-09T04:00:00.000Z",
+                "interval": 1,
+                "recurrences_id": 1
+            }],
+        future:
+            [{
+                "entry": "commute",
+                "start_time": "08:00:00",
+                "end_time": "04:00:00",
+                "date": 'timestamp',
+                "destination": '8469 Boul. Saint-Michel, Montreal QC H1Z 3E7'
+            }]
+    }
+
+    const [state, setState] = useState(false);
+
     return (
         <main>
-           <Home/>
-           <Schedule/>
-           <NavMenu/>
+            <Home />
+            <Schedule />
+            <NavMenu />
         </main>
     );
 }
