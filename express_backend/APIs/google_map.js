@@ -11,7 +11,9 @@ const getTripTime = (from, to) => {
 
 const getLeaveBy = (origin, event) => {
    return getTripTime(origin, event.destination)
-   .then(time => moment(event.start_time).subtract(time, "s"))
+    .then(time => {
+      return moment(event.start_time).subtract(time, "s")
+  })
 }
 
 module.exports = {

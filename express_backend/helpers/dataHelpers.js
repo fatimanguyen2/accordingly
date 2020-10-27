@@ -5,7 +5,7 @@ const dataQ = require('../models')(db);
 
 const createEventList = (rawEvents, id) => {
   return dataQ.getUserLocationById(id)
-    .then(origin => todayFormatting(rawEvents[0].concat(checkReocsToday(rawEvents[1])), origin))
+    .then(origin => todayFormatting(rawEvents[0], rawEvents[1], origin))
     .then(today => {
       return {
         today: today,
@@ -13,6 +13,9 @@ const createEventList = (rawEvents, id) => {
         future : rawEvents[2].map(event => ({...event, weather : null }))
       };
     })
+    // .then(eventList => {
+
+    // })
     .catch(err => console.log(err))
 };
 
@@ -24,28 +27,23 @@ const getRecurrenceArray = (event, list) => {
   }
 }
 
-const todayFormatting = (today, origin) => {
-  const leave_bys = [];
-  for (const event of today) {
-    leave_bys.push(getLeaveBy(origin, event))
-  }
-  return Promise.all(leave_bys)
-    .then(departures => today.map((event, index) => {
-    if (event.start_time){
-      return ({
-        ...event,
-        weather : null,
-        leave_by: departures[index]
-        })
-    } else {
+const todayFormatting = (rawToday, rawRec, origin) => {
+  const today = rawToday.concat(checkReocsToday(rawRec)).map((event, index) => {
+    if (!event.start_time){
       const start_time = getTodayRecStartTime(event);
-      const result = ({...event, start_time})
       return ({
-        ...result,
-        weather : null,
-        leave_by : departures[index]
+      ...event,
+        start_time
       })
     }
+  })
+  const leaveBys = today.map(event => getLeaveBy(origin, event));
+  return Promise.all(leaveBys)
+  .then(departures => today.map((event, index) => {
+      return ({
+        ...event,
+        leave_by: moment(departures[index]).format()
+      })
   }))
 };
 
@@ -77,6 +75,7 @@ const groupByEntry = (events) => {
     
     for (const event of grouping) {
       const rec = {
+        id: event.id,
         type_of : event.type_of,
         initial : event.initial,
         interval : event.interval,

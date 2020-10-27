@@ -31,8 +31,8 @@ module.exports = (
 
 
   router.get('/:id/recommendations', function (req, res) {
-    // getUserEvents(req.params.id)
-    //   .then(data => res.json(data[0].concat(checkReocsToday(data[1]))))
+    getUserEvents(req.params.id)
+    .then(rawEvents => createEventList(rawEvents, req.params.id))
 
     // getUserLocationById(req.params.id)
     //   .then(data => res.json(data))
@@ -40,11 +40,11 @@ module.exports = (
     // getTripTime(test, test2)
     //   .then(data => res.json(data))
 
-    getWeather(test)
-      .then(data => res.json(data))
+    // getWeather(test)
+    //   .then(data => res.json(data))
       // .catch(err => res.json({ msg: err.message }))
   })
-  
+
 
 
 
