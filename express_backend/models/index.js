@@ -2,7 +2,7 @@ const moment = require('moment');
 
 module.exports = (db) => {
 
-  const getUserEvents = (user, day) => {
+  const getUserEvents = (user) => {
     const now = moment().format("'YYYY-MM-D'")
     // const nowTest = "'2020-10-30'"
 
@@ -45,7 +45,6 @@ module.exports = (db) => {
     SELECT home_location FROM users
     WHERE id = ${id}
     `)
-
     return db.query(query)
       .then(results => results.rows[0].home_location)
   } 

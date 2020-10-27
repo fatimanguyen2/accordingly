@@ -1,11 +1,19 @@
 const moment = require('moment');
+const { getLeaveBy } = require('../APIs/google_map')
+const db = require('../db');
+const dataQ = require('../models')(db);
 
-const createEventList = (rawEvents) => {
-  return {
-    today: rawEvents[0].concat(checkReocsToday(rawEvents[1])).map(event => ({...event, weather : null })),
-    repeating : groupByEntry(rawEvents[1].map(event => ({...event, next_event: getNextEventFromRec(event) }))) || [],
-    future : rawEvents[2].map(event => ({...event, weather : null }))
-  };
+const createEventList = (rawEvents, id) => {
+  return dataQ.getUserLocationById(id)
+    .then(origin => todayFormatting(rawEvents[0].concat(checkReocsToday(rawEvents[1])), origin))
+    .then(today => {
+      return {
+        today: today,
+        repeating : groupByEntry(rawEvents[1].map(event => ({...event, next_event: getNextEventFromRec(event) }))) || [],
+        future : rawEvents[2].map(event => ({...event, weather : null }))
+      };
+    })
+    .catch(err => console.log(err))
 };
 
 const getRecurrenceArray = (event, list) => {
@@ -15,6 +23,33 @@ const getRecurrenceArray = (event, list) => {
     }
   }
 }
+
+
+
+const todayFormatting = (today, origin) => {
+  const leave_bys = [];
+  for (const event of today) {
+    leave_bys.push(getLeaveBy(origin, event))
+  }
+  return Promise.all(leave_bys)
+    .then(departures => today.map((event, index) => {
+    if (event.start_time){
+      return ({
+        ...event,
+        weather : null,
+        leave_by: departures[index]
+        })
+    } else {
+      const start_time = getTodayRecStartTime(event);
+      const result = ({...event, start_time})
+      return ({
+        ...result,
+        weather : null,
+        leave_by : departures[index]
+      })
+    }
+  }))
+};
 
 
 const groupByEntry = (events) => {
@@ -123,27 +158,86 @@ const getNextEventFromRec = (reoc) => {
   }
 }
 
-const updateTodayToNow = (today) => {
-  if(!today.start_time) {
-    return today.filter(event => moment(event.start_date) > moment())
-  } else {
-    return today.filter(event => event.start_time > moment())
+const test = [
+  {
+      "entry": "commute",
+      "id": 2,
+      "is_outdoor": true,
+      "destination": {
+          "x": 49.2301,
+          "y": -123.10867
+      },
+      "start_date": "2020-03-05T05:00:00.000Z",
+      "end_date": null,
+      "start_hour": "08:00:00",
+      "end_hour": "04:00:00",
+      "is_from_start_date": false,
+      "entry_id": 1,
+      "type_of": "weekly",
+      "initial": "2020-03-10T04:00:00.000Z",
+      "interval": 1,
+      "recurrence_id": 1,
+      "weather": null
+  },
+  {
+      "entry": "morning run",
+      "id": 6,
+      "is_outdoor": true,
+      "destination": {
+          "x": 49.259432,
+          "y": -123.100795
+      },
+      "start_date": "2020-03-05T05:00:00.000Z",
+      "end_date": null,
+      "start_hour": "17:00:00",
+      "end_hour": "07:30:00",
+      "is_from_start_date": false,
+      "entry_id": 2,
+      "type_of": "daily",
+      "initial": "2020-03-05T05:00:00.000Z",
+      "interval": 1,
+      "recurrence_id": 2,
+      "weather": null
   }
+]
+
+
+const getTodayRecStartTime = (rec) => {
+  return moment().format("YYYY-MM-DD") + "T" + rec.start_hour;
+}
+
+const updateTodayToNow = (today) => {
+  return today.filter(event => {
+    if(today.start_time) {
+      return moment(event.start_date) > moment();
+    } else {
+      return moment(getTodayRecStartTime(event)) > moment();
+    }
+  })
 }
 
 
 const getFirstEventTime = (events) => {
-  let firstEventTime = events[0].next_event
+  let firstEventTime = events[0].next_event;
   for (const event of events) {
-    if (event.next_event < firstEventTime){
-      firstEventTime = event.next_event
+    if (event.next_event < firstEventTime) {
+      firstEventTime = event.next_event;
     }
   }
-  return firstEventTime
+  return firstEventTime;
 }
+
+
+
+const getTripsToday = (today, origin) => {
+
+}
+
 
 module.exports = {
   createEventList,
   checkReocsToday,
-  getNextEventFromRec
+  getNextEventFromRec,
+  getTodayRecStartTime,
+  updateTodayToNow
 };
