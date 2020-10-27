@@ -161,6 +161,7 @@ function App() {
           onSubmit={(name) => console.log(name)}
           loggedIn={state.loggedIn}
           time={state.time}
+          logout={logout}
         />
 
         <Switch>
