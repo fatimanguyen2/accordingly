@@ -9,7 +9,7 @@ export default {
 
 const Template = (args) => <Home {...args} />;
 
-export const LoggedOut = Template.bind({});
-LoggedOut.args = {
+export const LoggedIn = Template.bind({});
+LoggedIn.args = {
   exampleProp: false,
 };

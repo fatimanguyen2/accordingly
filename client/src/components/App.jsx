@@ -125,7 +125,7 @@ function App() {
 
     const [state, setState] = useState({
         view: 'home',
-        loggedIn: false,
+        loggedIn: true,
         weather,
         events,
         time: 1603740043000
@@ -135,7 +135,7 @@ function App() {
         <main>
             <Home />
             <Schedule />
-            <NavMenu loggedIn = {state.loggedIn} time = {state.time}/>
+            <NavMenu view={state.view} onSelect={null} loggedIn={state.loggedIn} time={state.time}/>
         </main>
     );
 }

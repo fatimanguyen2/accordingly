@@ -16,7 +16,7 @@ export const NavMenu = (props) => {
     <div>
       <button
         onClick={onClick}
-        className = {
+        className={
           classnames('button', {
           'button--collapse':collapse,
           'button--expand':!collapse,
@@ -26,7 +26,7 @@ export const NavMenu = (props) => {
       </button>
       {!collapse &&
         <ul>
-          {props.loggedIn ? <li><a>Home</a></li> : <li><a>Login</a></li>}
+          <li className={classnames('link', {'link--active':props.view === 'home'})}>{props.loggedIn ? <a>Home</a> : <a>Login</a>}</li>
           {!props.loggedIn && <li><a>Register</a></li>}
           {props.loggedIn && <li><a>Schedule</a></li>}
           <li><a>About</a></li>
