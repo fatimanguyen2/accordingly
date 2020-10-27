@@ -24,8 +24,6 @@ const getRecurrenceArray = (event, list) => {
   }
 }
 
-
-
 const todayFormatting = (today, origin) => {
   const leave_bys = [];
   for (const event of today) {
@@ -157,49 +155,6 @@ const getNextEventFromRec = (reoc) => {
       return moment(reoc.initial).add(cycleYear * reoc.interval,'y');
   }
 }
-
-const test = [
-  {
-      "entry": "commute",
-      "id": 2,
-      "is_outdoor": true,
-      "destination": {
-          "x": 49.2301,
-          "y": -123.10867
-      },
-      "start_date": "2020-03-05T05:00:00.000Z",
-      "end_date": null,
-      "start_hour": "08:00:00",
-      "end_hour": "04:00:00",
-      "is_from_start_date": false,
-      "entry_id": 1,
-      "type_of": "weekly",
-      "initial": "2020-03-10T04:00:00.000Z",
-      "interval": 1,
-      "recurrence_id": 1,
-      "weather": null
-  },
-  {
-      "entry": "morning run",
-      "id": 6,
-      "is_outdoor": true,
-      "destination": {
-          "x": 49.259432,
-          "y": -123.100795
-      },
-      "start_date": "2020-03-05T05:00:00.000Z",
-      "end_date": null,
-      "start_hour": "17:00:00",
-      "end_hour": "07:30:00",
-      "is_from_start_date": false,
-      "entry_id": 2,
-      "type_of": "daily",
-      "initial": "2020-03-05T05:00:00.000Z",
-      "interval": 1,
-      "recurrence_id": 2,
-      "weather": null
-  }
-]
 
 
 const getTodayRecStartTime = (rec) => {

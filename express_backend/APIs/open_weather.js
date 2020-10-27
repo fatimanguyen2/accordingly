@@ -1,6 +1,6 @@
 const axios = require('axios');
 const key = 'a528ff4636797a1121546bea69964059';
-const exclusions = 'minutely,daily'
+const exclusions = 'minutely'
 
 
 const getWeather = (location) => {
@@ -8,6 +8,7 @@ const getWeather = (location) => {
     .then(response => response.data)
     .catch(err => err);
   }
+
 
 
 module.exports = {

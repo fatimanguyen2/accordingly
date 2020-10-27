@@ -37,13 +37,14 @@ module.exports = (
     // getUserLocationById(req.params.id)
     //   .then(data => res.json(data))
 
-    getTripTime(test, test2)
-      .then(data => res.json(data))
+    // getTripTime(test, test2)
+    //   .then(data => res.json(data))
 
-    // getWeather(test)
-      // .then(data => res.json(data))
+    getWeather(test)
+      .then(data => res.json(data))
       // .catch(err => res.json({ msg: err.message }))
   })
+  
 
 
 
