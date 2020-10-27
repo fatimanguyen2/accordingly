@@ -1,14 +1,14 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { Add } from '../components/Nav/add';
+import { AddEvent } from '../components/Nav/AddEvent';
 
 export default {
   title: 'Add Menu',
-  component: Add,
+  component: AddEvent,
 };
 
-const Template = (args) => <Add {...args} />;
+const Template = (args) => <AddEvent {...args} />;
 
 export const Empty = Template.bind({});
 Empty.args = {
