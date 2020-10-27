@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 import moment from 'moment';
 const classnames = require('classnames');
 
@@ -12,24 +13,26 @@ export const NavMenu = (props) => {
 
   return (
     <button
-      className = {
+      className={
         classnames('button', {
-        'button--collapse':collapse,
-        'button--expand':!collapse,
+          'button--collapse': collapse,
+          'button--expand': !collapse,
         })
       }>
       {!collapse &&
-        <ul>
-          {props.loggedIn ? <li><a>Home</a></li> : <li><a>Login</a></li>}
-          {!props.loggedIn && <li><a>Register</a></li>}
-          {props.loggedIn && <li><a>Schedule</a></li>}
-          <li><a>About</a></li>
-          {props.loggedIn && <li><a>Settings</a></li>}
-          {props.loggedIn && <li>
-            <a>Refresh</a>
+        <nav>
+          <ul>
+            {props.loggedIn ? <li>< Link to='/'>Home</Link></li> : <li>< Link to='/login'>Login</Link></li>}
+            {!props.loggedIn && <li>< Link to='/register'>Register</Link></li>}
+            {props.loggedIn && <li>< Link to='/schedule'>Schedule</Link></li>}
+            <li>< Link to='/about'>About</Link></li>
+            {props.loggedIn && <li>< Link to='/settings'>Settings</Link></li>}
+            {props.loggedIn && <li>
+              Refresh
             <span>{moment(1603740043000).fromNow()}</span>
-          </li>}
-        </ul>
+            </li>}
+          </ul>
+        </nav>
       }
     </button>
   );
