@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Home } from './Home';
 import { NavMenu } from './NavMenu';
 
-import Schedule from './Schedule';
+import { Schedule } from './Schedule';
 import { About } from './About';
 
 function App() {
@@ -152,6 +152,7 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Home
+              loggedIn={state.loggedIn}
               weather={state.weather}
               events={state.events}
               suggestions={state.suggestions}
@@ -167,7 +168,7 @@ function App() {
           <Route path='/login'></Route>
           <Route path='/register'></Route>
           <Route path='/about'>
-            <About/>
+            <About />
           </Route>
           <Route path='/settings'></Route>
           <Route path='*'><h1>404 - Not Found</h1></Route>

@@ -3,7 +3,7 @@ import React from 'react';
 import DepartureTime from '../DepartureTime';
 import EventList from './EventList';
 
-export default function Schedule(props) {
+export const Schedule = props => {
   const today = 'today';
   const repeating = 'repeating';
   const future = 'future'
