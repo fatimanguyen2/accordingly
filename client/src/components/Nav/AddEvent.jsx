@@ -15,11 +15,11 @@ export const AddEvent = (props) => {
 
   return (
     <form>
-      <LocationSearchInput/>
       <label for="entry">Title</label>
       <input type="text" name="entry" id="entry" placeholder="Add Title" onChange={handleInputChange} required></input>
       <label for="destination">Location</label>
       <input type="text" name="destination" id="destination" placeholder="Add Location" onChange={handleInputChange} required></input>
+      <LocationSearchInput/>
       <label for="start_date">Start Date</label>
       <input type="date" name="start_date" id="start_date" onChange={handleInputChange} required></input>
       <label for="start_time">Start Time</label>
