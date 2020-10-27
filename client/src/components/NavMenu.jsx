@@ -29,7 +29,7 @@ export const NavMenu = (props) => {
             {props.loggedIn && <li>< Link to='/settings'>Settings</Link></li>}
             {props.loggedIn && <li>
               Refresh
-            <span>{moment(1603740043000).fromNow()}</span>
+            <span> ~{moment(1603740043000).fromNow()}</span>
             </li>}
           </ul>
         </nav>
