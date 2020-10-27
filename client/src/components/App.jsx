@@ -161,6 +161,7 @@ function App() {
 
           <Route path='/schedule'>
             <Schedule
+              loggedIn={state.loggedIn}
               events={state.events}
             />
           </Route>

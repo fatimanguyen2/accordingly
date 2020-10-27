@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import DepartureTime from '../DepartureTime';
 import EventList from './EventList';
 
 export const Schedule = props => {
-  const today = 'today';
-  const repeating = 'repeating';
-  const future = 'future'
+  const TODAY = 'today';
+  const REPEATING = 'repeating';
+  const FUTURE = 'future';
 
   return (
-    <div>
-      <DepartureTime departureTime={props.events.departureTime} />
-      <EventList allEvents={props.events} events={props.events[today]} type={today}>Today:</EventList>
-      <EventList events={props.events[repeating]} type={repeating}>Repeating:</EventList>
-      <EventList events={props.events[future]} type={future}>Future:</EventList>
-    </div>
+    <Fragment>
+      {props.loggedIn ?
+        <div>
+          <DepartureTime departureTime={props.events.departureTime} />
+          <EventList allEvents={props.events} events={props.events[TODAY]} type={TODAY}>Today:</EventList>
+          <EventList events={props.events[REPEATING]} type={REPEATING}>Repeating:</EventList>
+          <EventList events={props.events[FUTURE]} type={FUTURE}>Future:</EventList>
+        </div> :
+        <div><h1>Please register/log in.</h1></div>
+      }
+    </Fragment>
   );
 };

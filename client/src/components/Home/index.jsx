@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import { getItem, getSuggestionCategory } from '../../helpers/selectors';
 
-import WeatherRing from './WeatherRing'
-import EventList from './EventList'
+import WeatherRing from './WeatherRing';
+import EventList from './EventList';
 import DepartureTime from '../DepartureTime';
-import RecommendationList from './RecommendationList'
+import RecommendationList from './RecommendationList';
 
 
 export const Home = props => {
@@ -18,7 +18,7 @@ export const Home = props => {
     const category = getSuggestionCategory(id, props.suggestions);
 
     // if item gets checked and is in upcoming/later list, remove from that list and add to done list
-    if (type === 'upcoming' || type === 'later') {
+    if (type === UPCOMING || type === LATER ) {
       setRecommendations(prev => ({ ...prev, [type]: prev[type].filter(item => item.id !== id), done: [...prev.done, item] }));
     } else { //if item is unchecked from done list, move it back to original list(upcoming/later) or remove if no longer relevant
       setRecommendations(prev => ({ ...prev, done: prev[type].filter(item => item.id !== id), [category]: [...prev[category], item] }));
