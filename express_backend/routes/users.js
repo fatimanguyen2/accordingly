@@ -1,25 +1,46 @@
 const express = require('express');
 const router = express.Router();
+const { getTrip } = require('../APIs/google_map')
 
 
 
 
-module.exports = ({ getUserEvents }, { createEventList }, { getTrip }) => {
+module.exports = ({ getUserEvents }, { createEventList, checkReocsToday }, { locationToAddress }, { getWeather }) => {
 
   router.get('/:id/events', function (req, res) {
     getUserEvents(req.params.id)
       .then(rawEvents => {
-        
-        createEventList(rawEvents)
         res.json(createEventList(rawEvents))
         })
       .catch(err => res.json({ msg: err.message }))
   })
 
-  router.get('/:id/today/recommandations', function (req, res) {
-    getTrip()
-      .then(res => cp)
-      .catch(err => res.json({ msg: err.message }))
+  const test = {
+    x: 43.70564,
+    y: -79.42154
+  }
+
+  const test2 = {
+    x: 43.75064,
+    y: -79.41254
+  }
+
+
+  router.get('/:id/recommendations', function (req, res) {
+    // getUserEvents(req.params.id)
+    //   .then(data => res.json(data[0].concat(checkReocsToday(data[1]))))
+
+
+
+    // getTrip(test, test2)
+    //   .then(data => res.json(data))
+
+    // getTrip()
+    //   .then(data => res.json(data))
+
+    // getWeather(test)
+      // .then(data => res.json(data))
+      // .catch(err => res.json({ msg: err.message }))
   })
 
 
