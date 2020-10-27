@@ -9,6 +9,7 @@ import { Nav } from './Nav'
 
 import { Schedule } from './Schedule';
 import { About } from './About';
+import {Settings} from './Settings'
 
 function App() {
   const suggestions = {
@@ -174,10 +175,14 @@ function App() {
 
           <Route path='/login'></Route>
           <Route path='/register'></Route>
+
           <Route path='/about'>
             <About />
           </Route>
-          <Route path='/settings'></Route>
+
+          <Route path='/settings'>
+            <Settings loggedIn={state.loggedIn}></Settings>
+          </Route>
           <Route path='*'><h1>404 - Not Found</h1></Route>
         </Switch>
       </Router>
