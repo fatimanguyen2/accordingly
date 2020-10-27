@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import axios from 'axios';
 // import useApplicationData from '../hooks/useApplicationData';
 // import { SET_USERS } from '../reducers/dataReducer';
@@ -145,15 +146,30 @@ function App() {
 
     return (
         <main>
-            {/* <Home
-                weather={state.weather}
-                events={state.events}
-                suggestions={state.suggestions}
-            /> */}
-            <Schedule
-                events={state.events}
-            />
-            {/* <NavMenu/> */}
+            <Router>
+                < NavMenu />
+                <Switch>
+                    <Route exact path='/'>
+                        <Home
+                            weather={state.weather}
+                            events={state.events}
+                            suggestions={state.suggestions}
+                        />
+                    </Route>
+
+                    <Route path='/schedule'>
+                        <Schedule
+                            events={state.events}
+                        />
+                    </Route>
+
+                    <Route path='/login'></Route>
+                    <Route path='/register'></Route>
+                    <Route path='/about'></Route>
+                    <Route path='/settings'></Route>
+                    <Route path='*'><h1>404 - Not Found</h1></Route>
+                </Switch>
+            </Router>
         </main>
     );
 }
