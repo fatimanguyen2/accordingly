@@ -7,6 +7,12 @@ import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons';
 export const Settings = props => {
   const [address, setAddress] = useState('');
   const [startOfDay, setStartOfDay] = useState('');
+  const [showButton, setShowButton] = useState(false);
+
+  const handleChange = (event, cb) => {
+    cb(event.target.value);
+    setShowButton(true);
+  };
 
   return (
     <Fragment>
@@ -14,12 +20,12 @@ export const Settings = props => {
         <div>
           <h1>Settings</h1>
           <form autoComplete='off' onSubmit={event => event.preventDefault()}>
-            <label for='address'><FontAwesomeIcon icon={faMapMarkerAlt}/>Home:</label>
-            <input id='address' value={address} onChange={event => setAddress(event.target.value)}/><br/>
-            <label for='startOfDay'><FontAwesomeIcon icon={faClock}/>Start of Day:</label>
-            <input id='startOfDay' value={startOfDay} onChange={event => setStartOfDay(event.target.value)} type='time'/>
+            <label htmlFor='address'><FontAwesomeIcon icon={faMapMarkerAlt}/>Home:</label>
+            <input id='address' value={address} onChange={event => handleChange(event, setAddress)}/><br/>
+            <label htmlFor='startOfDay'><FontAwesomeIcon icon={faClock}/>Start of Day:</label>
+            <input id='startOfDay' value={startOfDay} onChange={event => handleChange(event, setStartOfDay)} type='time'/>
           </form>
-          {/* <Button onClick={}>Save</Button> */}
+          {showButton && <Button onClick={() => console.log('axios update')}>Save</Button>}
 
         </div> :
         <div><h1>Please register/log in.</h1></div>
