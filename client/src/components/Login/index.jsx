@@ -11,7 +11,7 @@ export const Login = props => {
         <div>
           <LogoRing />
           <Form login={props.login} />
-          <p><Link to='/register'>Register</Link></p>
+          <p><Link to='/register'>Create an Account</Link></p>
         </div> :
         <Redirect to='/'/>
       }
