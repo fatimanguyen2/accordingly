@@ -9,4 +9,12 @@ const getSuggestionCategory = (id, object) => {
   }
 };
 
-export { getItem, getSuggestionCategory };
+const getRecurrenceArray = (event, list) => {
+  for (const rec of list.repeating) {
+    if (event.entry === rec.entry) {
+      return rec.recurrences;
+    }
+  }
+}
+
+export { getItem, getSuggestionCategory, getRecurrenceArray };

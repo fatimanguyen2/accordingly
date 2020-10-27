@@ -1,4 +1,5 @@
 import React from 'react';
+import { getRecurrenceArray } from '../../helpers/selectors';
 
 import EventListItem from './EventListItem';
 
@@ -13,7 +14,7 @@ export default function EventList(props) {
       endTime={event.end_time}
       weatherIcon={event.weatherIcon}
       destination={event.destination}
-      recurrences={event.recurrences}
+      recurrences={props.type === 'today'? getRecurrenceArray(event, props.allEvents): event.recurrences}
       type={props.type}
     />
   })
