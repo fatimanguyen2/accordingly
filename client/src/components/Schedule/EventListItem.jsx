@@ -6,15 +6,25 @@ import { faMapMarkerAlt, faClock, faTrash } from '@fortawesome/free-solid-svg-ic
 import RepeatList from './RepeatList';
 import Button from '../Button'
 
+const NORMAL = 'normal';
+const DELETE = 'delete';
 
 export default function EventListItem(props) {
   const [toggle, setToggle] = useState(false);
-  const [view, setView] = useState();
+  const [view, setView] = useState(NORMAL);
 
-  // const date = moment().format('dddd, MMM Do');
-  const cancel = () => {};
+
+  const cancel = () => {
+    if (view === NORMAL) {
+      setView(DELETE);
+    } else {
+      console.log('axios request to destroy')
+    }
+  };
+
+  const back = () => setView(NORMAL);
   const edit = () => console.log('edit click');
-  
+
   return (
     <li>
       <div onClick={() => setToggle(!toggle)}>
@@ -25,7 +35,7 @@ export default function EventListItem(props) {
         <Fragment>
           <div>
             <FontAwesomeIcon icon={faMapMarkerAlt} />
-            <p>{props.destination.x /* TO FIX */}</p> 
+            <p>{props.destination.x /* TO FIX */}</p>
           </div>
           <div>
             <FontAwesomeIcon icon={faClock} />
@@ -38,10 +48,17 @@ export default function EventListItem(props) {
             props.recurrences ?
               <RepeatList recurrences={props.recurrences} /> : <div><p> Does not repeat </p></div>
           }
-          <div>
-            <Button onClick={edit}>Edit</Button>
-            <Button onClick={cancel}><FontAwesomeIcon icon={faTrash} /></Button>
-          </div>
+          {
+            view === NORMAL ?
+              <div>
+                <Button onClick={edit}>Edit</Button>
+                <Button onClick={cancel}><FontAwesomeIcon icon={faTrash} /></Button>
+              </div> :
+              <div>
+                <Button onClick={back}>Back</Button>
+                <Button onClick={cancel}>Confirm Delete</Button>
+              </div> 
+          }
         </Fragment>
       }
     </li>
