@@ -47,7 +47,6 @@ const groupByEntry = (events) => {
         type_of : event.type_of,
         initial : event.initial,
         interval : event.interval,
-        next_event : event.next_event
       }
       group.recurrences.push(rec)
     }

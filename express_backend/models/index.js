@@ -40,6 +40,15 @@ module.exports = (db) => {
       .catch(err => err);
   }
 
+  const getUserLocationById = (id) => {
+    const query =(`
+    SELECT home_location FROM users
+    WHERE id = ${id}
+    `)
+
+    return db
+  } 
+
   return {
     getUserEvents
   };

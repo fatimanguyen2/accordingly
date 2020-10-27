@@ -30,12 +30,7 @@ module.exports = ({ getUserEvents }, { createEventList, checkReocsToday }, { loc
     // getUserEvents(req.params.id)
     //   .then(data => res.json(data[0].concat(checkReocsToday(data[1]))))
 
-
-
     // getTrip(test, test2)
-    //   .then(data => res.json(data))
-
-    // getTrip()
     //   .then(data => res.json(data))
 
     // getWeather(test)
