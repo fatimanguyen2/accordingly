@@ -9,11 +9,12 @@ import Button from '../Button'
 
 export default function EventListItem(props) {
   const [toggle, setToggle] = useState(false);
-  // const [];
-  const date = moment().format('dddd, MMM Do');
-  const edit = () => {};
-  const cancel = () => {};
+  const [view, setView] = useState();
 
+  // const date = moment().format('dddd, MMM Do');
+  const cancel = () => {};
+  const edit = () => console.log('edit click');
+  
   return (
     <li>
       <div onClick={() => setToggle(!toggle)}>
@@ -29,8 +30,8 @@ export default function EventListItem(props) {
           <div>
             <FontAwesomeIcon icon={faClock} />
             <div>
-              <p> {date} {props.startTime} </p>
-              <p> {date} {props.endTime} </p>
+              <p> {moment(props.startDate).format('dddd, MMM Do')} {props.startTime} </p>
+              <p> {moment(props.startDate).format('dddd, MMM Do')} {props.endTime} </p>
             </div>
           </div>
           {
