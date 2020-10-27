@@ -6,16 +6,15 @@ const classnames = require('classnames');
 export const NavMenu = (props) => {
 
   return (
-    <div>
-      <Link to='/' onClick={() => props.onSelect('home')} className={classnames('link', {'link--active':props.view === 'home'})}>{props.loggedIn ? 'Home' : 'Login'}</Link>
-      {!props.loggedIn && <Link to='/register' onClick={() => props.onSelect('register')}>Register</Link>}
-      {props.loggedIn && <Link to='/schedule' onClick={() => props.onSelect('schedule')}>Schedule</Link>}
-      <Link to='/about'>About</Link>
-      {props.loggedIn && <Link to='/settings'>Settings</Link>}
-      {props.loggedIn && <button onClick={() => props.onSelect('refresh')}>
-        Refresh
-        <span> {moment(props.time).fromNow()}</span>
-      </button>}
-    </div>
+    <ul>
+      <li><Link to='/' onClick={() => props.onSelect('home')} className={classnames('link', {'link--active':props.view === 'home'})}>{props.loggedIn ? 'Home' : 'Login'}</Link></li>
+      {!props.loggedIn && <li><Link to='/register' onClick={() => props.onSelect('register')}>Register</Link></li>}
+      {props.loggedIn && <li><Link to='/schedule' onClick={() => props.onSelect('schedule')}>Schedule</Link></li>}
+      <li><Link to='/about'>About</Link></li>
+      {props.loggedIn && <li><Link to='/settings'>Settings</Link></li>}
+      {props.loggedIn && <li><button onClick={() => props.onSelect('refresh')}>
+        Refresh <span> {moment(props.time).fromNow()}</span>
+      </button></li>}
+    </ul>
   );
 };

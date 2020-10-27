@@ -4,12 +4,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import useApplicationData from '../hooks/useApplicationData';
 // import { SET_USERS } from '../reducers/dataReducer';
 
-import { Home } from './Home'
-import { Nav } from './Nav'
-
+import { Home } from './Home';
+import { Login } from './Login';
+import { Nav } from './Nav';
 import { Schedule } from './Schedule';
 import { About } from './About';
-import {Settings} from './Settings'
+import { Settings } from './Settings';
 
 function App() {
   const suggestions = {
@@ -140,7 +140,7 @@ function App() {
 
   const [state, setState] = useState({
     view: 'home',
-    loggedIn: true,
+    loggedIn: false,
     weather,
     suggestions,
     events,
@@ -151,20 +151,22 @@ function App() {
     <main>
       <Router>
         <Nav
-            view={state.view}
-            onSelect={(name) => console.log(name)}
-            onSubmit={(name) => console.log(name)}
-            loggedIn={state.loggedIn}
-            time={state.time}
+          view={state.view}
+          onSelect={(name) => console.log(name)}
+          onSubmit={(name) => console.log(name)}
+          loggedIn={state.loggedIn}
+          time={state.time}
         />
         <Switch>
           <Route exact path='/'>
-            <Home
-              loggedIn={state.loggedIn}
-              weather={state.weather}
-              events={state.events}
-              suggestions={state.suggestions}
-            />
+            {state.loggedIn ?
+              <Home
+                loggedIn={state.loggedIn}
+                weather={state.weather}
+                events={state.events}
+                suggestions={state.suggestions}
+              /> :
+              <Login />}
           </Route>
 
           <Route path='/schedule'>
@@ -174,7 +176,6 @@ function App() {
             />
           </Route>
 
-          <Route path='/login'></Route>
           <Route path='/register'></Route>
 
           <Route path='/about'>

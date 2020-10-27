@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 import { NavMenu } from './NavMenu';
 import { AddEvent } from './AddEvent';
 
@@ -12,36 +15,34 @@ export const Nav = (props) => {
   return (
     <div>
       <button
-        onClick={() => setCollapse(state => {
-          return !state;
-        })}
+        onClick={() => setCollapse(state => !state)}
         className={
           classnames('button', {
-          'button--collapse':collapse,
-          'button--expand':!collapse,
+            'button--collapse': collapse,
+            'button--expand': !collapse,
           })
         }>
-          Menu
+        <FontAwesomeIcon icon={faBars} />
       </button>
       {!collapse &&
-        <NavMenu onSelect={props.onSelect} loggedIn={props.loggedIn} time={props.time}/>
+        <NavMenu onSelect={props.onSelect} loggedIn={props.loggedIn} time={props.time} />
       }
       {props.loggedIn &&
-      <button
+        <button
           onClick={() => setAddCollapse(state => {
             return !state;
           })}
           className={
             classnames('button', {
-            'button--collapse':addCollapse,
-            'button--expand':!addCollapse,
+              'button--collapse': addCollapse,
+              'button--expand': !addCollapse,
             })
           }>
-            Add
+          Add
         </button>
       }
       {!addCollapse &&
-        <AddEvent onSubmit={props.onSubmit}/>
+        <AddEvent onSubmit={props.onSubmit} />
       }
     </div>
   );
