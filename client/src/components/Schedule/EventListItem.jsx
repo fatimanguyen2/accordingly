@@ -4,6 +4,8 @@ import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock, faTrash } from '@fortawesome/free-solid-svg-icons';
 
+import RepeatList from './RepeatList'
+
 
 export default function EventListItem(props) {
   const [toggle, setToggle] = useState(false);
@@ -13,13 +15,13 @@ export default function EventListItem(props) {
     <li onClick={() => setToggle(!toggle)}>
       <div>
         <img src={props.weatherIcon} alt='Weather icon' />
-        <p>{props.startTime} {props.title}</p>
+        <p>{props.type === 'today' ? props.startTime : moment(props.startDate).fromNow()} {props.title}</p>
       </div>
       {toggle &&
         <Fragment>
           <div>
             <FontAwesomeIcon icon={faMapMarkerAlt} />
-            <p>{props.destination}</p>
+            <p>{props.destination.x /* TO FIX */}</p> 
           </div>
           <div>
             <FontAwesomeIcon icon={faClock} />
@@ -28,9 +30,10 @@ export default function EventListItem(props) {
               <p> {date} {props.endTime} </p>
             </div>
           </div>
-          <div>
-            <p> {props.reoccurenceId? 'Repeats' : 'Does not Repeat'} </p>
-          </div>
+          {
+            props.recurrences ?
+              <RepeatList recurrences={props.recurrences} /> : <div><p> Does not repeat </p></div>
+          }
           <div>
             <button>Edit</button>
             <button><FontAwesomeIcon icon={faTrash} /></button>

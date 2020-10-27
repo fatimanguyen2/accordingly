@@ -1,17 +1,20 @@
 import React from 'react';
+import { getRecurrenceArray } from '../../helpers/selectors';
 
 import EventListItem from './EventListItem';
 
-export default function EventList(props){
-  let events = props.events.map(event => {
+export default function EventList(props) {
+  const events = props.events.map((event, id) => {
     return <EventListItem
-      key = {event.entry_id}
-      title = {event.title}
-      startTime = {event.startTime}
-      endTime = {event.endTime}
-      weatherIcon = {event.weatherIcon} 
-      destination = {event.destination}
-      reoccurenceId = {event.recurrence_id}
+      key={id}
+      title={event.entry}
+      startDate={props.type === 'today' ? event.start_date : event.next_event}
+      startTime={event.start_time}
+      endTime={event.end_time}
+      weatherIcon={event.weatherIcon}
+      destination={event.destination}
+      recurrences={props.type === 'today'? getRecurrenceArray(event, props.allEvents): event.recurrences}
+      type={props.type}
     />
   })
   return (
