@@ -18,7 +18,7 @@ export default function EventListItem(props) {
     <li>
       <div onClick={() => setToggle(!toggle)}>
         <img src={props.weatherIcon} alt='Weather icon' />
-        <p>{props.type === 'today' ? props.startTime : moment(props.startDate).fromNow()} {props.title}</p>
+        <p>{props.type === 'today' ? moment(props.startDate).format('h:mm a') : moment(props.startDate).fromNow()} {props.title}</p>
       </div>
       {toggle &&
         <Fragment>
