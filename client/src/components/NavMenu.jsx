@@ -1,23 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
+import moment from 'moment';
 const classnames = require('classnames');
 
 export const NavMenu = (props) => {
 
+  const [collapse, setCollapse] = useState(false);
+
+  const onClick = () => {
+    props.handleCheck(props.id, props.type);
+  };
+
   return (
     <button
-      className = {
+      className={
         classnames('button', {
-        'button--collapse':false,
-        'button--expand':false,
+          'button--collapse': collapse,
+          'button--expand': !collapse,
         })
       }>
-      <ul>
-        {props.loggedIn ? <li>Home</li> : <li>Login</li>}
-        {!props.loggedIn && <li>Register</li>}
-        <li>About</li>
-        {props.loggedIn && <li>Settings</li>}
-        {props.loggedIn && <li>Refresh</li>}
-      </ul>
+      {!collapse &&
+        <nav>
+          <ul>
+            {props.loggedIn ? <li>< Link to='/'>Home</Link></li> : <li>< Link to='/login'>Login</Link></li>}
+            {!props.loggedIn && <li>< Link to='/register'>Register</Link></li>}
+            {props.loggedIn && <li>< Link to='/schedule'>Schedule</Link></li>}
+            <li>< Link to='/about'>About</Link></li>
+            {props.loggedIn && <li>< Link to='/settings'>Settings</Link></li>}
+            {props.loggedIn && <li>
+              Refresh
+            <span>{moment(1603740043000).fromNow()}</span>
+            </li>}
+          </ul>
+        </nav>
+      }
     </button>
   );
 };
