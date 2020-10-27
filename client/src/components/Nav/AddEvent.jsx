@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment';
+import LocationSearchInput from './LocationSearchInput'
 const classnames = require('classnames');
 
 export const AddEvent = (props) => {
@@ -14,6 +15,7 @@ export const AddEvent = (props) => {
 
   return (
     <form>
+      <LocationSearchInput/>
       <label for="entry">Title</label>
       <input type="text" name="entry" id="entry" placeholder="Add Title" onChange={handleInputChange} required></input>
       <label for="destination">Location</label>
