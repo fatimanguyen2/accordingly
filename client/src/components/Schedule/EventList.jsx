@@ -2,16 +2,19 @@ import React from 'react';
 
 import EventListItem from './EventListItem';
 
-export default function EventList(props){
-  let events = props.events.map(event => {
+export default function EventList(props) {
+  const events = props.events.map((event, id) => {
+
     return <EventListItem
-      key = {event.entry_id}
-      title = {event.entry}
-      startTime = {event.start_time}
-      endTime = {event.end_time}
-      weatherIcon = {event.weatherIcon} 
-      destination = {event.destination}
-      recurrences = {event.recurrences}
+      key={id}
+      title={event.entry}
+      startDate={props.type === 'today' ? event.start_date : event.next_event}
+      startTime={event.start_time}
+      endTime={event.end_time}
+      weatherIcon={event.weatherIcon}
+      destination={event.destination}
+      recurrences={event.recurrences}
+      type={props.type}
     />
   })
   return (

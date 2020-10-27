@@ -10,18 +10,21 @@ import RepeatList from './RepeatList'
 export default function EventListItem(props) {
   const [toggle, setToggle] = useState(false);
   const date = moment().format('dddd, MMM Do');
+  console.log('rendering EventListItem component')
+  console.log('type', props.type)
+  console.log('date', props.startDate)
 
   return (
     <li onClick={() => setToggle(!toggle)}>
       <div>
         <img src={props.weatherIcon} alt='Weather icon' />
-        <p>{props.startTime} {props.title}</p>
+        <p>{props.type === 'today' ? props.startTime : moment(props.startDate).fromNow()} {props.title}</p>
       </div>
       {toggle &&
         <Fragment>
           <div>
             <FontAwesomeIcon icon={faMapMarkerAlt} />
-            <p>{props.destination}</p>
+            <p>{props.destination.x}</p>
           </div>
           <div>
             <FontAwesomeIcon icon={faClock} />
