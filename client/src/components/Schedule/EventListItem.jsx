@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import RepeatList from './RepeatList';
-import Button from '../Button'
+import { Button } from '../Button'
 
 const NORMAL = 'normal';
 const DELETE = 'delete';
@@ -57,7 +57,7 @@ export default function EventListItem(props) {
               <div>
                 <Button onClick={back}>Back</Button>
                 <Button onClick={cancel}>Confirm Delete</Button>
-              </div> 
+              </div>
           }
         </Fragment>
       }
