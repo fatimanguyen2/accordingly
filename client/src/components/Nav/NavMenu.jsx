@@ -14,8 +14,8 @@ export const NavMenu = (props) => {
       {props.loggedIn && <Link to='/settings'>Settings</Link>}
       {props.loggedIn && <button onClick={() => props.onSelect('refresh')}>
         Refresh
-        <span> {moment(props.time).fromNow()}</span>
       </button>}
+      <span> {moment(props.time).fromNow()}</span>
     </div>
   );
 };
