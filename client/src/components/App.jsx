@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import useApplicationData from '../hooks/useApplicationData';
 // import { SET_USERS } from '../reducers/dataReducer';
 
-import { Home } from './Home';
-import { NavMenu } from './NavMenu';
+import { Home } from './Home'
+import { Nav } from './Nav'
 
 import { Schedule } from './Schedule';
 import { About } from './About';
@@ -149,7 +149,13 @@ function App() {
   return (
     <main>
       <Router>
-        < NavMenu loggedIn={state.loggedIn} />
+        <Nav
+            view={state.view}
+            onSelect={(name) => console.log(name)}
+            onSubmit={(name) => console.log(name)}
+            loggedIn={state.loggedIn}
+            time={state.time}
+        />
         <Switch>
           <Route exact path='/'>
             <Home

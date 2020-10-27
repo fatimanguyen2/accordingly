@@ -5,7 +5,7 @@ const { getTrip } = require('../APIs/google_map')
 
 
 
-module.exports = ({ getUserEvents }, { createEventList, checkReocsToday }, { locationToAddress }, { getWeather }) => {
+module.exports = ({ getUserEvents, getUserLocationById }, { createEventList, checkReocsToday }, { locationToAddress }, { getWeather }) => {
 
   router.get('/:id/events', function (req, res) {
     getUserEvents(req.params.id)
@@ -30,12 +30,10 @@ module.exports = ({ getUserEvents }, { createEventList, checkReocsToday }, { loc
     // getUserEvents(req.params.id)
     //   .then(data => res.json(data[0].concat(checkReocsToday(data[1]))))
 
-
+    getUserLocationById(req.params.id)
+      .then(data => res.json(data))
 
     // getTrip(test, test2)
-    //   .then(data => res.json(data))
-
-    // getTrip()
     //   .then(data => res.json(data))
 
     // getWeather(test)

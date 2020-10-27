@@ -1,5 +1,5 @@
 INSERT INTO
-  recurrences(start_date, end_date, start_time, end_time, is_from_start_date, entry_id)
+  recurrences(start_date, end_date, start_hour, end_hour, is_from_start_date, entry_id)
 VALUES
 ('2020-03-05', null, '8:00:00', '4:00:00', FALSE, 1),
 ('2020-03-05', null, '7:00:00', '7:30:00', FALSE, 2),
