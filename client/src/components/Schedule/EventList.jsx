@@ -7,6 +7,7 @@ export default function EventList(props) {
   const events = props.events.map((event, id) => {
     return <EventListItem
       key={id}
+      type={props.type}
       title={event.entry}
       startDate={props.type === 'today' ? event.start_date : event.next_event}
       startTime={event.start_time}
@@ -14,7 +15,6 @@ export default function EventList(props) {
       weatherIcon={event.weatherIcon}
       destination={event.destination}
       recurrences={props.type === 'today'? getRecurrenceArray(event, props.allEvents): event.recurrences}
-      type={props.type}
     />
   })
   return (

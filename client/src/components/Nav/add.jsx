@@ -28,7 +28,7 @@ export const Add = (props) => {
       <input type="time" name="end_time" id="end_time" onChange={handleInputChange} required></input>
 
       {repeats.map(ele => {
-        return <li>Item</li>
+        return <li key={ele.id}>Item</li>
       })}
       
       <button onClick={(event) => {
