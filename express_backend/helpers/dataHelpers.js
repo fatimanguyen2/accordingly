@@ -3,7 +3,7 @@ const moment = require('moment');
 const createEventList = (rawEvents) => {
   return {
     today: rawEvents[0].concat(checkReocsToday(rawEvents[1])).map(event => ({...event, weather : null })),
-    repeating : groupByEntry(rawEvents[1].map(event => ({...event, next_event: getNextEvent(event) }))) || [],
+    repeating : groupByEntry(rawEvents[1].map(event => ({...event, next_event: getNextEventFromRec(event) }))) || [],
     future : rawEvents[2].map(event => ({...event, weather : null }))
   };
 };
@@ -93,7 +93,7 @@ const checkReocsToday = (reocs, day) => {
   })
 }
 
-const getNextEvent = (reoc) => {
+const getNextEventFromRec = (reoc) => {
   switch (reoc.type_of) {
     case 'daily':
       const fromInitialDay =  moment().dayOfYear() - moment(reoc.initial).dayOfYear();
@@ -123,28 +123,14 @@ const getNextEvent = (reoc) => {
   }
 }
 
-const test =         {
-  "entry": "skatepark",
-  "id": 7,
-  "is_outdoor": true,
-  "destination": {
-      "x": 43.70564,
-      "y": -79.42154
-  },
-  "start_date": "2020-08-23T04:00:00.000Z",
-  "end_date": null,
-  "start_time": "16:00:00",
-  "end_time": "17:00:00",
-  "is_from_start_date": false,
-  "entry_id": 3,
-  "type_of": "weekly",
-  "initial": "2020-08-23T04:00:00.000Z",
-  "interval": 2,
-  "recurrence_id": 3,
-  "next_event": "2020-09-27T04:00:00.000Z"
+const updateTodayToNow = (today) => {
+  if(!today.start_time) {
+    return today.filter(event => moment(event.start_date) > moment())
+  } else {
+    return today.filter(event => event.start_time > moment())
+  }
 }
 
-console.log(getNextEvent(test))
 
 const getFirstEventTime = (events) => {
   let firstEventTime = events[0].next_event
@@ -159,5 +145,5 @@ const getFirstEventTime = (events) => {
 module.exports = {
   createEventList,
   checkReocsToday,
-  getNextEvent
+  getNextEventFromRec
 };
