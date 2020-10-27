@@ -39,7 +39,7 @@ export const Home = props => {
             <section>
               <EventList events={props.events.today} />
             </section>
-            <DepartureTime departureTime={props.events.departureTime} />
+            <DepartureTime departureTime={props.events.today[0].leave_by} />
             <section>
               <RecommendationList recommendations={recommendations[UPCOMING]} handleCheck={handleCheck} type={UPCOMING}>Upcoming: </RecommendationList>
               <RecommendationList recommendations={recommendations[LATER]} handleCheck={handleCheck} type={LATER}>Later: </RecommendationList>
