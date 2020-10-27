@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { Redirect } from "react-router-dom";
 import { getItem, getSuggestionCategory } from '../../helpers/selectors';
 
 import WeatherRing from './WeatherRing';
@@ -46,7 +47,7 @@ export const Home = props => {
               <RecommendationList recommendations={recommendations[DONE]} handleCheck={handleCheck} type={DONE}>Done: </RecommendationList>
             </section>
           </div> :
-          <div><h1>Please register/log in.</h1></div>
+          <Redirect to='/login' />
       }
     </Fragment>
   );
