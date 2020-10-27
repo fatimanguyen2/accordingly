@@ -38,7 +38,8 @@ function App() {
         "initial": "2020-03-09T04:00:00.000Z",
         "interval": 1,
         "recurrence_id": 1,
-        "weather": null
+        "weather": null,
+        "leave_by": "2020-10-27T18:35:46.229Z"
       },
       {
         "entry": "morning run",
