@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import moment from 'moment';
 const classnames = require('classnames');
 
-export const Add = (props) => {
+export const AddEvent = (props) => {
 
   const [input, setInput] = useState({})
   const [repeats, setRepeat] = useState([1, 2, 3]);

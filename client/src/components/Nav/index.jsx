@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Menu } from './menu';
-import { Add } from './add';
+import { NavMenu } from './NavMenu';
+import { AddEvent } from './AddEvent';
 
 const classnames = require('classnames');
 
@@ -24,7 +24,7 @@ export const Nav = (props) => {
           Menu
       </button>
       {!collapse &&
-        <Menu onSelect={props.onSelect} loggedIn={props.loggedIn} time={props.time}/>
+        <NavMenu onSelect={props.onSelect} loggedIn={props.loggedIn} time={props.time}/>
       }
       {props.loggedIn &&
       <button
@@ -41,7 +41,7 @@ export const Nav = (props) => {
         </button>
       }
       {!addCollapse &&
-        <Add onSubmit={props.onSubmit}/>
+        <AddEvent onSubmit={props.onSubmit}/>
       }
     </div>
   );
