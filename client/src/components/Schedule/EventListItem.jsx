@@ -10,9 +10,6 @@ import RepeatList from './RepeatList'
 export default function EventListItem(props) {
   const [toggle, setToggle] = useState(false);
   const date = moment().format('dddd, MMM Do');
-  console.log('rendering EventListItem component')
-  console.log('type', props.type)
-  console.log('date', props.startDate)
 
   return (
     <li onClick={() => setToggle(!toggle)}>

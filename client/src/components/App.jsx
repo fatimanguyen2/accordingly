@@ -7,27 +7,15 @@ import { Home } from './Home'
 import { NavMenu } from './NavMenu'
 
 import Schedule from './Schedule'
-// Data needed for HOME component
-// const suggestions = {
-//     upcoming: [{ id: 1, name: 'hat', description: 'Keep that head sheltered from the cold' }, { id: 2, name: 'suncreen', description: 'It is sunny outside' }],
-//     later: [{ id: 3, name: 'top', description: 'layer up' }, { id: 4, name: 'gloves', description: 'It is cold' }]
-// }
-// const events = [
-//     { id: 1, title: 'work', startTime: '9:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' },
-//     { id: 2, title: 'lunch', startTime: '10:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' },
-//     { id: 3, title: 'meeting', startTime: '11:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' },
-//     { id: 4, title: 'meeting', startTime: '13:00', weatherIcon: 'http://openweathermap.org/img/wn/02d@2x.png' }
-// ];
-// mainWeather='Sunny'
-// feelsLikeTemp='23'
-// minTemp='18'
-// maxTemp='29'
-// departureTime='8:24pm'
 
 function App() {
+    const suggestions = {
+        upcoming: [{ id: 1, name: 'hat', description: 'Keep that head sheltered from the cold' }, { id: 2, name: 'suncreen', description: 'It is sunny outside' }],
+        later: [{ id: 3, name: 'top', description: 'layer up' }, { id: 4, name: 'gloves', description: 'It is cold' }]
+    }
 
     const events = {
-        departureTime:'8:24pm',
+        departureTime: '8:24pm',
         today: [
             {
                 "entry": "commute",
@@ -117,25 +105,30 @@ function App() {
     }
 
     const weather = {
-        mainWeather:'Sunny',
-        feelsLikeTemp:'23',
-        minTemp:'18',
-        maxTemp:'29',
+        mainWeather: 'Sunny',
+        feelsLikeTemp: '23',
+        minTemp: '18',
+        maxTemp: '29',
     };
 
     const [state, setState] = useState({
         view: 'home',
         loggedIn: false,
         weather,
+        suggestions,
         events,
         time: 1603740043000
     });
 
     return (
         <main>
-           {/* <Home/> */}
-           <Schedule/>
-           {/* <NavMenu/> */}
+            <Home
+                weather={state.weather}
+                events={state.events}
+                suggestions={state.suggestions}
+            />
+            <Schedule />
+            {/* <NavMenu/> */}
         </main>
     );
 }
