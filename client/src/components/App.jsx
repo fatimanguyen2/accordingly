@@ -10,6 +10,7 @@ import { Nav } from './Nav';
 import { Schedule } from './Schedule';
 import { About } from './About';
 import { Settings } from './Settings';
+import { Register } from './Register'
 
 const suggestions = {
   upcoming: [{ id: 1, name: 'hat', description: 'Keep that head sheltered from the cold' }, { id: 2, name: 'suncreen', description: 'It is sunny outside' }],
@@ -148,8 +149,8 @@ function App() {
     time: 1603740043000
   });
 
-  const login = () => setState(prev => ({...prev, loggedIn: true}));
-  const logout = () => setState(prev => ({...prev, loggedIn: false}));
+  const login = () => setState(prev => ({ ...prev, loggedIn: true }));
+  const logout = () => setState(prev => ({ ...prev, loggedIn: false }));
 
   return (
     <main>
@@ -171,7 +172,7 @@ function App() {
                 events={state.events}
                 suggestions={state.suggestions}
               /> :
-              <Login login={login}/>}
+              <Login login={login} />}
           </Route>
 
           <Route path='/schedule'>
@@ -181,7 +182,9 @@ function App() {
             />
           </Route>
 
-          <Route path='/register'></Route>
+          <Route path='/register'>
+            <Register loggedIn={state.loggedIn} login={login}></Register>
+          </Route>
 
           <Route path='/about'>
             <About />
