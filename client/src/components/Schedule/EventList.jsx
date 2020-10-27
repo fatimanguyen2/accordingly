@@ -6,7 +6,7 @@ import EventListItem from './EventListItem';
 export default function EventList(props) {
   const events = props.events.map((event, id) => {
     return <EventListItem
-      key={id}
+      key={props.type + id}
       type={props.type}
       title={event.entry}
       startDate={props.type === 'today' ? event.start_date : event.next_event}
