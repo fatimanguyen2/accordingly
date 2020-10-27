@@ -1,17 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const { getTrip } = require('../APIs/google_map')
+const { getTripTime } = require('../APIs/google_map')
 
 
 
 
-module.exports = ({ getUserEvents, getUserLocationById }, { createEventList, checkReocsToday }, { locationToAddress }, { getWeather }) => {
+module.exports = (
+  { getUserEvents, getUserLocationById }, 
+  { createEventList, checkReocsToday }, 
+  { locationToAddress }, 
+  { getWeather }
+  ) => {
 
   router.get('/:id/events', function (req, res) {
     getUserEvents(req.params.id)
-      .then(rawEvents => {
-        res.json(createEventList(rawEvents))
-        })
+      .then(rawEvents => createEventList(rawEvents, req.params.id))
+      .then(data => res.json(data))
       .catch(err => res.json({ msg: err.message }))
   })
 
@@ -27,19 +31,20 @@ module.exports = ({ getUserEvents, getUserLocationById }, { createEventList, che
 
 
   router.get('/:id/recommendations', function (req, res) {
-    // getUserEvents(req.params.id)
-    //   .then(data => res.json(data[0].concat(checkReocsToday(data[1]))))
+    getUserEvents(req.params.id)
+    .then(rawEvents => createEventList(rawEvents, req.params.id))
 
-    getUserLocationById(req.params.id)
-      .then(data => res.json(data))
+    // getUserLocationById(req.params.id)
+    //   .then(data => res.json(data))
 
-    // getTrip(test, test2)
+    // getTripTime(test, test2)
     //   .then(data => res.json(data))
 
     // getWeather(test)
-      // .then(data => res.json(data))
+    //   .then(data => res.json(data))
       // .catch(err => res.json({ msg: err.message }))
   })
+
 
 
 

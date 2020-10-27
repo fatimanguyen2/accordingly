@@ -1,11 +1,22 @@
 const moment = require('moment');
+const { getLeaveBy } = require('../APIs/google_map')
+const db = require('../db');
+const dataQ = require('../models')(db);
 
-const createEventList = (rawEvents) => {
-  return {
-    today: rawEvents[0].concat(checkReocsToday(rawEvents[1])).map(event => ({...event, weather : null })),
-    repeating : groupByEntry(rawEvents[1].map(event => ({...event, next_event: getNextEventFromRec(event) }))) || [],
-    future : rawEvents[2].map(event => ({...event, weather : null }))
-  };
+const createEventList = (rawEvents, id) => {
+  return dataQ.getUserLocationById(id)
+    .then(origin => todayFormatting(rawEvents[0], rawEvents[1], origin))
+    .then(today => {
+      return {
+        today: today,
+        repeating : groupByEntry(rawEvents[1].map(event => ({...event, next_event: getNextEventFromRec(event) }))) || [],
+        future : rawEvents[2].map(event => ({...event, weather : null }))
+      };
+    })
+    // .then(eventList => {
+
+    // })
+    .catch(err => console.log(err))
 };
 
 const getRecurrenceArray = (event, list) => {
@@ -15,6 +26,26 @@ const getRecurrenceArray = (event, list) => {
     }
   }
 }
+
+const todayFormatting = (rawToday, rawRec, origin) => {
+  const today = rawToday.concat(checkReocsToday(rawRec)).map((event, index) => {
+    if (!event.start_time){
+      const start_time = getTodayRecStartTime(event);
+      return ({
+      ...event,
+        start_time
+      })
+    }
+  })
+  const leaveBys = today.map(event => getLeaveBy(origin, event));
+  return Promise.all(leaveBys)
+  .then(departures => today.map((event, index) => {
+      return ({
+        ...event,
+        leave_by: moment(departures[index]).format()
+      })
+  }))
+};
 
 
 const groupByEntry = (events) => {
@@ -44,6 +75,7 @@ const groupByEntry = (events) => {
     
     for (const event of grouping) {
       const rec = {
+        id: event.id,
         type_of : event.type_of,
         initial : event.initial,
         interval : event.interval,
@@ -123,27 +155,43 @@ const getNextEventFromRec = (reoc) => {
   }
 }
 
+
+const getTodayRecStartTime = (rec) => {
+  return moment().format("YYYY-MM-DD") + "T" + rec.start_hour;
+}
+
 const updateTodayToNow = (today) => {
-  if(!today.start_time) {
-    return today.filter(event => moment(event.start_date) > moment())
-  } else {
-    return today.filter(event => event.start_time > moment())
-  }
+  return today.filter(event => {
+    if(today.start_time) {
+      return moment(event.start_date) > moment();
+    } else {
+      return moment(getTodayRecStartTime(event)) > moment();
+    }
+  })
 }
 
 
 const getFirstEventTime = (events) => {
-  let firstEventTime = events[0].next_event
+  let firstEventTime = events[0].next_event;
   for (const event of events) {
-    if (event.next_event < firstEventTime){
-      firstEventTime = event.next_event
+    if (event.next_event < firstEventTime) {
+      firstEventTime = event.next_event;
     }
   }
-  return firstEventTime
+  return firstEventTime;
 }
+
+
+
+const getTripsToday = (today, origin) => {
+
+}
+
 
 module.exports = {
   createEventList,
   checkReocsToday,
-  getNextEventFromRec
+  getNextEventFromRec,
+  getTodayRecStartTime,
+  updateTodayToNow
 };
