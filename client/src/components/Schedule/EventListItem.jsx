@@ -10,8 +10,6 @@ import RepeatList from './RepeatList'
 export default function EventListItem(props) {
   const [toggle, setToggle] = useState(false);
   const date = moment().format('dddd, MMM Do');
-  console.log(props.type)
-  console.log(props.recurrences)
 
   return (
     <li onClick={() => setToggle(!toggle)}>
@@ -23,7 +21,7 @@ export default function EventListItem(props) {
         <Fragment>
           <div>
             <FontAwesomeIcon icon={faMapMarkerAlt} />
-            <p>{props.destination.x}</p>
+            <p>{props.destination.x /* TO FIX */}</p> 
           </div>
           <div>
             <FontAwesomeIcon icon={faClock} />
