@@ -4,10 +4,11 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import useApplicationData from '../hooks/useApplicationData';
 // import { SET_USERS } from '../reducers/dataReducer';
 
-import { Home } from './Home'
-import { NavMenu } from './NavMenu'
+import { Home } from './Home';
+import { NavMenu } from './NavMenu';
 
-import Schedule from './Schedule'
+import { Schedule } from './Schedule';
+import { About } from './About';
 
 function App() {
   const suggestions = {
@@ -151,6 +152,7 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Home
+              loggedIn={state.loggedIn}
               weather={state.weather}
               events={state.events}
               suggestions={state.suggestions}
@@ -159,13 +161,16 @@ function App() {
 
           <Route path='/schedule'>
             <Schedule
+              loggedIn={state.loggedIn}
               events={state.events}
             />
           </Route>
 
           <Route path='/login'></Route>
           <Route path='/register'></Route>
-          <Route path='/about'></Route>
+          <Route path='/about'>
+            <About />
+          </Route>
           <Route path='/settings'></Route>
           <Route path='*'><h1>404 - Not Found</h1></Route>
         </Switch>
