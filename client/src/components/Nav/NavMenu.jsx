@@ -13,7 +13,7 @@ export const NavMenu = (props) => {
       <li><Link to='/about'>About</Link></li>
       {props.loggedIn && <li><Link to='/settings'>Settings</Link></li>}
       {props.loggedIn && <li><button onClick={() => props.onSelect('refresh')}>
-        Refresh 
+        Refresh
       </button>
       <span> {moment(props.time).fromNow()}</span>
       </li>}

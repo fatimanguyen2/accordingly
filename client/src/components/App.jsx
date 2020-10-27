@@ -80,12 +80,12 @@ const events = {
         {
           "type_of": "weekly",
           "initial": "2020-03-09T04:00:00.000Z",
-          "interval": 1
+          "interval": 2
         },
         {
           "type_of": "weekly",
           "initial": "2020-03-10T04:00:00.000Z",
-          "interval": 1
+          "interval": 2
         },
         {
           "type_of": "weekly",
