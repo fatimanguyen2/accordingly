@@ -74,12 +74,12 @@ export const AddEvent = (props) => {
         {repeats.map(ele => {
           return <li key={ele.id}>
             Every 
-            <label htmlFor="interval_count">Repeat Count</label>
-            <input type="number" value="1" min="1" max="12" name="interval_count" id="interval_count" onChange={handleInputChange} required></input>
-            <label for="interval_type">Repeat Type</label>
-            <select name="interval_type" id={`interval_type_${ele.id}`}>
+            <label htmlFor={`interval_count_${ele.id}`}>Repeat Count</label>
+            <input type="number" min="1" max="12" name={`interval_count_${ele.id}`} id={`interval_count_${ele.id}`} onChange={handleInputChange} required></input>
+            <label for={`interval_type_${ele.id}`}>Repeat Type</label>
+            <select name={`interval_type_${ele.id}`} id={`interval_type_${ele.id}`} onChange={handleInputChange}>
               <option value="day">Day</option>
-              <option value="7">Month</option>
+              <option value="month">Month</option>
               <option value="year">Year</option>
               <option value="" disabled>----</option>
               <option value="0">Monday</option>
