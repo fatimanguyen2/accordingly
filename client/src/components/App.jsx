@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import axios from 'axios';
 // import useApplicationData from '../hooks/useApplicationData';
 // import { SET_USERS } from '../reducers/dataReducer';
+import './layout.scss'
 
 import { Home } from './Home';
 import { Login } from './Login';
@@ -10,7 +11,7 @@ import { Nav } from './Nav';
 import { Schedule } from './Schedule';
 import { About } from './About';
 import { Settings } from './Settings';
-import { Register } from './Register'
+import { Register } from './Register';
 
 const suggestions = {
   upcoming: [{ id: 1, name: 'hat', description: 'Keep that head sheltered from the cold' }, { id: 2, name: 'suncreen', description: 'It is sunny outside' }],

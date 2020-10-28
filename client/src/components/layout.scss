@@ -1,0 +1,20 @@
+@import 'base';
+
+html {
+  font-size: 1em;
+  word-break: break-word;
+}
+
+body {
+  font-family: $font-stack;
+  background-color: salmon;
+  color: white;
+}
+
+p {font-size: $font-size}
+
+h5 {font-size: $h5}
+h4 {font-size: $h4}
+h3 {font-size: $h3}
+h2 {font-size: $h2}
+h1 {font-size: $h1}
