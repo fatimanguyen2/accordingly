@@ -26,20 +26,26 @@ function App() {
     suggestions,
     events: {},
     time: 1603740043000,
-    homeAddress:{}
+    homeAddress: {}
   });
 
   useEffect(() => {
-      Promise.all([
-          axios.get('/api/users/2/weather'),
-          axios.get('api/users/2/events'),
-          axios.get('api/users/2')
-      ])
-      .then(all => setState(prev => ({...prev, weather: all[0].data, events: all[1].data, homeAddress:all[2].data})))
+    Promise.all([
+      axios.get('/api/users/2/weather'),
+      axios.get('/api/users/2/events'),
+      axios.get('/api/users/2')
+    ])
+      .then(all => setState(prev => ({ ...prev, weather: all[0].data, events: all[1].data, homeAddress: all[2].data })))
   }, [])
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => setState(prev => ({ ...prev, loggedIn: false }));
+  const updateAddress = (addressObj) => {
+    console.log('update address')
+    console.log(addressObj)
+    axios.put('api/users/2', addressObj)
+      .then(() => setState(prev => ({...prev, homeAddress: addressObj})));
+  };
 
 
   return (
@@ -84,7 +90,7 @@ function App() {
           </Route>
 
           <Route path='/settings'>
-            <Settings loggedIn={state.loggedIn} address={state.homeAddress}></Settings>
+            <Settings loggedIn={state.loggedIn} address={state.homeAddress} updateAddress={updateAddress}></Settings>
           </Route>
 
           <Route path='*'><h1>404 - Not Found</h1></Route>
