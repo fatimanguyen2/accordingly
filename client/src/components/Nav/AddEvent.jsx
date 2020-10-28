@@ -64,8 +64,8 @@ export const AddEvent = (props) => {
       <LocationSearchInput onConfirm={handleConfirm}/>
       <label htmlFor="start_date">Start Date</label>
       <input type="date" name="start_date" id="start_date" onChange={handleInputChange} required></input>
-      <label htmlFor="start_time">Start Time</label>
-      <input type="time" name="start_time" id="start_time" onChange={handleInputChange} required></input>
+      <label htmlFor="start_hour">Start Time</label>
+      <input type="time" name="start_hour" id="start_hour" onChange={handleInputChange} required></input>
       <label htmlFor="end_date">End Date</label>
       <input type="date" name="end_date" id="end_date" onChange={handleInputChange} required></input>
       <label htmlFor="end_time">End Time</label>
