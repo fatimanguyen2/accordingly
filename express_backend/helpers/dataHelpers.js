@@ -9,9 +9,9 @@ const createEventList = (rawEvents, id) => {
     .then(origin => todayFormatting(rawEvents[0], rawEvents[1], origin))
     .then(today => {
       return {
-        today: today,
+        today: sortEventChrono(today),
         repeating : groupByEntry(rawEvents[1].map(event => ({...event, next_event: getNextEventFromRec(event)}))) || [],///needs refatoring
-        future : rawEvents[2]
+        future : sortEventChrono(rawEvents[2])
       };
     })
     .then(eventList => {
@@ -202,18 +202,42 @@ const getFirstEventTime = (events) => {
 }
 
 
+const sortEventChrono = (events) => {
+  return events.sort((a, b) => moment(a.start_time).unix() - moment(b.start_time).unix())
+}
 
 
 const getTripsToday = (origin, today) => {
-  const path = [];
-  for (const event of today) {
-    path.push(event.destination)
+  const path = [[origin, today[0].destination]];
+  for (let x = 1; x < today.length; x ++) {
+    path.push([today[x-1].destination, today[x].destination])
   }
-
+  path.push([today[today.length - 1].destination, origin])
   
-  return getMultipleTripTime(origin, path)
+  return getMultipleTripTime(path)
+  .then(travelTimes => {
+    return travelTimes.map((travelTime, index) => {
+      let start_travel
+      if (index < travelTimes.length - 1) {
+        start_travel = moment(today[index].start_time).subtract(travelTime.time, 's').format()
+      } else {
+        start_travel = (today.reverse())[0].end_time
+      }
+      return ({...travelTime, start_travel})
+    })
+  })
 }
 
+const test6AM = moment("2020-10-28T06")
+
+const getRelativeSchedule = (tripTimes) => {
+  return tripTimes.map(travelTimes => {
+    return {
+      hours_from_now: moment(travelTimes.start_travel).diff(test6AM, 'h'),
+      start_point : travelTimes.start_point
+    }
+  })
+}
 
 module.exports = {
   createEventList,
@@ -221,5 +245,6 @@ module.exports = {
   getNextEventFromRec,
   getTodayRecStartTime,
   getTripsToday,
-  updateTodayToNow
+  updateTodayToNow,
+  getRelativeSchedule
 };

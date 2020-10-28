@@ -26,6 +26,23 @@ const getMainWeather = (location) => {
     })
 }
 
+const getDetailedForcast = (schedule) => {
+  const allForecasts = schedule.map(step => {
+    const hour = step.hours_from_now
+    if (hour > 0) {
+      return getWeather(step.start_point)
+        .then(data => data.hourly[hour])
+    } else if (hour == 0) {
+      return getWeather(step.start_point)
+      .then(data => data.current)
+    } else {
+      return null
+    }
+  })
+  return Promise.all(allForecasts)
+}
+
+
 ///need refactorging call only one time
 const getForecastCategory = (event) => {
   const start = event.start_time;
@@ -48,16 +65,9 @@ const getForecastCategory = (event) => {
   }
 };
 
-const test = {
-  "start_time": "2020-11-01T04:00:00.000Z",
-  "weather": null,
-  "destination": {
-      "x": 43.70564,
-      "y": -79.42154
-  }
-}
 
 module.exports = {
   getMainWeather,
-  getForecastCategory
+  getForecastCategory,
+  getDetailedForcast
 };

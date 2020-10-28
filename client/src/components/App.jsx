@@ -73,6 +73,7 @@ function App() {
           loggedIn={state.loggedIn}
           time={state.time}
           logout={logout}
+          events={state.events}
         />
 
         {state.loading ? <WeatherRing mainWeather='Loading...' /> :
