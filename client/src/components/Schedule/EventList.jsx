@@ -9,12 +9,10 @@ export default function EventList(props) {
       key={props.type + id}
       type={props.type}
       title={event.entry}
-      startDate={props.type === 'today' ? event.start_date : event.next_event}
-      startTime={event.start_time}
-      endTime={event.end_time}
-      weatherIcon={event.weatherIcon}
-      destination={event.destination}
-      recurrences={props.type === 'today'? getRecurrenceArray(event, props.allEvents): event.recurrences}
+      start={props.type === 'repeating' ? event.next_event.start_time : event.start_time }
+      weather={event.weather}
+      destination={props.type === 'repeating'? event.next_event.destination : event.destination}
+      recurrences={props.type === 'repeating'? event.recurrences : getRecurrenceArray(event, props.allEvents)}
     />
   })
   return (

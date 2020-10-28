@@ -5,7 +5,7 @@ import RepeatListItem from './RepeatListItem'
 export default function RepeatList(props) {
   const items = props.recurrences.map((reccurence, id) => {
     return <RepeatListItem
-    key={reccurence.reocurrence_id} // TO FIX ???
+    key={reccurence.type_of + reccurence.reocurrence_id} // TO FIX ???
     frequency={reccurence.type_of}
     initial={reccurence.initial}
     interval={reccurence.interval}

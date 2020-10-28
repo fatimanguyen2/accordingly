@@ -28,8 +28,8 @@ export default function EventListItem(props) {
   return (
     <li>
       <div onClick={() => setToggle(!toggle)}>
-        <img src={props.weatherIcon} alt='Weather icon' />
-        <p>{props.type === 'today' ? moment(props.startTime, 'hh:mm:ss').format('h:mm a') : moment(props.startDate).fromNow()} {props.title}</p>
+        <img src={props.weather} alt='Weather icon' />
+        <p>{props.type === 'today' ? moment(props.start).format('h:mm a') : moment(props.start).fromNow()} {props.title}</p>
       </div>
       {toggle &&
         <Fragment>
@@ -40,8 +40,8 @@ export default function EventListItem(props) {
           <div>
             <FontAwesomeIcon icon={faClock} />
             <div>
-              <p> {moment(props.startDate).format('dddd, MMM Do')} {props.startTime} </p>
-              <p> {moment(props.startDate).format('dddd, MMM Do')} {props.endTime} </p>
+              <p> {moment(props.start).format('dddd, MMM Do   h:mm a')}</p>
+              <p> {moment(props.end).format('dddd, MMM Do   h:mm a')}</p>
             </div>
           </div>
           {

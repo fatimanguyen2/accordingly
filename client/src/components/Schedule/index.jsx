@@ -16,7 +16,7 @@ export const Schedule = props => {
           <DepartureTime departureTime={props.events.today[0].leave_by} />
           <EventList allEvents={props.events} events={props.events[TODAY]} type={TODAY}>Today:</EventList>
           <EventList events={props.events[REPEATING]} type={REPEATING}>Repeating:</EventList>
-          <EventList events={props.events[FUTURE]} type={FUTURE}>Future:</EventList>
+          <EventList allEvents={props.events} events={props.events[FUTURE]} type={FUTURE}>Future:</EventList>
         </div> :
         <Redirect to='/login' />
       }
