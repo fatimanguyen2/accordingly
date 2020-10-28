@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -76,7 +75,7 @@ export const AddEvent = (props) => {
             Every 
             <label htmlFor={`interval_count_${ele.id}`}>Repeat Count</label>
             <input type="number" min="1" max="12" name={`interval_count_${ele.id}`} id={`interval_count_${ele.id}`} onChange={handleInputChange} required></input>
-            <label for={`interval_type_${ele.id}`}>Repeat Type</label>
+            <label htmlFor={`interval_type_${ele.id}`}>Repeat Type</label>
             <select name={`interval_type_${ele.id}`} id={`interval_type_${ele.id}`} onChange={handleInputChange}>
               <option value="day">Day</option>
               <option value="month">Month</option>
