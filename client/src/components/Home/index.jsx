@@ -2,6 +2,8 @@ import React, { Fragment, useState } from 'react';
 import { Redirect } from "react-router-dom";
 import { getItem, getSuggestionCategory } from '../../helpers/selectors';
 
+import './home.scss';
+
 import WeatherRing from './WeatherRing';
 import EventList from './EventList';
 import DepartureTime from '../DepartureTime';
@@ -30,7 +32,7 @@ export const Home = props => {
     <Fragment>
       {
         props.loggedIn ?
-          <div>
+          <div className='test'>
             <WeatherRing
               mainWeather={props.weather.mainWeather}
               feelsLikeTemp={props.weather.feelsLikeTemp}
