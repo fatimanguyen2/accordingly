@@ -25,13 +25,15 @@ function App() {
     weather: {},
     suggestions,
     events: {},
-    time: 1603740043000
+    time: 1603740043000,
+    homeAddress:{}
   });
 
   useEffect(() => {
       Promise.all([
           axios.get('/api/users/2/weather'),
-          axios.get('api/users/2/events')
+          axios.get('api/users/2/events'),
+          // axios.get('api/users/2/events')
       ])
       .then(all => setState(prev => ({...prev, weather: all[0].data, events: all[1].data})))
   }, [])
@@ -82,7 +84,7 @@ function App() {
           </Route>
 
           <Route path='/settings'>
-            <Settings loggedIn={state.loggedIn}></Settings>
+            <Settings loggedIn={state.loggedIn} address={state.homeAddress}></Settings>
           </Route>
 
           <Route path='*'><h1>404 - Not Found</h1></Route>

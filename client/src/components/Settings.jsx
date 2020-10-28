@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons';
 
 export const Settings = props => {
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState(props.address.x);
   const [startOfDay, setStartOfDay] = useState('');
   const [showButton, setShowButton] = useState(false);
 
