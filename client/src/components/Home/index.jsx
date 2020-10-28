@@ -35,9 +35,9 @@ export const Home = props => {
           <div className='test'>
             <WeatherRing
               mainWeather={props.weather.mainWeather}
-              feelsLikeTemp={props.weather.feelsLikeTemp}
-              minTemp={props.weather.minTemp}
-              maxTemp={props.weather.maxTemp}
+              feelsLikeTemp={Math.round(props.weather.feelsLikeTemp)}
+              minTemp={Math.round(props.weather.feels_likeMin)}
+              maxTemp={Math.round(props.weather.feels_likeMax)}
             />
             <section>
               <EventList events={props.events.today} />

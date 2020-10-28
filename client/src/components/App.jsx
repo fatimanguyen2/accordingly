@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import axios from 'axios';
+import axios from 'axios';
 // import useApplicationData from '../hooks/useApplicationData';
 // import { SET_USERS } from '../reducers/dataReducer';
 import './App.scss'
@@ -26,8 +26,8 @@ const events = {
       "id": 2,
       "is_outdoor": true,
       "destination": {
-          "x": 49.2301,
-          "y": -123.10867
+        "x": 49.2301,
+        "y": -123.10867
       },
       "start_date": "2020-03-05T05:00:00.000Z",
       "end_date": null,
@@ -43,7 +43,7 @@ const events = {
       "end_time": "2020-10-27T012:00:00",
       "leave_by": "2020-10-27T07:28:26-04:00",
       "weather": null
-  },
+    },
     {
       "entry": "morning run",
       "id": 6,
@@ -75,62 +75,60 @@ const events = {
       "end_date": null,
       "is_from_start_date": false,
       "next_event": {
-          "start_time": "2020-11-01T04:00:00.000Z",
-          "end_time": "2020-11-01T08:00:00.000Z",
-          "weather": null,
-          "destination": {
-              "x": 43.70564,
-              "y": -79.42154
-          }
+        "start_time": "2020-11-01T04:00:00.000Z",
+        "end_time": "2020-11-01T08:00:00.000Z",
+        "weather": null,
+        "destination": {
+          "x": 43.70564,
+          "y": -79.42154
+        }
       },
       "recurrences": [
-          {
-              "id": 7,
-              "type_of": "weekly",
-              "initial": "2020-08-23T04:00:00.000Z",
-              "interval": 2
-          }
+        {
+          "id": 7,
+          "type_of": "weekly",
+          "initial": "2020-08-23T04:00:00.000Z",
+          "interval": 2
+        }
       ]
-  }
+    }
   ],
   "future": [
     {
       "entry": "Skate competition",
       "id": 4,
       "destination": {
-          "x": 43.66858,
-          "y": -79.35459
+        "x": 43.66858,
+        "y": -79.35459
       },
       "is_outdoor": true,
       "start_time": "2020-11-17T18:45:00.000Z",
       "end_time": "2020-11-17T23:30:00.000Z",
       "entry_id": 9,
       "weather": null
-  }
-]
+    }
+  ]
 }
-
-const weather = {
-  mainWeather: 'Sunny',
-  feelsLikeTemp: '23',
-  minTemp: '18',
-  maxTemp: '29',
-};
 
 
 function App() {
   const [state, setState] = useState({
     view: 'home',
     loggedIn: true,
-    weather,
+    weather: {},
     suggestions,
     events,
     time: 1603740043000
   });
 
+  useEffect(() => {
+    axios.get('/api/users/2/weather')
+      .then(res => setState(prev => ({...prev, weather: res.data})))
+  }, [])
+
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => setState(prev => ({ ...prev, loggedIn: false }));
-
+  console.log(state.weather.mainWeather)
   return (
     <main>
       <Router>
@@ -145,16 +143,16 @@ function App() {
 
         <Switch>
           <Route exact path='/'>
-              <Home
-                loggedIn={state.loggedIn}
-                weather={state.weather}
-                events={state.events}
-                suggestions={state.suggestions}
-                />
+            <Home
+              loggedIn={state.loggedIn}
+              weather={state.weather}
+              events={state.events}
+              suggestions={state.suggestions}
+            />
           </Route>
 
           <Route path='/login'>
-              <Login loggedIn={state.loggedIn} login={login} />
+            <Login loggedIn={state.loggedIn} login={login} />
           </Route>
 
           <Route path='/schedule'>
