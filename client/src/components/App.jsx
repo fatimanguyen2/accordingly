@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import axios from 'axios';
 // import useApplicationData from '../hooks/useApplicationData';
 // import { SET_USERS } from '../reducers/dataReducer';
-import './layout.scss'
+import './App.scss'
 
 import { Home } from './Home';
 import { Login } from './Login';
