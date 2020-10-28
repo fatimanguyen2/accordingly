@@ -10,4 +10,5 @@ VALUES
 ('Gymn-a-thon', TRUE, point(43.66808, -79.30635), 5),
 ('Fundraiser', FALSE, point(43.67969, -79.29683), 4),
 ('Skate competition', TRUE, point(43.66858, -79.35459), 1),
-('Comicon', FALSE, point(44.22624, -76.49317), 3);
+('Comicon', FALSE, point(44.22624, -76.49317), 3),
+('Boring convention', FALSE, point(49.38654, -123.13254), 2);
