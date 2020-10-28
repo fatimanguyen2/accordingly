@@ -34,15 +34,15 @@ export const Home = props => {
         props.loggedIn ?
           <div className='test'>
             <WeatherRing
-              mainWeather={props.weather.mainWeather}
+              mainWeather={props.weather.mainWeather && props.weather.mainWeather[0]}
               feelsLikeTemp={Math.round(props.weather.feelsLikeTemp)}
               minTemp={Math.round(props.weather.feels_likeMin)}
               maxTemp={Math.round(props.weather.feels_likeMax)}
             />
             <section>
-              <EventList events={props.events.today} />
+              {props.events.today && <EventList events={props.events.today} />}
             </section>
-            <DepartureTime departureTime={props.events.today[0].leave_by} />
+            <DepartureTime departureTime={props.events.today && props.events.today[0].leave_by} />
             <section>
               <RecommendationList recommendations={recommendations[UPCOMING]} handleCheck={handleCheck} type={UPCOMING}>Upcoming: </RecommendationList>
               <RecommendationList recommendations={recommendations[LATER]} handleCheck={handleCheck} type={LATER}>Later: </RecommendationList>
