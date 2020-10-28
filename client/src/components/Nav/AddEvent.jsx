@@ -70,13 +70,9 @@ export const AddEvent = (props) => {
     }]));
   };
 
-  const removeRepeat = (e, index) => {
+  const removeRepeat = (e, html_id) => {
     e.preventDefault();
-    setRepeat(state => {
-      const output = [...state];
-      output.splice(index-1, 1);
-      return output;
-    });
+    setRepeat(state => state.filter(ele => ele.html_id !== html_id));
   };
 
   //year max=99
