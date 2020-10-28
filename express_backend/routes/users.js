@@ -7,9 +7,9 @@ const { getTripTime } = require('../APIs/google_map')
 
 module.exports = (
   { getUserEvents, getUserLocationById }, 
-  { createEventList, checkReocsToday }, 
+  { createEventList, getTripsToday }, 
   { locationToAddress }, 
-  { getMainWeather }
+  { getMainWeather,getMultipleTripTime }
   ) => {
 
   router.get('/:id/events', function (req, res) {
@@ -38,8 +38,12 @@ module.exports = (
 
 
   router.get('/:id/recommendations', function (req, res) {
-    getUserEvents(req.params.id)
+    let origin
+    getUserLocationById(req.params.id)
+    .then(homeLoc => origin = homeLoc)
+    .then(() => getUserEvents(req.params.id))
     .then(rawEvents => createEventList(rawEvents, req.params.id))
+    .then(eventList => console.log(getTripsToday(origin, eventList.today)))
 
     // getUserLocationById(req.params.id)
     //   .then(data => res.json(data))
