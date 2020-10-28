@@ -39,6 +39,10 @@ function App() {
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => setState(prev => ({ ...prev, loggedIn: false }));
 
+  function handleEdit(id) {
+    console.log('edit ' + id);
+  };
+
 
   return (
     <main>
@@ -50,6 +54,7 @@ function App() {
           loggedIn={state.loggedIn}
           time={state.time}
           logout={logout}
+          events={state.events}
         />
 
         <Switch>
