@@ -51,6 +51,10 @@ export const AddEvent = (props) => {
     ...input,
     "destination": address
   })
+  const handleDraft = (address) => setInput({
+    ...input,
+    "draft_destination": address
+  })
 
   //year max=99
   //month max=12
@@ -61,7 +65,7 @@ export const AddEvent = (props) => {
     <form>
       <label htmlFor="entry">Title</label>
       <input type="text" name="entry" id="entry" placeholder="Add Title" onChange={handleInputChange} required></input>
-      <LocationSearchInput onConfirm={handleConfirm}/>
+      <LocationSearchInput onConfirm={handleConfirm} onDraft={handleDraft}/>
       <label htmlFor="start_date">Start Date</label>
       <input type="date" name="start_date" id="start_date" onChange={handleInputChange} required></input>
       <label htmlFor="start_hour">Start Time</label>
@@ -80,15 +84,16 @@ export const AddEvent = (props) => {
             <select name="interval_type" id={`interval_type_${ele.id}`}>
               <option value="">None</option>
               <option value="day">Day</option>
-              <option value="monday">Monday</option>
-              <option value="tuesday">Tuesday</option>
-              <option value="wednesday">Wednesday</option>
-              <option value="thursday">Thursday</option>
-              <option value="friday">Friday</option>
-              <option value="saturday">Saturday</option>
-              <option value="sunday">Sunday</option>
-              <option value="month">Month</option>
+              <option value="7">Month</option>
               <option value="year">Year</option>
+              <option value="" disabled>----</option>
+              <option value="0">Monday</option>
+              <option value="1">Tuesday</option>
+              <option value="2">Wednesday</option>
+              <option value="3">Thursday</option>
+              <option value="4">Friday</option>
+              <option value="5">Saturday</option>
+              <option value="6">Sunday</option>
             </select>
           </li>
         })}
