@@ -2,6 +2,8 @@ import React, { Fragment, useState } from 'react';
 import { Redirect } from "react-router-dom";
 import { getItem, getSuggestionCategory } from '../../helpers/selectors';
 
+import './styles.scss';
+
 import WeatherRing from './WeatherRing';
 import EventList from './EventList';
 import DepartureTime from '../DepartureTime';
@@ -30,17 +32,17 @@ export const Home = props => {
     <Fragment>
       {
         props.loggedIn ?
-          <div>
+          <div className='test'>
             <WeatherRing
-              mainWeather={props.weather.mainWeather}
-              feelsLikeTemp={props.weather.feelsLikeTemp}
-              minTemp={props.weather.minTemp}
-              maxTemp={props.weather.maxTemp}
+              mainWeather={props.weather.mainWeather && props.weather.mainWeather[0]}
+              feelsLikeTemp={Math.round(props.weather.feelsLikeTemp)}
+              minTemp={Math.round(props.weather.feels_likeMin)}
+              maxTemp={Math.round(props.weather.feels_likeMax)}
             />
             <section>
-              <EventList events={props.events.today} />
+              {props.events.today && <EventList events={props.events.today} />}
             </section>
-            <DepartureTime departureTime={props.events.today[0].leave_by} />
+            <DepartureTime departureTime={props.events.today && props.events.today[0].leave_by} />
             <section>
               <RecommendationList recommendations={recommendations[UPCOMING]} handleCheck={handleCheck} type={UPCOMING}>Upcoming: </RecommendationList>
               <RecommendationList recommendations={recommendations[LATER]} handleCheck={handleCheck} type={LATER}>Later: </RecommendationList>

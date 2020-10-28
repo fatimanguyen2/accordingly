@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
+
+$font-stack: 'Mulish', sans-serif;
+$font-size: 1em;
+$ratio: 1.25;
+$h5: calc(font-size * $ratio);
+$h4: calc($h5 * $ratio);
+$h3: calc($h4 * $ratio);
+$h2: calc($h3 * $ratio);
+$h1: calc($h2 * $ratio);
