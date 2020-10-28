@@ -32,11 +32,15 @@ const getForecastCategory = (event) => {
   const in48h = moment().add(48, 'h');
   if (moment(start).isBefore(in48h)) {
     const hour = moment(start).diff(moment(), "hour")
-    return getWeather(event.destination)
-    .then(data => data.hourly[hour].weather[0].main)
+    if (hour > 0) {
+      return getWeather(event.destination)
+        .then(data => data.hourly[hour].weather[0].main)
+    } else {
+      return null
+    }
   } else {
     const day = moment(start).diff(moment(), "day")
-    if (day > 7){
+    if (day > 7 || day < 1){
       return null
     }
     return getWeather(event.destination)
