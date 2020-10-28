@@ -47,13 +47,9 @@ export const AddEvent = (props) => {
     [e.currentTarget.name]: e.currentTarget.value
   })
 
-  const handleConfirm = (address) => setInput({
+  const handleAddress = (address) => setInput({
     ...input,
     "destination": address
-  })
-  const handleDraft = (address) => setInput({
-    ...input,
-    "draft_destination": address
   })
 
   //year max=99
@@ -65,7 +61,7 @@ export const AddEvent = (props) => {
     <form>
       <label htmlFor="entry">Title</label>
       <input type="text" name="entry" id="entry" placeholder="Add Title" onChange={handleInputChange} required></input>
-      <LocationSearchInput onConfirm={handleConfirm} onDraft={handleDraft}/>
+      <LocationSearchInput onChange={handleAddress}/>
       <label htmlFor="start_date">Start Date</label>
       <input type="date" name="start_date" id="start_date" onChange={handleInputChange} required></input>
       <label htmlFor="start_hour">Start Time</label>
