@@ -6,12 +6,48 @@ const classnames = require('classnames');
 export const AddEvent = (props) => {
 
   const [input, setInput] = useState({})
-  const [repeats, setRepeat] = useState([{id: 1}, {id: 2}, {id: 3}]);
+  const [repeats, setRepeat] = useState([
+    {
+      "id": 1,
+      "type_of": "weekly",
+      "initial": "2020-03-09T04:00:00.000Z",
+      "interval": 2
+    },
+    {
+      "id": 2,
+      "type_of": "weekly",
+      "initial": "2020-03-10T04:00:00.000Z",
+      "interval": 2
+    },
+    {
+      "id": 3,
+      "type_of": "weekly",
+      "initial": "2020-03-11T04:00:00.000Z",
+      "interval": 1
+    },
+    {
+      "id": 4,
+      "type_of": "weekly",
+      "initial": "2020-03-12T04:00:00.000Z",
+      "interval": 1
+    },
+    {
+      "id": 5,
+      "type_of": "weekly",
+      "initial": "2020-03-13T04:00:00.000Z",
+      "interval": 1
+    }
+  ]);
 
   const handleInputChange = (e) => setInput({
     ...input,
     [e.currentTarget.name]: e.currentTarget.value
   })
+
+  //year max=99
+  //month max=12
+  //weekly max=52
+  //daily max=99
 
   return (
     <form>
@@ -28,10 +64,29 @@ export const AddEvent = (props) => {
       <input type="date" name="end_date" id="end_date" onChange={handleInputChange} required></input>
       <label htmlFor="end_time">End Time</label>
       <input type="time" name="end_time" id="end_time" onChange={handleInputChange} required></input>
-
-      {repeats.map(ele => {
-        return <li key={ele.id}>List id {ele.id}</li>
-      })}
+      <ul>
+        {repeats.map(ele => {
+          return <li key={ele.id}>
+            Every 
+            <label htmlFor="interval_count">Repeat Count</label>
+            <input type="number" min="0" max="12" name="interval_count" id="interval_count" onChange={handleInputChange} required></input>
+            <label for="interval_type">Repeat Type</label>
+            <select name="interval_type" id="interval_type">
+              <option value="">--Please choose an option--</option>
+              <option value="day">Day</option>
+              <option value="monday">Monday</option>
+              <option value="tuesday">Tuesday</option>
+              <option value="wednesday">Wednesday</option>
+              <option value="thursday">Thursday</option>
+              <option value="friday">Friday</option>
+              <option value="saturday">Saturday</option>
+              <option value="sunday">Sunday</option>
+              <option value="month">Month</option>
+              <option value="year">Year</option>
+            </select>
+          </li>
+        })}
+      </ul>
       
       <button onClick={(event) => {
         event.preventDefault()

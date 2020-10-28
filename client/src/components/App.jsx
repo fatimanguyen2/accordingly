@@ -79,26 +79,31 @@ const events = {
       "next_weather": null,
       "recurrences": [
         {
+          "id": 1,
           "type_of": "weekly",
           "initial": "2020-03-09T04:00:00.000Z",
           "interval": 2
         },
         {
+          "id": 2,
           "type_of": "weekly",
           "initial": "2020-03-10T04:00:00.000Z",
           "interval": 2
         },
         {
+          "id": 3,
           "type_of": "weekly",
           "initial": "2020-03-11T04:00:00.000Z",
           "interval": 1
         },
         {
+          "id": 4,
           "type_of": "weekly",
           "initial": "2020-03-12T04:00:00.000Z",
           "interval": 1
         },
         {
+          "id": 5,
           "type_of": "weekly",
           "initial": "2020-03-13T04:00:00.000Z",
           "interval": 1
