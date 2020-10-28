@@ -10,6 +10,8 @@ const getWeather = (location) => {
     .catch(err => err);
   }
 
+
+
 const getMainWeather = (location) => {
   return getWeather(location)
   .then(data => {
@@ -18,41 +20,39 @@ const getMainWeather = (location) => {
         mainWeather: data.current.weather.map(condtion => condtion.main),
         feelsLikeTemp: data.current.feels_like,
         actualTemp: data.current.temp,
-        feels_likeMin : Math.min(...data.hourly.filter((hour, index) => index < 8).map(hour => hour.feels_like)),
-        feels_likeMax : Math.max(...data.hourly.filter((hour, index) => index < 8).map(hour => hour.feels_like))
+        feels_likeMin : Math.min(...data.hourly.filter((hour, index) => index < 12).map(hour => hour.feels_like)),
+        feels_likeMax : Math.max(...data.hourly.filter((hour, index) => index < 12).map(hour => hour.feels_like))
       }
     })
 }
 
-const getForecast = (event) => {
-  const in48h = moment().add(48, 'h')
-  return (moment(event.start_time).isBefore(moment().add(48, 'h')))
+const getForecastCategory = (event) => {
+  const start = event.start_time;
+  const in48h = moment().add(48, 'h');
+  if (moment(start).isBefore(in48h)) {
+    const hour = moment(start).diff(moment(), "hour")
+    return getWeather(event.destination)
+    .then(data => data.hourly[hour].weather[0].main)
+  } else {
+    const day = moment(start).diff(moment(), "day")
+    if (day > 7){
+      return null
+    }
+    return getWeather(event.destination)
+    .then(data => data.daily[day].weather[0].main)
+  }
 };
 
-const test =         {
-  "entry": "commute",
-  "id": 2,
-  "is_outdoor": true,
+const test = {
+  "start_time": "2020-11-01T04:00:00.000Z",
+  "weather": null,
   "destination": {
-      "x": 49.2301,
-      "y": -123.10867
-  },
-  "start_date": "2020-03-05T05:00:00.000Z",
-  "end_date": null,
-  "start_hour": "08:00:00",
-  "end_hour": "04:00:00",
-  "is_from_start_date": false,
-  "entry_id": 1,
-  "type_of": "weekly",
-  "initial": "2020-03-10T04:00:00.000Z",
-  "interval": 1,
-  "recurrence_id": 1,
-  "start_time": "2020-10-31T08:00:00",
-  "leave_by": "2020-10-27T07:28:26-04:00"
+      "x": 43.70564,
+      "y": -79.42154
+  }
 }
-
-console.log(getForecast(test))
 
 module.exports = {
   getMainWeather,
+  getForecastCategory
 };
