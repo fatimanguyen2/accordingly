@@ -9,6 +9,14 @@ const getTripTime = (from, to) => {
     .catch(err => err)
 }
 
+const getMultipleTripTime = (origin, destinations) => {
+  
+  return axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${from.x},${from.y}&destinations=${to.x},${to.y}&key=${key}&mode=walking`)
+    .then(response => response.data.rows[0].elements[0].duration.value)
+    .catch(err => err)
+}
+
+
 const getLeaveBy = (origin, event) => {
    return getTripTime(origin, event.destination)
     .then(time => {
@@ -18,5 +26,6 @@ const getLeaveBy = (origin, event) => {
 
 module.exports = {
   getTripTime,
+  getMultipleTripTime,
   getLeaveBy
 };
