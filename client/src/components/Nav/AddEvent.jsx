@@ -75,10 +75,9 @@ export const AddEvent = (props) => {
           return <li key={ele.id}>
             Every 
             <label htmlFor="interval_count">Repeat Count</label>
-            <input type="number" min="0" max="12" name="interval_count" id="interval_count" onChange={handleInputChange} required></input>
+            <input type="number" value="1" min="1" max="12" name="interval_count" id="interval_count" onChange={handleInputChange} required></input>
             <label for="interval_type">Repeat Type</label>
             <select name="interval_type" id={`interval_type_${ele.id}`}>
-              <option value="">None</option>
               <option value="day">Day</option>
               <option value="7">Month</option>
               <option value="year">Year</option>
