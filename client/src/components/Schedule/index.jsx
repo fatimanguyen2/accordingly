@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Redirect } from "react-router-dom";
 
 import DepartureTime from '../DepartureTime';
 import EventList from './EventList';
@@ -15,9 +16,9 @@ export const Schedule = props => {
           <DepartureTime departureTime={props.events.today[0].leave_by} />
           <EventList allEvents={props.events} events={props.events[TODAY]} type={TODAY}>Today:</EventList>
           <EventList events={props.events[REPEATING]} type={REPEATING}>Repeating:</EventList>
-          <EventList events={props.events[FUTURE]} type={FUTURE}>Future:</EventList>
+          <EventList allEvents={props.events} events={props.events[FUTURE]} type={FUTURE}>Future:</EventList>
         </div> :
-        <div><h1>Please register/log in.</h1></div>
+        <Redirect to='/login' />
       }
     </Fragment>
   );

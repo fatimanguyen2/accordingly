@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { NavMenu } from './NavMenu';
 import { AddEvent } from './AddEvent';
@@ -24,21 +24,26 @@ export const Nav = (props) => {
         }>
         <FontAwesomeIcon icon={faBars} />
       </button>
+
       {!collapse &&
-        <NavMenu onSelect={props.onSelect} loggedIn={props.loggedIn} time={props.time} />
+        <NavMenu
+          onSelect={props.onSelect}
+          loggedIn={props.loggedIn}
+          time={props.time}
+          logout={props.logout}
+        />
       }
+
       {props.loggedIn &&
         <button
-          onClick={() => setAddCollapse(state => {
-            return !state;
-          })}
+          onClick={() => setAddCollapse(state => !state)}
           className={
             classnames('button', {
               'button--collapse': addCollapse,
               'button--expand': !addCollapse,
             })
           }>
-          Add
+          <FontAwesomeIcon icon={faPlus} />
         </button>
       }
       {!addCollapse &&

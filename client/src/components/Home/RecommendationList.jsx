@@ -1,5 +1,5 @@
 import React from 'react';
-import RecommendationItem from './RecommendationItem'
+import RecommendationItem from './RecommendationListItem'
 
 export default function RecommendationList(props) {
   const items = props.recommendations.map(item => {
