@@ -26,6 +26,11 @@ module.exports = (
         .catch(err => res.json({ msg: err.message }))
   })
 
+  router.get('/:id', function (req, res) {
+    getUserLocationById(req.params.id)
+      .then(location => res.json(location))
+  })
+
   const test = {
     x: 43.70564,
     y: -79.42154
@@ -43,7 +48,8 @@ module.exports = (
     .then(homeLoc => origin = homeLoc)
     .then(() => getUserEvents(req.params.id))
     .then(rawEvents => createEventList(rawEvents, req.params.id))
-    .then(eventList => console.log(getTripsToday(origin, eventList.today)))
+    .then(eventList => getTripsToday(origin, eventList.today))
+    .then(trips => res.json(trips))
 
     // getUserLocationById(req.params.id)
     //   .then(data => res.json(data))

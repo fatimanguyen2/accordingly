@@ -102,5 +102,3 @@ dist
 
 # TernJS port file
 .tern-port
-express_backend/.env
-express_backend/.env
