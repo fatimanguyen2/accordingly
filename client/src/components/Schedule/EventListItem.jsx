@@ -18,7 +18,7 @@ export default function EventListItem(props) {
     if (view === NORMAL) {
       setView(DELETE);
     } else {
-      console.log('axios request to destroy')
+      props.deleteEvent()
     }
   };
 

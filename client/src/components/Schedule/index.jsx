@@ -14,9 +14,9 @@ export const Schedule = props => {
       {props.loggedIn ?
         <div>
           <DepartureTime departureTime={props.events.today && props.events.today[0].leave_by} />
-          {props.events[TODAY] && <EventList allEvents={props.events} events={props.events[TODAY]} type={TODAY}>Today:</EventList>}
-          {props.events[REPEATING] && <EventList events={props.events[REPEATING]} type={REPEATING}>Repeating:</EventList>}
-          {props.events[FUTURE] && <EventList allEvents={props.events} events={props.events[FUTURE]} type={FUTURE}>Future:</EventList>}
+          {props.events[TODAY] && <EventList allEvents={props.events} events={props.events[TODAY]} type={TODAY} deleteEvent={props.deleteEvent}>Today:</EventList>}
+          {props.events[REPEATING] && <EventList events={props.events[REPEATING]} type={REPEATING} deleteEvent={props.deleteEvent}>Repeating:</EventList>}
+          {props.events[FUTURE] && <EventList allEvents={props.events} events={props.events[FUTURE]} type={FUTURE} deleteEvent={props.deleteEvent}>Future:</EventList>}
         </div> :
         <Redirect to='/login' />
       }

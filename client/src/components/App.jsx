@@ -44,8 +44,9 @@ function App() {
     console.log('update address')
     console.log(addressObj)
     axios.put('api/users/2', addressObj)
-      .then(() => setState(prev => ({...prev, homeAddress: addressObj})));
+      .then(() => setState(prev => ({ ...prev, homeAddress: addressObj })));
   };
+  const deleteEvent = () => { };
 
 
   return (
@@ -78,6 +79,7 @@ function App() {
             <Schedule
               loggedIn={state.loggedIn}
               events={state.events}
+              deleteEvent={deleteEvent}
             />
           </Route>
 
