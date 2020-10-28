@@ -13,7 +13,7 @@ import { About } from './About';
 import { Settings } from './Settings';
 import { Register } from './Register';
 
-import { getEvent } from '../helpers/selectors';
+import { getEvent, filterEvents } from '../helpers/selectors';
 
 const suggestions = {
   upcoming: [{ id: 1, name: 'hat', description: 'Keep that head sheltered from the cold' }, { id: 2, name: 'suncreen', description: 'It is sunny outside' }],
@@ -42,18 +42,20 @@ function App() {
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => setState(prev => ({ ...prev, loggedIn: false }));
-  const updateAddress = (addressObj) => {
-    console.log('update address')
-    console.log(addressObj)
-    axios.put('/api/users/2', addressObj)
-      .then(() => setState(prev => ({ ...prev, homeAddress: addressObj })));
-  };
-  const deleteEvent = (scheduleType, id) => {
-    const eventObj = getEvent(scheduleType, id, state.events);
 
-    const newEventsObj = {}
+  const updateAddress = (addressObj) => {
+    axios.put('/api/users/2', addressObj)
+      .then(() => setState(prev => ({ ...prev, homeAddress: addressObj })))
+      .catch(() => console.log('failed to update address'));
+  };
+
+  const deleteEvent = (scheduleType, id) => {
+    const filteredArr = filterEvents(scheduleType, id, state.events);
+    const newEventsObj = {...state.events, [scheduleType]: filteredArr};
+
     axios.delete(`/api/entries/${id}`)
-      .then(() => setState(prev => ({ ...prev, events: newEventsObj})));
+      .catch(() => setState(prev => ({ ...prev, events: newEventsObj})))
+      // .catch(() => console.log('failed delete'));
   };
 
 

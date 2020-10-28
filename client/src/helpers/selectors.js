@@ -25,4 +25,12 @@ const getEvent = (scheduleType, id, evtObj) => {
   }
 };
 
-export { getItem, getSuggestionCategory, getRecurrenceArray, getEvent };
+const filterEvents = (scheduleType, id, evtObj) => {
+  if (scheduleType === 'repeating') {
+    return evtObj[scheduleType].filter(event => event.entry_id !== id);
+  } else {
+    return evtObj[scheduleType].filter(event => event.id !== id);
+  }
+};
+
+export { getItem, getSuggestionCategory, getRecurrenceArray, getEvent, filterEvents };
