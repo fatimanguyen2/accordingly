@@ -26,6 +26,7 @@ const getMainWeather = (location) => {
     })
 }
 
+///need refactorging call only one time
 const getForecastCategory = (event) => {
   const start = event.start_time;
   const in48h = moment().add(48, 'h');
