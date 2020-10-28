@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
 import LocationSearchInput from './LocationSearchInput'
 const classnames = require('classnames');
 
@@ -44,6 +47,11 @@ export const AddEvent = (props) => {
     [e.currentTarget.name]: e.currentTarget.value
   })
 
+  const handleConfirm = (address) => setInput({
+    ...input,
+    "destination": address
+  })
+
   //year max=99
   //month max=12
   //weekly max=52
@@ -53,9 +61,7 @@ export const AddEvent = (props) => {
     <form>
       <label htmlFor="entry">Title</label>
       <input type="text" name="entry" id="entry" placeholder="Add Title" onChange={handleInputChange} required></input>
-      <label htmlFor="destination">Location</label>
-      <input type="text" name="destination" id="destination" placeholder="Add Location" onChange={handleInputChange} required></input>
-      <LocationSearchInput />
+      <LocationSearchInput onConfirm={handleConfirm}/>
       <label htmlFor="start_date">Start Date</label>
       <input type="date" name="start_date" id="start_date" onChange={handleInputChange} required></input>
       <label htmlFor="start_time">Start Time</label>
@@ -71,8 +77,8 @@ export const AddEvent = (props) => {
             <label htmlFor="interval_count">Repeat Count</label>
             <input type="number" min="0" max="12" name="interval_count" id="interval_count" onChange={handleInputChange} required></input>
             <label for="interval_type">Repeat Type</label>
-            <select name="interval_type" id="interval_type">
-              <option value="">--Please choose an option--</option>
+            <select name="interval_type" id={`interval_type_${ele.id}`}>
+              <option value="">None</option>
               <option value="day">Day</option>
               <option value="monday">Monday</option>
               <option value="tuesday">Tuesday</option>
@@ -87,6 +93,11 @@ export const AddEvent = (props) => {
           </li>
         })}
       </ul>
+
+      <button id="add_repeat" onClick={(event) => {
+        event.preventDefault()
+        console.log(event.target)
+      }}><FontAwesomeIcon icon={faPlus} /></button>
       
       <button onClick={(event) => {
         event.preventDefault()

@@ -16,10 +16,11 @@ class LocationSearchInput extends React.Component {
  
   handleSelect = address => {
     this.setState({ address });
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
-      .catch(error => console.error('Error', error));
+    this.props.onConfirm(address);
+    // geocodeByAddress(address)
+    //   .then(results => getLatLng(results[0]))
+    //   .then(latLng => console.log('Success', latLng))
+    //   .catch(error => console.error('Error', error));
   };
  
   render() {
@@ -31,8 +32,10 @@ class LocationSearchInput extends React.Component {
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
+            <lable htmlFor='location_search'>Location</lable>
             <input
               {...getInputProps({
+                id: 'location_search',
                 placeholder: 'Search Places ...',
                 className: 'location-search-input',
               })}
