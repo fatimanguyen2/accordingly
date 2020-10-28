@@ -1,5 +1,5 @@
 const moment = require('moment');
-const { getLeaveBy } = require('../APIs/google_map');
+const { getLeaveBy, getMultipleTripTime } = require('../APIs/google_map');
 const { getForecastCategory } = require('../APIs/open_weather')
 const db = require('../db');
 const dataQ = require('../models')(db);
@@ -204,8 +204,14 @@ const getFirstEventTime = (events) => {
 
 
 
-const getTripsToday = (today, origin) => {
+const getTripsToday = (origin, today) => {
+  const path = [];
+  for (const event of today) {
+    path.push(event.destination)
+  }
 
+  
+  return getMultipleTripTime(origin, path)
 }
 
 
@@ -214,5 +220,6 @@ module.exports = {
   checkReocsToday,
   getNextEventFromRec,
   getTodayRecStartTime,
+  getTripsToday,
   updateTodayToNow
 };
