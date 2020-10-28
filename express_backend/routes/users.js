@@ -1,15 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { getTripTime } = require('../APIs/google_map')
 
 
 
 
 module.exports = (
   { getUserEvents, getUserLocationById }, 
-  { createEventList, getTripsToday }, 
+  { createEventList, getTripsToday, getRelativeSchedule }, 
   { locationToAddress }, 
-  { getMainWeather,getMultipleTripTime }
+  { getMainWeather, getDetailedForcast }
   ) => {
 
   router.get('/:id/events', function (req, res) {
@@ -49,7 +48,9 @@ module.exports = (
     .then(() => getUserEvents(req.params.id))
     .then(rawEvents => createEventList(rawEvents, req.params.id))
     .then(eventList => getTripsToday(origin, eventList.today))
-    .then(trips => res.json(trips))
+    .then(trips => getRelativeSchedule(trips))
+    .then(relSchedule => getDetailedForcast(relSchedule))
+    .then(data => res.json(data))
 
     // getUserLocationById(req.params.id)
     //   .then(data => res.json(data))
