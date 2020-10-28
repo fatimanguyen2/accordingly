@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Redirect } from "react-router-dom";
 import {Button} from './Button';
 
@@ -21,12 +21,16 @@ export const Settings = props => {
         <div>
           <h1>Settings</h1>
           <form autoComplete='off' onSubmit={event => event.preventDefault()}>
+
             <label htmlFor='address'><FontAwesomeIcon icon={faMapMarkerAlt}/>Home:</label>
-            <input id='address' value={address} onChange={event => handleChange(event, setAddress)}/><br/>
+            <input id='address' value={address || props.address.x} onChange={event => handleChange(event, setAddress)}/><br/>
+            
             <label htmlFor='startOfDay'><FontAwesomeIcon icon={faClock}/>Start of Day:</label>
             <input id='startOfDay' value={startOfDay} onChange={event => handleChange(event, setStartOfDay)} type='time'/>
+
           </form>
-          {showButton && <Button onClick={() => console.log('axios update')}>Save</Button>}
+          
+          {showButton && <Button onClick={() => props.updateAddress({x: address})}>Save</Button>}
 
         </div> :
         <Redirect to='/login' />
