@@ -1,5 +1,6 @@
 const moment = require('moment');
-const { getLeaveBy } = require('../APIs/google_map')
+const { getLeaveBy } = require('../APIs/google_map');
+const { getForecastCategory } = require('../APIs/open_weather')
 const db = require('../db');
 const dataQ = require('../models')(db);
 
@@ -9,13 +10,24 @@ const createEventList = (rawEvents, id) => {
     .then(today => {
       return {
         today: today,
-        repeating : groupByEntry(rawEvents[1].map(event => ({...event, next_event: getNextEventFromRec(event) }))) || [],
-        future : rawEvents[2].map(event => ({...event, weather : null }))
+        repeating : groupByEntry(rawEvents[1].map(event => ({...event, next_event: getNextEventFromRec(event)}))) || [],///needs refatoring
+        future : rawEvents[2]
       };
     })
-    // .then(eventList => {
-
-    // })
+    .then(eventList => {
+      const todayWeather = eventList.today.map(event => getForecastCategory(event))
+      const nextEventWeater = eventList.repeating.map(event => getForecastCategory(event.next_event))
+      const futureWeater = eventList.future.map(event => getForecastCategory(event))
+      const promisedWeather = [ todayWeather, nextEventWeater, futureWeater ]
+      return Promise.all(promisedWeather.map(weather => Promise.all(weather)))
+        .then(allWeather => {
+          return {
+            today : eventList.today.map((event, index) => ({...event, weather : allWeather[0][index]})),
+            repeating : eventList.repeating.map((event, index) => ({...event, next_event : ({...event.next_event, weather : allWeather[1][index]})})),
+            future : eventList.future.map((event, index) => ({...event, weather : allWeather[2][index]}))
+          }
+        })
+    })
     .catch(err => console.log(err))
 };
 
@@ -28,12 +40,14 @@ const getRecurrenceArray = (event, list) => {
 }
 
 const todayFormatting = (rawToday, rawRec, origin) => {
-  const today = rawToday.concat(checkReocsToday(rawRec)).map((event, index) => {
+  const today = rawToday.concat(checkReocsToday(rawRec)).map(event => {
     if (!event.start_time){
       const start_time = getTodayRecStartTime(event);
+      const end_time = getTodayRecEndTime(event);
       return ({
       ...event,
-        start_time
+        start_time,
+        end_time
       })
     }
   })
@@ -58,18 +72,20 @@ const groupByEntry = (events) => {
   }
   for (const id of distinctEvents) {
     const grouping = events.filter(event => event.entry_id === id)
-    const { entry, start_time, end_time, start_date, end_date, entry_id, is_from_start_date, destination } = grouping[0];
+    const { entry, start_hour, end_hour, start_date, end_date, entry_id, is_from_start_date, destination } = grouping[0];
     const group = {
       entry,
       entry_id,
-      destination,
       start_date,
       end_date,
-      start_time,
-      end_time,
+      start_hour,
+      end_hour,
       is_from_start_date,
-      next_event : getFirstEventTime(grouping),
-      next_weather : null,
+      next_event : {
+        start_time : getFirstEventTime(grouping).format("YYYY-MM-DD") + "T" + start_hour,
+        end_time : getFirstEventTime(grouping).format("YYYY-MM-DD") + "T" + end_hour,
+        destination
+      },
       recurrences : []
     }
     
@@ -160,6 +176,10 @@ const getTodayRecStartTime = (rec) => {
   return moment().format("YYYY-MM-DD") + "T" + rec.start_hour;
 }
 
+const getTodayRecEndTime = (rec) => {
+  return moment().format("YYYY-MM-DD") + "T" + rec.end_hour;
+}
+
 const updateTodayToNow = (today) => {
   return today.filter(event => {
     if(today.start_time) {
@@ -180,6 +200,7 @@ const getFirstEventTime = (events) => {
   }
   return firstEventTime;
 }
+
 
 
 
