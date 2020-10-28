@@ -16,7 +16,7 @@ export default function RecommendationItem(props) {
           <input type='checkbox' checked={checked} onChange={() => {}}/> {props.name}
         </div>
         <div>
-          <ItemToggle toggle = {() => setToggle(!toggle)}/>
+          <ItemToggle toggle = {() => setToggle(prev => !prev)}/>
         </div>
       </div>
       {toggle && <div><p>{props.description}</p></div>}

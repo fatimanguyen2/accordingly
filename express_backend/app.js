@@ -11,6 +11,7 @@ const openW = require('./APIs/open_weather');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const weatherRouter = require('./routes/weather');
 const { request } = require('express');
 
 const app = express();
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter(dbHelpers, dataHelpers, mapQ, openW));
+app.use('/api/weather', weatherRouter(openW))
 
 
 // catch 404 and forward to error handler

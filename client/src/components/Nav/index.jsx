@@ -24,14 +24,19 @@ export const Nav = (props) => {
         }>
         <FontAwesomeIcon icon={faBars} />
       </button>
+
       {!collapse &&
-        <NavMenu onSelect={props.onSelect} loggedIn={props.loggedIn} time={props.time} />
+        <NavMenu
+          onSelect={props.onSelect}
+          loggedIn={props.loggedIn}
+          time={props.time}
+          logout={props.logout}
+        />
       }
+
       {props.loggedIn &&
         <button
-          onClick={() => setAddCollapse(state => {
-            return !state;
-          })}
+          onClick={() => setAddCollapse(state => !state)}
           className={
             classnames('button', {
               'button--collapse': addCollapse,

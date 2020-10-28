@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { Redirect } from "react-router-dom";
 import {Button} from './Button';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +12,6 @@ export const Settings = props => {
 
   const handleChange = (event, cb) => {
     cb(event.target.value);
-    console.log(startOfDay)
     setShowButton(true);
   };
 
@@ -29,7 +29,7 @@ export const Settings = props => {
           {showButton && <Button onClick={() => console.log('axios update')}>Save</Button>}
 
         </div> :
-        <div><h1>Please register/log in.</h1></div>
+        <Redirect to='/login' />
       }
     </Fragment>
   );

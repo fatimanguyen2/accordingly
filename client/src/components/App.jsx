@@ -147,7 +147,7 @@ const weather = {
 function App() {
   const [state, setState] = useState({
     view: 'home',
-    loggedIn: false,
+    loggedIn: true,
     weather,
     suggestions,
     events,
@@ -166,18 +166,21 @@ function App() {
           onSubmit={(name) => console.log(name)}
           loggedIn={state.loggedIn}
           time={state.time}
+          logout={logout}
         />
 
         <Switch>
           <Route exact path='/'>
-            {state.loggedIn ?
               <Home
                 loggedIn={state.loggedIn}
                 weather={state.weather}
                 events={state.events}
                 suggestions={state.suggestions}
-              /> :
-              <Login login={login} />}
+                />
+          </Route>
+
+          <Route path='/login'>
+              <Login loggedIn={state.loggedIn} login={login} />
           </Route>
 
           <Route path='/schedule'>
