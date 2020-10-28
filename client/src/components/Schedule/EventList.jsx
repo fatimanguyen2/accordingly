@@ -4,10 +4,11 @@ import { getRecurrenceArray } from '../../helpers/selectors';
 import EventListItem from './EventListItem';
 
 export default function EventList(props) {
-  const events = props.events.map((event, id) => {
+  const events = props.events.map(event => {
+    const id = props.type === 'repeating'? event.entry_id : event.id
     return <EventListItem
       key={props.type + id}
-      id={props.type === 'repeating'? event.entry_id : event.id}
+      id={id}
       type={props.type}
       title={event.entry}
       start={props.type === 'repeating' ? event.next_event.start_time : event.start_time }
