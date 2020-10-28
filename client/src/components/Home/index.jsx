@@ -4,7 +4,7 @@ import { getItem, getSuggestionCategory } from '../../helpers/selectors';
 
 import './styles.scss';
 
-import WeatherRing from './WeatherRing';
+import {WeatherRing} from './WeatherRing';
 import EventList from './EventList';
 import DepartureTime from '../DepartureTime';
 import RecommendationList from './RecommendationList';
