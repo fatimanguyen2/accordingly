@@ -18,8 +18,8 @@ export default function EventListItem(props) {
     if (view === NORMAL) {
       setView(DELETE);
     } else {
-      // setView(prev => !prev);
-      // setToggle(prev => !prev);
+      setView(prev => !prev);
+      setToggle(prev => !prev);
       props.deleteEvent(props.type, props.id)
     }
   };

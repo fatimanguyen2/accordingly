@@ -54,8 +54,8 @@ function App() {
     const newEventsObj = {...state.events, [scheduleType]: filteredArr};
 
     axios.delete(`/api/entries/${id}`)
-      .catch(() => setState(prev => ({ ...prev, events: newEventsObj})))
-      // .catch(() => console.log('failed delete'));
+      .then(() => setState(prev => ({ ...prev, events: newEventsObj})))
+      .catch(() => console.log('failed delete'));
   };
 
 
