@@ -9,7 +9,7 @@ module.exports = (
   { getUserEvents, getUserLocationById }, 
   { createEventList, checkReocsToday }, 
   { locationToAddress }, 
-  { getWeather }
+  { getMainWeather }
   ) => {
 
   router.get('/:id/events', function (req, res) {
@@ -17,6 +17,13 @@ module.exports = (
       .then(rawEvents => createEventList(rawEvents, req.params.id))
       .then(data => res.json(data))
       .catch(err => res.json({ msg: err.message }))
+  })
+
+  router.get('/:id/weather', function (req, res) {
+      getUserLocationById(req.params.id)
+        .then(userLocation => getMainWeather(userLocation))
+        .then(data => res.json(data))
+        .catch(err => res.json({ msg: err.message }))
   })
 
   const test = {
