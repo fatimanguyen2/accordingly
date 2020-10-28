@@ -13,6 +13,8 @@ import { About } from './About';
 import { Settings } from './Settings';
 import { Register } from './Register';
 
+import { getEvent } from '../helpers/selectors';
+
 const suggestions = {
   upcoming: [{ id: 1, name: 'hat', description: 'Keep that head sheltered from the cold' }, { id: 2, name: 'suncreen', description: 'It is sunny outside' }],
   later: [{ id: 3, name: 'top', description: 'layer up' }, { id: 4, name: 'gloves', description: 'It is cold' }]
@@ -43,10 +45,16 @@ function App() {
   const updateAddress = (addressObj) => {
     console.log('update address')
     console.log(addressObj)
-    axios.put('api/users/2', addressObj)
+    axios.put('/api/users/2', addressObj)
       .then(() => setState(prev => ({ ...prev, homeAddress: addressObj })));
   };
-  const deleteEvent = () => { };
+  const deleteEvent = (scheduleType, id) => {
+    const eventObj = getEvent(scheduleType, id, state.events);
+
+    const newEventsObj = {}
+    axios.delete(`/api/entries/${id}`)
+      .then(() => setState(prev => ({ ...prev, events: newEventsObj})));
+  };
 
 
   return (

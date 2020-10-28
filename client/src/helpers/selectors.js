@@ -17,4 +17,12 @@ const getRecurrenceArray = (event, list) => {
   }
 }
 
-export { getItem, getSuggestionCategory, getRecurrenceArray };
+const getEvent = (scheduleType, id, evtObj) => {
+  if (scheduleType === 'repeating') {
+    return evtObj[scheduleType].find(event => event.entry_id === id);
+  } else {
+    return evtObj[scheduleType].find(event => event.id === id);
+  }
+};
+
+export { getItem, getSuggestionCategory, getRecurrenceArray, getEvent };
