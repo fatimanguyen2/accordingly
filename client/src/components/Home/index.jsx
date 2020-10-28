@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Redirect } from "react-router-dom";
 import { getItem, getSuggestionCategory } from '../../helpers/selectors';
 
-// import './home.scss';
+import './styles.scss';
 
 import WeatherRing from './WeatherRing';
 import EventList from './EventList';

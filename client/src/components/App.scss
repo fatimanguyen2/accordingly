@@ -21,12 +21,12 @@ h2 {font-size: $h2}
 h1 {font-size: $h1}
 
 // TO FIX font size not getting bigger
-@media only screen and (max-width: 600px) {
-  html {
-    $font-size: 4em; 
-  }
+// @media only screen and (max-width: 600px) {
+//   html {
+//     $font-size: 4em; 
+//   }
 
-  body {
-  background-color: black
-  }
-}
+//   body {
+//   background-color: black
+//   }
+// }
