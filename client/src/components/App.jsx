@@ -33,9 +33,9 @@ function App() {
       Promise.all([
           axios.get('/api/users/2/weather'),
           axios.get('api/users/2/events'),
-          // axios.get('api/users/2/events')
+          axios.get('api/users/2')
       ])
-      .then(all => setState(prev => ({...prev, weather: all[0].data, events: all[1].data})))
+      .then(all => setState(prev => ({...prev, weather: all[0].data, events: all[1].data, homeAddress:all[2].data})))
   }, [])
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
