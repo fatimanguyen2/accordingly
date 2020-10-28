@@ -9,10 +9,14 @@ const getTripTime = (from, to) => {
     .catch(err => err)
 }
 
-const getMultipleTripTime = (origin, destinations) => {
-  
-  return axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${from.x},${from.y}&destinations=${to.x},${to.y}&key=${key}&mode=walking`)
-    .then(response => response.data.rows[0].elements[0].duration.value)
+const getMultipleTripTime = (from, destinations) => {
+  let formattedDests = ''
+  for (const destination of destinations) {
+    formattedDests += `|${destination.x},${destination.y}`
+  }
+  formattedDests = formattedDests.substring(1)
+  return axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${from.x},${from.y}&destinations=${formattedDests}&key=${key}&mode=walking`)
+    .then(response => response.data.rows)
     .catch(err => err)
 }
 
