@@ -5,8 +5,8 @@ const router = express.Router();
 
 
 module.exports = (
-  { getUserEvents, getUserLocationById }, 
-  { createEventList, getTripsToday, getRelativeSchedule }, 
+  { getUserEvents, getUserLocationById, getRecommendations }, 
+  { createEventList, getTripsToday, getRelativeSchedule, condtionsOfDay }, 
   { locationToAddress }, 
   { getMainWeather, getDetailedForcast }
   ) => {
