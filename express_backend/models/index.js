@@ -54,7 +54,7 @@ module.exports = (db) => {
     const temp = nowCond.shift()
     let futurCond = conditions[1]
     let queryNow = (`
-    SELECT DISTINCT items.name, items.description FROM items
+    SELECT DISTINCT items.id, items.name, items.description FROM items
     JOIN item_condition ON item_id = items.id
     JOIN conditions ON condition_id = conditions.id
     WHERE conditions.name = '${temp}'
@@ -69,7 +69,7 @@ module.exports = (db) => {
 
     const first = futurCond.shift()
     let queryFuture = (`
-    SELECT DISTINCT items.name, items.description FROM items
+    SELECT DISTINCT items.id, items.name, items.description FROM items
     JOIN item_condition ON item_id = items.id
     JOIN conditions ON condition_id = conditions.id
     WHERE conditions.name = '${first}'
