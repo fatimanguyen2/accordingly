@@ -43,7 +43,7 @@ export const Home = props => {
             <section>
               {props.events.today && <EventList events={props.events.today} />}
             </section>
-            <DepartureTime departureTime={props.events.today && props.events.today[0].leave_by} />
+            <DepartureTime departureTime={props.events&& props.events[0].leave_by} />
             <section>
               {props.events.length ?
                 <Fragment>

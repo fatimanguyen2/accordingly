@@ -10,8 +10,8 @@ export default function RecommendationItem(props) {
   };
  
   return (
-    <li>
-      <div>
+    <li className='recommendation-list-item'>
+      <div className='recommendation-list-item__main'>
         <div onClick={onClick}>
           <input type='checkbox' checked={checked} onChange={() => {}}/> {props.name}
         </div>
