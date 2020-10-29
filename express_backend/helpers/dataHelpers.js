@@ -32,13 +32,6 @@ const createEventList = (rawEvents, id) => {
     .catch(err => console.log(err))
 };
 
-const getRecurrenceArray = (event, list) => {
-  for (const rec of list.repeating) {
-    if (event.entry === rec.entry) {
-      return rec
-    }
-  }
-}
 
 const todayFormatting = (rawToday, rawRec, origin) => {
   const today = rawToday.concat(checkReocsToday(rawRec)).map(event => {
@@ -173,6 +166,10 @@ const getNextEventFromRec = (reoc) => {
 }
 
 
+const formatTimeForDb = (date, hour) => {
+  return date + "T" + hour
+}
+
 const getTodayRecStartTime = (rec) => {
   return moment().format("YYYY-MM-DD") + "T" + rec.start_hour;
 }
@@ -298,6 +295,9 @@ const condtionsOfDay = (conditions) => {
   return [nowCond, filteredCond]
 }
 
+const formatEntryForDb = (entry) => {
+}
+
 
 module.exports = {
   createEventList,
@@ -307,5 +307,6 @@ module.exports = {
   getTripsToday,
   updateTodayToNow,
   getRelativeSchedule,
-  condtionsOfDay
+  condtionsOfDay,
+  formatTimeForDb
 };
