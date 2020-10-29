@@ -11,14 +11,14 @@ import RecommendationList from './RecommendationList';
 
 
 export const Home = props => {
-  const [recommendations, setRecommendations] = useState({ ...props.suggestions, done: [] });
+  const [recommendations, setRecommendations] = useState({ ...props.recommendations, done: [] });
   const UPCOMING = 'upcoming';
   const LATER = 'later';
   const DONE = 'done';
 
   const handleCheck = (id, type) => {
     const item = getItem(id, recommendations[type]);
-    const category = getSuggestionCategory(id, props.suggestions);
+    const category = getSuggestionCategory(id, props.recommendations);
 
     // if item gets checked and is in upcoming/later list, remove from that list and add to done list
     if (type === UPCOMING || type === LATER ) {

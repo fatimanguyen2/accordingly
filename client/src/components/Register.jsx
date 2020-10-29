@@ -30,7 +30,7 @@ export const Register = props => {
 
             <label htmlFor='address'><FontAwesomeIcon icon={faMapMarkerAlt} />Home:</label>
             <input id='address' {...address} /><br />
-            <p>We use your home location as the starting point of the day to predict and prepare your personalized suggestions.</p>
+            <p>We use your home location as the starting point of the day to predict and prepare your personalized recommendations.</p>
 
             <label htmlFor='startOfDay'><FontAwesomeIcon icon={faClock} />Start of Day:</label>
             <input id='startOfDay' {...startOfDay} type='time' />

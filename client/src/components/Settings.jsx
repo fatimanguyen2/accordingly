@@ -29,7 +29,7 @@ export const Settings = props => {
 
             <label htmlFor='address'><FontAwesomeIcon icon={faMapMarkerAlt} /> Home:</label>
             <input id='address' value={address || props.address.x} onChange={event => handleChange(event, setAddress)} /><br />
-            <p>We use your home location as the starting point of the day to predict and prepare your personalized suggestions.</p>
+            <p>We use your home location as the starting point of the day to predict and prepare your personalized recommendations.</p>
 
             <label htmlFor='startOfDay'><FontAwesomeIcon icon={faClock} /> Start of Day:</label>
             <input id='startOfDay' value={startOfDay} onChange={event => handleChange(event, setStartOfDay)} type='time' />

@@ -12,7 +12,7 @@ import { Schedule } from './Schedule';
 import { About } from './About';
 import { Settings } from './Settings';
 import { Register } from './Register';
-import {WeatherRing} from './Home/WeatherRing';
+import { WeatherRing } from './Home/WeatherRing';
 
 import { filterEvents } from '../helpers/selectors';
 
@@ -27,7 +27,7 @@ function App() {
     view: 'home',
     loggedIn: true,
     weather: {},
-    suggestions,
+    recommendations: suggestions,
     events: {},
     time: 1603740043000,
     homeAddress: {},
@@ -37,10 +37,19 @@ function App() {
   useEffect(() => {
     Promise.all([
       axios.get('/api/users/2/weather'),
+      axios.get('/api/users/2/recommendations'),
       axios.get('/api/users/2/events'),
-      axios.get('/api/users/2')
+      axios.get('/api/users/2'),
     ])
-      .then(all => setState(prev => ({ ...prev, loading: false, weather: all[0].data, events: all[1].data, homeAddress: all[2].data })))
+      .then(all => setState(prev => (
+        {
+          ...prev,
+          loading: false,
+          weather: all[0].data,
+          // recommendations: all[1].data,
+          events: all[2].data,
+          homeAddress: all[3].data
+        })))
   }, [])
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
@@ -92,14 +101,14 @@ function App() {
           clearToEdit={clearToEdit}
         />
 
-        {state.loading ? <WeatherRing mainWeather='Loading...' /> :
+        {state.loading ? <div class="loader"></div> :
           <Switch>
             <Route exact path='/'>
               <Home
                 loggedIn={state.loggedIn}
                 weather={state.weather}
                 events={state.events}
-                suggestions={state.suggestions}
+                recommendations={state.recommendations}
               />
             </Route>
 
