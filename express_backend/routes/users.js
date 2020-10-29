@@ -5,8 +5,8 @@ const router = express.Router();
 
 
 module.exports = (
-  { getUserEvents, getUserLocationById }, 
-  { createEventList, getTripsToday, getRelativeSchedule }, 
+  { getUserEvents, getUserLocationById, getRecommendations }, 
+  { createEventList, getTripsToday, getRelativeSchedule, condtionsOfDay }, 
   { locationToAddress }, 
   { getMainWeather, getDetailedForcast }
   ) => {
@@ -50,6 +50,8 @@ module.exports = (
     .then(eventList => getTripsToday(origin, eventList.today))
     .then(trips => getRelativeSchedule(trips))
     .then(relSchedule => getDetailedForcast(relSchedule))
+    .then(detForecast => condtionsOfDay(detForecast))
+    .then(condOfDay => getRecommendations(condOfDay))
     .then(data => res.json(data))
 
     // getUserLocationById(req.params.id)

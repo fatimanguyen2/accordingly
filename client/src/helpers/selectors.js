@@ -1,3 +1,5 @@
+import {faBolt, faCloud, faSun, faCloudShowersHeavy, faSnowflake, faCloudRain, faQuestionCircle} from '@fortawesome/free-solid-svg-icons';
+
 const getItem = (id, array) => array.find(element => element.id === id);
 
 const getSuggestionCategory = (id, object) => {
@@ -33,4 +35,27 @@ const filterEvents = (scheduleType, id, evtObj) => {
   }
 };
 
-export { getItem, getSuggestionCategory, getRecurrenceArray, getEvent, filterEvents };
+const getWeatherIcon = weather => {
+  const icons = {
+    Thunderstorm: faBolt,
+    Drizzle: faCloudRain,
+    Rain: faCloudShowersHeavy,
+    Snow: faSnowflake,
+    Clear: faSun,
+    Clouds: faCloud,
+    null: faQuestionCircle
+  };
+  return icons[weather];
+};
+
+const changeWeatherName = weather => {
+  const names = {
+    Rain: 'Rainy',
+    Snow: 'Snowy',
+    Clear: 'Sunny',
+    Clouds: 'Cloudy'
+  }
+  return names[weather] || weather;
+};
+
+export { getItem, getSuggestionCategory, getRecurrenceArray, getEvent, filterEvents, getWeatherIcon, changeWeatherName };

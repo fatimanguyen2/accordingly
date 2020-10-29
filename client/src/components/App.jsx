@@ -12,7 +12,7 @@ import { Schedule } from './Schedule';
 import { About } from './About';
 import { Settings } from './Settings';
 import { Register } from './Register';
-import WeatherRing from './Home/WeatherRing';
+import {WeatherRing} from './Home/WeatherRing';
 
 import { filterEvents } from '../helpers/selectors';
 
@@ -59,7 +59,7 @@ function App() {
       .catch(() => {
         setState(prev => ({ ...prev, events: newEventsObj }))
       })
-    // .catch(() => console.log('failed delete'));
+    // .catch(() => console.log('failed delete')); // TO FIX
   };
 
   const openEdit = (entry_id) => {

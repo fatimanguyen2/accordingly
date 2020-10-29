@@ -10,7 +10,7 @@ VALUES
 ('humid', 'Humidity above 60%'),
 ('moderate_hum', 'Humidity between 40% and 60%'),
 ('dry', 'Humidity below 40%'),
-('rainy', 'Precipitaction mor intense than "drizzle"'),
+('rainy', 'Precipitaction more intense than "drizzle"'),
 ('wet_ground', 'Precipitation above 2.6mm/hr'),
 ('uv_moderate', 'UV index between 3 and 6'),
 ('uv_heavy', 'UV index above 6'),

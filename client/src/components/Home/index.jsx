@@ -4,7 +4,7 @@ import { getItem, getSuggestionCategory } from '../../helpers/selectors';
 
 import './styles.scss';
 
-import WeatherRing from './WeatherRing';
+import {WeatherRing} from './WeatherRing';
 import EventList from './EventList';
 import DepartureTime from '../DepartureTime';
 import RecommendationList from './RecommendationList';
@@ -32,7 +32,7 @@ export const Home = props => {
     <Fragment>
       {
         props.loggedIn ?
-          <div className='test'>
+          <div className='home'>
             <WeatherRing
               mainWeather={props.weather.mainWeather && props.weather.mainWeather[0]}
               feelsLikeTemp={Math.round(props.weather.feelsLikeTemp)}
