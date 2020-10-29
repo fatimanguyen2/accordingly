@@ -186,13 +186,24 @@ function App() {
     loading: false,
     view: 'home',
     loggedIn: true,
-    weather: {},
-    recommendations: suggestions,
-    events: {},
+    weather,
+    recommendations,
+    events,
     time: 1603740043000,
-    homeAddress: {},
+    homeAddress,
     eventToEdit: {}
   });
+  // const [state, setState] = useState({
+  //   loading: false,
+  //   view: 'home',
+  //   loggedIn: true,
+  //   weather: {},
+  //   recommendations: suggestions,
+  //   events: {},
+  //   time: 1603740043000,
+  //   homeAddress: {},
+  //   eventToEdit: {}
+  // });
 
   // useEffect(() => {
   //   Promise.all([
