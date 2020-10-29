@@ -12,7 +12,6 @@ import { Schedule } from './Schedule';
 import { About } from './About';
 import { Settings } from './Settings';
 import { Register } from './Register';
-import { WeatherRing } from './Home/WeatherRing';
 
 import { filterEvents } from '../helpers/selectors';
 
@@ -23,7 +22,7 @@ const suggestions = {
 
 function App() {
   const [state, setState] = useState({
-    loading: true,
+    loading: false,
     view: 'home',
     loggedIn: true,
     weather: {},
@@ -46,7 +45,7 @@ function App() {
           ...prev,
           loading: false,
           weather: all[0].data,
-          // recommendations: all[1].data,
+          recommendations: all[1].data,
           events: all[2].data,
           homeAddress: all[3].data
         })))
@@ -101,44 +100,51 @@ function App() {
           clearToEdit={clearToEdit}
         />
 
-        {state.loading ? <div class="loader"></div> :
-          <Switch>
-            <Route exact path='/'>
-              <Home
-                loggedIn={state.loggedIn}
-                weather={state.weather}
-                events={state.events}
-                recommendations={state.recommendations}
-              />
-            </Route>
+        {state.loading ? 
+        <div className='loader'>
+          <h1 className='loader__text'>Loading ...</h1>
+          <div className='loader__animation'></div> 
+        </div> :
+          <div className='page-content'>
+            <Switch>
+              <Route exact path='/'>
+                <Home
+                  loggedIn={state.loggedIn}
+                  weather={state.weather}
+                  events={state.events}
+                  recommendations={state.recommendations}
+                />
+              </Route>
 
-            <Route path='/login'>
-              <Login loggedIn={state.loggedIn} login={login} />
-            </Route>
+              <Route path='/login'>
+                <Login loggedIn={state.loggedIn} login={login} />
+              </Route>
 
-            <Route path='/schedule'>
-              <Schedule
-                loggedIn={state.loggedIn}
-                events={state.events}
-                deleteEvent={deleteEvent}
-                onEdit={openEdit}
-              />
-            </Route>
+              <Route path='/schedule'>
+                <Schedule
+                  loggedIn={state.loggedIn}
+                  events={state.events}
+                  deleteEvent={deleteEvent}
+                  onEdit={openEdit}
+                />
+              </Route>
 
-            <Route path='/register'>
-              <Register loggedIn={state.loggedIn} login={login}></Register>
-            </Route>
+              <Route path='/register'>
+                <Register loggedIn={state.loggedIn} login={login}></Register>
+              </Route>
 
-            <Route path='/about'>
-              <About />
-            </Route>
+              <Route path='/about'>
+                <About />
+              </Route>
 
-            <Route path='/settings'>
-              <Settings loggedIn={state.loggedIn} address={state.homeAddress} updateAddress={updateAddress}></Settings>
-            </Route>
+              <Route path='/settings'>
+                <Settings loggedIn={state.loggedIn} address={state.homeAddress} updateAddress={updateAddress}></Settings>
+              </Route>
 
-            <Route path='*'><h1>404 - Not Found</h1></Route>
-          </Switch>}
+              <Route path='*'><h1>404 - Not Found</h1></Route>
+            </Switch>
+          </div>
+        }
       </Router>
     </main>
   );
