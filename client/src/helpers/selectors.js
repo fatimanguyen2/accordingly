@@ -48,5 +48,14 @@ const getWeatherIcon = weather => {
   return icons[weather];
 };
 
+const changeWeatherName = weather => {
+  const names = {
+    Rain: 'Rainy',
+    Snow: 'Snowy',
+    Clear: 'Sunny',
+    Clouds: 'Cloudy'
+  }
+  return names[weather] || weather;
+};
 
-export { getItem, getSuggestionCategory, getRecurrenceArray, getEvent, filterEvents, getWeatherIcon };
+export { getItem, getSuggestionCategory, getRecurrenceArray, getEvent, filterEvents, getWeatherIcon, changeWeatherName };
