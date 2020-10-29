@@ -32,7 +32,7 @@ export const Home = props => {
     <Fragment>
       {
         props.loggedIn ?
-          <div className='test'>
+          <div className='home'>
             <WeatherRing
               mainWeather={props.weather.mainWeather && props.weather.mainWeather[0]}
               feelsLikeTemp={Math.round(props.weather.feelsLikeTemp)}
