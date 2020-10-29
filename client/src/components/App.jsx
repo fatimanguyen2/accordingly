@@ -33,25 +33,28 @@ const weather = {
 const events = {
   today: [
     {
-      entry: "morning run",
-      id: 6,
-      is_outdoor: true,
-      destination: {
-        x: 49.259432,
-        y: -123.100795
+      "entry": "morning run",
+      "id": 6,
+      "destination": {
+          "x": 49.259432,
+          "y": -123.100795
       },
-      start_date: "2020-03-05T05:00:00.000Z",
-      start_hour: "07:00:00",
-      end_hour: "07:30:00",
-      entry_id: 2,
-      type_of: "daily",
-      initial: "2020-03-05T05:00:00.000Z",
-      interval: 1,
-      recurrence_id: 2,
-      start_time: "2020-10-29T07:00:00",
-      end_time: "2020-10-29T07:30:00",
-      leave_by: "2020-10-29T06:36:10-04:00",
-      weather: "Clouds"
+      "address": "2846 Main St",
+      "city": "Vancouver",
+      "postal_code": "V5T 3G2",
+      "is_outdoor": true,
+      "start_date": "2020-03-05T05:00:00.000Z",
+      "start_hour": "07:00:00",
+      "end_hour": "07:30:00",
+      "entry_id": 2,
+      "type_of": "daily",
+      "initial": "2020-03-05T05:00:00.000Z",
+      "interval": 1,
+      "recurrence_id": 2,
+      "start_time": "2020-10-29T07:00:00",
+      "end_time": "2020-10-29T07:30:00",
+      "leave_by": "2020-10-29T06:36:10-04:00",
+      "weather": "Clouds"
     },
     {
       entry: "commute",
@@ -61,6 +64,9 @@ const events = {
         x: 49.2301,
         y: -123.10867
       },
+      address: "2846 Main St",
+      city: "Vancouver",
+      postal_code: "V5T 3G2",
       start_date: "2020-03-05T05:00:00.000Z",
       start_hour: "08:00:00",
       end_hour: "16:00:00",
@@ -82,6 +88,9 @@ const events = {
         x: 49.2301,
         y: -123.10867
       },
+      address: "2846 Main St",
+      city: "Vancouver",
+      postal_code: "V5T 3G2",
       start_date: "2020-03-05T05:00:00.000Z",
       start_hour: "08:00:00",
       end_hour: "16:00:00",
@@ -110,6 +119,9 @@ const events = {
           x: 49.2301,
           y: -123.10867
         },
+        address: "2846 Main St",
+        city: "Vancouver",
+        postal_code: "V5T 3G2",
         weather: "Clouds"
       },
       recurrences: [
@@ -158,6 +170,9 @@ const events = {
           x: 49.259432,
           y: -123.100795
         },
+        address: "2846 Main St",
+        city: "Vancouver",
+        postal_code: "V5T 3G2",
         weather: "Rain"
       },
       recurrences: [
@@ -178,6 +193,9 @@ const events = {
         x: 49.38654,
         y: -123.13254
       },
+      address: "2846 Main St",
+      city: "Vancouver",
+      postal_code: "V5T 3G2",
       is_outdoor: false,
       start_time: "2020-11-12T14:00:00.000Z",
       end_time: "2020-11-12T23:00:00.000Z",
@@ -188,8 +206,9 @@ const events = {
 }
 
 const homeAddress = {
-  x: 49.24713,
-  y: -123.10867
+  address: "2846 Main St",
+  city: "Vancouver",
+  postal_code: "V5T 3G2",
 }
 
 const recommendations = {
