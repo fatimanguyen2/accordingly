@@ -228,7 +228,7 @@ const getTripsToday = (origin, today) => {
   })
 }
 
-const test6AM = moment("2020-10-28T06")
+const test6AM = moment("2020-10-29T06")
 
 const getRelativeSchedule = (tripTimes) => {
   return tripTimes.map(travelTimes => {
