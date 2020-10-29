@@ -62,4 +62,12 @@ const getDateFromTimestamp = date => {
   return date.slice(0, 10);
 }
 
-export { getItem, getSuggestionCategory, getRecurrenceArray, getEvent, filterEvents, getWeatherIcon, changeWeatherName, getDateFromTimestamp };
+const giveHTMLID = (recurrences) => {
+  return recurrences.map((ele, index) => ({...ele, html_id: index }));
+};
+
+const validateObj = (eventObj, checks) => {
+  return checks.reduce((acc, name) => (eventObj[name] !== '' && acc), true);
+};
+
+export { getItem, getSuggestionCategory, getRecurrenceArray, getEvent, filterEvents, getWeatherIcon, changeWeatherName, getDateFromTimestamp, giveHTMLID, validateObj };

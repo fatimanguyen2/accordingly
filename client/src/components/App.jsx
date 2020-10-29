@@ -288,7 +288,7 @@ function App() {
     // console.log(state.events);
 
     const eventToEditArr = state.events.repeating.filter(eventItem => eventItem.entry_id === entry_id);
-    console.log(eventToEditArr[0].entry_id);
+    // console.log(eventToEditArr[0].entry_id);
     setState(prev => ({ ...prev, eventToEdit: eventToEditArr[0] }))
   };
 
