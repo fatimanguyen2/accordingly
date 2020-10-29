@@ -10,9 +10,6 @@
 
 header {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
   .weather-ring {
     margin: 2rem 0 1.5rem 0;
@@ -68,6 +65,13 @@ header {
 .small__weather-event {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.big__weather-event {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .event-list {
@@ -91,7 +95,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  // width: 75%;
+  margin: 0 3rem;
 }
 
 .recommendation-list-item {
