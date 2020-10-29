@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 module.exports = (
-  { getUserEvents, getUserLocationById, getRecommendations }, 
+  { getUserEvents, getUserLocationById, getUserAddressById, getRecommendations }, 
   { createEventList, getTripsToday, getRelativeSchedule, condtionsOfDay }, 
   { locationToAddress }, 
   { getMainWeather, getDetailedForcast }
@@ -26,19 +26,9 @@ module.exports = (
   })
 
   router.get('/:id', function (req, res) {
-    getUserLocationById(req.params.id)
+    getUserAddressById(req.params.id)
       .then(location => res.json(location))
   })
-
-  const test = {
-    x: 43.70564,
-    y: -79.42154
-  }
-
-  const test2 = {
-    x: 43.75064,
-    y: -79.41254
-  }
 
 
   router.get('/:id/recommendations', function (req, res) {
@@ -53,16 +43,6 @@ module.exports = (
       .then(detForecast => condtionsOfDay(detForecast))
       .then(condOfDay => getRecommendations(condOfDay))
       .then(data => res.json(data))
-
-    // getUserLocationById(req.params.id)
-    //   .then(data => res.json(data))
-
-    // getTripTime(test, test2)
-    //   .then(data => res.json(data))
-
-    // getWeather(test)
-    //   .then(data => res.json(data))
-      // .catch(err => res.json({ msg: err.message }))
   })
 
 

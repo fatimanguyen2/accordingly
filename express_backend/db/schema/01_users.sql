@@ -7,7 +7,7 @@ CREATE TABLE users(
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     home_location POINT NOT NULL,
-    address VARCHAR(255) NOT NULL,
-    city VARCHAR(255) NOT NULL,
-    postal_code VARCHAR(255) NOT NULL
+    address VARCHAR(255),
+    city VARCHAR(255),
+    postal_code VARCHAR(255)
 );
