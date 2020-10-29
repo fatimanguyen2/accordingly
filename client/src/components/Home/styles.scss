@@ -4,21 +4,86 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%
+  width: 100%;
+  background: linear-gradient($sunny-color-gradient,black 40vh);
 }
 
-.weather-ring {
-  margin-top: 3rem;
-  border: 5px solid $sunny-color;
-  border-radius: 50%;
-  text-align: center;
-  width: 12rem;
-  height: 12rem;
-  padding: 0.5rem;
+header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .weather-ring {
+    margin: 2rem 0 1.5rem 0;
+    border: 0.4rem solid $sunny-color;
+    border-radius: 50%;
+    text-align: center;
+    width: 12rem;
+    height: 12rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 0 1rem $sunny-color, inset 0 0 1rem $sunny-color;
+  
+    h1 { margin: 1rem 0 0 0 }
+  
+    h3 { margin: 0.75rem }
+    
+    p { margin: 0 }
+    
+  }
+
+  &.small {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(black, black, transparent 90%);
+
+    // &__weather-event {
+    //   display: flex;
+    //   flex-direction: row;
+    // }
+
+    .weather-ring {
+      width: 2.7rem;
+      height: 2.7rem;
+      transition: all 400ms ease-in;
+      margin: 1rem 2rem 0 1.2rem;
+      border: 0.3rem solid $sunny-color;
+   
+      h1, h3 span, p {
+        display: none
+      }
+    }
+
+    .departure-time {
+      margin-bottom: 4rem;
+    }
+  }
+}
+
+.small__weather-event {
+  display: flex;
+  flex-direction: row;
+}
+
+.event-list {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 0 0 1rem $sunny-color, inset 0 0 1rem $sunny-color;
+  align-items: flex-end;
+
+  li {
+    margin: 0.2rem 0;
+
+    &:not(:first-of-type) {
+      transform: scale(0.8);
+    }
+    
+  }
 
 }
 
@@ -38,27 +103,4 @@
     flex-direction: row;
     justify-content: space-between;
   }
-}
-
-header.small {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  h1, h3 span, p {
-    display: none
-  }
-
-  .weather-ring {
-    width: 1.2rem;
-    height: 1.2rem;
-    transition: all 400ms ease-in;
-    margin-top: 0;
-    margin-right: 1.2rem;
-  }
-
-  .event-list > li:not(:first-of-type) {
-    transform: scale(0.8);
-  }
-
 }

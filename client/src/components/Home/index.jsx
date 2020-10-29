@@ -13,7 +13,7 @@ import RecommendationList from './RecommendationList';
 export const Home = props => {
   const [recommendations, setRecommendations] = useState({ ...props.recommendations, done: [] });
   const [headerSize, setHeaderSize] = useState('big');
-  
+
   const NOW = 'now';
   const UPCOMING = 'upcoming';
   const LATER = 'later';
@@ -36,17 +36,19 @@ export const Home = props => {
       {
         props.loggedIn ?
           <div className='home'>
-            <header className={headerSize} onClick={() => setHeaderSize(headerSize === 'big'? 'small' : 'big')}>
-              <WeatherRing
-                mainWeather={props.weather.mainWeather && props.weather.mainWeather[0]}
-                feelsLikeTemp={Math.round(props.weather.feelsLikeTemp)}
-                minTemp={Math.round(props.weather.feels_likeMin)}
-                maxTemp={Math.round(props.weather.feels_likeMax)}
-                size={headerSize}
-              />
-              {props.events && <EventList events={props.events} />}
+            <header className={headerSize} onClick={() => setHeaderSize(headerSize === 'big' ? 'small' : 'big')}>
+              <div className={`${headerSize}__weather-event`}>
+                <WeatherRing
+                  mainWeather={props.weather.mainWeather && props.weather.mainWeather[0]}
+                  feelsLikeTemp={Math.round(props.weather.feelsLikeTemp)}
+                  minTemp={Math.round(props.weather.feels_likeMin)}
+                  maxTemp={Math.round(props.weather.feels_likeMax)}
+                  size={headerSize}
+                />
+                {props.events && <EventList events={props.events} />}
+              </div>
+              <DepartureTime departureTime={props.events && props.events[0].leave_by} />
             </header>
-            <DepartureTime departureTime={props.events && props.events[0].leave_by} />
             <section>
               {props.events.length ?
                 <Fragment>
