@@ -21,7 +21,7 @@ export default function useEndlessForm (inital={}) {
     //   "interval": 2
     // }
    : []);
-  const [max, setMax] = useState(repeats.length === 0 ? 1 : repeats.length + 1);
+  const [max, setMax] = useState(repeats.length || 0);
 
   const increaseMax = () => setMax(state => state += 1);
 

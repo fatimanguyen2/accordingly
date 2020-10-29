@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import useEndlessForm from '../../hooks/useEndlessForm';
-import { getDateFromTimestamp } from '../../helpers/selectors';
+import { getDateFromTimestamp, giveHTMLID, validateObj } from '../../helpers/selectors';
 import moment from 'moment';
 
 import LocationSearchInput from './LocationSearchInput'
@@ -24,7 +24,7 @@ export const AddEvent = (props) => {
   const start_hour = props.eventToEdit.start_hour || '';
   const end_hour = props.eventToEdit.end_hour || '';
   const destination = entry_id ? props.eventToEdit.next_event.destination.x : '';
-  const recurrences = props.eventToEdit.recurrences || [];
+  const recurrences = giveHTMLID(props.eventToEdit.recurrences || []);
 
   const { input, repeats, handleInputChange, handleAddress, addRepeat, setRepeat, removeRepeat } = useEndlessForm({
     entry_id,
@@ -34,10 +34,11 @@ export const AddEvent = (props) => {
     start_hour,
     end_hour,
     recurrences,
+    destination,
   });
 
   return (
-    <form>
+    <form action="javascript: false" >
       <label htmlFor="entry">Title</label>
       <input type="text" name="entry" id="entry" placeholder="Add Title" defaultValue={entry} onChange={handleInputChange} required></input>
       <LocationSearchInput onChange={handleAddress} destination={destination}/>
@@ -47,8 +48,8 @@ export const AddEvent = (props) => {
       <input type="time" name="start_hour" id="start_hour" defaultValue={start_hour} onChange={handleInputChange} required></input>
       <label htmlFor="end_date">End Date</label>
       <input type="date" name="end_date" id="end_date" defaultValue={end_date} onChange={handleInputChange} required></input>
-      <label htmlFor="end_time">End Time</label>
-      <input type="time" name="end_time" id="end_time" defaultValue={end_hour} onChange={handleInputChange} required></input>
+      <label htmlFor="end_hour">End Time</label>
+      <input type="time" name="end_hour" id="end_hour" defaultValue={end_hour} onChange={handleInputChange} required></input>
       <ul>
         {repeats.map(ele => {
           // console.log(ele.type_of);
@@ -93,10 +94,13 @@ export const AddEvent = (props) => {
 
       <button id="add_repeat" onClick={addRepeat}><FontAwesomeIcon icon={faPlus} /></button>
       
-      <button onClick={(event) => {
-        event.preventDefault()
+      <button onClick={() => {
+        // event.preventDefault()
+        // event.stopPropagation();
+        // event.nativeEvent.stopImmediatePropagation();
         // console.log(event.target)
-        input.entry_id ? props.onEdit({...input, recurrences: repeats}) : props.onSubmit({...input, recurrences: repeats});
+        const eventObj = {...input, recurrences: repeats};
+        validateObj(eventObj, [ 'entry', 'destination', 'start_date', 'end_date', 'start_hour', 'end_hour' ]) && (input.entry_id ? props.onEdit(eventObj) : props.onSubmit(eventObj));
       }}>{entry_id ? 'Edit' : 'Add'}</button>
     </form>
   );
