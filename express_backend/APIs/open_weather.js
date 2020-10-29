@@ -42,7 +42,6 @@ const getDetailedForcast = (schedule) => {
   return Promise.all(allForecasts)
 }
 
-
 ///need refactorging call only one time
 const getForecastCategory = (event) => {
   const start = event.start_time;
