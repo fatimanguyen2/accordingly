@@ -239,6 +239,12 @@ const getRelativeSchedule = (tripTimes) => {
   })
 }
 
+const weatherConditions = (weather) => {
+  return {
+    
+  }
+}
+
 module.exports = {
   createEventList,
   checkReocsToday,

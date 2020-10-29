@@ -47,7 +47,7 @@ module.exports = (db) => {
     `)
     return db.query(query)
       .then(results => results.rows[0].home_location)
-  } 
+  }
 
   return {
     getUserEvents,
