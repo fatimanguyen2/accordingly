@@ -8,7 +8,7 @@
 
 .weather-ring {
   margin-top: 3rem;
-  border: 5px solid $cloudy-color;
+  border: 5px solid $sunny-color;
   border-radius: 50%;
   text-align: center;
   width: 12rem;
@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 0 0 1rem;
+  box-shadow: 0 0 1rem $sunny-color;
 
 }
 
