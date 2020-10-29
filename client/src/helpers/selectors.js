@@ -58,4 +58,8 @@ const changeWeatherName = weather => {
   return names[weather] || weather;
 };
 
-export { getItem, getSuggestionCategory, getRecurrenceArray, getEvent, filterEvents, getWeatherIcon, changeWeatherName };
+const getDateFromTimestamp = date => {
+  return date.slice(0, 10);
+}
+
+export { getItem, getSuggestionCategory, getRecurrenceArray, getEvent, filterEvents, getWeatherIcon, changeWeatherName, getDateFromTimestamp };

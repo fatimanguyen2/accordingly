@@ -40,14 +40,14 @@ export const Nav = (props) => {
           className={
             classnames('button', {
               'button--collapse': addCollapse,
-              'button--expand': !addCollapse,
+              'button--expand': !addCollapse || props.eventToEdit.entry_id,
             })
           }>
           <FontAwesomeIcon icon={faPlus} />
         </button>
       }
-      {!addCollapse &&
-        <AddEvent onSubmit={props.onSubmit} />
+      {(!addCollapse || props.eventToEdit.entry_id) &&
+        <AddEvent onSubmit={props.onSubmit} eventToEdit={props.eventToEdit} />
       }
     </div>
   );

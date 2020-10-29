@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import useEndlessForm from '../../hooks/useEndlessForm';
+import { getDateFromTimestamp } from '../../helpers/selectors';
 
 import LocationSearchInput from './LocationSearchInput'
 const classnames = require('classnames');
@@ -13,21 +14,34 @@ export const AddEvent = (props) => {
   //weekly max=52
   //daily max=99
 
-  const { repeats, increaseMax, handleInputChange, handleAddress, addRepeat, removeRepeat } = useEndlessForm();
+  const entry = props.eventToEdit.entry || '';
+  const start_date = getDateFromTimestamp(props.eventToEdit.entry_id !== undefined ? props.eventToEdit.next_event.start_time : '');
+  const end_date = getDateFromTimestamp(props.eventToEdit.entry_id !== undefined ? props.eventToEdit.next_event.end_time : '');;
+  const start_hour = props.eventToEdit.start_hour || '';
+  const end_hour = props.eventToEdit.end_hour || '';
+  const destination = props.eventToEdit.entry_id !== undefined ? props.eventToEdit.next_event.destination.x : '';
+
+  const { repeats, handleInputChange, handleAddress, addRepeat, removeRepeat } = useEndlessForm({
+    entry,
+    start_date,
+    end_date,
+    start_hour,
+    end_hour,
+  });
 
   return (
     <form>
       <label htmlFor="entry">Title</label>
-      <input type="text" name="entry" id="entry" placeholder="Add Title" onChange={handleInputChange} required></input>
-      <LocationSearchInput onChange={handleAddress}/>
+      <input type="text" name="entry" id="entry" placeholder="Add Title" defaultValue={entry} onChange={handleInputChange} required></input>
+      <LocationSearchInput onChange={handleAddress} destination={destination}/>
       <label htmlFor="start_date">Start Date</label>
-      <input type="date" name="start_date" id="start_date" onChange={handleInputChange} required></input>
+      <input type="date" name="start_date" id="start_date" defaultValue={start_date} onChange={handleInputChange} required></input>
       <label htmlFor="start_hour">Start Time</label>
-      <input type="time" name="start_hour" id="start_hour" onChange={handleInputChange} required></input>
+      <input type="time" name="start_hour" id="start_hour" defaultValue={start_hour} onChange={handleInputChange} required></input>
       <label htmlFor="end_date">End Date</label>
-      <input type="date" name="end_date" id="end_date" onChange={handleInputChange} required></input>
+      <input type="date" name="end_date" id="end_date" defaultValue={end_date} onChange={handleInputChange} required></input>
       <label htmlFor="end_time">End Time</label>
-      <input type="time" name="end_time" id="end_time" onChange={handleInputChange} required></input>
+      <input type="time" name="end_time" id="end_time" defaultValue={end_hour} onChange={handleInputChange} required></input>
       <ul>
         {repeats.map(ele => {
           return <li key={ele.html_id}>

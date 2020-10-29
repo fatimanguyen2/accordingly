@@ -30,7 +30,8 @@ function App() {
     suggestions,
     events: {},
     time: 1603740043000,
-    homeAddress: {}
+    homeAddress: {},
+    eventToEdit: {}
   });
 
   useEffect(() => {
@@ -64,6 +65,11 @@ function App() {
 
   const openEdit = (entry_id) => {
     console.log("entry_id " + entry_id);
+    console.log(state.events);
+
+    const eventToEditArr = state.events.repeating.filter(eventItem => eventItem.entry_id === entry_id);
+    console.log(eventToEditArr[0].entry_id);
+    setState(prev => ({ ...prev, eventToEdit: eventToEditArr[0] }))
   };
 
 
@@ -78,6 +84,7 @@ function App() {
           time={state.time}
           logout={logout}
           events={state.events}
+          eventToEdit={state.eventToEdit}
         />
 
         {state.loading ? <WeatherRing mainWeather='Loading...' /> :

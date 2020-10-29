@@ -31,7 +31,7 @@ class LocationSearchInput extends React.Component {
   render() {
     return (
       <PlacesAutocomplete
-        value={this.state.draft_address}
+        value={this.state.draft_address || this.props.destination}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
       >
@@ -43,7 +43,7 @@ class LocationSearchInput extends React.Component {
                 id: 'location_search',
                 placeholder: 'Search Places ...',
                 className: 'location_search_input',
-                onBlur: () => this.handleBlur()
+                onBlur: () => this.handleBlur(),
               })}
             />
             <div className="autocomplete-dropdown-container">
