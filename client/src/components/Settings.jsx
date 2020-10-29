@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Redirect } from "react-router-dom";
 import { Button } from './Button';
 import useEndlessForm from '../hooks/useEndlessForm';
-import SettingsLocationSearchInput from './SettingsLocationSearchInput'
+import LocationSearchInput from './LocationSearchInput'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons';
@@ -38,7 +38,7 @@ export const Settings = props => {
             <input id='address' value={address || props.address.x} onChange={event => handleChange(event, setAddress)} /><br />
             <p>We use your home location as the starting point of the day to predict and prepare your personalized recommendations.</p> */}
 
-            <SettingsLocationSearchInput onChange={handleAddress} destination={raw_address}/>
+            <LocationSearchInput onChange={handleAddress} destination={raw_address}/>
             <p>We use your home location as the starting point of the day to predict and prepare your personalized recommendations.</p>
 
             <label htmlFor='startOfDay'><FontAwesomeIcon icon={faClock} /> Start of Day:</label>

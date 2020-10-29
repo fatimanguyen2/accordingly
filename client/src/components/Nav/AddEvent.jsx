@@ -5,7 +5,7 @@ import useEndlessForm from '../../hooks/useEndlessForm';
 import { getDateFromTimestamp, giveHTMLID, validateObj } from '../../helpers/selectors';
 import moment from 'moment';
 
-import LocationSearchInput from './LocationSearchInput'
+import LocationSearchInput from '../LocationSearchInput'
 const classnames = require('classnames');
 
 export const AddEvent = (props) => {
