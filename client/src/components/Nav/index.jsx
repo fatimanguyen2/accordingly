@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faPlus } from '@fortawesome/free-solid-svg-icons';
+import './styles.scss';
 
 import { NavMenu } from './NavMenu';
 import { AddEvent } from './AddEvent';
 
 const classnames = require('classnames');
 
-export const Nav = (props) => {
+export const Nav = props => {
 
   const [collapse, setCollapse] = useState(true);
   const [addCollapse, setAddCollapse] = useState(true);
 
   return (
-    <div>
+    <div className='nav'>
       <button
         onClick={() => setCollapse(state => !state)}
         className={
