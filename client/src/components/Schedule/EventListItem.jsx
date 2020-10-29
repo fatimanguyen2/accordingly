@@ -51,7 +51,7 @@ export default function EventListItem(props) {
           {
             view === NORMAL ?
               <div>
-                <Button onClick={edit}>Edit</Button>
+                <Button onClick={() => props.onEdit(props.entry_id)}>Edit</Button>
                 <Button onClick={cancel}><FontAwesomeIcon icon={faTrash} /></Button>
               </div> :
               <div>

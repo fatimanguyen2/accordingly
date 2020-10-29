@@ -62,6 +62,10 @@ function App() {
     // .catch(() => console.log('failed delete'));
   };
 
+  const openEdit = (entry_id) => {
+    console.log("entry_id " + entry_id);
+  };
+
 
   return (
     <main>
@@ -96,6 +100,7 @@ function App() {
                 loggedIn={state.loggedIn}
                 events={state.events}
                 deleteEvent={deleteEvent}
+                onEdit={openEdit}
               />
             </Route>
 

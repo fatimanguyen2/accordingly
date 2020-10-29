@@ -9,6 +9,8 @@ export default function EventList(props) {
     return <EventListItem
       key={props.type + id}
       id={id}
+      entry_id={event.entry_id}
+      onEdit={props.onEdit}
       type={props.type}
       title={event.entry}
       start={props.type === 'repeating' ? event.next_event.start_time : event.start_time }
