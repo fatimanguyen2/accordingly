@@ -1,5 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import moment from 'moment';
+import { getWeatherIcon } from '../../helpers/selectors';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -28,7 +30,7 @@ export default function EventListItem(props) {
   return (
     <li>
       <div onClick={() => setToggle(!toggle)}>
-        <img src={props.weather} alt='Weather icon' />
+        <FontAwesomeIcon icon={getWeatherIcon(props.weather)} />
         <p>{props.type === 'today' ? moment(props.start).format('h:mm a') : moment(props.start).fromNow()} {props.title}</p>
       </div>
       {toggle &&
@@ -51,7 +53,7 @@ export default function EventListItem(props) {
           {
             view === NORMAL ?
               <div>
-                <Button onClick={edit}>Edit</Button>
+                <Button onClick={() => props.onEdit(props.entry_id)}>Edit</Button>
                 <Button onClick={cancel}><FontAwesomeIcon icon={faTrash} /></Button>
               </div> :
               <div>

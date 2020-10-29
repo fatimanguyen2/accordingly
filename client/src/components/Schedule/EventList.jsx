@@ -9,11 +9,13 @@ export default function EventList(props) {
     return <EventListItem
       key={props.type + id}
       id={id}
+      entry_id={event.entry_id}
+      onEdit={props.onEdit}
       type={props.type}
       title={event.entry}
       start={props.type === 'repeating' ? event.next_event.start_time : event.start_time }
       end={props.type === 'repeating' ? event.next_event.end_time : event.end_time }
-      weather={event.weather}
+      weather={props.type === 'repeating' ? event.next_event.weather : event.weather }
       destination={props.type === 'repeating'? event.next_event.destination : event.destination}
       recurrences={props.type === 'repeating'? event.recurrences : getRecurrenceArray(event, props.allEvents)}
       deleteEvent={props.deleteEvent}

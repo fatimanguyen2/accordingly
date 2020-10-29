@@ -1,0 +1,29 @@
+@import '../base';
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.weather-ring {
+  margin-top: 3rem;
+  border: 5px solid $sunny-color;
+  border-radius: 50%;
+  text-align: center;
+  width: 12rem;
+  height: 12rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 0 1rem $sunny-color;
+
+}
+
+.departure-time {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  // width: 75%;
+}

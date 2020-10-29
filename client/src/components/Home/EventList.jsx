@@ -6,9 +6,9 @@ export default function EventList(props) {
   const events = props.events.map(event => {
     return <EventListItem
       key={event.id}
-      title={event.title}
-      startTime={event.startTime}
-      weatherIcon={event.weatherIcon} //TO FIX
+      title={event.entry}
+      start={event.start_time}
+      weather={event.weather} //TO FIX
     />
   }).slice(0, 3)
   return (

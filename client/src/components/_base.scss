@@ -1,6 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
 
 $font-stack: 'Mulish', sans-serif;
+
+// Weather theme colors
+$sunny-color: rgb(255,223,109);
+$sunny-color-gradient: rgba(255,223,109,0.8);
+
+$rainy-color: rgb(34,155,206);
+$rainy-color-gradient: rgba(34,155,206, 0.8);
+
+$thunderstorm-color: rgb(151, 118, 223);
+$thunderstorm-color-gradient: rgba(175,145,239, 0.6);
+
+$cloudy-color: rgb(168, 168, 168);
+$cloudy-color-gradient: rgba(169, 208, 236, 0.726);
+
+
+// For responsive text size
 $font-size: 1em;
 $ratio: 1.25;
 $h5: calc(font-size * $ratio);
