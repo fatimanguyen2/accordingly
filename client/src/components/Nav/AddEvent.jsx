@@ -17,15 +17,17 @@ export const AddEvent = (props) => {
   //POST /api/users/:user_id/entries/new
   //PUT /api/users/:user_id/entries/:id
 
+  const entry_id = props.eventToEdit.entry_id || null;
   const entry = props.eventToEdit.entry || '';
-  const start_date = getDateFromTimestamp(props.eventToEdit.entry_id !== undefined ? props.eventToEdit.next_event.start_time : '');
-  const end_date = getDateFromTimestamp(props.eventToEdit.entry_id !== undefined ? props.eventToEdit.next_event.end_time : '');;
+  const start_date = getDateFromTimestamp(entry_id ? props.eventToEdit.next_event.start_time : '');
+  const end_date = getDateFromTimestamp(entry_id ? props.eventToEdit.next_event.end_time : '');;
   const start_hour = props.eventToEdit.start_hour || '';
   const end_hour = props.eventToEdit.end_hour || '';
-  const destination = props.eventToEdit.entry_id !== undefined ? props.eventToEdit.next_event.destination.x : '';
-  const recurrences = props.eventToEdit.recurrences;
+  const destination = entry_id ? props.eventToEdit.next_event.destination.x : '';
+  const recurrences = props.eventToEdit.recurrences || [];
 
-  const { repeats, handleInputChange, handleAddress, addRepeat, setRepeat, removeRepeat } = useEndlessForm({
+  const { input, repeats, handleInputChange, handleAddress, addRepeat, setRepeat, removeRepeat } = useEndlessForm({
+    entry_id,
     entry,
     start_date,
     end_date,
@@ -49,7 +51,7 @@ export const AddEvent = (props) => {
       <input type="time" name="end_time" id="end_time" defaultValue={end_hour} onChange={handleInputChange} required></input>
       <ul>
         {repeats.map(ele => {
-          console.log(ele.type_of);
+          // console.log(ele.type_of);
           return <li key={ele.html_id}>
             Every 
             <label htmlFor={`interval_count_${ele.html_id}`}>Repeat Count</label>
@@ -92,10 +94,10 @@ export const AddEvent = (props) => {
       <button id="add_repeat" onClick={addRepeat}><FontAwesomeIcon icon={faPlus} /></button>
       
       <button onClick={(event) => {
-        // event.preventDefault()
-        console.log(event.target)
-        props.onSubmit('Data Here')
-      }}>Save</button>
+        event.preventDefault()
+        // console.log(event.target)
+        input.entry_id ? props.onEdit({...input, recurrences: repeats}) : props.onSubmit({...input, recurrences: repeats});
+      }}>{entry_id ? 'Edit' : 'Add'}</button>
     </form>
   );
 };
