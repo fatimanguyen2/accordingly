@@ -1,25 +1,26 @@
 import { useState } from 'react';
 
 export default function useEndlessForm (inital={}) {
-
+  // console.log('inital')
+  // console.log(inital);
   const [input, setInput] = useState(inital)
 
-  const [repeats, setRepeat] = useState([
-    {
-      "html_id": 1,
-      "id": 11,
-      "type_of": "weekly",
-      "initial": "2020-03-09T04:00:00.000Z",
-      "interval": 2
-    },
-    {
-      "html_id": 2,
-      "id": 22,
-      "type_of": "weekly",
-      "initial": "2020-03-10T04:00:00.000Z",
-      "interval": 2
-    }
-  ]);
+  const [repeats, setRepeat] = useState(inital.recurrences ? inital.recurrences
+    // {
+    //   "html_id": 1,
+    //   "id": 11,
+    //   "type_of": "weekly",
+    //   "initial": "2020-03-09T04:00:00.000Z",
+    //   "interval": 2
+    // },
+    // {
+    //   "html_id": 2,
+    //   "id": 22,
+    //   "type_of": "weekly",
+    //   "initial": "2020-03-10T04:00:00.000Z",
+    //   "interval": 2
+    // }
+   : []);
   const [max, setMax] = useState(repeats.length === 0 ? 1 : repeats.length + 1);
 
   const increaseMax = () => setMax(state => state += 1);
@@ -39,7 +40,7 @@ export default function useEndlessForm (inital={}) {
     increaseMax();
     setRepeat(state => ([...state, {
       "html_id": max,
-      "type_of": "weekly",
+      "type_of": "day",
       "interval": 1
     }]));
   };

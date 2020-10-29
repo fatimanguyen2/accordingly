@@ -55,7 +55,7 @@ export const Nav = props => {
         </button>
       }
       {(!addCollapse || props.eventToEdit.entry_id) &&
-        <AddEvent onSubmit={props.onSubmit} eventToEdit={props.eventToEdit} />
+        <AddEvent onSubmit={props.onSubmit} onEdit={props.onEdit} eventToEdit={props.eventToEdit} />
       }
     </div>
   );

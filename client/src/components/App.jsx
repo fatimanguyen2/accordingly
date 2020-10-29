@@ -266,9 +266,26 @@ function App() {
     // .catch(() => console.log('failed delete')); // TO FIX
   };
 
+  const addEvent = (eventObj) => {
+    console.log('add event triggered: ');
+    console.log(eventObj);
+    // axios.post('/api/users/2/entries/new', eventObj)
+    //   .then(() => setState(prev => ({NEW STATE})))
+    //   .catch(() => console.log('failed to add event'));
+  };
+
+  const editEvent = (eventObj) => {
+    console.log('update event triggered: ');
+    console.log(eventObj);
+    // axios.put(`/api/entries/${eventObj.entry_id}`, eventObj)
+    //   .then(() => setState(prev => ({NEW STATE})))
+    //   .catch(() => console.log('failed to update event'));
+  };
+
+
   const openEdit = (entry_id) => {
-    console.log("entry_id " + entry_id);
-    console.log(state.events);
+    // console.log("entry_id " + entry_id);
+    // console.log(state.events);
 
     const eventToEditArr = state.events.repeating.filter(eventItem => eventItem.entry_id === entry_id);
     console.log(eventToEditArr[0].entry_id);
@@ -286,7 +303,8 @@ function App() {
         <Nav
           view={state.view}
           onSelect={(name) => console.log(name)}
-          onSubmit={(name) => console.log(name)}
+          onSubmit={addEvent}
+          onEdit={editEvent}
           loggedIn={state.loggedIn}
           time={state.time}
           logout={logout}

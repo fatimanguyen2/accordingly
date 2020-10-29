@@ -2,7 +2,7 @@ const axios = require('axios');
 
 // MAPQUEST developerAPI
 const host = "http://www.mapquestapi.com/"
-const key = "AiWSvQStB39c9CB4ftDVnYgHANMxQbEx"
+const key = process.env.MAP_QUEST_KEY
 
 
 
@@ -32,6 +32,10 @@ const addressToLocation = ({street, city, postalcode }) => {
      }
  })
  .catch(err => err)
+}
+
+const formatAddressForDb = () => {
+
 }
 
 
