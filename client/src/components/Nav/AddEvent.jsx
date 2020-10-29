@@ -22,7 +22,7 @@ export const AddEvent = (props) => {
   const destination = props.eventToEdit.entry_id !== undefined ? props.eventToEdit.next_event.destination.x : '';
   
 
-  const { repeats, handleInputChange, handleAddress, addRepeat, removeRepeat } = useEndlessForm({
+  const { repeats, handleInputChange, handleAddress, addRepeat, setRepeat, removeRepeat } = useEndlessForm({
     entry,
     start_date,
     end_date,
@@ -50,7 +50,22 @@ export const AddEvent = (props) => {
             <label htmlFor={`interval_count_${ele.html_id}`}>Repeat Count</label>
             <input type="number" min="1" max="12" name={`interval_count_${ele.html_id}`} id={`interval_count_${ele.html_id}`} onChange={handleInputChange} required></input>
             <label htmlFor={`interval_type_${ele.html_id}`}>Repeat Type</label>
-            <select name={`interval_type_${ele.html_id}`} id={`interval_type_${ele.html_id}`} onChange={handleInputChange}>
+            <select name={`interval_type_${ele.html_id}`}
+              id={`interval_type_${ele.html_id}`}
+              onChange={(e) => {
+                //update the repeat state with correct repeat type
+                const value = e.currentTarget.value;
+                handleInputChange(e)
+                setRepeat(state => {
+                  return state.map(repeat => {
+                    if (repeat.html_id === ele.html_id) {
+                      return {...repeat, type_of: value}
+                    } else {
+                      return repeat;
+                    }
+                  })
+                })
+              }}>
               <option value="day">Day</option>
               <option value="month">Month</option>
               <option value="year">Year</option>
