@@ -7,7 +7,16 @@ module.exports = (db) => {
     // const nowTest = "'2020-10-30'"
 
     const queryToday = (`
-    SELECT title AS entry, entries.id, destination, is_outdoor, trips.* FROM entries
+    SELECT 
+    title AS entry, 
+    entries.id, 
+    destination, 
+    address,
+    city,
+    postal_code,
+    is_outdoor, 
+    trips.* 
+    FROM entries
     JOIN trips on trips.entry_id = entries.id
     WHERE user_id = ${user} 
     AND entries.is_active = TRUE 
@@ -15,7 +24,17 @@ module.exports = (db) => {
     `)
 
     const queryRecurrence = (`
-    SELECT title AS entry, entries.id, is_outdoor, destination, recurrences.*, frequencies.* FROM entries
+    SELECT 
+    title AS entry, 
+    entries.id, 
+    destination, 
+    address,
+    city,
+    postal_code,
+    is_outdoor, 
+    recurrences.*, 
+    frequencies.*
+    FROM entries
     JOIN recurrences ON recurrences.entry_id = entries.id
     JOIN frequencies ON recurrence_id = recurrences.id
     WHERE user_id = ${user} 
@@ -24,7 +43,16 @@ module.exports = (db) => {
     `)
 
     const queryFuture = (`
-    SELECT title AS entry, entries.id, destination, is_outdoor, trips.* FROM entries
+    SELECT 
+    title AS entry, 
+    entries.id, 
+    destination, 
+    address,
+    city,
+    postal_code,
+    is_outdoor, 
+    trips.*
+    FROM entries
     JOIN trips on trips.entry_id = entries.id
     WHERE user_id = ${user} 
     AND entries.is_active = TRUE 

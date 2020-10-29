@@ -5,6 +5,7 @@ const db = require('../db');
 const dataQ = require('../models')(db);
 
 const createEventList = (rawEvents, id) => {
+  console.log(rawEvents)
   return dataQ.getUserLocationById(id)
     .then(origin => todayFormatting(rawEvents[0], rawEvents[1], origin))
     .then(today => {
