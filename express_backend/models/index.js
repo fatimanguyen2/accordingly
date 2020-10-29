@@ -77,6 +77,21 @@ module.exports = (db) => {
       .then(results => results.rows[0].home_location)
   }
 
+  const getUserAddressById = (id) => {
+    const query =(`
+    SELECT address, city, postal_code FROM users
+    WHERE id = ${id}
+    `)
+    return db.query(query)
+      .then(results => {
+        return {
+          street : results.rows[0].address,
+          city : results.rows[0].city,
+          postal_code : results.rows[0].postal_code
+        }
+      })
+    }
+
   const getRecommendations = (conditions) => {
     let nowCond = conditions[0]
     const temp = nowCond.shift()
@@ -120,6 +135,7 @@ module.exports = (db) => {
   return {
     getUserEvents,
     getUserLocationById,
+    getUserAddressById,
     getRecommendations
   };
 };
