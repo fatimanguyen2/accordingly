@@ -1,3 +1,5 @@
+@import '../base';
+
 .home {
   display: flex;
   flex-direction: column;
@@ -5,7 +7,8 @@
 }
 
 .weather-ring {
-  border: 5px solid #FFD749;
+  margin-top: 3rem;
+  border: 5px solid $cloudy-color;
   border-radius: 50%;
   text-align: center;
   width: 12rem;
@@ -14,7 +17,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  // align-items: center;
+  box-shadow: 0 0 1rem;
 
 }
 
@@ -22,5 +25,5 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 75%;
+  // width: 75%;
 }
