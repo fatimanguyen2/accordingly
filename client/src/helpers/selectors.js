@@ -1,4 +1,4 @@
-import {faBolt, faCloud, faSun, faCloudShowersHeavy, faSnowflake, faCloudRain, faQuestionCircle, faQuestion} from '@fortawesome/free-solid-svg-icons';
+import {faBolt, faCloud, faSun, faCloudShowersHeavy, faSnowflake, faCloudRain, faQuestionCircle} from '@fortawesome/free-solid-svg-icons';
 
 const getItem = (id, array) => array.find(element => element.id === id);
 
