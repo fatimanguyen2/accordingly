@@ -42,6 +42,7 @@ const getDetailedForcast = (schedule) => {
   return Promise.all(allForecasts)
 }
 
+const test6AM = moment("2020-10-28T06")
 ///need refactorging call only one time
 const getForecastCategory = (event) => {
   const start = event.start_time;
