@@ -14,9 +14,11 @@ export default function RecommendationList(props) {
   });
 
   return (
-    <ul>
+    <div>
       <h2>{props.children}</h2>
-      {items}
-    </ul>
+      <ul>
+        {items}
+      </ul>
+    </div>
   );
 };
