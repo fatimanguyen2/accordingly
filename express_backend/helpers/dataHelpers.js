@@ -239,11 +239,64 @@ const getRelativeSchedule = (tripTimes) => {
   })
 }
 
-const weatherConditions = (weather) => {
-  return {
-    
+const weatherConditions = ({temp, humidity, weather, rain, uvi, wind_speed, visibility}) => {
+  const result = [qualifyTemp(temp), qualifyHumidity(humidity)]
+  if (uvi) result.push(qualifyUVI(uvi));
+  if (weather.rainy) result.push("rainy");
+  if (wind_speed >= 20) result.push("windy");
+  if (wind_speed >= 20 && temp < 15) result.push("cold_wind");
+  if (visibility < 100) result.push("low_visib");
+  if (checkWetGround(rain)) result.push("wet_ground");
+  return result;
+}
+
+const qualifyTemp = (temp) => {
+    if (temp > 25) return "hot";
+    if (temp < 25 && temp >= 18) return "warm";
+    if (temp < 18 && temp >= 10) return "temperate";
+    if (temp < 10 && temp >= 0) return "cool";
+    if (temp < 0 && temp >= -10) return "cold";
+    if (temp < -10) return "very cold";
+}
+
+const qualifyHumidity = (humidity) => {
+  if (humidity > 60) return "humid";
+  if (humidity < 60 && humidity >= 40) return "moderate";
+  if (humidity < 40) return "dry";
+}
+
+const qualifyUVI = (uvi) => {
+  if (uvi < 3) return "uv_low";
+  if (uvi < 6 && uvi >= 3) return "uv_moderate";
+  if (uvi > 6) return "uv_heavy";
+}
+
+
+
+const checkWetGround = (rain) => {
+  if (rain) {
+    return (rain['1h'] > 2.5);
+  } else {
+    return false;
   }
 }
+
+const condtionsOfDay = (conditions) => {
+  const bulkCond = conditions.map(condition =>{
+    return weatherConditions(condition);
+  })
+  const nowCond = bulkCond.shift();
+  const filteredCond = [];
+  bulkCond.forEach(events => {
+    events.forEach(condition => {
+      if (!filteredCond.includes(condition) && !nowCond.includes(condition)) {
+        filteredCond.push(condition);
+      }
+    })
+  })
+  return [nowCond, filteredCond]
+}
+
 
 module.exports = {
   createEventList,
@@ -252,5 +305,6 @@ module.exports = {
   getTodayRecStartTime,
   getTripsToday,
   updateTodayToNow,
-  getRelativeSchedule
+  getRelativeSchedule,
+  condtionsOfDay
 };

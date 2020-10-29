@@ -1,10 +1,10 @@
 INSERT INTO
   items(name, description)
 VALUES
-('Water', 'Bring hydration in warm temperatur day'),
+('Water', 'Bring hydration in warm temperature day'),
 ('A lot of Water', 'Hydration is really important during hot day'),
 ('Short Sleeves', 'Warm temperature allows light clothing'),
-('Long sleeves', 'Lower temperature require mor complete coverage'),
+('Long sleeves', 'Lower temperature require more complete coverage'),
 ('Light clothing', 'Warm enough for one layer'),
 ('Extra layer', 'Warm cloth or light coat recommended'),
 ('Winter Coat', 'Cold temperature requires quality coat'),
@@ -25,4 +25,5 @@ VALUES
 ('Filter mask', 'Current air quality suggests precaution'),
 ('Windbreaker', 'Temperature and windspeed indicate biting wind'),
 ('Black Ice Warning', 'Conditions suggest risk of falls'),
-('Reflective Clothing', 'Poor visibility is mitigated by bright clothing');
+('Reflective Clothing', 'Poor visibility is mitigated by bright clothing'),
+('Normal clothing', 'Not to hot, not too warm.');

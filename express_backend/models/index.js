@@ -49,8 +49,49 @@ module.exports = (db) => {
       .then(results => results.rows[0].home_location)
   }
 
+  const getRecommendations = (conditions) => {
+    let nowCond = conditions[0]
+    const temp = nowCond.shift()
+    let futurCond = conditions[1]
+    let queryNow = (`
+    SELECT DISTINCT items.name, items.description FROM items
+    JOIN item_condition ON item_id = items.id
+    JOIN conditions ON condition_id = conditions.id
+    WHERE conditions.name = '${temp}'
+    `)
+
+    for (const condition of nowCond) {
+      queryNow += (`
+      OR conditions.name = '${condition}'
+      `)
+    }
+
+
+    const first = futurCond.shift()
+    let queryFuture = (`
+    SELECT DISTINCT items.name, items.description FROM items
+    JOIN item_condition ON item_id = items.id
+    JOIN conditions ON condition_id = conditions.id
+    WHERE conditions.name = '${first}'
+    `)
+
+    for (const condition of futurCond) {
+      queryNow += (`
+      OR conditions.name = '${condition}'
+      `)
+    }
+
+
+    const now = db.query(queryNow)
+    const later = db.query(queryFuture)
+
+    return Promise.all([now, later])
+      .then(results => ({now : results[0].rows, later : results[1].rows}))
+  }
+
   return {
     getUserEvents,
-    getUserLocationById
+    getUserLocationById,
+    getRecommendations
   };
 };
