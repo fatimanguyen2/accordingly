@@ -20,6 +20,7 @@ export const AddEvent = (props) => {
   const start_hour = props.eventToEdit.start_hour || '';
   const end_hour = props.eventToEdit.end_hour || '';
   const destination = props.eventToEdit.entry_id !== undefined ? props.eventToEdit.next_event.destination.x : '';
+  
 
   const { repeats, handleInputChange, handleAddress, addRepeat, removeRepeat } = useEndlessForm({
     entry,

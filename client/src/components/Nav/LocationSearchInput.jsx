@@ -34,6 +34,7 @@ class LocationSearchInput extends React.Component {
         value={this.state.draft_address || this.props.destination}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
+        highlightFirstSuggestion={true}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
@@ -54,8 +55,8 @@ class LocationSearchInput extends React.Component {
                   : 'suggestion-item';
                 // inline style for demonstration purpose
                 const style = suggestion.active
-                  ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                  ? { color: 'white', backgroundColor: 'black', cursor: 'pointer' }
+                  : { color: 'white', backgroundColor: 'grey', cursor: 'pointer' };
                 return (
                   <div
                     {...getSuggestionItemProps(suggestion, {

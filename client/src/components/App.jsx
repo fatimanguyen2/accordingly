@@ -72,6 +72,10 @@ function App() {
     setState(prev => ({ ...prev, eventToEdit: eventToEditArr[0] }))
   };
 
+  const clearToEdit = () => {
+    setState(prev => ({ ...prev, eventToEdit: {} }))
+  };
+
 
   return (
     <main>
@@ -85,6 +89,7 @@ function App() {
           logout={logout}
           events={state.events}
           eventToEdit={state.eventToEdit}
+          clearToEdit={clearToEdit}
         />
 
         {state.loading ? <WeatherRing mainWeather='Loading...' /> :

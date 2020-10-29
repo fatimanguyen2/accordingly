@@ -36,7 +36,14 @@ export const Nav = (props) => {
 
       {props.loggedIn &&
         <button
-          onClick={() => setAddCollapse(state => !state)}
+          onClick={() => {
+            if (props.eventToEdit.entry_id) {
+              setAddCollapse(state => true);
+            } else {
+              setAddCollapse(state => !state);
+            }
+            props.clearToEdit();
+          }}
           className={
             classnames('button', {
               'button--collapse': addCollapse,
