@@ -1,5 +1,5 @@
 const axios = require('axios');
-const key = 'a528ff4636797a1121546bea69964059';
+const key = process.env.OPEN_WEATHER_KEY;
 const exclusions = 'minutely'
 const moment = require('moment')
 
