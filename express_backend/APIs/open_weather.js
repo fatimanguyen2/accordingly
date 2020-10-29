@@ -42,13 +42,13 @@ const getDetailedForcast = (schedule) => {
   return Promise.all(allForecasts)
 }
 
-
+const test6AM = moment("2020-10-28T06");
 ///need refactorging call only one time
 const getForecastCategory = (event) => {
   const start = event.start_time;
   const in48h = moment().add(48, 'h');
   if (moment(start).isBefore(in48h)) {
-    const hour = moment(start).diff(moment(), "hour")
+    const hour = moment(start).diff(test6AM, "hour")
     if (hour > 0) {
       return getWeather(event.destination)
         .then(data => data.hourly[hour].weather[0].main)
