@@ -109,7 +109,6 @@ module.exports = (db) => {
       `)
     }
 
-
     const first = futurCond.shift()
     let queryFuture = (`
     SELECT DISTINCT items.id, items.name, items.description FROM items
@@ -124,7 +123,6 @@ module.exports = (db) => {
       `)
     }
 
-
     const now = db.query(queryNow)
     const later = db.query(queryFuture)
 
@@ -132,10 +130,23 @@ module.exports = (db) => {
       .then(results => ({now : results[0].rows, later : results[1].rows}))
   }
 
+  const deleteEntry = (entryID) => {
+    const query = (`
+    UPDATE entries
+    SET is_active = FALSE
+    WHERE id = ${entryID}
+    RETURNING *
+    `)
+
+    return db.query(query)
+      .then(results => results.rows[0])
+  }
+
   return {
     getUserEvents,
     getUserLocationById,
     getUserAddressById,
+    deleteEntry,
     getRecommendations
   };
 };
