@@ -187,7 +187,7 @@ function App() {
     view: 'home',
     loggedIn: true,
     weather,
-    recommendations,
+    recommendations: suggestions,
     events,
     time: 1603740043000,
     homeAddress,
