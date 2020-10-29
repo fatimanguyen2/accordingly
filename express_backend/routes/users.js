@@ -44,6 +44,7 @@ module.exports = (
   router.get('/:id/recommendations', function (req, res) {
     let origin
     getUserLocationById(req.params.id)
+<<<<<<< Updated upstream
     .then(homeLoc => origin = homeLoc)
     .then(() => getUserEvents(req.params.id))
     .then(rawEvents => createEventList(rawEvents, req.params.id))
@@ -51,6 +52,17 @@ module.exports = (
     .then(trips => getRelativeSchedule(trips))
     .then(relSchedule => getDetailedForcast(relSchedule))
     .then(data => res.json(data))
+=======
+      .then(homeLoc => origin = homeLoc)
+      .then(() => getUserEvents(req.params.id))
+      .then(rawEvents => createEventList(rawEvents, req.params.id))
+      .then(eventList => getTripsToday(origin, eventList.today))
+      .then(trips => getRelativeSchedule(trips))
+      .then(relSchedule => getDetailedForcast(relSchedule))
+      .then(detForecast => condtionsOfDay(detForecast))
+      .then(condOfDay => getRecommendations(condOfDay))
+      .then(data => res.json(data))
+>>>>>>> Stashed changes
 
     // getUserLocationById(req.params.id)
     //   .then(data => res.json(data))
