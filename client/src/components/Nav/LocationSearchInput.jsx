@@ -45,6 +45,7 @@ class LocationSearchInput extends React.Component {
                 placeholder: 'Search Places ...',
                 className: 'location_search_input',
                 onBlur: () => this.handleBlur(),
+                required: true,
               })}
             />
             <div className="autocomplete-dropdown-container">
