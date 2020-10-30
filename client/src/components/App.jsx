@@ -15,11 +15,6 @@ import { Register } from './Register';
 
 import { filterEvents } from '../helpers/selectors';
 
-const suggestions = {
-  upcoming: [{ id: 1, name: 'hat', description: 'Keep that head sheltered from the cold' }, { id: 2, name: 'suncreen', description: 'It is sunny outside' }],
-  later: [{ id: 3, name: 'top', description: 'layer up' }, { id: 4, name: 'gloves', description: 'It is cold' }]
-}
-
 const weather = {
   mainWeather: [
     "Clouds"
@@ -343,7 +338,6 @@ function App() {
                 <Home
                   loggedIn={state.loggedIn}
                   weather={state.weather}
-                  events={state.events}
                   recommendations={state.recommendations}
                   events={state.events.today}
                 />

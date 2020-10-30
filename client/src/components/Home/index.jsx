@@ -14,7 +14,7 @@ import RecommendationList from './RecommendationList';
 export const Home = props => {
   const [recommendations, setRecommendations] = useState({ ...props.recommendations, done: [] });
   const [headerSize, setHeaderSize] = useState('big');
-  const [hideOnScroll, setHideOnScroll] = useState(true)
+  // const [hideOnScroll, setHideOnScroll] = useState(true)
 
   useScrollPosition(({ prevPos, currPos }) => {
     // const isShow = currPos.y > prevPos.y
@@ -49,7 +49,7 @@ export const Home = props => {
       {
         props.loggedIn ?
           <div className='home'>
-            <header className={headerSize} onClick={() => setHeaderSize(headerSize === 'big' ? 'small' : 'big')}>
+            <header className={headerSize} /*onClick={() => setHeaderSize(headerSize === 'big' ? 'small' : 'big')}*/>
               <div className={`${headerSize}__weather-event`}>
                 <WeatherRing
                   mainWeather={props.weather.mainWeather && props.weather.mainWeather[0]}

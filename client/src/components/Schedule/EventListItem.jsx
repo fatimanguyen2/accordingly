@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import { getWeatherIcon } from '../../helpers/selectors';
 

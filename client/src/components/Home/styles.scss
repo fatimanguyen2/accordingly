@@ -1,5 +1,4 @@
 @import '../base';
-
 .home {
   display: flex;
   flex-direction: column;
@@ -35,8 +34,8 @@
       span {
         position: absolute;
         top: 45%;
-        left: 18%;
-        font-size: $font-size * 0.5
+        left: 20%;
+        font-size: $font-size * 0.1
       }
       
     }
@@ -52,7 +51,7 @@
       .weather-ring {
         width: 2.7rem;
         height: 2.7rem;
-        transition: all 400ms ease-in;
+        transition: all 200ms ease-in;
         border: 0.3rem solid $sunny-color;
      
         h1, h3 span, p {
@@ -82,7 +81,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
   
     li {
       margin: 0.2rem 0;
@@ -112,8 +111,9 @@
   
   .recommendation-list-item {
     margin: 1rem 0;
-    padding: 0 0.5rem;
+    padding: 0.5rem 1rem;
     background-color: rgb(73,72,72);
+    border-radius: 10px;
     cursor: pointer;
   
     &__main {
@@ -164,8 +164,6 @@
         top: 0;
         padding: 0.1rem;
       }
-
-      
     }
   
     &__icon {
