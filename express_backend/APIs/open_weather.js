@@ -15,7 +15,6 @@ const getWeather = (location) => {
 const getMainWeather = (location) => {
   return getWeather(location)
   .then(data => {
-    console.log(data.hourly)
       return {
         mainWeather: data.current.weather.map(condtion => condtion.main),
         feelsLikeTemp: data.current.feels_like,
@@ -67,6 +66,7 @@ const getForecastCategory = (event) => {
 
 
 module.exports = {
+  getWeather,
   getMainWeather,
   getForecastCategory,
   getDetailedForcast

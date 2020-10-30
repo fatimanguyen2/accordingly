@@ -1,3 +1,4 @@
+const { json } = require('express');
 const express = require('express');
 const router = express.Router();
 
@@ -5,8 +6,8 @@ const router = express.Router();
 
 
 module.exports = (
-  { getUserEvents, getUserLocationById, getUserAddressById, getRecommendations, postEntry }, 
-  { createEventList, getTripsToday, getRelativeSchedule, condtionsOfDay, formatEntryForFrontEnd }, 
+  { getUserEvents, getUserLocationById, getUserAddressById, getRecommendations, postEntry, getImmediateRecommendations }, 
+  { createEventList, getTripsToday, getRelativeSchedule, condtionsOfDay, formatEntryForFrontEnd, getNowConditions}, 
   { formatAddressForDb }, 
   { getMainWeather, getDetailedForcast }
   ) => {
@@ -84,7 +85,15 @@ module.exports = (
       .then(() => getUserEvents(req.params.id))
       .then(rawEvents => createEventList(rawEvents, req.params.id))
       .then(eventList => getTripsToday(origin, eventList.today))
-      .then(trips => getRelativeSchedule(trips))
+      .then(trips => {
+        if (!trips) {
+          return getNowConditions(origin)
+          .then(conditions => getImmediateRecommendations(conditions))
+          .then(data => res.json([data.rows]))
+        } else {
+          return getRelativeSchedule(trips)
+        }
+      })
       .then(relSchedule => getDetailedForcast(relSchedule))
       .then(detForecast => condtionsOfDay(detForecast))
       .then(condOfDay => getRecommendations(condOfDay))

@@ -92,15 +92,37 @@ module.exports = (db) => {
       })
     }
 
+  const getImmediateRecommendations = (conditions) => {
+
+    let nowCond = conditions
+    const temp = nowCond.shift()
+    let queryImmediate = (`
+      SELECT DISTINCT items.id, items.name, items.description FROM items
+      JOIN item_condition ON item_id = items.id
+      JOIN conditions ON condition_id = conditions.id
+      WHERE conditions.name = '${temp}'
+    `)
+
+    for (const condition of nowCond) {
+      queryImmediate += (`
+      OR conditions.name = '${condition}'
+      `)
+    }
+    console.log(queryImmediate)
+    
+    return db.query(queryImmediate)
+
+  }
+
   const getRecommendations = (conditions) => {
     let nowCond = conditions[0]
     const temp = nowCond.shift()
     let futurCond = conditions[1]
     let queryNow = (`
-    SELECT DISTINCT items.id, items.name, items.description FROM items
-    JOIN item_condition ON item_id = items.id
-    JOIN conditions ON condition_id = conditions.id
-    WHERE conditions.name = '${temp}'
+      SELECT DISTINCT items.id, items.name, items.description FROM items
+      JOIN item_condition ON item_id = items.id
+      JOIN conditions ON condition_id = conditions.id
+      WHERE conditions.name = '${temp}'
     `)
 
     for (const condition of nowCond) {
@@ -282,6 +304,7 @@ module.exports = (db) => {
     getUserAddressById,
     deleteEntry,
     postEntry,
+    getImmediateRecommendations,
     getRecommendations
   };
 };

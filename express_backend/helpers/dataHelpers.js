@@ -1,11 +1,10 @@
 const moment = require('moment');
 const { getLeaveBy, getMultipleTripTime } = require('../APIs/google_map');
-const { getForecastCategory } = require('../APIs/open_weather')
+const { getForecastCategory, getWeather } = require('../APIs/open_weather')
 const db = require('../db');
 const dataQ = require('../models')(db);
 
 const createEventList = (rawEvents, id) => {
-  console.log(rawEvents)
   return dataQ.getUserLocationById(id)
     .then(origin => todayFormatting(rawEvents[0], rawEvents[1], origin))
     .then(today => {
@@ -234,11 +233,15 @@ const sortEventChrono = (events) => {
 
 
 const getTripsToday = (origin, today) => {
-  const path = [[origin, today[0].destination]];
-  for (let x = 1; x < today.length; x ++) {
-    path.push([today[x-1].destination, today[x].destination])
-  }
-  path.push([today[today.length - 1].destination, origin])
+  if (today.length > 0) {
+    const path = [[origin, today[0].destination]];
+    for (let x = 1; x < today.length; x ++) {
+      path.push([today[x-1].destination, today[x].destination])
+    }
+    path.push([today[today.length - 1].destination, origin])
+  } else {
+    return null
+}
   
   return getMultipleTripTime(path)
   .then(travelTimes => {
@@ -308,22 +311,26 @@ const checkWetGround = (rain) => {
 }
 
 const condtionsOfDay = (conditions) => {
-  const bulkCond = conditions.map(condition =>{
-    return weatherConditions(condition);
-  })
-  const nowCond = bulkCond.shift();
-  const filteredCond = [];
-  bulkCond.forEach(events => {
-    events.forEach(condition => {
-      if (!filteredCond.includes(condition) && !nowCond.includes(condition)) {
-        filteredCond.push(condition);
-      }
+    const bulkCond = conditions.map(condition =>{
+      return weatherConditions(condition);
     })
-  })
-  return [nowCond, filteredCond]
+    const upcomingCond = bulkCond.shift();
+    const filteredCond = [];
+    bulkCond.forEach(events => {
+      events.forEach(condition => {
+        if (!filteredCond.includes(condition) && !upcomingCond.includes(condition)) {
+          filteredCond.push(condition);
+        }
+      })
+    })
+    return [upcomingCond, filteredCond]
 }
 
-const formatEntryForDb = (entry) => {
+const getNowConditions = (location) => {
+  return getWeather(location)
+  .then(conditions => {
+    return weatherConditions(conditions.current)
+  })
 }
 
 
@@ -337,5 +344,6 @@ module.exports = {
   getRelativeSchedule,
   condtionsOfDay,
   formatEntryForFrontEnd,
+  getNowConditions,
   formatTimeForDb
 };
