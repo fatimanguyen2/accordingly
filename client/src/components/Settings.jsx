@@ -18,10 +18,10 @@ export const Settings = props => {
     setShowButton(true);
   };
 
-  // const handleSave = () => {
-  //   props.updateAddress({ x: address });
-  //   setShowButton(false);
-  // };
+  const handleSave = () => {
+    props.updateAddress(input.raw_address);
+    setShowButton(false);
+  };
 
   const { input, handleInputChange, handleAddress } = useEndlessForm({
     raw_address,
@@ -38,7 +38,10 @@ export const Settings = props => {
             <input id='address' value={address || props.address.x} onChange={event => handleChange(event, setAddress)} /><br />
             <p>We use your home location as the starting point of the day to predict and prepare your personalized recommendations.</p> */}
 
-            <LocationSearchInput onChange={handleAddress} destination={raw_address}/>
+            <LocationSearchInput onChange={() => {
+              handleAddress();
+              setShowButton(true);
+            }} destination={raw_address}/>
             <p>We use your home location as the starting point of the day to predict and prepare your personalized recommendations.</p>
 
             <label htmlFor='startOfDay'><FontAwesomeIcon icon={faClock} /> Start of Day:</label>

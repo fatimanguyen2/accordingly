@@ -23,7 +23,7 @@ export const AddEvent = (props) => {
   const end_date = getDateFromTimestamp(entry_id ? props.eventToEdit.next_event.end_time : '');;
   const start_hour = props.eventToEdit.start_hour || '';
   const end_hour = props.eventToEdit.end_hour || '';
-  const raw_address = entry_id ? props.eventToEdit.next_event.destination.x : '';
+  const raw_address = entry_id ? `${props.eventToEdit.next_event.address}, ${props.eventToEdit.next_event.city}` : '';
   const recurrences = giveHTMLID(props.eventToEdit.recurrences || []);
 
   const { input, repeats, handleInputChange, handleAddress, addRepeat, setRepeat, removeRepeat } = useEndlessForm({
