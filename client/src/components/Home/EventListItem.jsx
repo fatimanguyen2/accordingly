@@ -7,9 +7,9 @@ import { getWeatherIcon, getWeatherColor } from '../../helpers/selectors';
 export default function EventListItem(props) {
 
   return (
-    <li>
+    <li className='event-list-item'>
       {props.title} - {moment(props.start).format('h:mm a')} 
-      <FontAwesomeIcon icon={getWeatherIcon(props.weather)} color={getWeatherColor(props.weather)} />
+      <FontAwesomeIcon className='event-list-item__icon' icon={getWeatherIcon(props.weather)} color={getWeatherColor(props.weather)} />
     </li>
   );
 };

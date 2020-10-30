@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import { getWeatherIcon, getWeatherColor } from '../../helpers/selectors';
+import classNames from 'classnames';
 
+import { getWeatherIcon, getWeatherColor, changeWeatherName } from '../../helpers/selectors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock, faTrash } from '@fortawesome/free-solid-svg-icons';
-
 import RepeatList from './RepeatList';
 import { Button } from '../Button'
 
@@ -14,7 +14,6 @@ const DELETE = 'delete';
 export default function EventListItem(props) {
   const [toggle, setToggle] = useState(false);
   const [view, setView] = useState(NORMAL);
-
 
   const cancel = () => {
     if (view === NORMAL) {
@@ -27,38 +26,47 @@ export default function EventListItem(props) {
   const back = () => setView(NORMAL);
   const edit = () => console.log('edit click');
 
+  //Build classname for each weather
+  const weatherName = changeWeatherName(props.weather);
+  const key = `event-list-item--${weatherName}`;
+  const itemClass = classNames('event-list-item', key);
+
   return (
-    <li className='event-list-item'>
-      <div onClick={() => setToggle(!toggle)}>
-        <FontAwesomeIcon icon={getWeatherIcon(props.weather)} color={getWeatherColor(props.weather)}/>
-        <p>{props.type === 'today' ? moment(props.start).format('h:mm a') : moment(props.start).fromNow()} {props.title}</p>
+    <li className={itemClass}>
+    {/* <li className='event-list-item' style={{background: setPrimaryColors(props.weather).solid}}> */}
+      <div className='event-list-item__main' onClick={() => setToggle(!toggle)}>
+        <div className='event-list-item__time' >
+        <FontAwesomeIcon className='event-list-item__weather-icon' icon={getWeatherIcon(props.weather)} color={getWeatherColor(props.weather)}/>
+        <p>{props.type === 'today' ? moment(props.start).format('HH:mm') : moment(props.start).fromNow()} </p>
+        </div>
+        <div><p>{props.title}</p></div>
       </div>
       {toggle &&
-        <div onClick={() => setToggle(false)}>
-          <div>
-            <FontAwesomeIcon icon={faMapMarkerAlt} />
+        <div className='event-list-item__details' onClick={() => setToggle(false)}>
+          <div className='event-list-item__address'>
+            <FontAwesomeIcon className='event-list-item__address-icon'icon={faMapMarkerAlt} />
             <p>{props.destination}</p>
           </div>
-          <div>
-            <FontAwesomeIcon icon={faClock} />
+          <div className='event-list-item__details__time'>
+            <FontAwesomeIcon className='event-list-item__time-icon' icon={faClock} />
             <div>
-              <p> {moment(props.start).format('dddd, MMM Do   h:mm a')}</p>
-              <p> {moment(props.end).format('dddd, MMM Do   h:mm a')}</p>
+              <p> {moment(props.start).format('dddd, MMM Do   HH:mm')}</p>
+              <p> {moment(props.end).format('dddd, MMM Do   HH:mm')}</p>
             </div>
           </div>
           {
             props.recurrences ?
-              <RepeatList recurrences={props.recurrences} /> : <div><p> Does not repeat </p></div>
+              <RepeatList recurrences={props.recurrences} /> : <div className='repeat-title'><p> Does not repeat </p></div>
           }
           {
             view === NORMAL ?
               <div>
-                <Button onClick={() => props.onEdit(props.entry_id)}>Edit</Button>
-                <Button onClick={cancel}><FontAwesomeIcon icon={faTrash} /></Button>
+                <Button classname='event-list-item__edit-btn' onClick={() => props.onEdit(props.entry_id)}>Edit</Button>
+                <Button classname='event-list-item__trash-btn' onClick={cancel}><FontAwesomeIcon icon={faTrash} /></Button>
               </div> :
               <div>
-                <Button onClick={back}>Back</Button>
-                <Button onClick={cancel}>Confirm Delete</Button>
+                <Button classname='event-list-item__back-btn' onClick={back}>Back</Button>
+                <Button classname='event-list-item__confirm-delete-btn' onClick={cancel}>Confirm Delete</Button>
               </div>
           }
         </div>

@@ -92,15 +92,37 @@ module.exports = (db) => {
       })
     }
 
+  const getImmediateRecommendations = (conditions) => {
+
+    let nowCond = conditions
+    const temp = nowCond.shift()
+    let queryImmediate = (`
+      SELECT DISTINCT items.id, items.name, items.description FROM items
+      JOIN item_condition ON item_id = items.id
+      JOIN conditions ON condition_id = conditions.id
+      WHERE conditions.name = '${temp}'
+    `)
+
+    for (const condition of nowCond) {
+      queryImmediate += (`
+      OR conditions.name = '${condition}'
+      `)
+    }
+    console.log(queryImmediate)
+    
+    return db.query(queryImmediate)
+
+  }
+
   const getRecommendations = (conditions) => {
     let nowCond = conditions[0]
     const temp = nowCond.shift()
     let futurCond = conditions[1]
     let queryNow = (`
-    SELECT DISTINCT items.id, items.name, items.description FROM items
-    JOIN item_condition ON item_id = items.id
-    JOIN conditions ON condition_id = conditions.id
-    WHERE conditions.name = '${temp}'
+      SELECT DISTINCT items.id, items.name, items.description FROM items
+      JOIN item_condition ON item_id = items.id
+      JOIN conditions ON condition_id = conditions.id
+      WHERE conditions.name = '${temp}'
     `)
 
     for (const condition of nowCond) {
@@ -142,11 +164,147 @@ module.exports = (db) => {
       .then(results => results.rows[0])
   }
 
+  const postEntry = (entry, user_id) => {
+    let newEntryId
+    return db.query(`
+    INSERT INTO entries(title, is_outdoor, destination, address, city, postal_code, user_id)
+      VALUES
+        ($1, null, point(${entry.destination.x}, ${entry.destination.y}), '${entry.street}', '${entry.city}', '${entry.postal_code || null}', ${user_id})
+    RETURNING entries.id
+    `, [`${entry.title}`])
+    .then(id => {
+      newEntryId = id.rows[0].id
+      const formattedEntry = {...entry, id : newEntryId}
+      if (!entry.recurrences.length) {
+        const trip = createTrip(formattedEntry)
+        return postTrip(trip)
+      } else {
+        const rec = createRec(formattedEntry)
+        return postRec(rec)
+        .then(id => {
+          const formattedRec = {...rec, id : id.rows[0].id}
+          const frequencies = formattedEntry.recurrences.map(freq => createFrequency(freq, formattedRec))
+          return postFreqs(frequencies)
+        })
+      }
+    })
+    .then(() => getEntryById(newEntryId))
+  }
+
+  const getEntryById = (id) => {
+
+    return db.query(`
+    SELECT 
+    title AS entry, 
+    entries.id as entry_id,
+    destination, 
+    address,
+    city,
+    postal_code,
+    is_outdoor, 
+    trips.id AS trip_id,
+    trips.start_time AS trip_start_time,
+    trips.end_time AS trip_end_time,
+    recurrences.id AS recurrence_id,
+    recurrences.start_date,
+    recurrences.start_hour,
+    recurrences.end_hour,
+    frequencies.id AS frequency_id,
+    frequencies.type_of,
+    frequencies.initial,
+    frequencies.interval
+    FROM entries
+    LEFT JOIN trips on trips.entry_id = entries.id
+    LEFT JOIN recurrences ON recurrences.entry_id = entries.id
+    LEFT JOIN frequencies ON recurrence_id = recurrences.id
+    WHERE entries.id = ${id}
+    `)
+  }
+
+
+  const postTrip = (trip) => {
+    return db.query(`
+    INSERT INTO trips(start_time, end_time, entry_id)
+      VALUES
+      ('${trip.start_time}', '${trip.end_time}', ${trip.entry_id})
+    `)
+  }
+
+  const postRec = (rec) => {
+    return db.query(`
+    INSERT INTO recurrences(start_date, start_hour, end_hour, entry_id)
+      VALUES
+      ('${rec.start_date}', '${rec.start_hour}', '${rec.end_hour}', ${rec.entry_id})
+    RETURNING recurrences.id
+    `)
+  }
+
+  const postFreqs = (freqs) => {
+    let queryGen = (`
+    INSERT INTO frequencies(type_of, interval, initial, recurrence_id)
+      VALUES
+    `)
+
+    for(const freq of freqs) {
+      queryGen += `('${freq.type_of}', ${freq.interval}, '${freq.initial}', ${freq.recurrence_id}),`
+    }
+
+    const query = queryGen.slice(0, -1)
+    return db.query(query)
+  }
+
+
+  const createTrip = (entry) => {
+    return {
+      start_time : entry.start_date + " " + entry.start_hour,
+      end_time : entry.end_date + " " + entry.end_hour,
+      entry_id : entry.id
+    }
+  }
+
+  const createRec = (entry) => {
+    return {
+      start_date : entry.start_date,
+      start_hour : entry.start_hour,
+      end_hour : entry.end_hour,
+      entry_id : entry.id
+    }
+  }
+  
+  const createFrequency = (freq, rec) => {
+    let type_of = '';
+    let initial = rec.start_date;
+    switch (freq.type_of) {
+      case 'day':
+        type_of = "daily";
+        break;
+      case 'month':
+        type_of = "monthly";
+        break;
+      case 'year':
+        type_of = "yearly";
+        break;
+      default:
+        type_of = "weekly";
+      if (rec.type_of !== 'week' ) {
+        initial = moment(rec.start_date).day(freq.type_of).format('YYYY-MM-DD')
+        }
+    }
+    return {
+      type_of,
+      initial,
+      interval : freq.interval,
+      recurrence_id : rec.id,
+    }
+  }
+
   return {
     getUserEvents,
     getUserLocationById,
     getUserAddressById,
     deleteEntry,
+    postEntry,
+    getImmediateRecommendations,
     getRecommendations
   };
 };
