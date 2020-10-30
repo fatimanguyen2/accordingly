@@ -152,7 +152,7 @@ module.exports = (db) => {
       .then(results => ({now : results[0].rows, later : results[1].rows}))
   }
 
-  const deleteEntry = (entryID) => {
+  const makeEntryInactive = (entryID) => {
     const query = (`
     UPDATE entries
     SET is_active = FALSE
@@ -296,13 +296,16 @@ module.exports = (db) => {
       interval : freq.interval,
       recurrence_id : rec.id,
     }
+
   }
+  
+
 
   return {
     getUserEvents,
     getUserLocationById,
     getUserAddressById,
-    deleteEntry,
+    makeEntryInactive,
     postEntry,
     getImmediateRecommendations,
     getRecommendations
