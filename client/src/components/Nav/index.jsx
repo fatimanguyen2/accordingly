@@ -30,19 +30,21 @@ export const Nav = props => {
   return (
     <div className='nav'>
       <div>
-        <button
-          onClick={() => {
-            setMenuCollapse(state => !state);
-            closeAdd();
-          }}
-          className={
-            classnames('button', {
-              'button--collapse': menuCollapse,
-              'button--expand': !menuCollapse,
-            })
-          }>
-          <FontAwesomeIcon icon={faBars} />
-        </button>
+        {(addCollapse || !props.loggedIn) &&
+          <button
+            onClick={() => {
+              setMenuCollapse(state => !state);
+              closeAdd();
+            }}
+            className={
+              classnames('button', {
+                'button--collapse': menuCollapse,
+                'button--expand': !menuCollapse,
+              })
+            }>
+            <FontAwesomeIcon icon={faBars} />
+          </button>
+        }
         {!menuCollapse &&
           <Fragment>
             <NavMenu
@@ -58,7 +60,7 @@ export const Nav = props => {
       </div>
 
       <div>
-        {props.loggedIn &&
+        {props.loggedIn && menuCollapse &&
           <button
             onClick={() => {
               if (props.eventToEdit.entry_id) {
