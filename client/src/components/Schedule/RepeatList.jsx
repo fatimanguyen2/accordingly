@@ -12,8 +12,8 @@ export default function RepeatList(props) {
     />
   });
   return (
-    <ul>
-      <p>Repeats</p>
+    <ul className='repeat'>
+      <p className='repeat-title'><b>Repeats</b></p>
       {items}
     </ul>
   )

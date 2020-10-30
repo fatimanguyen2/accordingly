@@ -1,7 +1,131 @@
 @import '../base';
 
 .schedule {
+  .departure-time {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .event-list {
+    &__title {
+    text-align: center;
+    }
+
+  }
+  
   .event-list-item {
-    background-color: salmon;
+    background-color: #222222;
+    margin: 1rem 0;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+
+    // EVENT BACKGROUND COLORS
+    &--Thunderstorm { 
+      background: $thunderstorm-color;
+      color: black;
+    }
+    &--Rainy {
+      background: $rainy-drizzle-color;
+      color: black;
+    }
+    &--Drizzle{
+      background: $rainy-drizzle-color;
+      color: black;
+    }
+    &--Snowy {
+      background: $snowy-color;
+      color: black;
+    }
+    &--Sunny {
+      background: $sunny-color;
+      color: black;
+    }
+    &--Cloudy {
+      background: $cloudy-color;
+      color: black;
+    }
+
+    &__main {
+      display: flex;
+      flex-direction: row;
+      padding: 0 1rem 0 0.3rem;
+    }
+
+    &__time {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-right: 0.5rem;
+    }
+
+    &__weather-icon {
+      padding: 0.4rem;
+      margin: 0.4rem 0.6rem 0.4rem 0.4rem;
+      background: black;
+      border-radius: 50%;
+      width: 1rem;
+      height: 1rem;
+    }
+
+    &__details {
+      padding: 0 1rem 1rem 1rem;
+
+      &__time {
+        display: flex;
+        flex-direction: row;
+      }
+    }
+
+    &__address {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      &-icon {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+      }
+    }
+
+    &__time-icon {
+      margin: 1rem 1rem 0 0;
+      font-size: 1.2rem;
+    }
+
+    // Buttons
+    button {
+      margin: 0.5rem 0.3rem;
+      cursor: pointer;
+    }
+
+    &__edit-btn {
+      width: 75%;
+    }
+
+    &__trash-btn {
+
+    }
+
+    &__back-btn {
+
+    }
+
+    &__confirm-delete-btn {
+
+    }
+  }
+
+  .repeat {
+    text-align: center;
+
+    &-title {
+      margin: 0.5rem;
+    }
+
+    li {
+      margin: 0.5rem;
+    }
   }
 }

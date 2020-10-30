@@ -1,0 +1,38 @@
+@import '../base';
+
+.nav-menu {
+  background-color: none;
+  // opacity: 0.5;
+  height: 50vh;
+  // min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px;
+  // position: absolute;
+
+  .menu-shape {
+    position: absolute;
+    bottom: 0px;
+    background-color: black;
+    width: 100vh;
+    // min-width: 100px;
+    height: 100vh;
+    // min-height: 100px;
+    border-radius: 50%;
+    transform: translate(-60vh, 60vh);
+    z-index: -1;
+    border: solid 5vh var(--primary-color);
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 4vh;
+  }
+
+  button {
+    color: white;
+    background: none;
+  }
+}

@@ -13,6 +13,10 @@ export const Nav = props => {
   const [menuCollapse, setMenuCollapse] = useState(true);
   const [addCollapse, setAddCollapse] = useState(true);
 
+  const toggleMenu = () => {
+    setMenuCollapse(state => !state);
+  };
+
   const closeMenu = () => {
     setMenuCollapse(true);
   };
@@ -29,20 +33,30 @@ export const Nav = props => {
 
   return (
     <div className='nav'>
-      <div>
-        <button
-          onClick={() => {
-            setMenuCollapse(state => !state);
-            closeAdd();
-          }}
-          className={
-            classnames('button', {
-              'button--collapse': menuCollapse,
-              'button--expand': !menuCollapse,
-            })
-          }>
-          <FontAwesomeIcon icon={faBars} />
-        </button>
+      <div className='add-container'>
+        {(addCollapse || !props.loggedIn) &&
+          <Fragment>
+            <button
+              onClick={() => {
+                toggleMenu();
+                closeAdd();
+              }}
+              className={
+                classnames('button', {
+                  'button--collapse': menuCollapse,
+                  'button--expand': !menuCollapse,
+                })
+              }>
+              <FontAwesomeIcon icon={faBars} />
+            </button>
+            <div onClick={() => (menuCollapse && toggleMenu())} className={
+                classnames('menu-shape', {
+                  'menu-shape--collapse': menuCollapse,
+                  'menu-shape--expand': !menuCollapse,
+                })
+              }></div>
+          </Fragment>
+        }
         {!menuCollapse &&
           <Fragment>
             <NavMenu
@@ -58,7 +72,7 @@ export const Nav = props => {
       </div>
 
       <div>
-        {props.loggedIn &&
+        {props.loggedIn && menuCollapse &&
           <button
             onClick={() => {
               if (props.eventToEdit.entry_id) {

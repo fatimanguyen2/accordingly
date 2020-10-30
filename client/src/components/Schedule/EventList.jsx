@@ -24,7 +24,7 @@ export default function EventList(props) {
   })
   return (
     <ul className='event-list'>
-      <h2>{props.children}</h2>
+      <h2 className='event-list__title'>{props.children}</h2>
       {props.type === 'today' && <DepartureTime departureTime={props.events && props.events.length > 0 && props.events[0].leave_by} />}
       {events}
     </ul>
