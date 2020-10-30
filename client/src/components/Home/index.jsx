@@ -21,7 +21,6 @@ export const Home = props => {
     } else if (headerSize === 'small' && currPos.y >= -150) {
       setHeaderSize('big');
     }
-    console.log(currPos.y) //-260
   })
 
   const NOW = 'now';

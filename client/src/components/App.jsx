@@ -259,7 +259,7 @@ function App() {
   //         homeAddress: all[3].data
   //       })))
   // }, [])
-
+  document.documentElement.style.setProperty('--primary-color', 'yellow');
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => setState(prev => ({ ...prev, loggedIn: false }));
 
