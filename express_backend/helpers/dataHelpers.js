@@ -32,6 +32,32 @@ const createEventList = (rawEvents, id) => {
     .catch(err => console.log(err))
 };
 
+const formatEntryForFrontEnd = (entry) => {
+  if (entry[0].recurrence_id) {
+    const formarttedRec = groupByEntry(entry.map(event => ({...event, next_event: getNextEventFromRec(event)})))
+    return getForecastCategory(formarttedRec[0].next_event)
+      .then(weather => ({...formarttedRec[0], next_event : ({...formarttedRec[0].next_event, weather : weather})}))
+  } else {
+    const formattedEvent = { ...entry[0], start_time: entry[0].trip_start_time, end_time : entry[0].trip_end_time}
+    return getForecastCategory(formattedEvent)
+      .then(weather => {
+        const { entry, entry_id, destination, address, city, postal_code, trip_id, start_time, end_time } = formattedEvent;
+        return { 
+          entry, 
+          entry_id, 
+          destination, 
+          address, 
+          city, 
+          postal_code, 
+          event_id : trip_id, 
+          start_time, 
+          end_time, 
+          weather : weather
+        }
+      })
+  }
+}
+
 
 const todayFormatting = (rawToday, rawRec, origin) => {
   const today = rawToday.concat(checkReocsToday(rawRec)).map(event => {
@@ -310,5 +336,6 @@ module.exports = {
   updateTodayToNow,
   getRelativeSchedule,
   condtionsOfDay,
+  formatEntryForFrontEnd,
   formatTimeForDb
 };

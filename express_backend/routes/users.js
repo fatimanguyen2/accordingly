@@ -5,8 +5,8 @@ const router = express.Router();
 
 
 module.exports = (
-  { getUserEvents, getUserLocationById, getUserAddressById, getRecommendations }, 
-  { createEventList, getTripsToday, getRelativeSchedule, condtionsOfDay }, 
+  { getUserEvents, getUserLocationById, getUserAddressById, getRecommendations, postEntry }, 
+  { createEventList, getTripsToday, getRelativeSchedule, condtionsOfDay, formatEntryForFrontEnd }, 
   { formatAddressForDb }, 
   { getMainWeather, getDetailedForcast }
   ) => {
@@ -39,9 +39,12 @@ module.exports = (
   
 
   router.post('/:id/entries', function (req, res) {
-    // formatAddressForDb(test.destination)
-    //   .then(address => ({title: test.entry, ...address}))
-    //   .then(data => res.json(data))
+    formatAddressForDb(test.destination)
+      .then(address => ({...test, title: test.entry, ...address}))
+      .then(entry => postEntry(entry, req.params.id))
+      .then(postedEntry => formatEntryForFrontEnd(postedEntry.rows))
+      .then(formattedEntry => res.json(formattedEntry))
+  })
 
     
 

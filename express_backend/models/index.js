@@ -142,59 +142,93 @@ module.exports = (db) => {
       .then(results => results.rows[0])
   }
 
-  const postEntry = (input, address, user_id) => {
-    const entry = { ...input, ...address};
-
-
+  const postEntry = (entry, user_id) => {
+    let newEntryId
     return db.query(`
     INSERT INTO entries(title, is_outdoor, destination, address, city, postal_code, user_id)
       VALUES
-        ('$1', null, point(${entry.destination.x}, ${entry.destination.y}), '${entry.street}', '${entry.city}', '${entry.postal_code}', ${user_id})
+        ($1, null, point(${entry.destination.x}, ${entry.destination.y}), '${entry.street}', '${entry.city}', '${entry.postal_code || null}', ${user_id})
     RETURNING entries.id
-    `, [`'${entry.title}'`])
+    `, [`${entry.title}`])
     .then(id => {
-      const fromattedEntry = {...entry, id}
+      newEntryId = id.rows[0].id
+      const formattedEntry = {...entry, id : newEntryId}
       if (!entry.recurrences.length) {
-        const trip = createTrip(fromattedEntry)
+        const trip = createTrip(formattedEntry)
         return postTrip(trip)
       } else {
-        const rec = createRec(fromattedEntry)
+        const rec = createRec(formattedEntry)
         return postRec(rec)
         .then(id => {
-          const formattedFreq = {...rec, id}
-          const frequencies = fromattedEntry.map(freq => createFrequency(formattedFreq, rec))
+          const formattedRec = {...rec, id : id.rows[0].id}
+          const frequencies = formattedEntry.recurrences.map(freq => createFrequency(freq, formattedRec))
           return postFreqs(frequencies)
         })
       }
     })
+    .then(() => getEntryById(newEntryId))
   }
+
+  const getEntryById = (id) => {
+
+    return db.query(`
+    SELECT 
+    title AS entry, 
+    entries.id as entry_id,
+    destination, 
+    address,
+    city,
+    postal_code,
+    is_outdoor, 
+    trips.id AS trip_id,
+    trips.start_time AS trip_start_time,
+    trips.end_time AS trip_end_time,
+    recurrences.id AS recurrence_id,
+    recurrences.start_date,
+    recurrences.start_hour,
+    recurrences.end_hour,
+    frequencies.id AS frequency_id,
+    frequencies.type_of,
+    frequencies.initial,
+    frequencies.interval
+    FROM entries
+    LEFT JOIN trips on trips.entry_id = entries.id
+    LEFT JOIN recurrences ON recurrences.entry_id = entries.id
+    LEFT JOIN frequencies ON recurrence_id = recurrences.id
+    WHERE entries.id = ${id}
+    `)
+  }
+
 
   const postTrip = (trip) => {
     return db.query(`
     INSERT INTO trips(start_time, end_time, entry_id)
       VALUES
-      ('${trip.start_time}', '${trip.end_time}', ${entry})
-    RETRUNING trips.id
+      ('${trip.start_time}', '${trip.end_time}', ${trip.entry_id})
     `)
   }
 
   const postRec = (rec) => {
     return db.query(`
-    INSERT INTO recurrences(start_time, end_time, entry_id)
+    INSERT INTO recurrences(start_date, start_hour, end_hour, entry_id)
       VALUES
-      recurrences(${rec.start_date}, ${rec.start_hour}, ${rec.end_hour}, ${rec.entry_id})
-    RETRUNING recurrences.id
+      ('${rec.start_date}', '${rec.start_hour}', '${rec.end_hour}', ${rec.entry_id})
+    RETURNING recurrences.id
     `)
   }
 
   const postFreqs = (freqs) => {
-    const query = (`
+    let queryGen = (`
     INSERT INTO frequencies(type_of, interval, initial, recurrence_id)
       VALUES
     `)
 
-    for(const freq of)
+    for(const freq of freqs) {
+      queryGen += `('${freq.type_of}', ${freq.interval}, '${freq.initial}', ${freq.recurrence_id}),`
+    }
 
+    const query = queryGen.slice(0, -1)
+    return db.query(query)
   }
 
 
@@ -202,7 +236,7 @@ module.exports = (db) => {
     return {
       start_time : entry.start_date + " " + entry.start_hour,
       end_time : entry.end_date + " " + entry.end_hour,
-      entry_id : entry.entry_id
+      entry_id : entry.id
     }
   }
 
@@ -211,14 +245,14 @@ module.exports = (db) => {
       start_date : entry.start_date,
       start_hour : entry.start_hour,
       end_hour : entry.end_hour,
-      entry_id
+      entry_id : entry.id
     }
   }
   
   const createFrequency = (freq, rec) => {
     let type_of = '';
     let initial = rec.start_date;
-    switch (req.type_of) {
+    switch (freq.type_of) {
       case 'day':
         type_of = "daily";
         break;
@@ -231,14 +265,14 @@ module.exports = (db) => {
       default:
         type_of = "weekly";
       if (rec.type_of !== 'week' ) {
-        initial = moment(rec.start_date).day(rec.type_of).format('YYYY-MM-DD')
+        initial = moment(rec.start_date).day(freq.type_of).format('YYYY-MM-DD')
         }
     }
     return {
       type_of,
       initial,
       interval : freq.interval,
-      recurrence_id : rec.Id,
+      recurrence_id : rec.id,
     }
   }
 
@@ -247,7 +281,7 @@ module.exports = (db) => {
     getUserLocationById,
     getUserAddressById,
     deleteEntry,
-    createEntry,
+    postEntry,
     getRecommendations
   };
 };
