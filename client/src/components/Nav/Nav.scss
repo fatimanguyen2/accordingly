@@ -6,17 +6,64 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  bottom: 0px;
+  bottom: 5vh;
   // background: $rainy-color;
   background-color: none;
   color: white;
-  z-index: 1;
-  
-  
+  z-index: 2;
 
   .button {
     position: relative;
-    // width: 100px;
+    // padding: 0;
+    // padding-left: 5px;
+    transform: translate(0px, 5vh);
+    background: none;
+    border: none;
+    cursor: pointer;
+    
+    &:focus {
+      border: none;
+      box-shadow: none;
+      outline: none;
+    }
+
+    &.button--collapse {
+      height: 8vh;
+      padding: 2vh;
+    }
+
+    &.button--expand {
+      height: 5vh;
+      transform: translate(0px, 5.5vh) rotate(5deg);
+    }
+
+    svg {
+      font-size: 4vh; 
+    }
+  }
+
+  .menu-shape {
+    position: absolute;
+    bottom: 0px;
+    background-color: black;
+    border-radius: 50%;
+    z-index: -1;
+    transition: all 0.2s;
+  }
+  
+  .menu-shape--collapse {
+    width: 20vh;
+    height: 20vh;
+    background-color: var(--primary-color);
+    transform: translate(-10vh, 15vh);
+    cursor: pointer;
+  }
+  
+  .menu-shape--expand {
+    width: 100vh;
+    height: 100vh;
+    transform: translate(-60vh, 60vh);
+    border: solid 5vh var(--primary-color);
   }
 
   .blur-trigger {
@@ -26,6 +73,6 @@
     left: 0px;
     width: 100vw;
     height: 100vh;
-    z-index: -1;
+    z-index: -2;
   }
 }

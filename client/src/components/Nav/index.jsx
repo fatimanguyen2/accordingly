@@ -13,6 +13,10 @@ export const Nav = props => {
   const [menuCollapse, setMenuCollapse] = useState(true);
   const [addCollapse, setAddCollapse] = useState(true);
 
+  const toggleMenu = () => {
+    setMenuCollapse(state => !state);
+  };
+
   const closeMenu = () => {
     setMenuCollapse(true);
   };
@@ -29,21 +33,29 @@ export const Nav = props => {
 
   return (
     <div className='nav'>
-      <div>
+      <div className='add-container'>
         {(addCollapse || !props.loggedIn) &&
-          <button
-            onClick={() => {
-              setMenuCollapse(state => !state);
-              closeAdd();
-            }}
-            className={
-              classnames('button', {
-                'button--collapse': menuCollapse,
-                'button--expand': !menuCollapse,
-              })
-            }>
-            <FontAwesomeIcon icon={faBars} />
-          </button>
+          <Fragment>
+            <button
+              onClick={() => {
+                toggleMenu();
+                closeAdd();
+              }}
+              className={
+                classnames('button', {
+                  'button--collapse': menuCollapse,
+                  'button--expand': !menuCollapse,
+                })
+              }>
+              <FontAwesomeIcon icon={faBars} />
+            </button>
+            <div onClick={() => (menuCollapse && toggleMenu())} className={
+                classnames('menu-shape', {
+                  'menu-shape--collapse': menuCollapse,
+                  'menu-shape--expand': !menuCollapse,
+                })
+              }></div>
+          </Fragment>
         }
         {!menuCollapse &&
           <Fragment>
