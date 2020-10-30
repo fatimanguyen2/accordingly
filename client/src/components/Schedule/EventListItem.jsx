@@ -37,7 +37,7 @@ export default function EventListItem(props) {
         <Fragment>
           <div>
             <FontAwesomeIcon icon={faMapMarkerAlt} />
-            <p>{props.destination.x /* TO FIX */}</p>
+            <p>{props.destination}</p>
           </div>
           <div>
             <FontAwesomeIcon icon={faClock} />
