@@ -19,6 +19,7 @@
     margin: 1rem 0;
     border-radius: 10px;
     color: white;
+    cursor: pointer;
 
     // EVENT BACKGROUND COLORS
     &--Thunderstorm { 
@@ -91,6 +92,40 @@
     &__time-icon {
       margin: 1rem 1rem 0 0;
       font-size: 1.2rem;
+    }
+
+    // Buttons
+    button {
+      margin: 0.5rem 0.3rem;
+      cursor: pointer;
+    }
+
+    &__edit-btn {
+      width: 75%;
+    }
+
+    &__trash-btn {
+
+    }
+
+    &__back-btn {
+
+    }
+
+    &__confirm-delete-btn {
+
+    }
+  }
+
+  .repeat {
+    text-align: center;
+
+    &-title {
+      margin: 0.5rem;
+    }
+
+    li {
+      margin: 0.5rem;
     }
   }
 }

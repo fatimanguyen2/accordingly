@@ -56,17 +56,17 @@ export default function EventListItem(props) {
           </div>
           {
             props.recurrences ?
-              <RepeatList recurrences={props.recurrences} /> : <div><p> Does not repeat </p></div>
+              <RepeatList recurrences={props.recurrences} /> : <div className='repeat-title'><p> Does not repeat </p></div>
           }
           {
             view === NORMAL ?
               <div>
-                <Button onClick={() => props.onEdit(props.entry_id)}>Edit</Button>
-                <Button onClick={cancel}><FontAwesomeIcon icon={faTrash} /></Button>
+                <Button classname='event-list-item__edit-btn' onClick={() => props.onEdit(props.entry_id)}>Edit</Button>
+                <Button classname='event-list-item__trash-btn' onClick={cancel}><FontAwesomeIcon icon={faTrash} /></Button>
               </div> :
               <div>
-                <Button onClick={back}>Back</Button>
-                <Button onClick={cancel}>Confirm Delete</Button>
+                <Button classname='event-list-item__back-btn' onClick={back}>Back</Button>
+                <Button classname='event-list-item__confirm-delete-btn' onClick={cancel}>Confirm Delete</Button>
               </div>
           }
         </div>
