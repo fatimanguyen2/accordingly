@@ -12,33 +12,86 @@
     text-align: center;
     }
 
-    .event-list-item {
-      background-color: salmon;
-      margin: 1rem 0;
-      border-radius: 10px;
+  }
+  
+  .event-list-item {
+    background-color: #222222;
+    margin: 1rem 0;
+    border-radius: 10px;
+    color: white;
 
-      &__main {
-        display: flex;
-        flex-direction: row;
-        padding: 0 1rem 0 0.3rem;
-      }
+    // EVENT BACKGROUND COLORS
+    &--Thunderstorm { 
+      background: $thunderstorm-color;
+      color: black;
+    }
+    &--Rainy {
+      background: $rainy-drizzle-color;
+      color: black;
+    }
+    &--Drizzle{
+      background: $rainy-drizzle-color;
+      color: black;
+    }
+    &--Snowy {
+      background: $snowy-color;
+      color: black;
+    }
+    &--Sunny {
+      background: $sunny-color;
+      color: black;
+    }
+    &--Cloudy {
+      background: $cloudy-color;
+      color: black;
+    }
+
+    &__main {
+      display: flex;
+      flex-direction: row;
+      padding: 0 1rem 0 0.3rem;
+    }
+
+    &__time {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-right: 0.5rem;
+    }
+
+    &__weather-icon {
+      padding: 0.4rem;
+      margin: 0.4rem;
+      background: black;
+      border-radius: 50%;
+      width: 1rem;
+      height: 1rem;
+    }
+
+    &__details {
+      padding: 0 1rem 1rem 1rem;
 
       &__time {
         display: flex;
         flex-direction: row;
-        align-items: center;
-        margin-right: 0.5rem;
-      }
 
-      &__weather-icon {
-        padding: 0.4rem;
-        margin: 0.4rem;
-        background: black;
-        border-radius: 50%;
-        width: 1rem;
-        height: 1rem;
       }
     }
-  }
 
+    &__address {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      &-icon {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+      }
+    }
+
+    &__time-icon {
+      margin: 1rem 1rem 0 0;
+      font-size: 1.2rem;
+    }
+  }
 }

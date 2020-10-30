@@ -97,6 +97,10 @@
         opacity: 0.6;
       }
     }
+
+    &-item__icon {
+      margin-left: 0.5rem;
+    }
   }
   
   .departure-time {
@@ -119,6 +123,8 @@
       background-color: rgb(73,72,72);
       border-radius: 10px;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
     
       &__main {
         display: flex;

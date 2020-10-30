@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import { getWeatherIcon, getWeatherColor, setPrimaryColors } from '../../helpers/selectors';
+import classNames from 'classnames';
 
+import { getWeatherIcon, getWeatherColor, changeWeatherName } from '../../helpers/selectors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock, faTrash } from '@fortawesome/free-solid-svg-icons';
-
 import RepeatList from './RepeatList';
 import { Button } from '../Button'
 
@@ -26,8 +26,14 @@ export default function EventListItem(props) {
   const back = () => setView(NORMAL);
   const edit = () => console.log('edit click');
 
+  //Build classname for each weather
+  const weatherName = changeWeatherName(props.weather);
+  const key = `event-list-item--${weatherName}`;
+  const itemClass = classNames('event-list-item', key);
+
   return (
-    <li className='event-list-item' style={{background: setPrimaryColors(props.weather).solid}}>
+    <li className={itemClass}>
+    {/* <li className='event-list-item' style={{background: setPrimaryColors(props.weather).solid}}> */}
       <div className='event-list-item__main' onClick={() => setToggle(!toggle)}>
         <div className='event-list-item__time' >
         <FontAwesomeIcon className='event-list-item__weather-icon' icon={getWeatherIcon(props.weather)} color={getWeatherColor(props.weather)}/>
@@ -37,12 +43,12 @@ export default function EventListItem(props) {
       </div>
       {toggle &&
         <div className='event-list-item__details' onClick={() => setToggle(false)}>
-          <div>
-            <FontAwesomeIcon icon={faMapMarkerAlt} />
+          <div className='event-list-item__address'>
+            <FontAwesomeIcon className='event-list-item__address-icon'icon={faMapMarkerAlt} />
             <p>{props.destination}</p>
           </div>
-          <div>
-            <FontAwesomeIcon icon={faClock} />
+          <div className='event-list-item__details__time'>
+            <FontAwesomeIcon className='event-list-item__time-icon' icon={faClock} />
             <div>
               <p> {moment(props.start).format('dddd, MMM Do   HH:mm')}</p>
               <p> {moment(props.end).format('dddd, MMM Do   HH:mm')}</p>
