@@ -66,7 +66,7 @@ const groupByEntry = (events) => {
   }
   for (const id of distinctEvents) {
     const grouping = events.filter(event => event.entry_id === id)
-    const { entry, start_hour, end_hour, start_date, end_date, entry_id, is_from_start_date, destination } = grouping[0];
+    const { entry, start_hour, end_hour, start_date, end_date, entry_id, is_from_start_date, destination, address, city } = grouping[0];
     const group = {
       entry,
       entry_id,
@@ -76,6 +76,8 @@ const groupByEntry = (events) => {
       end_hour,
       is_from_start_date,
       next_event : {
+        address,
+        city,
         start_time : getFirstEventTime(grouping).format("YYYY-MM-DD") + "T" + start_hour,
         end_time : getFirstEventTime(grouping).format("YYYY-MM-DD") + "T" + end_hour,
         destination

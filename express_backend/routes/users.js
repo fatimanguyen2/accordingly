@@ -17,29 +17,24 @@ module.exports = (
   })
 
   const test = {
-    destination: "123 Melrose Street, Brooklyn, NY, USA",
+    raw_address: "5698 Sound Avenue, Riverhead, NY, USA",
+    start_date: "2020-10-30",
+    start_hour: "17:11",
     end_date: "2020-10-30",
-    end_hour: "",
-    end_time: "16:34",
-    entry: "sdfg",
+    end_hour: "21:12",
+    entry: "adsgf",
     entry_id: null,
-    interval_count_2: "2",
-    interval_type_2: "2",
-    recurrences: [
-      {
-        html_id: 1,
-        interval: 1,
-        type_of: "day"
-      },
-      {
-        html_id: 2,
-        interval: 1,
-        type_of: "2",
-        length: 2
-      }
-    ],
-    start_date: "2020-10-31",
-    start_hour: "16:32",
+    recurrences: 
+      [
+        {
+          interval: 1,
+          type_of: "day",
+        },
+        {
+          interval: 1,
+          type_of: "3",
+        }
+      ],
   }
   
 
@@ -48,14 +43,7 @@ module.exports = (
     //   .then(address => ({title: test.entry, ...address}))
     //   .then(data => res.json(data))
 
-    const createTrip = (test) => {
-      
-    }
-
-    const createRec = (test) => {
-
-    }
-  })
+    
 
 
   router.put('/:user_id/entries/:id', function (req, res) {

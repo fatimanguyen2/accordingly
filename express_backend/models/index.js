@@ -142,11 +142,112 @@ module.exports = (db) => {
       .then(results => results.rows[0])
   }
 
+  const postEntry = (input, address, user_id) => {
+    const entry = { ...input, ...address};
+
+
+    return db.query(`
+    INSERT INTO entries(title, is_outdoor, destination, address, city, postal_code, user_id)
+      VALUES
+        ('$1', null, point(${entry.destination.x}, ${entry.destination.y}), '${entry.street}', '${entry.city}', '${entry.postal_code}', ${user_id})
+    RETURNING entries.id
+    `, [`'${entry.title}'`])
+    .then(id => {
+      const fromattedEntry = {...entry, id}
+      if (!entry.recurrences.length) {
+        const trip = createTrip(fromattedEntry)
+        return postTrip(trip)
+      } else {
+        const rec = createRec(fromattedEntry)
+        return postRec(rec)
+        .then(id => {
+          const formattedFreq = {...rec, id}
+          const frequencies = fromattedEntry.map(freq => createFrequency(formattedFreq, rec))
+          return postFreqs(frequencies)
+        })
+      }
+    })
+  }
+
+  const postTrip = (trip) => {
+    return db.query(`
+    INSERT INTO trips(start_time, end_time, entry_id)
+      VALUES
+      ('${trip.start_time}', '${trip.end_time}', ${entry})
+    RETRUNING trips.id
+    `)
+  }
+
+  const postRec = (rec) => {
+    return db.query(`
+    INSERT INTO recurrences(start_time, end_time, entry_id)
+      VALUES
+      recurrences(${rec.start_date}, ${rec.start_hour}, ${rec.end_hour}, ${rec.entry_id})
+    RETRUNING recurrences.id
+    `)
+  }
+
+  const postFreqs = (freqs) => {
+    const query = (`
+    INSERT INTO frequencies(type_of, interval, initial, recurrence_id)
+      VALUES
+    `)
+
+    for(const freq of)
+
+  }
+
+
+  const createTrip = (entry) => {
+    return {
+      start_time : entry.start_date + " " + entry.start_hour,
+      end_time : entry.end_date + " " + entry.end_hour,
+      entry_id : entry.entry_id
+    }
+  }
+
+  const createRec = (entry) => {
+    return {
+      start_date : entry.start_date,
+      start_hour : entry.start_hour,
+      end_hour : entry.end_hour,
+      entry_id
+    }
+  }
+  
+  const createFrequency = (freq, rec) => {
+    let type_of = '';
+    let initial = rec.start_date;
+    switch (req.type_of) {
+      case 'day':
+        type_of = "daily";
+        break;
+      case 'month':
+        type_of = "monthly";
+        break;
+      case 'year':
+        type_of = "yearly";
+        break;
+      default:
+        type_of = "weekly";
+      if (rec.type_of !== 'week' ) {
+        initial = moment(rec.start_date).day(rec.type_of).format('YYYY-MM-DD')
+        }
+    }
+    return {
+      type_of,
+      initial,
+      interval : freq.interval,
+      recurrence_id : rec.Id,
+    }
+  }
+
   return {
     getUserEvents,
     getUserLocationById,
     getUserAddressById,
     deleteEntry,
+    createEntry,
     getRecommendations
   };
 };
