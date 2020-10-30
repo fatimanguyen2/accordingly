@@ -142,13 +142,13 @@ const events = {
           id: 4,
           type_of: "weekly",
           initial: "2020-03-12T04:00:00.000Z",
-          interval: 1
+          interval: 2
         },
         {
           id: 5,
           type_of: "weekly",
           initial: "2020-03-13T04:00:00.000Z",
-          interval: 1
+          interval: 3
         }
       ]
     },

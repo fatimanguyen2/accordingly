@@ -10,13 +10,13 @@
   // background: $rainy-color;
   background-color: none;
   color: white;
+  transform: translate(0px, 15vh);
   z-index: 2;
 
   .button {
     position: relative;
     // padding: 0;
     // padding-left: 5px;
-    transform: translate(0px, 5vh);
     background: none;
     border: none;
     cursor: pointer;
@@ -26,15 +26,16 @@
       box-shadow: none;
       outline: none;
     }
-
+    
     &.button--collapse {
+      transform: translate(0px, -10vh);
       height: 8vh;
       padding: 2vh;
     }
 
     &.button--expand {
       height: 5vh;
-      transform: translate(0px, 5.5vh) rotate(5deg);
+      transform: translate(0px, -9.5vh) rotate(5deg);
     }
 
     svg {
@@ -55,14 +56,14 @@
     width: 20vh;
     height: 20vh;
     background-color: var(--primary-color);
-    transform: translate(-10vh, 15vh);
+    transform: translate(-10vh, 0vh);
     cursor: pointer;
   }
   
   .menu-shape--expand {
     width: 100vh;
     height: 100vh;
-    transform: translate(-60vh, 60vh);
+    transform: translate(-60vh, 45vh);
     border: solid 5vh var(--primary-color);
   }
 
@@ -74,5 +75,6 @@
     width: 100vw;
     height: 100vh;
     z-index: -2;
+    transform: translate(0px, -55vh);
   }
 }
