@@ -14,15 +14,12 @@ import RecommendationList from './RecommendationList';
 export const Home = props => {
   const [recommendations, setRecommendations] = useState({ ...props.recommendations, done: [] });
   const [headerSize, setHeaderSize] = useState('big');
-  // const [hideOnScroll, setHideOnScroll] = useState(true)
 
   useScrollPosition(({ prevPos, currPos }) => {
-    // const isShow = currPos.y > prevPos.y
-    // if (isShow !== hideOnScroll) setHideOnScroll(isShow)
-    if (currPos.y < -150) {
+    if (headerSize === 'big' && currPos.y < -400) {
       setHeaderSize('small');
-    } else {
-      setHeaderSize('big')
+    } else if (headerSize === 'small' && currPos.y >= -150) {
+      setHeaderSize('big');
     }
     console.log(currPos.y) //-260
   })
