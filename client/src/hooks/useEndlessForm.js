@@ -32,7 +32,7 @@ export default function useEndlessForm (inital={}) {
 
   const handleAddress = (address) => setInput({
     ...input,
-    "destination": address
+    "raw_address": address
   })
 
   const addRepeat = (e) => {

@@ -5,7 +5,7 @@ import useEndlessForm from '../../hooks/useEndlessForm';
 import { getDateFromTimestamp, giveHTMLID, validateObj } from '../../helpers/selectors';
 import moment from 'moment';
 
-import LocationSearchInput from './LocationSearchInput'
+import LocationSearchInput from '../LocationSearchInput'
 const classnames = require('classnames');
 
 export const AddEvent = (props) => {
@@ -23,7 +23,7 @@ export const AddEvent = (props) => {
   const end_date = getDateFromTimestamp(entry_id ? props.eventToEdit.next_event.end_time : '');;
   const start_hour = props.eventToEdit.start_hour || '';
   const end_hour = props.eventToEdit.end_hour || '';
-  const destination = entry_id ? props.eventToEdit.next_event.destination.x : '';
+  const raw_address = entry_id ? `${props.eventToEdit.next_event.address}, ${props.eventToEdit.next_event.city}` : '';
   const recurrences = giveHTMLID(props.eventToEdit.recurrences || []);
 
   const { input, repeats, handleInputChange, handleAddress, addRepeat, setRepeat, removeRepeat } = useEndlessForm({
@@ -34,14 +34,14 @@ export const AddEvent = (props) => {
     start_hour,
     end_hour,
     recurrences,
-    destination,
+    raw_address,
   });
 
   return (
     <form action="javascript: false" >
       <label htmlFor="entry">Title</label>
       <input type="text" name="entry" id="entry" placeholder="Add Title" defaultValue={entry} onChange={handleInputChange} required></input>
-      <LocationSearchInput onChange={handleAddress} destination={destination}/>
+      <LocationSearchInput onChange={handleAddress} destination={raw_address}/>
       <label htmlFor="start_date">Start Date</label>
       <input type="date" name="start_date" id="start_date" defaultValue={start_date} onChange={handleInputChange} required></input>
       <label htmlFor="start_hour">Start Time</label>
@@ -100,7 +100,9 @@ export const AddEvent = (props) => {
         // event.nativeEvent.stopImmediatePropagation();
         // console.log(event.target)
         const eventObj = {...input, recurrences: repeats};
-        validateObj(eventObj, [ 'entry', 'destination', 'start_date', 'end_date', 'start_hour', 'end_hour' ]) && (input.entry_id ? props.onEdit(eventObj) : props.onSubmit(eventObj));
+        const pass = validateObj(eventObj, [ 'entry', 'raw_address', 'start_date', 'end_date', 'start_hour', 'end_hour' ]);
+        pass && (input.entry_id ? props.onEdit(eventObj) : props.onSubmit(eventObj));
+        pass && props.closeAdd();
       }}>{entry_id ? 'Edit' : 'Add'}</button>
     </form>
   );

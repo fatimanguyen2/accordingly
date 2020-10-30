@@ -34,10 +34,10 @@ export default function EventListItem(props) {
         <p>{props.type === 'today' ? moment(props.start).format('h:mm a') : moment(props.start).fromNow()} {props.title}</p>
       </div>
       {toggle &&
-        <Fragment>
+        <div onClick={() => setToggle(false)}>
           <div>
             <FontAwesomeIcon icon={faMapMarkerAlt} />
-            <p>{props.destination.x /* TO FIX */}</p>
+            <p>{props.destination}</p>
           </div>
           <div>
             <FontAwesomeIcon icon={faClock} />
@@ -61,7 +61,7 @@ export default function EventListItem(props) {
                 <Button onClick={cancel}>Confirm Delete</Button>
               </div>
           }
-        </Fragment>
+        </div>
       }
     </li>
   );
