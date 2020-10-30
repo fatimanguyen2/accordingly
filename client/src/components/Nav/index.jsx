@@ -51,7 +51,7 @@ export const Nav = props => {
             time={props.time}
             logout={props.logout}
           />
-          <button className='blur-trigger' onClick={closeAll}>BLUR TRIGGER, MAKE ME INVISIBLE AND TAKE UP THE WHOLE SCREEN!</button>
+          <button className='blur-trigger' onClick={closeAll}>BLUR TRIGGER, MAKE ME INVISIBLE AND TAKE UP THE REST OF THE SCREEN!</button>
         </Fragment>
       }
 
@@ -77,7 +77,7 @@ export const Nav = props => {
       {(!addCollapse || props.eventToEdit.entry_id) && props.loggedIn &&
         <Fragment>
           <AddEvent onSubmit={props.onSubmit} onEdit={props.onEdit} eventToEdit={props.eventToEdit} closeAdd={closeAdd} />
-          <button className='blur-trigger' onClick={closeAll}>BLUR TRIGGER, MAKE ME INVISIBLE AND TAKE UP THE WHOLE SCREEN!</button>
+          <button className='blur-trigger' onClick={closeAll}>BLUR TRIGGER, MAKE ME INVISIBLE AND TAKE UP THE WHOLE REST OF THE SCREEN!</button>
         </Fragment>
       }
     </div>
