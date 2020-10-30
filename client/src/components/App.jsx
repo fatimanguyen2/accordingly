@@ -15,11 +15,6 @@ import { Register } from './Register';
 
 import { filterEvents } from '../helpers/selectors';
 
-const suggestions = {
-  upcoming: [{ id: 1, name: 'hat', description: 'Keep that head sheltered from the cold' }, { id: 2, name: 'suncreen', description: 'It is sunny outside' }],
-  later: [{ id: 3, name: 'top', description: 'layer up' }, { id: 4, name: 'gloves', description: 'It is cold' }]
-}
-
 const weather = {
   mainWeather: [
     "Clouds"
@@ -33,25 +28,28 @@ const weather = {
 const events = {
   today: [
     {
-      entry: "morning run",
-      id: 6,
-      is_outdoor: true,
-      destination: {
-        x: 49.259432,
-        y: -123.100795
+      "entry": "morning run",
+      "id": 6,
+      "destination": {
+          "x": 49.259432,
+          "y": -123.100795
       },
-      start_date: "2020-03-05T05:00:00.000Z",
-      start_hour: "07:00:00",
-      end_hour: "07:30:00",
-      entry_id: 2,
-      type_of: "daily",
-      initial: "2020-03-05T05:00:00.000Z",
-      interval: 1,
-      recurrence_id: 2,
-      start_time: "2020-10-29T07:00:00",
-      end_time: "2020-10-29T07:30:00",
-      leave_by: "2020-10-29T06:36:10-04:00",
-      weather: "Clouds"
+      "address": "2846 Main St",
+      "city": "Vancouver",
+      "postal_code": "V5T 3G2",
+      "is_outdoor": true,
+      "start_date": "2020-03-05T05:00:00.000Z",
+      "start_hour": "07:00:00",
+      "end_hour": "07:30:00",
+      "entry_id": 2,
+      "type_of": "daily",
+      "initial": "2020-03-05T05:00:00.000Z",
+      "interval": 1,
+      "recurrence_id": 2,
+      "start_time": "2020-10-29T07:00:00",
+      "end_time": "2020-10-29T07:30:00",
+      "leave_by": "2020-10-29T06:36:10-04:00",
+      "weather": "Clouds"
     },
     {
       entry: "commute",
@@ -61,6 +59,9 @@ const events = {
         x: 49.2301,
         y: -123.10867
       },
+      address: "2846 Main St",
+      city: "Vancouver",
+      postal_code: "V5T 3G2",
       start_date: "2020-03-05T05:00:00.000Z",
       start_hour: "08:00:00",
       end_hour: "16:00:00",
@@ -76,12 +77,15 @@ const events = {
     },
     {
       entry: "commute",
-      id: 4,
+      id: 7,
       is_outdoor: true,
       destination: {
         x: 49.2301,
         y: -123.10867
       },
+      address: "2846 Main St",
+      city: "Vancouver",
+      postal_code: "V5T 3G2",
       start_date: "2020-03-05T05:00:00.000Z",
       start_hour: "08:00:00",
       end_hour: "16:00:00",
@@ -110,6 +114,9 @@ const events = {
           x: 49.2301,
           y: -123.10867
         },
+        address: "2846 Main St",
+        city: "Vancouver",
+        postal_code: "V5T 3G2",
         weather: "Clouds"
       },
       recurrences: [
@@ -158,6 +165,9 @@ const events = {
           x: 49.259432,
           y: -123.100795
         },
+        address: "2846 Main St",
+        city: "Vancouver",
+        postal_code: "V5T 3G2",
         weather: "Rain"
       },
       recurrences: [
@@ -178,6 +188,9 @@ const events = {
         x: 49.38654,
         y: -123.13254
       },
+      address: "2846 Main St",
+      city: "Vancouver",
+      postal_code: "V5T 3G2",
       is_outdoor: false,
       start_time: "2020-11-12T14:00:00.000Z",
       end_time: "2020-11-12T23:00:00.000Z",
@@ -188,18 +201,21 @@ const events = {
 }
 
 const homeAddress = {
-  x: 49.24713,
-  y: -123.10867
+  address: "2846 Main St",
+  city: "Vancouver",
+  postal_code: "V5T 3G2",
 }
 
 const recommendations = {
   now: [
     {
+      id: 10,
       name: "Normal clothing",
-      description: "Not to hot, not too warm."
+      description: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."Not to hot, not too warm."`
     }
   ],
-  later: []
+  upcoming: [{ id: 1, name: 'hat', description: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'Keep that head sheltered from the cold'` }, { id: 2, name: 'suncreen', description: 'It is sunny outside' }],
+  later: [{ id: 3, name: 'top', description: 'layer up' }, { id: 4, name: 'gloves', description: 'It is cold' }]
 }
 
 function App() {
@@ -208,7 +224,7 @@ function App() {
     view: 'home',
     loggedIn: true,
     weather,
-    recommendations: suggestions,
+    recommendations,
     events,
     time: 1603740043000,
     homeAddress,
@@ -322,8 +338,8 @@ function App() {
                 <Home
                   loggedIn={state.loggedIn}
                   weather={state.weather}
-                  events={state.events}
                   recommendations={state.recommendations}
+                  events={state.events.today}
                 />
               </Route>
 

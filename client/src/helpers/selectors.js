@@ -48,6 +48,19 @@ const getWeatherIcon = weather => {
   return icons[weather];
 };
 
+const getWeatherColor = weather => {
+  const icons = {
+    Thunderstorm: 'yellow',
+    Drizzle: 'blue',
+    Rain: 'blue',
+    Snow: 'white',
+    Clear: 'yellow',
+    Clouds: 'white',
+    null: 'black'
+  };
+  return icons[weather];
+};
+
 const changeWeatherName = weather => {
   const names = {
     Rain: 'Rainy',
@@ -70,4 +83,16 @@ const validateObj = (eventObj, checks) => {
   return checks.reduce((acc, name) => (eventObj[name] !== '' && acc), true);
 };
 
-export { getItem, getSuggestionCategory, getRecurrenceArray, getEvent, filterEvents, getWeatherIcon, changeWeatherName, getDateFromTimestamp, giveHTMLID, validateObj };
+export { 
+  getItem,
+  getSuggestionCategory,
+  getRecurrenceArray,
+  getEvent,
+  filterEvents,
+  getWeatherIcon,
+  getWeatherColor,
+  changeWeatherName,
+  getDateFromTimestamp,
+  giveHTMLID,
+  validateObj
+};

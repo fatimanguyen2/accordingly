@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faPlus } from '@fortawesome/free-solid-svg-icons';
 import './styles.scss';
@@ -10,29 +10,49 @@ const classnames = require('classnames');
 
 export const Nav = props => {
 
-  const [collapse, setCollapse] = useState(true);
+  const [menuCollapse, setMenuCollapse] = useState(true);
   const [addCollapse, setAddCollapse] = useState(true);
+
+  const closeMenu = () => {
+    setMenuCollapse(true);
+  };
+
+  const closeAdd = () => {
+    setAddCollapse(true);
+    props.clearToEdit();
+  };
+
+  const closeAll = () => {
+    closeAdd();
+    closeMenu();
+  }
 
   return (
     <div className='nav'>
-      <button
-        onClick={() => setCollapse(state => !state)}
-        className={
-          classnames('button', {
-            'button--collapse': collapse,
-            'button--expand': !collapse,
-          })
-        }>
-        <FontAwesomeIcon icon={faBars} />
-      </button>
+      {
+        <button
+          onClick={() => setMenuCollapse(state => !state)}
+          className={
+            classnames('button', {
+              'button--collapse': menuCollapse,
+              'button--expand': !menuCollapse,
+            })
+          }>
+          <FontAwesomeIcon icon={faBars} />
+        </button>
+      }
 
-      {!collapse &&
-        <NavMenu
-          onSelect={props.onSelect}
-          loggedIn={props.loggedIn}
-          time={props.time}
-          logout={props.logout}
-        />
+      {!menuCollapse &&
+        <Fragment>
+          <NavMenu
+            onSelect={props.onSelect}
+            closeMenu={closeMenu}
+            loggedIn={props.loggedIn}
+            time={props.time}
+            logout={props.logout}
+          />
+          <button className='blur-trigger' onClick={closeAll}>BLUR TRIGGER, MAKE ME INVISIBLE AND TAKE UP THE REST OF THE SCREEN!</button>
+        </Fragment>
       }
 
       {props.loggedIn &&
@@ -54,8 +74,11 @@ export const Nav = props => {
           <FontAwesomeIcon icon={faPlus} />
         </button>
       }
-      {(!addCollapse || props.eventToEdit.entry_id) &&
-        <AddEvent onSubmit={props.onSubmit} onEdit={props.onEdit} eventToEdit={props.eventToEdit} />
+      {(!addCollapse || props.eventToEdit.entry_id) && props.loggedIn &&
+        <Fragment>
+          <AddEvent onSubmit={props.onSubmit} onEdit={props.onEdit} eventToEdit={props.eventToEdit} closeAdd={closeAdd} />
+          <button className='blur-trigger' onClick={closeAll}>BLUR TRIGGER, MAKE ME INVISIBLE AND TAKE UP THE WHOLE REST OF THE SCREEN!</button>
+        </Fragment>
       }
     </div>
   );
