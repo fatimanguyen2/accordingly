@@ -31,7 +31,10 @@ export const Nav = props => {
     <div className='nav'>
       <div>
         <button
-          onClick={() => setMenuCollapse(state => !state)}
+          onClick={() => {
+            setMenuCollapse(state => !state);
+            closeAdd();
+          }}
           className={
             classnames('button', {
               'button--collapse': menuCollapse,

@@ -5,23 +5,23 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background: linear-gradient($sunny-color-gradient, black 35vh);
+  background: linear-gradient(var(--primary-color-gradient), black 35vh);
   
   header {
     width: 100%;
   
     .weather-ring {
       margin: 2rem 0 1.5rem 0;
-      border: 0.4rem solid $sunny-color;
+      border: 0.4rem solid var(--primary-color);
       border-radius: 50%;
       text-align: center;
-      width: 12rem;
-      height: 12rem;
+      width: 15rem;
+      height: 15rem;
       padding: 0.5rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      box-shadow: 0 0 1rem $sunny-color, inset 0 0 1rem $sunny-color;
+      box-shadow: 0 0 1rem var(--primary-color), inset 0 0 1rem var(--primary-color);
     
       h1 { margin: 1rem 0 0 0 }
     
@@ -52,8 +52,8 @@
       .weather-ring {
         width: 2.7rem;
         height: 2.7rem;
-        transition: all 200ms ease-in;
-        border: 0.3rem solid $sunny-color;
+        // transition: all 200ms ease-in;
+        border: 0.3rem solid var(--primary-color);
      
         h1, h3 span, p {
           display: none
@@ -90,9 +90,7 @@
       &:not(:first-of-type) {
         transform: scale(0.8);
       }
-      
     }
-  
   }
   
   .departure-time {
@@ -142,7 +140,7 @@
         cursor: pointer;
       }
 
-      [type="checkbox"]:not(:checked) + label:before, {
+      [type="checkbox"]:not(:checked) + label:before {
         content: '';
         position: absolute;
         left: 0; top: 0;
@@ -159,8 +157,8 @@
         font-size: 1.3em;
         line-height: 0.8;
         color: black;
-        border: 0.1rem solid $sunny-color;
-        background: $sunny-color;
+        border: 0.1rem solid var(--primary-color);
+        background: var(--primary-color);
         border-radius: 50%;
         top: 0;
         padding: 0.1rem;
