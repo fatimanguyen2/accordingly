@@ -50,7 +50,7 @@ const getWeatherIcon = weather => {
 
 const getWeatherColor = weather => {
   const icons = {
-    Thunderstorm: 'yellow',
+    Thunderstorm: 'purple',
     Drizzle: 'blue',
     Rain: 'blue',
     Snow: 'white',

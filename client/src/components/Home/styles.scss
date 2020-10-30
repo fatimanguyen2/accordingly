@@ -6,7 +6,6 @@
   align-items: center;
   width: 100%;
   background: linear-gradient(var(--primary-color-gradient), black 35vh);
-  // background: linear-gradient($snowy-color-gradient, black 35vh);
   
   header {
     width: 100%;
@@ -91,9 +90,7 @@
       &:not(:first-of-type) {
         transform: scale(0.8);
       }
-      
     }
-  
   }
   
   .departure-time {
