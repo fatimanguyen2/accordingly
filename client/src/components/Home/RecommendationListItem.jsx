@@ -14,7 +14,8 @@ export default function RecommendationItem(props) {
     <li className='recommendation-list-item'>
       <div className='recommendation-list-item__main'>
         <div onClick={onClick} className='recommendation-list-item--clickable'>
-          <input type='checkbox' checked={checked} onChange={() => { }} /> {props.name}
+          <input type='checkbox' id='item' checked={checked} onChange={() => { }} /> 
+          <label for='item'>{props.name}</label>
         </div>
           <FontAwesomeIcon icon={faCaretDown} className='recommendation-list-item__icon' onClick={() => setToggle(prev => !prev)} />
       </div>

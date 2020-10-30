@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background: linear-gradient($sunny-color-gradient,black 40vh);
+  background: linear-gradient($sunny-color-gradient, black 35vh);
   
   header {
     width: 100%;
@@ -25,9 +25,19 @@
     
       h1 { margin: 1rem 0 0 0 }
     
-      h3 { margin: 0.75rem }
+      h3 { 
+        position: relative;
+        margin: 0.75rem 
+      }
       
       p { margin: 0 }
+
+      span {
+        position: absolute;
+        top: 45%;
+        left: 18%;
+        font-size: $font-size * 0.5
+      }
       
     }
   
@@ -37,11 +47,6 @@
       display: flex;
       flex-direction: column;
       background-image: linear-gradient(black, black, transparent 90%);
-  
-      // &__weather-event {
-      //   display: flex;
-      //   flex-direction: row;
-      // }
   
       .weather-ring {
         width: 2.7rem;
@@ -108,6 +113,7 @@
     margin: 1rem 0;
     padding: 0 0.5rem;
     background-color: rgb(73,72,72);
+    cursor: pointer;
   
     &__main {
       display: flex;
@@ -118,6 +124,45 @@
   
     &--clickable {
       width: 90%;
+
+      [type="checkbox"]:not(:checked),
+      [type="checkbox"]:checked {
+        position: absolute;
+        left: -9999px;
+      }
+
+      [type="checkbox"]:not(:checked) + label,
+      [type="checkbox"]:checked + label {
+        position: relative;
+        padding-left: 2.5em;
+        cursor: pointer;
+      }
+
+      [type="checkbox"]:not(:checked) + label:before, {
+        content: '';
+        position: absolute;
+        left: 0; top: 0;
+        width: 1.25rem; height: 1.25rem;
+        border: 0.1rem solid #fff;
+        background: #fff;
+        border-radius: 50%;
+      }
+
+      [type="checkbox"]:checked + label:after {
+        content: '\2713\0020';
+        position: absolute;
+        left: .22em;
+        font-size: 1.3em;
+        line-height: 0.8;
+        color: black;
+        transition: all .2s;
+        border: 0.1rem solid $sunny-color;
+        background: $sunny-color;
+        border-radius: 50%;
+        font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+      }
+
+      
     }
   
     &__icon {
