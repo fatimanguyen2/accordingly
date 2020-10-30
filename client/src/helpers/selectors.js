@@ -94,7 +94,7 @@ const setPrimaryColors = weather => {
     default: {solid: 'white', gradient: 'white'}
   }
 
-  return colors[weather] && {solid: colors[weather].solid, gradient: colors[weather].gradient} || colors.default;
+  return (colors[weather] && {solid: colors[weather].solid, gradient: colors[weather].gradient} )|| colors.default;
 }
 
 export { 
