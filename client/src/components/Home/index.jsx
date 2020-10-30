@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { Redirect } from "react-router-dom";
 import { getItem, getSuggestionCategory } from '../../helpers/selectors';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
 import './styles.scss';
 
@@ -13,6 +14,18 @@ import RecommendationList from './RecommendationList';
 export const Home = props => {
   const [recommendations, setRecommendations] = useState({ ...props.recommendations, done: [] });
   const [headerSize, setHeaderSize] = useState('big');
+  const [hideOnScroll, setHideOnScroll] = useState(true)
+
+  useScrollPosition(({ prevPos, currPos }) => {
+    // const isShow = currPos.y > prevPos.y
+    // if (isShow !== hideOnScroll) setHideOnScroll(isShow)
+    if (currPos.y < -150) {
+      setHeaderSize('small');
+    } else {
+      setHeaderSize('big')
+    }
+    console.log(currPos.y) //-260
+  })
 
   const NOW = 'now';
   const UPCOMING = 'upcoming';
