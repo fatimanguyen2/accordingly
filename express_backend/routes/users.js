@@ -17,34 +17,14 @@ module.exports = (
       .then(location => res.json(location))
   })
 
-  const test = {
-    raw_address: "canada",
-    start_date: "2020-10-30",
-    start_hour: "17:11",
-    end_date: "2020-10-30",
-    end_hour: "21:12",
-    entry: "adsgf",
-    entry_id: null,
-    recurrences: 
-      [
-        {
-          interval: 1,
-          type_of: "day",
-        },
-        {
-          interval: 1,
-          type_of: "3",
-        }
-      ],
-  }
   
 
   router.post('/:id/entries', function (req, res) {
-    formatAddressForDb(test.raw_address)
+    formatAddressForDb(req.body.raw_address)
       .then(address => {
         console.log(address)
         if (!address.city.includes('Unorganized')) {
-          return ({...test, title: test.entry, ...address})
+          return ({...req.body, title: test.entry, ...address})
         } else {
           res.json("Sorry we need at least a city")
         }
