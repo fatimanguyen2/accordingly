@@ -50,7 +50,7 @@ const getWeatherIcon = weather => {
 
 const getWeatherColor = weather => {
   const icons = {
-    Thunderstorm: 'yellow',
+    Thunderstorm: 'purple',
     Drizzle: 'blue',
     Rain: 'blue',
     Snow: 'white',
@@ -83,6 +83,32 @@ const validateObj = (eventObj, checks) => {
   return checks.reduce((acc, name) => (eventObj[name] !== '' && acc), true);
 };
 
+const addSeconds = (hour) => {
+  return hour + ':00';
+};
+
+const removeSeconds = (hour='') => {
+  return hour.slice(0, 5);
+};
+
+const getHourFromTime = (time='') => {
+  return time.slice(11, 19);
+};
+
+const setPrimaryColors = weather => {
+  const colors = {
+    Thunderstorm: {solid: 'rgb(151, 118, 223)', gradient: 'rgba(175,145,239, 0.6)'},
+    Drizzle: {solid: 'rgb(34,155,206)', gradient: 'rgba(34,155,206, 0.8)'},
+    Rain: {solid: 'rgb(34,155,206)', gradient: 'rgba(34,155,206, 0.8)'},
+    Snow: {solid: 'white', gradient: 'rgb(177, 218, 255)'},
+    Clear: {solid: 'rgb(255,223,109)', gradient: 'rgba(255,223,109,0.8)'},
+    Clouds: {solid: 'rgb(168, 168, 168)', gradient: 'rgba(169, 208, 236, 0.726)'},
+    default: {solid: 'white', gradient: 'white'}
+  }
+  
+  return (colors[weather] && {solid: colors[weather].solid, gradient: colors[weather].gradient} )|| colors.default;
+};
+
 export { 
   getItem,
   getSuggestionCategory,
@@ -94,5 +120,9 @@ export {
   changeWeatherName,
   getDateFromTimestamp,
   giveHTMLID,
-  validateObj
+  validateObj,
+  addSeconds,
+  removeSeconds,
+  getHourFromTime,
+  setPrimaryColors
 };

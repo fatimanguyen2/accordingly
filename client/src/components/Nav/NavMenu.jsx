@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 const classnames = require('classnames');
 export const NavMenu = (props) => {
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   return (
     <ul>
       {props.loggedIn ?

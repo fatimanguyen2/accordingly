@@ -13,11 +13,11 @@ import { About } from './About';
 import { Settings } from './Settings';
 import { Register } from './Register';
 
-import { filterEvents } from '../helpers/selectors';
+import { filterEvents, setPrimaryColors } from '../helpers/selectors';
 
 const weather = {
   mainWeather: [
-    "Clouds"
+    "Thunderstorm"
   ],
   feelsLikeTemp: 7.17,
   actualTemp: 10.78,
@@ -260,6 +260,11 @@ function App() {
   //       })))
   // }, [])
 
+  //Setting app primary color
+  let colours = setPrimaryColors(weather.mainWeather[0]); // TO FIX
+  document.documentElement.style.setProperty('--primary-color', colours.solid);
+  document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
+
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => setState(prev => ({ ...prev, loggedIn: false }));
 
@@ -300,9 +305,9 @@ function App() {
   const openEdit = (entry_id) => {
     // console.log("entry_id " + entry_id);
     // console.log(state.events);
-
-    const eventToEditArr = state.events.repeating.filter(eventItem => eventItem.entry_id === entry_id);
-    // console.log(eventToEditArr[0].entry_id);
+    const allEvents = [...state.events.repeating, ...state.events.future]
+    const eventToEditArr = allEvents.filter(eventItem => eventItem.entry_id === entry_id);
+    console.log(eventToEditArr[0]);
     setState(prev => ({ ...prev, eventToEdit: eventToEditArr[0] }))
   };
 

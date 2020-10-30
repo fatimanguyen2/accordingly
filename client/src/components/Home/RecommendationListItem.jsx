@@ -16,7 +16,8 @@ export default function RecommendationItem(props) {
   };
 
   return (
-    <li className='recommendation-list-item '>
+    <li className={buttonClass}>
+    {/* <li className='recommendation-list-item '> */}
       <div className='recommendation-list-item__main'>
         <div onClick={onClick} className='recommendation-list-item--clickable'>
           <input type='checkbox' id='item' checked={checked} onChange={() => { }} /> 
