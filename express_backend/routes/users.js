@@ -17,7 +17,7 @@ module.exports = (
   })
 
   const test = {
-    raw_address: "5698 Sound Avenue, Riverhead, NY, USA",
+    raw_address: "canada",
     start_date: "2020-10-30",
     start_hour: "17:11",
     end_date: "2020-10-30",
@@ -39,8 +39,15 @@ module.exports = (
   
 
   router.post('/:id/entries', function (req, res) {
-    formatAddressForDb(test.destination)
-      .then(address => ({...test, title: test.entry, ...address}))
+    formatAddressForDb(test.raw_address)
+      .then(address => {
+        console.log(address)
+        if (!address.city.includes('Unorganized')) {
+          return ({...test, title: test.entry, ...address})
+        } else {
+          res.json("Sorry we need at least a city")
+        }
+      })
       .then(entry => postEntry(entry, req.params.id))
       .then(postedEntry => formatEntryForFrontEnd(postedEntry.rows))
       .then(formattedEntry => res.json(formattedEntry))
