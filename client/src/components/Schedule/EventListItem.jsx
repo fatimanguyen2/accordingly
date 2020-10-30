@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import { getWeatherIcon } from '../../helpers/selectors';
+import { getWeatherIcon, getWeatherColor } from '../../helpers/selectors';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -28,9 +28,9 @@ export default function EventListItem(props) {
   const edit = () => console.log('edit click');
 
   return (
-    <li>
+    <li className='event-list-item'>
       <div onClick={() => setToggle(!toggle)}>
-        <FontAwesomeIcon icon={getWeatherIcon(props.weather)} />
+        <FontAwesomeIcon icon={getWeatherIcon(props.weather)} color={getWeatherColor(props.weather)}/>
         <p>{props.type === 'today' ? moment(props.start).format('h:mm a') : moment(props.start).fromNow()} {props.title}</p>
       </div>
       {toggle &&
