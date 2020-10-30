@@ -17,7 +17,7 @@ import { filterEvents, setPrimaryColors } from '../helpers/selectors';
 
 const weather = {
   mainWeather: [
-    "Thunderstorm"
+    "Rain"
   ],
   feelsLikeTemp: 7.17,
   actualTemp: 10.78,
@@ -73,7 +73,7 @@ const events = {
       start_time: "2020-10-29T08:00:00",
       end_time: "2020-10-29T16:00:00",
       leave_by: "2020-10-29T07:28:26-04:00",
-      weather: "Clouds"
+      weather: "Thunderstorm"
     },
     {
       entry: "commute",
@@ -117,7 +117,7 @@ const events = {
         address: "2846 Main St",
         city: "Vancouver",
         postal_code: "V5T 3G2",
-        weather: "Clouds"
+        weather: "Drizzle"
       },
       recurrences: [
         {
@@ -168,7 +168,7 @@ const events = {
         address: "2846 Main St",
         city: "Vancouver",
         postal_code: "V5T 3G2",
-        weather: "Rain"
+        weather: "Snow"
       },
       recurrences: [
         {

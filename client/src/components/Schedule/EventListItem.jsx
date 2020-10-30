@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import { getWeatherIcon, getWeatherColor } from '../../helpers/selectors';
+import { getWeatherIcon, getWeatherColor, setPrimaryColors } from '../../helpers/selectors';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +15,6 @@ export default function EventListItem(props) {
   const [toggle, setToggle] = useState(false);
   const [view, setView] = useState(NORMAL);
 
-
   const cancel = () => {
     if (view === NORMAL) {
       setView(DELETE);
@@ -28,13 +27,16 @@ export default function EventListItem(props) {
   const edit = () => console.log('edit click');
 
   return (
-    <li className='event-list-item'>
-      <div onClick={() => setToggle(!toggle)}>
-        <FontAwesomeIcon icon={getWeatherIcon(props.weather)} color={getWeatherColor(props.weather)}/>
-        <p>{props.type === 'today' ? moment(props.start).format('h:mm a') : moment(props.start).fromNow()} {props.title}</p>
+    <li className='event-list-item' style={{background: setPrimaryColors(props.weather).solid}}>
+      <div className='event-list-item__main' onClick={() => setToggle(!toggle)}>
+        <div className='event-list-item__time' >
+        <FontAwesomeIcon className='event-list-item__weather-icon' icon={getWeatherIcon(props.weather)} color={getWeatherColor(props.weather)}/>
+        <p>{props.type === 'today' ? moment(props.start).format('HH:mm') : moment(props.start).fromNow()} </p>
+        </div>
+        <div><p>{props.title}</p></div>
       </div>
       {toggle &&
-        <div onClick={() => setToggle(false)}>
+        <div className='event-list-item__details' onClick={() => setToggle(false)}>
           <div>
             <FontAwesomeIcon icon={faMapMarkerAlt} />
             <p>{props.destination}</p>
@@ -42,8 +44,8 @@ export default function EventListItem(props) {
           <div>
             <FontAwesomeIcon icon={faClock} />
             <div>
-              <p> {moment(props.start).format('dddd, MMM Do   h:mm a')}</p>
-              <p> {moment(props.end).format('dddd, MMM Do   h:mm a')}</p>
+              <p> {moment(props.start).format('dddd, MMM Do   HH:mm')}</p>
+              <p> {moment(props.end).format('dddd, MMM Do   HH:mm')}</p>
             </div>
           </div>
           {

@@ -124,13 +124,14 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
+        align-items: stretch;
       }
   
       &--checked {background-color: #181818;}
     
       &--clickable {
         width: 90%;
+        padding-top: 0.5rem;
   
         [type="checkbox"]:not(:checked),
         [type="checkbox"]:checked {
