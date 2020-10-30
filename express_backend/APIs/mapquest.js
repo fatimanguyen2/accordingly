@@ -27,18 +27,41 @@ const addressToLocation = ({street, city, postalcode }) => {
    .then(response => {
      const { lat, lng } = response.data.results[0].locations[0].latLng
      return {
-      lat,
-      lng
+      x: lat,
+      y: lng
      }
  })
  .catch(err => err)
 }
 
-const formatAddressForDb = () => {
+const rawAddressToLocation = (rawAddress) => {
+  return axios.post(`${host}geocoding/v1/address?key=${key}`, {
+    location : `${rawAddress}`
+    }
+  )
+   .then(response => {
+     const { lat, lng } = response.data.results[0].locations[0].latLng
+     return {
+      x: lat,
+      y: lng
+     }
+ })
+ .catch(err => err)
+}
 
+const formatAddressForDb = (rawAddress) => {
+  const formattedAddress = {};
+  return rawAddressToLocation(rawAddress)
+    .then(location => {
+      formattedAddress.destination = location
+      return locationToAddress(location)
+    })
+    .then(address => ({...formattedAddress, ...address}))
 }
 
 
 module.exports = {
   locationToAddress,
+  addressToLocation,
+  formatAddressForDb
 };

@@ -15,7 +15,6 @@ const getWeather = (location) => {
 const getMainWeather = (location) => {
   return getWeather(location)
   .then(data => {
-    console.log(data.hourly)
       return {
         mainWeather: data.current.weather.map(condtion => condtion.main),
         feelsLikeTemp: data.current.feels_like,
@@ -48,7 +47,7 @@ const getForecastCategory = (event) => {
   const start = event.start_time;
   const in48h = moment().add(48, 'h');
   if (moment(start).isBefore(in48h)) {
-    const hour = moment(start).diff(test6AM, "hour")
+    const hour = moment(start).diff(moment(), "hour")
     if (hour > 0) {
       return getWeather(event.destination)
         .then(data => data.hourly[hour].weather[0].main)
@@ -57,7 +56,7 @@ const getForecastCategory = (event) => {
     }
   } else {
     const day = moment(start).diff(moment(), "day")
-    if (day > 7 || day < 1){
+    if (day > 7 || day < 0){
       return null
     }
     return getWeather(event.destination)
@@ -67,6 +66,7 @@ const getForecastCategory = (event) => {
 
 
 module.exports = {
+  getWeather,
   getMainWeather,
   getForecastCategory,
   getDetailedForcast

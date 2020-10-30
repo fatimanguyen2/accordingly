@@ -1,11 +1,10 @@
 const moment = require('moment');
 const { getLeaveBy, getMultipleTripTime } = require('../APIs/google_map');
-const { getForecastCategory } = require('../APIs/open_weather')
+const { getForecastCategory, getWeather } = require('../APIs/open_weather')
 const db = require('../db');
 const dataQ = require('../models')(db);
 
 const createEventList = (rawEvents, id) => {
-  console.log(rawEvents)
   return dataQ.getUserLocationById(id)
     .then(origin => todayFormatting(rawEvents[0], rawEvents[1], origin))
     .then(today => {
@@ -32,13 +31,32 @@ const createEventList = (rawEvents, id) => {
     .catch(err => console.log(err))
 };
 
-const getRecurrenceArray = (event, list) => {
-  for (const rec of list.repeating) {
-    if (event.entry === rec.entry) {
-      return rec
-    }
+const formatEntryForFrontEnd = (entry) => {
+  if (entry[0].recurrence_id) {
+    const formarttedRec = groupByEntry(entry.map(event => ({...event, next_event: getNextEventFromRec(event)})))
+    return getForecastCategory(formarttedRec[0].next_event)
+      .then(weather => ({...formarttedRec[0], next_event : ({...formarttedRec[0].next_event, weather : weather})}))
+  } else {
+    const formattedEvent = { ...entry[0], start_time: entry[0].trip_start_time, end_time : entry[0].trip_end_time}
+    return getForecastCategory(formattedEvent)
+      .then(weather => {
+        const { entry, entry_id, destination, address, city, postal_code, trip_id, start_time, end_time } = formattedEvent;
+        return { 
+          entry, 
+          entry_id, 
+          destination, 
+          address, 
+          city, 
+          postal_code, 
+          event_id : trip_id, 
+          start_time, 
+          end_time, 
+          weather : weather
+        }
+      })
   }
 }
+
 
 const todayFormatting = (rawToday, rawRec, origin) => {
   const today = rawToday.concat(checkReocsToday(rawRec)).map(event => {
@@ -73,7 +91,7 @@ const groupByEntry = (events) => {
   }
   for (const id of distinctEvents) {
     const grouping = events.filter(event => event.entry_id === id)
-    const { entry, start_hour, end_hour, start_date, end_date, entry_id, is_from_start_date, destination } = grouping[0];
+    const { entry, start_hour, end_hour, start_date, end_date, entry_id, is_from_start_date, destination, address, city } = grouping[0];
     const group = {
       entry,
       entry_id,
@@ -83,6 +101,8 @@ const groupByEntry = (events) => {
       end_hour,
       is_from_start_date,
       next_event : {
+        address,
+        city,
         start_time : getFirstEventTime(grouping).format("YYYY-MM-DD") + "T" + start_hour,
         end_time : getFirstEventTime(grouping).format("YYYY-MM-DD") + "T" + end_hour,
         destination
@@ -173,6 +193,10 @@ const getNextEventFromRec = (reoc) => {
 }
 
 
+const formatTimeForDb = (date, hour) => {
+  return date + "T" + hour
+}
+
 const getTodayRecStartTime = (rec) => {
   return moment().format("YYYY-MM-DD") + "T" + rec.start_hour;
 }
@@ -209,11 +233,15 @@ const sortEventChrono = (events) => {
 
 
 const getTripsToday = (origin, today) => {
-  const path = [[origin, today[0].destination]];
-  for (let x = 1; x < today.length; x ++) {
-    path.push([today[x-1].destination, today[x].destination])
-  }
-  path.push([today[today.length - 1].destination, origin])
+  if (today.length > 0) {
+    const path = [[origin, today[0].destination]];
+    for (let x = 1; x < today.length; x ++) {
+      path.push([today[x-1].destination, today[x].destination])
+    }
+    path.push([today[today.length - 1].destination, origin])
+  } else {
+    return null
+}
   
   return getMultipleTripTime(path)
   .then(travelTimes => {
@@ -283,19 +311,26 @@ const checkWetGround = (rain) => {
 }
 
 const condtionsOfDay = (conditions) => {
-  const bulkCond = conditions.map(condition =>{
-    return weatherConditions(condition);
-  })
-  const nowCond = bulkCond.shift();
-  const filteredCond = [];
-  bulkCond.forEach(events => {
-    events.forEach(condition => {
-      if (!filteredCond.includes(condition) && !nowCond.includes(condition)) {
-        filteredCond.push(condition);
-      }
+    const bulkCond = conditions.map(condition =>{
+      return weatherConditions(condition);
     })
+    const upcomingCond = bulkCond.shift();
+    const filteredCond = [];
+    bulkCond.forEach(events => {
+      events.forEach(condition => {
+        if (!filteredCond.includes(condition) && !upcomingCond.includes(condition)) {
+          filteredCond.push(condition);
+        }
+      })
+    })
+    return [upcomingCond, filteredCond]
+}
+
+const getNowConditions = (location) => {
+  return getWeather(location)
+  .then(conditions => {
+    return weatherConditions(conditions.current)
   })
-  return [nowCond, filteredCond]
 }
 
 
@@ -307,5 +342,8 @@ module.exports = {
   getTripsToday,
   updateTodayToNow,
   getRelativeSchedule,
-  condtionsOfDay
+  condtionsOfDay,
+  formatEntryForFrontEnd,
+  getNowConditions,
+  formatTimeForDb
 };
