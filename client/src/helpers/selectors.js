@@ -83,6 +83,14 @@ const validateObj = (eventObj, checks) => {
   return checks.reduce((acc, name) => (eventObj[name] !== '' && acc), true);
 };
 
+const addSeconds = (hour) => {
+  return hour + ':00';
+}
+
+const removeSeconds = (hour) => {
+  return hour.slice(0, 5);
+}
+
 export { 
   getItem,
   getSuggestionCategory,
@@ -94,5 +102,7 @@ export {
   changeWeatherName,
   getDateFromTimestamp,
   giveHTMLID,
-  validateObj
+  validateObj,
+  addSeconds,
+  removeSeconds
 };

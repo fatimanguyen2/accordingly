@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import useEndlessForm from '../../hooks/useEndlessForm';
-import { getDateFromTimestamp, giveHTMLID, validateObj } from '../../helpers/selectors';
+import { getDateFromTimestamp, giveHTMLID, validateObj, addSeconds, removeSeconds } from '../../helpers/selectors';
 import moment from 'moment';
 
 import LocationSearchInput from '../LocationSearchInput'
@@ -21,8 +21,8 @@ export const AddEvent = (props) => {
   const entry = props.eventToEdit.entry || '';
   const start_date = getDateFromTimestamp(entry_id ? props.eventToEdit.next_event.start_time : '');
   const end_date = getDateFromTimestamp(entry_id ? props.eventToEdit.next_event.end_time : '');;
-  const start_hour = props.eventToEdit.start_hour || '';
-  const end_hour = props.eventToEdit.end_hour || '';
+  const start_hour = removeSeconds(props.eventToEdit.start_hour) || '';
+  const end_hour = removeSeconds(props.eventToEdit.end_hour) || '';
   const raw_address = entry_id ? `${props.eventToEdit.next_event.address}, ${props.eventToEdit.next_event.city}` : '';
   const recurrences = giveHTMLID(props.eventToEdit.recurrences || []);
 
@@ -99,7 +99,7 @@ export const AddEvent = (props) => {
         // event.stopPropagation();
         // event.nativeEvent.stopImmediatePropagation();
         // console.log(event.target)
-        const eventObj = {...input, recurrences: repeats};
+        const eventObj = {...input, recurrences: repeats, start_hour: addSeconds(input.start_hour), end_hour: addSeconds(input.end_hour)};
         const pass = validateObj(eventObj, [ 'entry', 'raw_address', 'start_date', 'end_date', 'start_hour', 'end_hour' ]);
         pass && (input.entry_id ? props.onEdit(eventObj) : props.onSubmit(eventObj));
         pass && props.closeAdd();

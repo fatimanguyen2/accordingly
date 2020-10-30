@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faPlus } from '@fortawesome/free-solid-svg-icons';
-import './styles.scss';
+import './Nav.scss';
 
 import { NavMenu } from './NavMenu';
 import { AddEvent } from './AddEvent';
