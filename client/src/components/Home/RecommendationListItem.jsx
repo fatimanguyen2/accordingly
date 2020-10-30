@@ -18,7 +18,7 @@ export default function RecommendationItem(props) {
         </div>
           <FontAwesomeIcon icon={faCaretDown} className='recommendation-list-item__icon' onClick={() => setToggle(prev => !prev)} />
       </div>
-      {toggle && <div><p>{props.description}</p></div>}
+      {toggle && <div onClick={() => setToggle(prev => !prev)} ><p>{props.description}</p></div>}
     </li>
   );
 };
