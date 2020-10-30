@@ -13,11 +13,11 @@ import { About } from './About';
 import { Settings } from './Settings';
 import { Register } from './Register';
 
-import { filterEvents } from '../helpers/selectors';
+import { filterEvents, setPrimaryColors } from '../helpers/selectors';
 
 const weather = {
   mainWeather: [
-    "Clouds"
+    "Thunderstorm"
   ],
   feelsLikeTemp: 7.17,
   actualTemp: 10.78,
@@ -259,7 +259,12 @@ function App() {
   //         homeAddress: all[3].data
   //       })))
   // }, [])
-  document.documentElement.style.setProperty('--primary-color', 'yellow');
+
+  //Setting app primary color
+  let colours = setPrimaryColors(weather.mainWeather[0]); // TO FIX
+  document.documentElement.style.setProperty('--primary-color', colours.solid);
+  document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
+
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => setState(prev => ({ ...prev, loggedIn: false }));
 
