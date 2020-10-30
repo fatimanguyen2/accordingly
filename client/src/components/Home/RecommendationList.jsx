@@ -14,8 +14,8 @@ export default function RecommendationList(props) {
   });
 
   return (
-    <div>
-      <h2>{props.children}</h2>
+    <div lassName='recommendation-list'>
+      <h2 className='recommendation-list__title'>{props.children}</h2>
       <ul>
         {items}
       </ul>

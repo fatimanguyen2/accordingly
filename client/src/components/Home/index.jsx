@@ -49,7 +49,7 @@ export const Home = props => {
               </div>
               <DepartureTime departureTime={props.events && props.events[0].leave_by} />
             </header>
-            <section>
+            <section className='recommendations'>
               {props.events.length ?
                 <Fragment>
                   <RecommendationList recommendations={recommendations[UPCOMING]} handleCheck={handleCheck} type={UPCOMING}>Upcoming: </RecommendationList>
