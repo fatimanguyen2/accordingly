@@ -1,10 +1,17 @@
 @import '../base';
 
 .nav {
-  position: absolute;
+  position: fixed;
   display: flex;
+  width: 100%;
   justify-content: space-between;
+  align-items: center;
   bottom: 0px;
   background: $rainy-color;
   z-index: 1;
+}
+
+.button {
+  position: relative;
+  // width: 100px;
 }

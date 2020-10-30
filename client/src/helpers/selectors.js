@@ -87,7 +87,7 @@ const addSeconds = (hour) => {
   return hour + ':00';
 }
 
-const removeSeconds = (hour) => {
+const removeSeconds = (hour='') => {
   return hour.slice(0, 5);
 }
 
