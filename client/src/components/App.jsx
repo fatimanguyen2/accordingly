@@ -300,9 +300,9 @@ function App() {
   const openEdit = (entry_id) => {
     // console.log("entry_id " + entry_id);
     // console.log(state.events);
-
-    const eventToEditArr = state.events.repeating.filter(eventItem => eventItem.entry_id === entry_id);
-    // console.log(eventToEditArr[0].entry_id);
+    const allEvents = [...state.events.repeating, ...state.events.future]
+    const eventToEditArr = allEvents.filter(eventItem => eventItem.entry_id === entry_id);
+    console.log(eventToEditArr[0]);
     setState(prev => ({ ...prev, eventToEdit: eventToEditArr[0] }))
   };
 

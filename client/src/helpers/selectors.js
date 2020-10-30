@@ -91,6 +91,10 @@ const removeSeconds = (hour='') => {
   return hour.slice(0, 5);
 }
 
+const getHourFromTime = (time='') => {
+  return time.slice(11, 19);
+}
+
 export { 
   getItem,
   getSuggestionCategory,
@@ -104,5 +108,6 @@ export {
   giveHTMLID,
   validateObj,
   addSeconds,
-  removeSeconds
+  removeSeconds,
+  getHourFromTime
 };

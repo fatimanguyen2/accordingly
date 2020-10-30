@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import useEndlessForm from '../../hooks/useEndlessForm';
-import { getDateFromTimestamp, giveHTMLID, validateObj, addSeconds, removeSeconds } from '../../helpers/selectors';
+import { getDateFromTimestamp, giveHTMLID, validateObj, addSeconds, removeSeconds, getHourFromTime } from '../../helpers/selectors';
 import moment from 'moment';
 
 import LocationSearchInput from '../LocationSearchInput'
@@ -18,12 +18,13 @@ export const AddEvent = (props) => {
   //PUT /api/users/:user_id/entries/:id
 
   const entry_id = props.eventToEdit.entry_id || null;
+  const next_event = props.eventToEdit.next_event || null;
   const entry = props.eventToEdit.entry || '';
-  const start_date = getDateFromTimestamp(entry_id ? props.eventToEdit.next_event.start_time : '');
-  const end_date = getDateFromTimestamp(entry_id ? props.eventToEdit.next_event.end_time : '');;
-  const start_hour = removeSeconds(props.eventToEdit.start_hour) || '';
-  const end_hour = removeSeconds(props.eventToEdit.end_hour) || '';
-  const raw_address = entry_id ? `${props.eventToEdit.next_event.address}, ${props.eventToEdit.next_event.city}` : '';
+  const start_date = getDateFromTimestamp(entry_id ? (next_event ? props.eventToEdit.next_event.start_time : props.eventToEdit.start_time) : '');
+  const end_date = getDateFromTimestamp(entry_id ? (next_event ? props.eventToEdit.next_event.end_time : props.eventToEdit.end_time) : '');;
+  const start_hour = next_event ? removeSeconds(props.eventToEdit.start_hour) : removeSeconds(getHourFromTime(props.eventToEdit.start_time)) || '';
+  const end_hour = next_event? removeSeconds(props.eventToEdit.end_hour) : removeSeconds(getHourFromTime(props.eventToEdit.end_time)) || '';
+  const raw_address = entry_id ? (next_event ? `${props.eventToEdit.next_event.address}, ${props.eventToEdit.next_event.city}` : `${props.eventToEdit.address}, ${props.eventToEdit.city}`) : '';
   const recurrences = giveHTMLID(props.eventToEdit.recurrences || []);
 
   const { input, repeats, handleInputChange, handleAddress, addRepeat, setRepeat, removeRepeat } = useEndlessForm({
@@ -38,7 +39,7 @@ export const AddEvent = (props) => {
   });
 
   return (
-    <form action="javascript: false" >
+    <form onSubmit={(e) => e.preventDefault()} >
       <label htmlFor="entry">Title</label>
       <input type="text" name="entry" id="entry" placeholder="Add Title" defaultValue={entry} onChange={handleInputChange} required></input>
       <LocationSearchInput onChange={handleAddress} destination={raw_address}/>
