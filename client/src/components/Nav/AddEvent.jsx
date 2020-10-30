@@ -100,7 +100,9 @@ export const AddEvent = (props) => {
         // event.nativeEvent.stopImmediatePropagation();
         // console.log(event.target)
         const eventObj = {...input, recurrences: repeats};
-        validateObj(eventObj, [ 'entry', 'raw_address', 'start_date', 'end_date', 'start_hour', 'end_hour' ]) && (input.entry_id ? props.onEdit(eventObj) : props.onSubmit(eventObj));
+        const pass = validateObj(eventObj, [ 'entry', 'raw_address', 'start_date', 'end_date', 'start_hour', 'end_hour' ]);
+        pass && (input.entry_id ? props.onEdit(eventObj) : props.onSubmit(eventObj));
+        pass && props.closeAdd();
       }}>{entry_id ? 'Edit' : 'Add'}</button>
     </form>
   );

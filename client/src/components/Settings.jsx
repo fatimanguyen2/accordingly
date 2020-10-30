@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons';
 
 export const Settings = props => {
-  // const [address, setAddress] = useState('');
   const [startOfDay, setStartOfDay] = useState('');
   const [showButton, setShowButton] = useState(false);
   const raw_address = `${props.address.address}, ${props.address.city}`
