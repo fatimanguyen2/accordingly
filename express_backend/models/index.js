@@ -56,7 +56,7 @@ module.exports = (db) => {
     JOIN trips on trips.entry_id = entries.id
     WHERE user_id = ${user} 
     AND entries.is_active = TRUE 
-    AND start_time > ${now}
+    AND start_time > ${tomorrow}
     `)
 
     const today = db.query(queryToday)
