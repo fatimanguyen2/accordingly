@@ -219,46 +219,46 @@ const recommendations = {
 }
 
 function App() {
-  const [state, setState] = useState({
-    loading: false,
-    view: 'home',
-    loggedIn: true,
-    weather,
-    recommendations,
-    events,
-    time: 1603740043000,
-    homeAddress,
-    eventToEdit: {}
-  });
   // const [state, setState] = useState({
   //   loading: false,
   //   view: 'home',
   //   loggedIn: true,
-  //   weather: {},
-  //   recommendations: suggestions,
-  //   events: {},
+  //   weather,
+  //   recommendations,
+  //   events,
   //   time: 1603740043000,
-  //   homeAddress: {},
+  //   homeAddress,
   //   eventToEdit: {}
   // });
+  const [state, setState] = useState({
+    loading: false,
+    view: 'home',
+    loggedIn: true,
+    weather: {},
+    recommendations: {},
+    events: {},
+    time: 1603740043000,
+    homeAddress: {},
+    eventToEdit: {}
+  });
 
-  // useEffect(() => {
-  //   Promise.all([
-  //     axios.get('/api/users/2/weather'),
-  //     axios.get('/api/users/2/recommendations'),
-  //     axios.get('/api/users/2/events'),
-  //     axios.get('/api/users/2'),
-  //   ])
-  //     .then(all => setState(prev => (
-  //       {
-  //         ...prev,
-  //         loading: false,
-  //         weather: all[0].data,
-  //         recommendations: all[1].data,
-  //         events: all[2].data,
-  //         homeAddress: all[3].data
-  //       })))
-  // }, [])
+  useEffect(() => {
+    Promise.all([
+      axios.get('/api/users/2/weather'),
+      axios.get('/api/users/2/recommendations'),
+      axios.get('/api/users/2/events'),
+      axios.get('/api/users/2'),
+    ])
+      .then(all => setState(prev => (
+        {
+          ...prev,
+          loading: false,
+          weather: all[0].data,
+          recommendations: all[1].data,
+          events: all[2].data,
+          homeAddress: all[3].data
+        })))
+  }, [])
 
   //Setting app primary color
   let colours = setPrimaryColors(weather.mainWeather[0]); // TO FIX

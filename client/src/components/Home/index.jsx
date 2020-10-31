@@ -43,9 +43,9 @@ export const Home = props => {
   return (
     <Fragment>
       {
-        props.loggedIn ?
-          <div className='home'>
-            <header className={headerSize} /*onClick={() => setHeaderSize(headerSize === 'big' ? 'small' : 'big')}*/>
+        props.loggedIn
+          ? <div className='home'>
+            <header className={headerSize}>
               <div className={`${headerSize}__weather-event`}>
                 <WeatherRing
                   mainWeather={props.weather.mainWeather && props.weather.mainWeather[0]}
@@ -59,17 +59,20 @@ export const Home = props => {
               <DepartureTime departureTime={props.events && props.events[0].leave_by} />
             </header>
             <section className='recommendations'>
-              {props.events.length ?
+              {Object.keys(props.recommendations).length &&
                 <Fragment>
-                  <RecommendationList recommendations={recommendations[UPCOMING]} handleCheck={handleCheck} type={UPCOMING}>Upcoming: </RecommendationList>
-                  <RecommendationList recommendations={recommendations[LATER]} handleCheck={handleCheck} type={LATER}>Later: </RecommendationList>
-                </Fragment> :
-                <RecommendationList recommendations={recommendations[NOW]} handleCheck={handleCheck} type={NOW}>Now: </RecommendationList>
-              }
-              <RecommendationList recommendations={recommendations[DONE]} handleCheck={handleCheck} type={DONE}>Done: </RecommendationList>
+                  {props.events.length ?
+                    <Fragment>
+                      <RecommendationList recommendations={recommendations[UPCOMING]} handleCheck={handleCheck} type={UPCOMING}>Upcoming: </RecommendationList>
+                      <RecommendationList recommendations={recommendations[LATER]} handleCheck={handleCheck} type={LATER}>Later: </RecommendationList>
+                    </Fragment> :
+                    <RecommendationList recommendations={recommendations[NOW]} handleCheck={handleCheck} type={NOW}>Now: </RecommendationList>
+                  }
+                  <RecommendationList recommendations={recommendations[DONE]} handleCheck={handleCheck} type={DONE}>Done: </RecommendationList>
+                </Fragment>}
             </section>
-          </div> :
-          <Redirect to='/login' />
+          </div>
+          : <Redirect to='/login' />
       }
     </Fragment>
   );
