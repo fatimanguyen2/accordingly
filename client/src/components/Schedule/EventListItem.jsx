@@ -28,8 +28,16 @@ export default function EventListItem(props) {
 
   //Build classname for each weather
   const weatherName = changeWeatherName(props.weather);
-  const key = `event-list-item--${weatherName}`;
-  const itemClass = classNames('event-list-item', {'event-list-item--unchecked': toggle === false}, key);
+
+  // Ensure that background event list item color is weather color unless weather = null or in group 700 of open weather API
+  let key = '';
+  if (weatherName !== props.weather || weatherName === 'Thunderstorm' || weatherName === 'Drizzle') {
+    key = `event-list-item--${weatherName}`;
+  } else {
+    key = 'event-list-item';
+  }
+
+  const itemClass = classNames('event-list-item', {[key + '--untoggled']: toggle === false}, key);
 
   return (
     <li className={itemClass}>
