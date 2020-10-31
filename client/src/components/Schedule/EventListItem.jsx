@@ -13,8 +13,17 @@ const DELETE = 'delete';
 
 export const EventListItem = props => {
   const [toggle, setToggle] = useState(false);
-  const [view, setView] = useState(NORMAL);
+  const [view, setView] = useState(NORMAL); //switch betwen normal view and delete item view for btns
 
+  // setToggle and collapse other events
+  const handleToggle = () => {
+    setToggle(prev => !prev);
+    if (toggle) {
+      console.log('hi')
+    }
+  };
+
+  // Deleting an event when trash/confirm delete btn clicked
   const cancel = () => {
     if (view === NORMAL) {
       setView(DELETE);
@@ -23,6 +32,7 @@ export const EventListItem = props => {
     }
   };
 
+  // Undo first delete click when back btn clicked
   const back = () => setView(NORMAL);
 
   //Build classname for each weather
@@ -36,11 +46,9 @@ export const EventListItem = props => {
   }
   const itemClass = classNames('event-list-item', {[key + '--untoggled']: toggle === false}, key);
 
-
-
   return (
     <li className={itemClass}>
-      <div className='event-list-item__main' onClick={() => setToggle(prev => !prev)}>
+      <div className='event-list-item__main' onClick={handleToggle}>
         <div className='event-list-item__time' >
           <FontAwesomeIcon className='event-list-item__weather-icon' icon={getWeatherIcon(props.weather)} color={getWeatherColor(props.weather)} />
           <p>{props.type === 'today' ? moment(props.start).format('HH:mm') : moment(props.start).fromNow()} </p>

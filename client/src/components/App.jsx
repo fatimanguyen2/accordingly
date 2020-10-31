@@ -13,7 +13,7 @@ import { About } from './About';
 import { Settings } from './Settings';
 import { Register } from './Register';
 
-import { filterEvents, setPrimaryColors } from '../helpers/selectors';
+import { filterEvents, setPrimaryColors, getItem, getSuggestionCategory } from '../helpers/selectors';
 
 const weather = {
   mainWeather: [
@@ -31,8 +31,8 @@ const events = {
       "entry": "morning run",
       "id": 6,
       "destination": {
-          "x": 49.259432,
-          "y": -123.100795
+        "x": 49.259432,
+        "y": -123.100795
       },
       "address": "2846 Main St",
       "city": "Vancouver",
@@ -207,58 +207,66 @@ const homeAddress = {
 }
 
 const recommendations = {
-  now: [
-    {
-      id: 10,
-      name: "Normal clothing",
-      description: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."Not to hot, not too warm."`
-    }
-  ],
+  // now: [
+  //   {
+  //     id: 10,
+  //     name: "Normal clothing",
+  //     description: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."Not to hot, not too warm."`
+  //   }
+  // ],
   upcoming: [{ id: 1, name: 'hat', description: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'Keep that head sheltered from the cold'` }, { id: 2, name: 'suncreen', description: 'It is sunny outside' }],
-  later: [{ id: 3, name: 'top', description: 'layer up' }, { id: 4, name: 'gloves', description: 'It is cold' }]
+  later: [{ id: 3, name: 'top', description: 'layer up' }, { id: 4, name: 'gloves', description: 'It is cold' }],
+  done: []
 }
+let initialRecommendations = {};
 
 function App() {
-  const [state, setState] = useState({
-    loading: false,
-    view: 'home',
-    loggedIn: true,
-    weather,
-    recommendations,
-    events,
-    time: 1603740043000,
-    homeAddress,
-    eventToEdit: {}
-  });
   // const [state, setState] = useState({
   //   loading: false,
   //   view: 'home',
   //   loggedIn: true,
-  //   weather: {},
-  //   recommendations: {},
-  //   events: {},
+  //   weather,
+  //   recommendations,
+  //   events,
   //   time: 1603740043000,
-  //   homeAddress: {},
+  //   homeAddress,
   //   eventToEdit: {}
   // });
+  const [state, setState] = useState({
+    loading: true,
+    view: 'home',
+    loggedIn: true,
+    weather: {},
+    recommendations: {},
+    events: {},
+    time: 1603740043000,
+    homeAddress: {},
+    eventToEdit: {}
+  });
 
-  // useEffect(() => {
-  //   Promise.all([
-  //     axios.get('/api/users/2/weather'),
-  //     axios.get('/api/users/2/recommendations'),
-  //     axios.get('/api/users/2/events'),
-  //     axios.get('/api/users/2'),
-  //   ])
-  //     .then(all => setState(prev => (
-  //       {
-  //         ...prev,
-  //         loading: false,
-  //         weather: all[0].data,
-  //         recommendations: all[1].data,
-  //         events: all[2].data,
-  //         homeAddress: all[3].data
-  //       })))
-  // }, [])
+
+  useEffect(() => {
+    Promise.all([
+      axios.get('/api/users/2/weather'),
+      axios.get('/api/users/2/recommendations'),
+      axios.get('/api/users/2/events'),
+      axios.get('/api/users/2'),
+    ])
+      .then(all => {
+        initialRecommendations = all[1].data;
+        setState(prev => (
+          {
+            ...prev,
+            loading: false,
+            weather: all[0].data,
+            recommendations: { ...all[1].data, done: [] },
+            events: all[2].data,
+            homeAddress: all[3].data
+          }))
+      })
+  }, [])
+
+  console.log(initialRecommendations)
 
   //Setting app primary color
   let colours = setPrimaryColors(weather.mainWeather[0]); // TO FIX
@@ -267,6 +275,29 @@ function App() {
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => setState(prev => ({ ...prev, loggedIn: false }));
+
+  // Change state when checking items on recommendation list in home component
+  const handleCheck = (id, type) => {
+    const item = getItem(id, state.recommendations[type]); //get item object
+    const category = getSuggestionCategory(id, initialRecommendations); //get initial item category of axios request to ensure done itesm go back to right category
+    // if item gets checked and is in upcoming/later list, remove from that list and add to done list
+    if (type !== 'done') {
+      const updatedRecommendationsObj = {
+        ...state.recommendations,
+        [type]: state.recommendations[type].filter(item => item.id !== id),
+        done: [...state.recommendations.done, item]
+      };
+      setState(prev => ({ ...prev, recommendations: updatedRecommendationsObj }))
+    } else { //if item is unchecked from done list, move it back to original list(upcoming/later) or remove if no longer relevant
+      const updatedRecommendationsObj = {
+        ...state.recommendations,
+        done: state.recommendations.done.filter(item => item.id !== id),
+        [category]: [...state.recommendations[category], item]
+      };
+      setState(prev => ({ ...prev, recommendations: updatedRecommendationsObj }))
+    }
+  };
+
 
   const updateAddress = (addressObj) => {
     axios.put('/api/users/2', addressObj)
@@ -344,7 +375,7 @@ function App() {
                   loggedIn={state.loggedIn}
                   weather={state.weather}
                   recommendations={state.recommendations}
-                  events={state.events.today}
+                  handleCheck={handleCheck}
                 />
               </Route>
 
