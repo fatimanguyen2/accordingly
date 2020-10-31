@@ -55,7 +55,7 @@ const getWeatherColor = weather => {
     Rain: '#0FB2F9',
     Snow: 'white',
     Clear: 'rgb(255,223,109)',
-    Clouds: 'rgb(168, 168, 168)',
+    Clouds: 'rgb(184, 184, 184)',
     null: 'white'
   };
   return icons[weather];
