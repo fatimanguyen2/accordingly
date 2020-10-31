@@ -20,31 +20,66 @@
     border-radius: 10px;
     color: white;
     cursor: pointer;
+    box-shadow: 0 0 0.75rem #222222;
 
+    &--untoggled:hover {
+      background: #3b3b3b;
+    }
+    
     // EVENT BACKGROUND COLORS
     &--Thunderstorm { 
       background: $thunderstorm-color;
       color: black;
+      box-shadow: 0 0 0.75rem $thunderstorm-color;
+
+      &--untoggled:hover {
+        background-color: rgb(125, 97, 187);
+      }
     }
     &--Rainy {
       background: $rainy-drizzle-color;
       color: black;
+      box-shadow: 0 0 0.75rem $rainy-drizzle-color;
+
+      &--untoggled:hover {
+        background: #178cbe;
+      }
     }
-    &--Drizzle{
+    &--Drizzle {
       background: $rainy-drizzle-color;
       color: black;
+      box-shadow: 0 0 0.75rem $rainy-drizzle-color;
+
+      &--untoggled:hover {
+        background: #178cbe;
+      }
     }
     &--Snowy {
       background: $snowy-color;
       color: black;
+      box-shadow: 0 0 0.75rem $snowy-color;
+
+      &--untoggled:hover {
+        background: #c5c7c7;
+      }
     }
     &--Sunny {
       background: $sunny-color;
       color: black;
+      box-shadow: 0 0 0.75rem $sunny-color;
+
+      &--untoggled:hover {
+        background: rgb(228, 189, 48);
+      }
     }
     &--Cloudy {
       background: $cloudy-color;
       color: black;
+      box-shadow: 0 0 0.75rem $cloudy-color;
+
+      &--untoggled:hover {
+        background: rgb(150, 150, 150);
+      }
     }
 
     &__main {
@@ -70,7 +105,7 @@
     }
 
     &__details {
-      padding: 0 1rem 1rem 1rem;
+      padding: 0 1rem;
 
       &__time {
         display: flex;
@@ -98,6 +133,9 @@
     button {
       margin: 0.5rem 0.3rem;
       cursor: pointer;
+      background: black;
+      color: white;
+      font-size: $font-size * 1.2;
     }
 
     &__edit-btn {

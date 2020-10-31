@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-export default function DepartureTime(props) {
+export const DepartureTime = props => {
   return (
     <section className='departure-time'>
       <p>Leave By:</p>
