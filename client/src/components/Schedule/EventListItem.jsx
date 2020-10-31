@@ -11,7 +11,7 @@ import { Button } from '../Button'
 const NORMAL = 'normal';
 const DELETE = 'delete';
 
-export default function EventListItem(props) {
+export const EventListItem = props => {
   const [toggle, setToggle] = useState(false);
   const [view, setView] = useState(NORMAL);
 
@@ -24,11 +24,9 @@ export default function EventListItem(props) {
   };
 
   const back = () => setView(NORMAL);
-  const edit = () => console.log('edit click');
 
   //Build classname for each weather
   const weatherName = changeWeatherName(props.weather);
-
   // Ensure that background event list item color is weather color unless weather = null or in group 700 of open weather API
   let key = '';
   if (weatherName !== props.weather || weatherName === 'Thunderstorm' || weatherName === 'Drizzle') {
@@ -36,8 +34,9 @@ export default function EventListItem(props) {
   } else {
     key = 'event-list-item';
   }
-
   const itemClass = classNames('event-list-item', {[key + '--untoggled']: toggle === false}, key);
+
+
 
   return (
     <li className={itemClass}>
@@ -50,7 +49,7 @@ export default function EventListItem(props) {
       </div>
       {toggle &&
         <div className='event-list-item__details'>
-          <div onClick={() => setToggle(false)}>
+          <div onClick={() => setToggle(prev => !prev)}>
             <div className='event-list-item__address'>
               <FontAwesomeIcon className='event-list-item__address-icon' icon={faMapMarkerAlt} />
               <p>{props.destination}</p>

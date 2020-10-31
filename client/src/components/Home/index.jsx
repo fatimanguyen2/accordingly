@@ -7,7 +7,7 @@ import './styles.scss';
 
 import { WeatherRing } from './WeatherRing';
 import EventList from './EventList';
-import DepartureTime from '../DepartureTime';
+import { DepartureTime } from '../DepartureTime';
 import RecommendationList from './RecommendationList';
 
 

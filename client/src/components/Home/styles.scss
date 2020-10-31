@@ -52,7 +52,7 @@
       .weather-ring {
         width: 2.7rem;
         height: 2.7rem;
-        // transition: all 200ms ease-in;
+        transition: all 300ms ease-in;
         border: 0.3rem solid var(--primary-color);
      
         h1, h3 span, p {
