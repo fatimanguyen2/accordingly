@@ -7,7 +7,7 @@ const router = express.Router();
 
 module.exports = (
   { getUserEvents, getUserLocationById, getUserAddressById, getRecommendations, postEntry, getImmediateRecommendations }, 
-  { createEventList, getTripsToday, getRelativeSchedule, condtionsOfDay, formatEntryForFrontEnd, getNowConditions }, 
+  { createEventList, getTripsToday, getRelativeSchedule, conditionsOfDay, formatEntryForFrontEnd, getNowConditions }, 
   { formatAddressForDb }, 
   { getMainWeather, getDetailedForcast }
   ) => {
@@ -81,15 +81,15 @@ module.exports = (
       })
       // Happy path event present
       .then(relSchedule => getDetailedForcast(relSchedule))
-      .then(detForecast => condtionsOfDay(detForecast))
+      .then(detForecast => conditionsOfDay(detForecast))
       .then(condOfDay => getRecommendations(condOfDay))
       .then(data => res.json(data))
       // Sad path no event (Aye, Aye, Aye!)
       .catch(() => {
         return getNowConditions(origin)
+        .then(conditions => getImmediateRecommendations(conditions))
+        .then(data => res.json({now : data.rows}))
       })
-      .then(conditions => getImmediateRecommendations(conditions))
-      .then(data => res.json({now : data.rows}))
   })
 
 

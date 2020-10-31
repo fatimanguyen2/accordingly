@@ -3,9 +3,9 @@ const moment = require('moment');
 module.exports = (db) => {
 
   const getUserEvents = (user) => {
-    const now = moment().format("'YYYY-MM-D'")
+    const now = moment().format("'YYYY-MM-DD'")
+    const tomorrow = moment().add(1, "d").format("'YYYY-MM-DD'")
     // const nowTest = "'2020-10-30'"
-
     const queryToday = (`
     SELECT 
     title AS entry, 
@@ -20,7 +20,7 @@ module.exports = (db) => {
     JOIN trips on trips.entry_id = entries.id
     WHERE user_id = ${user} 
     AND entries.is_active = TRUE 
-    AND (start_time > ${now} AND start_time < ${now})
+    AND (start_time > ${now} AND start_time < ${tomorrow})
     `)
 
     const queryRecurrence = (`
@@ -93,8 +93,8 @@ module.exports = (db) => {
     }
 
   const getImmediateRecommendations = (conditions) => {
-
     let nowCond = conditions
+    console.log(nowCond)
     const temp = nowCond.shift()
     let queryImmediate = (`
       SELECT DISTINCT items.id, items.name, items.description FROM items

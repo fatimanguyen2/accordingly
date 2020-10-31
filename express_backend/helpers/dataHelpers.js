@@ -69,10 +69,16 @@ const todayFormatting = (rawToday, rawRec, origin) => {
         end_time
       })
     }
+    return  ({
+        ...event,
+        start_time : moment(event.start_time).format(),
+        end_time : moment(event.end_time).format()
+      })
   })
-  const leaveBys = today.map(event => getLeaveBy(origin, event));
+  const fromNow = updateTodayToNow(today)
+  const leaveBys = fromNow.map(event => getLeaveBy(origin, event));
   return Promise.all(leaveBys)
-  .then(departures => today.map((event, index) => {
+  .then(departures => fromNow.map((event, index) => {
       return ({
         ...event,
         leave_by: moment(departures[index]).format()
@@ -207,8 +213,8 @@ const getTodayRecEndTime = (rec) => {
 
 const updateTodayToNow = (today) => {
   return today.filter(event => {
-    if(today.start_time) {
-      return moment(event.start_date) > moment();
+    if(event.start_time) {
+      return moment(event.start_time) > moment();
     } else {
       return moment(getTodayRecStartTime(event)) > moment();
     }
@@ -233,15 +239,15 @@ const sortEventChrono = (events) => {
 
 
 const getTripsToday = (origin, today) => {
+  const path = [[origin, today[0].destination]];
   if (today.length > 0) {
-    const path = [[origin, today[0].destination]];
     for (let x = 1; x < today.length; x ++) {
       path.push([today[x-1].destination, today[x].destination])
     }
     path.push([today[today.length - 1].destination, origin])
   } else {
     return null
-}
+  }
   
   return getMultipleTripTime(path)
   .then(travelTimes => {
@@ -262,13 +268,14 @@ const test6AM = moment("2020-10-29T06")
 const getRelativeSchedule = (tripTimes) => {
   return tripTimes.map(travelTimes => {
     return {
-      hours_from_now: moment(travelTimes.start_travel).diff(test6AM, 'h'),
+      hours_from_now: moment(travelTimes.start_travel).diff(moment(), 'h'),
       start_point : travelTimes.start_point
     }
   })
 }
 
 const weatherConditions = ({temp, humidity, weather, rain, uvi, wind_speed, visibility}) => {
+  if (!temp) return [null];
   const result = [qualifyTemp(temp), qualifyHumidity(humidity)]
   if (uvi) result.push(qualifyUVI(uvi));
   if (weather.rainy) result.push("rainy");
@@ -310,7 +317,7 @@ const checkWetGround = (rain) => {
   }
 }
 
-const condtionsOfDay = (conditions) => {
+const conditionsOfDay = (conditions) => {
     const bulkCond = conditions.map(condition =>{
       return weatherConditions(condition);
     })
@@ -342,7 +349,7 @@ module.exports = {
   getTripsToday,
   updateTodayToNow,
   getRelativeSchedule,
-  condtionsOfDay,
+  conditionsOfDay,
   formatEntryForFrontEnd,
   getNowConditions,
   formatTimeForDb
