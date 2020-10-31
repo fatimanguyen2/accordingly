@@ -11,9 +11,6 @@ module.exports = ({ deleteEntry }) => {
       .then(data => res.json(`Sucessfully updated entry : id '${data.id} '${data.title}' to be inactive`))
   })
 
-  router.put('/:id', function (req, res) {
-
-  })
 
   return router;
 }
