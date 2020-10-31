@@ -20,31 +20,38 @@
     border-radius: 10px;
     color: white;
     cursor: pointer;
-
+    box-shadow: 0 0 0.75rem #222222;
+    
     // EVENT BACKGROUND COLORS
     &--Thunderstorm { 
       background: $thunderstorm-color;
       color: black;
+      box-shadow: 0 0 0.75rem $thunderstorm-color;
     }
     &--Rainy {
       background: $rainy-drizzle-color;
       color: black;
+      box-shadow: 0 0 0.75rem $rainy-drizzle-color;
     }
     &--Drizzle{
       background: $rainy-drizzle-color;
       color: black;
+      box-shadow: 0 0 0.75rem $rainy-drizzle-color;
     }
     &--Snowy {
       background: $snowy-color;
       color: black;
+      box-shadow: 0 0 0.75rem $snowy-color;
     }
     &--Sunny {
       background: $sunny-color;
       color: black;
+      box-shadow: 0 0 0.75rem $sunny-color;
     }
     &--Cloudy {
       background: $cloudy-color;
       color: black;
+      box-shadow: 0 0 0.75rem $cloudy-color;
     }
 
     &__main {
