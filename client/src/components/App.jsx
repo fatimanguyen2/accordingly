@@ -254,6 +254,12 @@ function App() {
     ])
       .then(all => {
         initialRecommendations = all[1].data;
+
+        // Setting app primary color
+        let colours = setPrimaryColors(all[0].data.mainWeather[0]);
+        document.documentElement.style.setProperty('--primary-color', colours.solid);
+        document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
+
         setState(prev => (
           {
             ...prev,
@@ -264,14 +270,13 @@ function App() {
             homeAddress: all[3].data
           }))
       })
+      // .then(() => {
+      //   // Setting app primary color
+      //   // let colours = setPrimaryColors(state.weather.mainWeather[0]);
+      //   document.documentElement.style.setProperty('--primary-color', colours.solid);
+      //   document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
+      // })
   }, [])
-
-  console.log(initialRecommendations)
-
-  //Setting app primary color
-  let colours = setPrimaryColors(weather.mainWeather[0]); // TO FIX
-  document.documentElement.style.setProperty('--primary-color', colours.solid);
-  document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => setState(prev => ({ ...prev, loggedIn: false }));

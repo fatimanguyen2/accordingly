@@ -102,7 +102,7 @@ const setPrimaryColors = weather => {
     Rain: {solid: 'rgb(34,155,206)', gradient: 'rgba(34,155,206, 0.8)'},
     Snow: {solid: 'white', gradient: 'rgb(177, 218, 255)'},
     Clear: {solid: 'rgb(255,223,109)', gradient: 'rgba(255,223,109,0.8)'},
-    Clouds: {solid: 'rgb(168, 168, 168)', gradient: 'rgba(169, 208, 236, 0.726)'},
+    Clouds: {solid: 'rgb(184, 184, 184)', gradient: 'rgba(169, 208, 236, 0.726)'},
     default: {solid: 'white', gradient: 'white'}
   }
   
