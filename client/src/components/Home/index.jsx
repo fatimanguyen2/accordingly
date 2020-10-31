@@ -12,7 +12,6 @@ import RecommendationList from './RecommendationList';
 
 
 export const Home = props => {
-  // const [recommendations, setRecommendations] = useState({ ...props.recommendations, done: [] });
   const [headerSize, setHeaderSize] = useState('big');
 
   useScrollPosition(({ prevPos, currPos }) => {
