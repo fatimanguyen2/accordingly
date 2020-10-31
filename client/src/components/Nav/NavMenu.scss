@@ -7,11 +7,13 @@
   // min-height: 100px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   margin: 0px;
   transform: translate(0vh, -10vh);
   // background-color: pink;
   // position: absolute;
+  animation-name: expand;
+  animation-duration: 0.2s;
 
   .menu-shape {
     position: absolute;
@@ -30,8 +32,14 @@
   a {
     color: white;
     text-decoration: none;
-    font-size: 4vh;
-    padding: 1em;
+    font-size: 3vh;
+    padding: 10px;
+    padding-left: 2vh;
+
+    &.link--active {
+      font-weight: 700;
+      font-size: 6vh;
+    }
   }
   
   li {
@@ -46,5 +54,15 @@
   button {
     color: white;
     background: none;
+  }
+}
+
+@keyframes expand {
+  from {
+    height:0px;
+  }
+
+  to {
+    height: 50vh;
   }
 }

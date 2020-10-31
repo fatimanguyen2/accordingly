@@ -17,7 +17,7 @@ import { filterEvents, setPrimaryColors } from '../helpers/selectors';
 
 const weather = {
   mainWeather: [
-    "Rain"
+    "Clouds"
   ],
   feelsLikeTemp: 7.17,
   actualTemp: 10.78,
