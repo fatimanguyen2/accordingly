@@ -89,7 +89,7 @@ module.exports = (
         return getNowConditions(origin)
       })
       .then(conditions => getImmediateRecommendations(conditions))
-      .then(data => res.json([data.rows]))
+      .then(data => res.json({now : data.rows}))
   })
 
 
