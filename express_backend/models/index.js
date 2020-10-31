@@ -108,7 +108,6 @@ module.exports = (db) => {
       OR conditions.name = '${condition}'
       `)
     }
-    console.log(queryImmediate)
     
     return db.query(queryImmediate)
 
