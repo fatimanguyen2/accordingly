@@ -4,10 +4,10 @@ const router = express.Router();
 
 
 
-module.exports = ({ deleteEntry }) => {
+module.exports = ({ makeEntryInactive }) => {
 
   router.delete('/:id', function (req, res) {
-    deleteEntry(req.params.id)
+    makeEntryInactive(req.params.id)
       .then(data => res.json(`Sucessfully updated entry : id '${data.id} '${data.title}' to be inactive`))
   })
 
