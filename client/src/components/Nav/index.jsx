@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faPlus } from '@fortawesome/free-solid-svg-icons';
 import './Nav.scss';
@@ -24,6 +24,12 @@ export const Nav = props => {
   const openAdd = () => {
     setAddCollapse(false);
   };
+
+  useEffect(() => {
+    if (props.eventToEdit.entry_id) {
+      openAdd();
+    }
+  }, [props.eventToEdit]);
 
   const closeMenu = () => {
     setMenuCollapse(true);
