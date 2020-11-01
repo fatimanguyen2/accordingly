@@ -20,8 +20,16 @@ module.exports = (
   })
 
   router.put('/:id', function (req, res) {
+    console.log(req.body)
     formatAddressForDb(req.body.raw_address)
       .then(location => updateUserAddress(location, req.params.id))
+      .then(address => {
+        if (!address.city.includes('Unorganized')) {
+          return ({...req.body, title: req.body.entry, ...address})
+        } else {
+          return Promise.reject("Sorry we need at least a city")
+        }
+      })
       .then(user => res.json(user))
       .catch(err => res.json({ msg: err.message }))
   })
