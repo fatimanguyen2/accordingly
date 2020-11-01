@@ -17,6 +17,10 @@ export const Nav = props => {
     setMenuCollapse(state => !state);
   };
 
+  const toggleAdd = () => {
+    setAddCollapse(state => !state);
+  };
+
   const closeMenu = () => {
     setMenuCollapse(true);
   };
@@ -42,7 +46,7 @@ export const Nav = props => {
                 closeAdd();
               }}
               className={
-                classnames('button', {
+                classnames('nav--menu', 'button', {
                   'button--collapse': menuCollapse,
                   'button--expand': !menuCollapse,
                 })
@@ -50,7 +54,7 @@ export const Nav = props => {
               <FontAwesomeIcon icon={faBars} />
             </button>
             <div onClick={() => (menuCollapse && toggleMenu())} className={
-                classnames('menu-shape', {
+                classnames('nav--menu', 'menu-shape', {
                   'menu-shape--collapse': menuCollapse,
                   'menu-shape--expand': !menuCollapse,
                 })
@@ -73,23 +77,32 @@ export const Nav = props => {
 
       <div>
         {props.loggedIn && menuCollapse &&
-          <button
-            onClick={() => {
-              if (props.eventToEdit.entry_id) {
-                setAddCollapse(state => true);
-              } else {
-                setAddCollapse(state => !state);
-              }
-              props.clearToEdit();
-            }}
-            className={
-              classnames('button', {
-                'button--collapse': addCollapse,
-                'button--expand': !addCollapse || props.eventToEdit.entry_id,
+          <Fragment>
+            <button
+              onClick={() => {
+                if (props.eventToEdit.entry_id) {
+                  closeAdd();
+                } else {
+                  toggleAdd();
+                }
+                props.clearToEdit();
+              }}
+              className={
+                classnames('add--menu', 'button', {
+                  'button--collapse': addCollapse,
+                  'button--expand': !addCollapse || props.eventToEdit.entry_id,
+                })
+              }>
+              <FontAwesomeIcon icon={faPlus} />
+            </button>
+            <div onClick={() => (addCollapse && toggleAdd())} className={
+              classnames('add--menu', 'menu-shape', {
+                'menu-shape--collapse': menuCollapse,
+                'menu-shape--expand': !menuCollapse,
               })
-            }>
-            <FontAwesomeIcon icon={faPlus} />
-          </button>
+            }></div>
+
+          </Fragment>
         }
         {(!addCollapse || props.eventToEdit.entry_id) && props.loggedIn &&
           <Fragment>

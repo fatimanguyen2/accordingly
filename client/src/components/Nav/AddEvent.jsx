@@ -4,6 +4,7 @@ import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import useEndlessForm from '../../hooks/useEndlessForm';
 import { getDateFromTimestamp, giveHTMLID, validateObj, addSeconds, removeSeconds, getHourFromTime } from '../../helpers/selectors';
 import moment from 'moment';
+import './AddEvent.scss';
 
 import LocationSearchInput from '../LocationSearchInput'
 const classnames = require('classnames');
@@ -39,7 +40,7 @@ export const AddEvent = (props) => {
   });
 
   return (
-    <form onSubmit={(e) => e.preventDefault()} >
+    <form className='add-menu' onSubmit={(e) => e.preventDefault()} >
       <label htmlFor="entry">Title</label>
       <input type="text" name="entry" id="entry" placeholder="Add Title" defaultValue={entry} onChange={handleInputChange} required></input>
       <LocationSearchInput onChange={handleAddress} destination={raw_address}/>

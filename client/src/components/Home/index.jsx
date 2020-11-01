@@ -13,6 +13,7 @@ import RecommendationList from './RecommendationList';
 
 export const Home = props => {
   const [headerSize, setHeaderSize] = useState('big');
+  const [render, setRender] = useState(false);
 
   useScrollPosition(({ prevPos, currPos }) => {
     if (headerSize === 'big' && currPos.y < -400) {
@@ -27,41 +28,47 @@ export const Home = props => {
   const LATER = 'later';
   const DONE = 'done';
 
+  const reRenderList = () => {
+    setRender(!render);
+  }
+
   return (
     <Fragment>
-      {
-        props.loggedIn
-          ? <div className='home'>
-            <header className={headerSize}>
-              <div className={`${headerSize}__weather-event`}>
-                <WeatherRing
-                  mainWeather={props.weather.mainWeather && props.weather.mainWeather[0]}
-                  feelsLikeTemp={Math.round(props.weather.feelsLikeTemp)}
-                  minTemp={Math.round(props.weather.feels_likeMin)}
-                  maxTemp={Math.round(props.weather.feels_likeMax)}
-                  size={headerSize}
-                />
-                {props.events && <EventList events={props.events} />}
-              </div>
-              <DepartureTime departureTime={props.events && props.events[0].leave_by} />
-            </header>
+      {props.loggedIn
+        ? <div className='home'>
 
-            {Object.keys(props.recommendations).length &&
-              <section className='recommendations'>
-                <Fragment>
-                  {!props.recommendations.now ?
-                    <Fragment>
-                      <RecommendationList recommendations={props.recommendations[UPCOMING]} handleCheck={props.handleCheck} type={UPCOMING}>Upcoming: </RecommendationList>
-                      <RecommendationList recommendations={props.recommendations[LATER]} handleCheck={props.handleCheck} type={LATER}>Later: </RecommendationList>
-                    </Fragment> :
-                    <RecommendationList recommendations={props.recommendations[NOW]} handleCheck={props.handleCheck} type={NOW}>Now: </RecommendationList>
-                  }
-                  <RecommendationList recommendations={props.recommendations[DONE]} handleCheck={props.handleCheck} type={DONE}>Done: </RecommendationList>
-                </Fragment>
+          <header className={headerSize}>
+            <div className={`${headerSize}__weather-event`}>
+              <WeatherRing
+                mainWeather={props.weather.mainWeather && props.weather.mainWeather[0]}
+                feelsLikeTemp={Math.round(props.weather.feelsLikeTemp)}
+                minTemp={Math.round(props.weather.feels_likeMin)}
+                maxTemp={Math.round(props.weather.feels_likeMax)}
+                size={headerSize}
+              />
+              {props.events && <EventList events={props.events} />}
+            </div>
+            {props.events && props.events.length > 0 && <DepartureTime departureTime={props.events[0].leave_by} />}
+          </header>
+
+          {Object.keys(props.recommendations).length &&
+            <section className='recommendations'>
+              <Fragment>
+                {!props.recommendations.now ?
+                  <Fragment>
+                    {props.recommendations[UPCOMING] && props.recommendations[UPCOMING].length > 0 && <RecommendationList recommendations={props.recommendations[UPCOMING]} handleCheck={props.handleCheck} reRender={reRenderList} type={UPCOMING}>Upcoming </RecommendationList>}
+                    {props.recommendations[LATER] && props.recommendations[LATER].length > 0 && <RecommendationList recommendations={props.recommendations[LATER]} handleCheck={props.handleCheck} reRender={reRenderList} type={LATER}>Later </RecommendationList>}
+                  </Fragment> :
+                  <Fragment>
+                    {props.recommendations[LATER] && props.recommendations[LATER].length > 0 && <RecommendationList recommendations={props.recommendations[NOW]} handleCheck={props.handleCheck} reRender={reRenderList} type={NOW}>Now </RecommendationList>}
+                  </Fragment>
+                }
+                {props.recommendations[DONE] && props.recommendations[DONE].length > 0 && <RecommendationList recommendations={props.recommendations[DONE]} handleCheck={props.handleCheck} reRender={reRenderList} type={DONE}>Done </RecommendationList>}
+              </Fragment>
             </section>}
 
-          </div>
-          : <Redirect to='/login' />
+        </div>
+        : <Redirect to='/login' />
       }
     </Fragment>
   );

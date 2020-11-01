@@ -26,6 +26,7 @@ const getMainWeather = (location) => {
 }
 
 const getDetailedForcast = (schedule) => {
+  console.log(schedule)
   const allForecasts = schedule.map(step => {
     const hour = step.hours_from_now
     if (hour > 0) {
@@ -35,7 +36,7 @@ const getDetailedForcast = (schedule) => {
       return getWeather(step.start_point)
       .then(data => data.current)
     } else {
-      return null
+      return {}
     }
   })
   return Promise.all(allForecasts)
@@ -48,7 +49,7 @@ const getForecastCategory = (event) => {
   const in48h = moment().add(48, 'h');
   if (moment(start).isBefore(in48h)) {
     const hour = moment(start).diff(moment(), "hour")
-    if (hour > 0) {
+    if (hour >= 0) {
       return getWeather(event.destination)
         .then(data => data.hourly[hour].weather[0].main)
     } else {
