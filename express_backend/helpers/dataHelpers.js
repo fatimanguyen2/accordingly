@@ -11,7 +11,7 @@ const createEventList = (rawEvents, id) => {
       return {
         today: sortEventChrono(today),
         repeating : groupByEntry(rawEvents[1].map(event => ({...event, next_event: getNextEventFromRec(event)}))) || [],///needs refatoring
-        future : sortEventChrono(rawEvents[2])
+        future : sortEventChrono(rawEvents[2].map(event => ({...event, start_time : moment(event.start_time).format(), end_time: moment(event.end_time).format()} )))
       };
     })
     .then(eventList => {
@@ -37,7 +37,8 @@ const formatEntryForFrontEnd = (entry) => {
     return getForecastCategory(formarttedRec[0].next_event)
       .then(weather => ({...formarttedRec[0], next_event : ({...formarttedRec[0].next_event, weather : weather})}))
   } else {
-    const formattedEvent = { ...entry[0], start_time: entry[0].trip_start_time, end_time : entry[0].trip_end_time}
+    const formattedEvent = { ...entry[0], start_time: moment(entry[0].trip_start_time).format(), end_time : moment(entry[0].trip_end_time).format()}
+    console.log(formattedEvent)
     return getForecastCategory(formattedEvent)
       .then(weather => {
         const { entry, entry_id, destination, address, city, postal_code, trip_id, start_time, end_time } = formattedEvent;
@@ -61,8 +62,8 @@ const formatEntryForFrontEnd = (entry) => {
 const todayFormatting = (rawToday, rawRec, origin) => {
   const today = rawToday.concat(checkReocsToday(rawRec)).map(event => {
     if (!event.start_time){
-      const start_time = getTodayRecStartTime(event);
-      const end_time = getTodayRecEndTime(event);
+      const start_time = moment(getTodayRecStartTime(event)).format();
+      const end_time = moment(getTodayRecEndTime(event)).format();
       return ({
       ...event,
         start_time,
@@ -183,14 +184,14 @@ const getNextEventFromRec = (reoc) => {
       return moment(reoc.initial).add(cycleWeek * reoc.interval,'w');
     case 'monthly':
       const fromInitialMonth =  moment().month() - moment(reoc.initial).month();
-      const cycleMonth = Math.floor(fromInitialMonth/reoc.interval);
+      let cycleMonth = Math.floor(fromInitialMonth/reoc.interval);
       if (moment().date() >= moment(reoc.initial).date()) {
         cycleMonth ++;
       };
       return moment(reoc.initial).add(cycleMonth * reoc.interval,'M');
     case 'yearly':
       const fromInitialYear =  moment().year() - moment(reoc.initial).year();
-      const cycleYear = Math.floor(fromInitialYear/reoc.interval);
+      let cycleYear = Math.floor(fromInitialYear/reoc.interval);
       if (moment().dayOfYear() >= moment(reoc.initial).dayOfYear()) {
         cycleYear ++;
       };
