@@ -60,7 +60,7 @@ export const Home = props => {
                     {props.recommendations[LATER] && props.recommendations[LATER].length > 0 && <RecommendationList recommendations={props.recommendations[LATER]} handleCheck={props.handleCheck} reRender={reRenderList} type={LATER}>Later </RecommendationList>}
                   </Fragment> :
                   <Fragment>
-                    {props.recommendations[LATER] && props.recommendations[LATER].length > 0 && <RecommendationList recommendations={props.recommendations[NOW]} handleCheck={props.handleCheck} reRender={reRenderList} type={NOW}>Now </RecommendationList>}
+                    {props.recommendations[NOW] && props.recommendations[NOW].length > 0 && <RecommendationList recommendations={props.recommendations[NOW]} handleCheck={props.handleCheck} reRender={reRenderList} type={NOW}>Now </RecommendationList>}
                   </Fragment>
                 }
                 {props.recommendations[DONE] && props.recommendations[DONE].length > 0 && <RecommendationList recommendations={props.recommendations[DONE]} handleCheck={props.handleCheck} reRender={reRenderList} type={DONE}>Done </RecommendationList>}

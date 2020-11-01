@@ -10,7 +10,7 @@ import LocationSearchInput from './LocationSearchInput'
 
 
 export const Settings = props => {
-  const [startOfDay, setStartOfDay] = useState('');
+  // const [startOfDay, setStartOfDay] = useState('');
   const [showButton, setShowButton] = useState(false);
   const raw_address = `${props.address.address}, ${props.address.city}`
 
