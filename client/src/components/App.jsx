@@ -310,7 +310,6 @@ function App() {
   };
 
   const updateAddress = (addressObj) => {
-    console.log(addressObj)
     axios.put('/api/users/2', addressObj)
       .then(() => setState(prev => ({ ...prev, homeAddress: addressObj })))
       .catch(() => console.log('failed to update address'));
