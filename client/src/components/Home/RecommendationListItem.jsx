@@ -9,7 +9,11 @@ export default function RecommendationItem(props) {
 
   const buttonClass = classNames('recommendation-list-item ', { 'recommendation-list-item--checked': props.type === 'done' })
 
-  const onClick = () => { props.handleCheck(props.id, props.type) };
+  const onClick = () => {
+    props.handleCheck(props.id, props.type);
+    props.reRender();
+
+  };
 
   return (
     <li className={buttonClass}>

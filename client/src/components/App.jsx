@@ -27,78 +27,78 @@ const weather = {
 
 const events = {
   today: [
-    {
-      "entry": "morning run",
-      "id": 6,
-      "destination": {
-        "x": 49.259432,
-        "y": -123.100795
-      },
-      "address": "2846 Main St",
-      "city": "Vancouver",
-      "postal_code": "V5T 3G2",
-      "is_outdoor": true,
-      "start_date": "2020-03-05T05:00:00.000Z",
-      "start_hour": "07:00:00",
-      "end_hour": "07:30:00",
-      "entry_id": 2,
-      "type_of": "daily",
-      "initial": "2020-03-05T05:00:00.000Z",
-      "interval": 1,
-      "recurrence_id": 2,
-      "start_time": "2020-10-29T07:00:00",
-      "end_time": "2020-10-29T07:30:00",
-      "leave_by": "2020-10-29T06:36:10-04:00",
-      "weather": "Clouds"
-    },
-    {
-      entry: "commute",
-      id: 4,
-      is_outdoor: true,
-      destination: {
-        x: 49.2301,
-        y: -123.10867
-      },
-      address: "2846 Main St",
-      city: "Vancouver",
-      postal_code: "V5T 3G2",
-      start_date: "2020-03-05T05:00:00.000Z",
-      start_hour: "08:00:00",
-      end_hour: "16:00:00",
-      entry_id: 1,
-      type_of: "weekly",
-      initial: "2020-03-12T04:00:00.000Z",
-      interval: 1,
-      recurrence_id: 1,
-      start_time: "2020-10-29T08:00:00",
-      end_time: "2020-10-29T16:00:00",
-      leave_by: "2020-10-29T07:28:26-04:00",
-      weather: "Thunderstorm"
-    },
-    {
-      entry: "commute",
-      id: 7,
-      is_outdoor: true,
-      destination: {
-        x: 49.2301,
-        y: -123.10867
-      },
-      address: "2846 Main St",
-      city: "Vancouver",
-      postal_code: "V5T 3G2",
-      start_date: "2020-03-05T05:00:00.000Z",
-      start_hour: "08:00:00",
-      end_hour: "16:00:00",
-      entry_id: 1,
-      type_of: "weekly",
-      initial: "2020-03-12T04:00:00.000Z",
-      interval: 1,
-      recurrence_id: 1,
-      start_time: "2020-10-29T08:00:00",
-      end_time: "2020-10-29T16:00:00",
-      leave_by: "2020-10-29T07:28:26-04:00",
-      weather: "Clear"
-    }
+    // {
+    //   "entry": "morning run",
+    //   "id": 6,
+    //   "destination": {
+    //     "x": 49.259432,
+    //     "y": -123.100795
+    //   },
+    //   "address": "2846 Main St",
+    //   "city": "Vancouver",
+    //   "postal_code": "V5T 3G2",
+    //   "is_outdoor": true,
+    //   "start_date": "2020-03-05T05:00:00.000Z",
+    //   "start_hour": "07:00:00",
+    //   "end_hour": "07:30:00",
+    //   "entry_id": 2,
+    //   "type_of": "daily",
+    //   "initial": "2020-03-05T05:00:00.000Z",
+    //   "interval": 1,
+    //   "recurrence_id": 2,
+    //   "start_time": "2020-10-29T07:00:00",
+    //   "end_time": "2020-10-29T07:30:00",
+    //   "leave_by": "2020-10-29T06:36:10-04:00",
+    //   "weather": "Clouds"
+    // },
+    // {
+    //   entry: "commute",
+    //   id: 4,
+    //   is_outdoor: true,
+    //   destination: {
+    //     x: 49.2301,
+    //     y: -123.10867
+    //   },
+    //   address: "2846 Main St",
+    //   city: "Vancouver",
+    //   postal_code: "V5T 3G2",
+    //   start_date: "2020-03-05T05:00:00.000Z",
+    //   start_hour: "08:00:00",
+    //   end_hour: "16:00:00",
+    //   entry_id: 1,
+    //   type_of: "weekly",
+    //   initial: "2020-03-12T04:00:00.000Z",
+    //   interval: 1,
+    //   recurrence_id: 1,
+    //   start_time: "2020-10-29T08:00:00",
+    //   end_time: "2020-10-29T16:00:00",
+    //   leave_by: "2020-10-29T07:28:26-04:00",
+    //   weather: "Thunderstorm"
+    // },
+    // {
+    //   entry: "commute",
+    //   id: 7,
+    //   is_outdoor: true,
+    //   destination: {
+    //     x: 49.2301,
+    //     y: -123.10867
+    //   },
+    //   address: "2846 Main St",
+    //   city: "Vancouver",
+    //   postal_code: "V5T 3G2",
+    //   start_date: "2020-03-05T05:00:00.000Z",
+    //   start_hour: "08:00:00",
+    //   end_hour: "16:00:00",
+    //   entry_id: 1,
+    //   type_of: "weekly",
+    //   initial: "2020-03-12T04:00:00.000Z",
+    //   interval: 1,
+    //   recurrence_id: 1,
+    //   start_time: "2020-10-29T08:00:00",
+    //   end_time: "2020-10-29T16:00:00",
+    //   leave_by: "2020-10-29T07:28:26-04:00",
+    //   weather: "Clear"
+    // }
   ],
   repeating: [
     {
@@ -287,7 +287,8 @@ function App() {
   // Change state when checking items on recommendation list in home component
   const handleCheck = (id, type) => {
     const item = getItem(id, state.recommendations[type]); //get item object
-    const category = getSuggestionCategory(id, initialRecommendations); //get initial item category of axios request to ensure done itesm go back to right category
+    // const category = getSuggestionCategory(id, initialRecommendations); //get initial item category of axios request to ensure done itesm go back to right category
+    const category = getSuggestionCategory(id, recommendations); //get initial item category of axios request to ensure done itesm go back to right category
     // if item gets checked and is in upcoming/later list, remove from that list and add to done list
     if (type !== 'done') {
       const updatedRecommendationsObj = {
@@ -306,7 +307,6 @@ function App() {
     }
   };
 
-
   const updateAddress = (addressObj) => {
     axios.put('/api/users/2', addressObj)
       .then(() => setState(prev => ({ ...prev, homeAddress: addressObj })))
@@ -318,10 +318,10 @@ function App() {
     const newEventsObj = { ...state.events, [scheduleType]: filteredArr };
 
     axios.delete(`/api/entries/${id}`)
-      .catch(() => {
+      .then(() => {
         setState(prev => ({ ...prev, events: newEventsObj }))
       })
-    // .catch(() => console.log('failed delete')); // TO FIX
+      .catch(() => console.log('failed delete')); 
   };
 
   const addEvent = (eventObj) => {
@@ -384,6 +384,7 @@ function App() {
                   weather={state.weather}
                   recommendations={state.recommendations}
                   handleCheck={handleCheck}
+                  events={state.events.today}
                 />
               </Route>
 
