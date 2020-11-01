@@ -4,13 +4,14 @@
 html {
   font-size: 1em;
   word-break: break-word;
-  max-width: 500px;
 }
 
 body {
   font-family: $font-stack;
   background-color: black;
   color: white;
+  // max-width: 500px;
+  // margin: auto
 }
 
 ul {
@@ -70,10 +71,6 @@ h1 {font-size: $h1}
   -webkit-animation-duration: 1s;
   animation-name: animatebottom;
   animation-duration: 1s;
-
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
   height: 100vh;
 }
 
