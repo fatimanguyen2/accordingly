@@ -21,13 +21,18 @@ $snowy-color-gradient: rgb(177, 218, 255);
 $sunny-color: rgb(255,223,109);
 $sunny-color-gradient: rgba(255,223,109,0.8);
 
-$cloudy-color: rgb(184, 184, 184);
+$cloudy-color: rgb(168, 168, 168);
 $cloudy-color-gradient: rgba(169, 208, 236, 0.726);
 
 //Nav Sizes
 $nav-menu-height: 50vh;
 $nav-menu-border: 5vh;
 $nav-menu-translate: calc($nav-menu-translate + (2 * $nav-menu-border));
+
+$add-menu-height: 50vh;
+$add-menu-border: 5vh;
+$add-menu-translate: calc($nav-menu-translate + (2 * $nav-menu-border));
+
 
 // For responsive text size
 $font-size: 1em;

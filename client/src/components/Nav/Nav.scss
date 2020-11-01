@@ -26,25 +26,54 @@
       box-shadow: none;
       outline: none;
     }
-    
-    &.button--collapse {
-      transform: translate(0px, -10vh);
-      height: 8vh;
-      padding: 2vh;
-    }
 
-    &.button--expand {
-      height: 5vh;
-      transform: translate(0px, -9.5vh) rotate(9deg);
-      
-      svg {
-        padding-left: 1.5vh;
+    &.nav--menu {
+
+      &.button--collapse {
+        transform: translate(0px, -10vh);
+        height: 8vh;
+        padding: 2vh;
       }
+  
+      &.button--expand {
+        height: $nav-menu-border;
+        transform: translate(0px, -9.5vh) rotate(9deg);
+        
+        svg {
+          padding-left: 1.5vh;
+        }
+      }
+  
+      svg {
+        font-size: 4vh;
+      }
+
     }
 
-    svg {
-      font-size: 4vh;
+    &.add--menu {
+
+      &.button--collapse {
+        transform: translate(0px, -10vh);
+        height: 8vh;
+        padding: 2vh;
+      }
+  
+      &.button--expand {
+        height: $add-menu-border;
+        transform: translate(0px, -9.5vh) rotate(9deg);
+        
+        svg {
+          padding-left: 1.5vh;
+        }
+      }
+  
+      svg {
+        font-size: 4vh;
+      }
+
     }
+
+    
   }
 
   .menu-shape {
