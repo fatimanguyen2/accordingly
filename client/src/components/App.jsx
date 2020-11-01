@@ -307,7 +307,6 @@ function App() {
     }
   };
 
-
   const updateAddress = (addressObj) => {
     axios.put('/api/users/2', addressObj)
       .then(() => setState(prev => ({ ...prev, homeAddress: addressObj })))
@@ -319,10 +318,10 @@ function App() {
     const newEventsObj = { ...state.events, [scheduleType]: filteredArr };
 
     axios.delete(`/api/entries/${id}`)
-      .catch(() => {
+      .then(() => {
         setState(prev => ({ ...prev, events: newEventsObj }))
       })
-    // .catch(() => console.log('failed delete')); // TO FIX
+      .catch(() => console.log('failed delete')); // TO FIX
   };
 
   const addEvent = (eventObj) => {
