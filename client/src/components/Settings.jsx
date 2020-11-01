@@ -33,8 +33,8 @@ export const Settings = props => {
 
             <div className='settings__home-location'>
               <FontAwesomeIcon className='settings__location-icon' icon={faMapMarkerAlt} />
-              <LocationSearchInput onChange={() => {
-                handleAddress();
+              <LocationSearchInput onChange={(e) => {
+                handleAddress(e);
                 setShowButton(true);
               }} destination={raw_address} />
             </div>
