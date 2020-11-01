@@ -55,7 +55,7 @@ module.exports = (
       .then(entry => postEntry(entry, req.params.user_id))
       .then(postedEntry => formatEntryForFrontEnd(postedEntry.rows))
       .then(formattedEntry => res.json(formattedEntry))
-      .then(() => makeEntryInactive(req.params.user_id))
+      .then(() => makeEntryInactive(req.params.id))
       .catch(err => err)
   })
     
