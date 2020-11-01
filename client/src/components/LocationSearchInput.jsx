@@ -33,8 +33,8 @@ class LocationSearchInput extends React.Component {
         highlightFirstSuggestion={true}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
-            <label htmlFor='location_search'>Location</label>
+          <div className='place-autocomplete'>
+            <label className='place-autocomplete__label' htmlFor='location_search'>Location: </label>
             <input
               {...getInputProps({
                 id: 'location_search',

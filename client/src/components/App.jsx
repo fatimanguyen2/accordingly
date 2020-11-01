@@ -221,28 +221,28 @@ const recommendations = {
 let initialRecommendations = {};
 
 function App() {
-  // const [state, setState] = useState({
-  //   loading: false,
-  //   view: 'home',
-  //   loggedIn: true,
-  //   weather,
-  //   recommendations,
-  //   events,
-  //   time: 1603740043000,
-  //   homeAddress,
-  //   eventToEdit: {}
-  // });
   const [state, setState] = useState({
-    loading: true,
+    loading: false,
     view: 'home',
     loggedIn: true,
-    weather: {},
-    recommendations: {},
-    events: {},
+    weather,
+    recommendations,
+    events,
     time: 1603740043000,
-    homeAddress: {},
+    homeAddress,
     eventToEdit: {}
   });
+  // const [state, setState] = useState({
+  //   loading: true,
+  //   view: 'home',
+  //   loggedIn: true,
+  //   weather: {},
+  //   recommendations: {},
+  //   events: {},
+  //   time: 1603740043000,
+  //   homeAddress: {},
+  //   eventToEdit: {}
+  // });
 
   const getAllData = () => {
     Promise.all([
@@ -278,9 +278,9 @@ function App() {
       // })
   };
 
-  useEffect(() => {
-    getAllData();
-  }, [])
+  // useEffect(() => {
+  //   getAllData();
+  // }, [])
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => setState(prev => ({ ...prev, loggedIn: false }));
@@ -346,7 +346,7 @@ function App() {
   const openEdit = (entry_id) => {
     // console.log("entry_id " + entry_id);
     // console.log(state.events);
-    const allEvents = [...state.events.repeating, ...state.events.future, ...state.events.today.filter(ele => ele.recurrence_id !== undefined)]
+    const allEvents = [...state.events.repeating, ...state.events.future, ...state.events.today.filter(ele => ele.recurrence_id === undefined)]
     console.log(allEvents);
     const eventToEditArr = allEvents.filter(eventItem => eventItem.entry_id === entry_id);
     console.log(eventToEditArr[0]);
