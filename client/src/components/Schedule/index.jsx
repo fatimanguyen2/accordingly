@@ -19,7 +19,7 @@ export const Schedule = props => {
     <Fragment>
       {props.loggedIn ?
         <div className='schedule'>
-          <h1>Schedule</h1>
+          <h1 className='schedule__title'>Schedule</h1>
           {
             props.events[TODAY]
             && props.events[TODAY].length > 0

@@ -1,0 +1,12 @@
+@import 'base';
+
+.settings {
+  &__title {
+    padding-bottom: 0.5rem;
+    border-bottom: 0.3rem solid var(--primary-color);
+  }
+
+  &__home-location {
+    display: flex;
+  }
+}
