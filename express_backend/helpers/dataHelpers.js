@@ -11,7 +11,7 @@ const createEventList = (rawEvents, id) => {
       return {
         today: sortEventChrono(today),
         repeating : groupByEntry(rawEvents[1].map(event => ({...event, next_event: getNextEventFromRec(event)}))) || [],///needs refatoring
-        future : sortEventChrono(rawEvents[2])
+        future : sortEventChrono(rawEvents[2].map(event => ({...event, start_time : moment(event.start_time).format(), end_time: moment(event.end_time).format()} )))
       };
     })
     .then(eventList => {
@@ -37,7 +37,8 @@ const formatEntryForFrontEnd = (entry) => {
     return getForecastCategory(formarttedRec[0].next_event)
       .then(weather => ({...formarttedRec[0], next_event : ({...formarttedRec[0].next_event, weather : weather})}))
   } else {
-    const formattedEvent = { ...entry[0], start_time: entry[0].trip_start_time, end_time : entry[0].trip_end_time}
+    const formattedEvent = { ...entry[0], start_time: moment(entry[0].trip_start_time).format(), end_time : moment(entry[0].trip_end_time).format()}
+    console.log(formattedEvent)
     return getForecastCategory(formattedEvent)
       .then(weather => {
         const { entry, entry_id, destination, address, city, postal_code, trip_id, start_time, end_time } = formattedEvent;
@@ -61,8 +62,8 @@ const formatEntryForFrontEnd = (entry) => {
 const todayFormatting = (rawToday, rawRec, origin) => {
   const today = rawToday.concat(checkReocsToday(rawRec)).map(event => {
     if (!event.start_time){
-      const start_time = getTodayRecStartTime(event);
-      const end_time = getTodayRecEndTime(event);
+      const start_time = moment(getTodayRecStartTime(event)).format();
+      const end_time = moment(getTodayRecEndTime(event)).format();
       return ({
       ...event,
         start_time,

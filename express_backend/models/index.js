@@ -39,7 +39,6 @@ module.exports = (db) => {
     JOIN frequencies ON recurrence_id = recurrences.id
     WHERE user_id = ${user} 
     AND entries.is_active = TRUE 
-    AND start_date < ${now}
     `)
 
     const queryFuture = (`
@@ -94,7 +93,6 @@ module.exports = (db) => {
 
   const getImmediateRecommendations = (conditions) => {
     let nowCond = conditions
-    console.log(nowCond)
     const temp = nowCond.shift()
     let queryImmediate = (`
       SELECT DISTINCT items.id, items.name, items.description FROM items
@@ -170,7 +168,7 @@ module.exports = (db) => {
       VALUES
         ($1, null, point(${entry.destination.x}, ${entry.destination.y}), '${entry.street}', '${entry.city}', '${entry.postal_code || null}', ${user_id})
     RETURNING entries.id
-    `, [`${entry.title}`])
+    `, [`${entry.entry}`])
     .then(id => {
       newEntryId = id.rows[0].id
       const formattedEntry = {...entry, id : newEntryId}
