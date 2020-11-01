@@ -108,10 +108,10 @@ module.exports = (db) => {
     }
     
     return db.query(queryImmediate)
-
   }
 
   const getRecommendations = (conditions) => {
+    console.log(conditions)
     let nowCond = conditions[0]
     const temp = nowCond.shift()
     let futurCond = conditions[1]
@@ -146,10 +146,11 @@ module.exports = (db) => {
     const later = db.query(queryFuture)
 
     return Promise.all([now, later])
-      .then(results => ({now : results[0].rows, later : results[1].rows}))
+      .then(results => ({upcoming : results[0].rows, later : results[1].rows}))
   }
 
   const makeEntryInactive = (entryID) => {
+    console.log(entryID)
     const query = (`
     UPDATE entries
     SET is_active = FALSE

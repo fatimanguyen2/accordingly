@@ -6,7 +6,8 @@ const router = express.Router();
 
 
 module.exports = (
-  { getUserEvents, getUserLocationById, getUserAddressById, getRecommendations, postEntry, getImmediateRecommendations }, 
+  { getUserEvents, getUserLocationById, getUserAddressById, getRecommendations, 
+    postEntry, getImmediateRecommendations, makeEntryInactive }, 
   { createEventList, getTripsToday, getRelativeSchedule, conditionsOfDay, formatEntryForFrontEnd, getNowConditions }, 
   { formatAddressForDb }, 
   { getMainWeather, getDetailedForcast }
@@ -15,6 +16,7 @@ module.exports = (
   router.get('/:id', function (req, res) {
     getUserAddressById(req.params.id)
       .then(location => res.json(location))
+      .catch(err => res.json({ msg: err.message }))
   })
 
   
@@ -31,6 +33,7 @@ module.exports = (
       .then(entry => postEntry(entry, req.params.id))
       .then(postedEntry => formatEntryForFrontEnd(postedEntry.rows))
       .then(formattedEntry => res.json(formattedEntry))
+      .catch(err => res.json({ msg: err.message }))
   })
 
   router.put('/:user_id/entries/:id', function (req, res) {
@@ -46,6 +49,7 @@ module.exports = (
       .then(postedEntry => formatEntryForFrontEnd(postedEntry.rows))
       .then(formattedEntry => res.json(formattedEntry))
       .then(() => makeEntryInactive(req.params.user_id))
+      .catch(err => err)
   })
     
 
@@ -89,39 +93,9 @@ module.exports = (
         return getNowConditions(origin)
         .then(conditions => getImmediateRecommendations(conditions))
         .then(data => res.json({now : data.rows}))
+        .catch(err => res.json({ msg: err.message }))
       })
   })
-
-
-
-
-  // router.post('/', (req, res) => {
-
-  //   const {
-  //     first_name,
-  //     last_name,
-  //     email,
-  //     password
-  //   } = req.body;
-
-  //   getUserByEmail(email)
-  //     .then(user => {
-
-  //       if (user) {
-  //         res.json({
-  //           msg: 'Sorry, a user account with this email already exists'
-  //         });
-  //       } else {
-  //         return addUser(first_name, last_name, email, password)
-  //       }
-
-  //     })
-  //     .then(newUser => res.json(newUser))
-  //     .catch(err => res.json({
-  //       error: err.message
-  //     }));
-
-  // })
 
 
   return router;

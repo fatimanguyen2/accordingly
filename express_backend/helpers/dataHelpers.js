@@ -184,14 +184,14 @@ const getNextEventFromRec = (reoc) => {
       return moment(reoc.initial).add(cycleWeek * reoc.interval,'w');
     case 'monthly':
       const fromInitialMonth =  moment().month() - moment(reoc.initial).month();
-      const cycleMonth = Math.floor(fromInitialMonth/reoc.interval);
+      let cycleMonth = Math.floor(fromInitialMonth/reoc.interval);
       if (moment().date() >= moment(reoc.initial).date()) {
         cycleMonth ++;
       };
       return moment(reoc.initial).add(cycleMonth * reoc.interval,'M');
     case 'yearly':
       const fromInitialYear =  moment().year() - moment(reoc.initial).year();
-      const cycleYear = Math.floor(fromInitialYear/reoc.interval);
+      let cycleYear = Math.floor(fromInitialYear/reoc.interval);
       if (moment().dayOfYear() >= moment(reoc.initial).dayOfYear()) {
         cycleYear ++;
       };
