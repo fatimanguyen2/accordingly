@@ -7,7 +7,7 @@ const router = express.Router();
 
 module.exports = (
   { getUserEvents, getUserLocationById, getUserAddressById, getRecommendations, 
-    postEntry, getImmediateRecommendations, makeEntryInactive }, 
+    postEntry, getImmediateRecommendations, makeEntryInactive, updateUserAddress }, 
   { createEventList, getTripsToday, getRelativeSchedule, conditionsOfDay, formatEntryForFrontEnd, getNowConditions }, 
   { formatAddressForDb }, 
   { getMainWeather, getDetailedForcast }
@@ -19,6 +19,13 @@ module.exports = (
       .catch(err => res.json({ msg: err.message }))
   })
 
+  router.put('/:id', function (req, res) {
+    formatAddressForDb(req.body.raw_address)
+      .then(location => updateUserAddress(location, req.params.id))
+      .then(user => res.json(user))
+      .catch(err => res.json({ msg: err.message }))
+  })
+
   
 
   router.post('/:id/entries', function (req, res) {
@@ -27,7 +34,7 @@ module.exports = (
         if (!address.city.includes('Unorganized')) {
           return ({...req.body, title: req.body.entry, ...address})
         } else {
-          res.json("Sorry we need at least a city")
+          return Promise.reject("Sorry we need at least a city")
         }
       })
       .then(entry => postEntry(entry, req.params.id))
@@ -42,7 +49,7 @@ module.exports = (
         if (!address.city.includes('Unorganized')) {
           return ({...req.body, title: req.body.entry, ...address})
         } else {
-          res.json("Sorry we need at least a city")
+          return Promise.reject("Sorry we need at least a city")
         }
       })
       .then(entry => postEntry(entry, req.params.user_id))

@@ -162,7 +162,6 @@ module.exports = (db) => {
   }
 
   const postEntry = (entry, user_id) => {
-    console.log(entry)
     let newEntryId
     return db.query(`
     INSERT INTO entries(title, is_outdoor, destination, address, city, postal_code, user_id)
@@ -287,17 +286,25 @@ module.exports = (db) => {
       if (rec.type_of !== 'week' ) {
         initial = moment(rec.start_date).day(freq.type_of).format('YYYY-MM-DD')
         }
+      }
+  return {
+    type_of,
+    initial,
+    interval : freq.interval,
+    recurrence_id : rec.id,
     }
-    return {
-      type_of,
-      initial,
-      interval : freq.interval,
-      recurrence_id : rec.id,
-    }
-
   }
-  
 
+  const updateUserAddress = (address, id) => {
+    return db.query(`
+    UPDATE users
+    SET address = ${address.street},
+    SET city = ${address.city},
+    SET postal_code = ${address.postal_code},
+    WHERE id = ${id}
+    RETURNING *
+    `)
+  }
 
   return {
     getUserEvents,
@@ -306,6 +313,7 @@ module.exports = (db) => {
     makeEntryInactive,
     postEntry,
     getImmediateRecommendations,
+    updateUserAddress,
     getRecommendations
   };
 };
