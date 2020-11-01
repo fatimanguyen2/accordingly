@@ -1,0 +1,11 @@
+@import '../base';
+
+button {
+  background-color: var(--primary-color);
+  cursor: pointer;
+  font-size: $font-size;
+  border-radius: 5px;
+  outline: 0;
+  padding: 0.4rem 0.7rem;
+  border-style: none;
+}

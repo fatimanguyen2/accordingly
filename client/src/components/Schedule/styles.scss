@@ -1,6 +1,12 @@
 @import '../base';
+@import '../Button';
 
 .schedule {
+  &__title{
+    padding-bottom: 0.5rem;
+    border-bottom: 0.3rem solid var(--primary-color);
+  }
+  
   .departure-time {
     display: flex;
     flex-direction: row;
@@ -132,33 +138,28 @@
     // Buttons
     button {
       margin: 0.5rem 0.3rem;
-      cursor: pointer;
       background: black;
       color: white;
-      font-size: $font-size * 1.2;
+
+      &:hover {
+        background: #222222;
+      }
     }
 
-    &__edit-btn {
-      width: 75%;
-    }
+    &__btns {
+      display: flex;
 
-    &__trash-btn {
-
-    }
-
-    &__back-btn {
-
-    }
-
-    &__confirm-delete-btn {
-
+      .edit {flex-grow: 3}
+      .confirm-delete {flex-grow: 3}
     }
   }
 
   .repeat {
     text-align: center;
-
+    
     &-title {
+      text-align: center;
+      font-weight: bold;
       margin: 0.5rem;
     }
 

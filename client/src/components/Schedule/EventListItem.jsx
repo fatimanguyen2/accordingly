@@ -48,6 +48,7 @@ export const EventListItem = props => {
 
   return (
     <li className={itemClass}>
+
       <div className='event-list-item__main' onClick={handleToggle}>
         <div className='event-list-item__time' >
           <FontAwesomeIcon className='event-list-item__weather-icon' icon={getWeatherIcon(props.weather)} color={getWeatherColor(props.weather)} />
@@ -55,6 +56,7 @@ export const EventListItem = props => {
         </div>
         <div><p>{props.title}</p></div>
       </div>
+      
       {toggle &&
         <div className='event-list-item__details'>
           <div onClick={() => setToggle(prev => !prev)}>
@@ -76,13 +78,13 @@ export const EventListItem = props => {
           </div>
           {
             view === NORMAL ?
-              <div>
-                <Button classname='event-list-item__edit-btn' onClick={() => props.onEdit(props.entry_id)}>Edit</Button>
-                <Button classname='event-list-item__trash-btn' onClick={cancel}><FontAwesomeIcon icon={faTrash} /></Button>
+              <div className='event-list-item__btns'>
+                <Button classname='edit' onClick={() => props.onEdit(props.entry_id)}>Edit</Button>
+                <Button classname='trash' onClick={cancel}><FontAwesomeIcon icon={faTrash} /></Button>
               </div> :
-              <div>
-                <Button classname='event-list-item__back-btn' onClick={back}>Back</Button>
-                <Button classname='event-list-item__confirm-delete-btn' onClick={cancel}>Confirm Delete</Button>
+              <div className='event-list-item__btns'>
+                <Button classname='back' onClick={back}>Back</Button>
+                <Button classname='confirm-delete' onClick={cancel}>Confirm Delete</Button>
               </div>
           }
         </div>

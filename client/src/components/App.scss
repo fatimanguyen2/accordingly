@@ -20,7 +20,6 @@ li {
   list-style-type: none;
 }
 // Responsive text size 
-p {font-size: $font-size}
 h5 {font-size: $h5}
 h4 {font-size: $h4}
 h3 {font-size: $h3}
@@ -75,6 +74,7 @@ h1 {font-size: $h1}
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 }
 
 @-webkit-keyframes animatebottom {
@@ -86,6 +86,7 @@ h1 {font-size: $h1}
   from{ bottom:-100px; opacity:0 } 
   to{ bottom:0; opacity:1 }
 }
+
 // TO FIX font size not getting bigger
 // @media only screen and (max-width: 600px) {
 //   html {
