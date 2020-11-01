@@ -3,6 +3,7 @@
 .settings {
   display: flex;
   flex-direction: column;
+  font-size: $font-size;
 
   &__title {
     padding-bottom: 0.5rem;
@@ -12,4 +13,33 @@
   &__home-location {
     display: flex;
   }
+
+  &__location-icon {
+    margin: 0 1rem 0 0.5rem;
+    font-size: $font-size;
+  }
+
+  &__desc {
+    font-size: $font-size * 0.7;
+    color: #575757;
+    padding: 0 1rem 1rem 1rem;
+  }
+
+  .place-autocomplete {
+    width: 90%;
+
+    .location_search_input {
+      width: 70%;
+      background: black;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-bottom: solid var(--primary-color);
+      padding: 0.2rem;
+      margin-left: 0.5rem;
+
+      &:focus {outline:none}
+    }
+  }
+
 }
