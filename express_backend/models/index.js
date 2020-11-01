@@ -84,7 +84,7 @@ module.exports = (db) => {
     return db.query(query)
       .then(results => {
         return {
-          street : results.rows[0].address,
+          address : results.rows[0].address,
           city : results.rows[0].city,
           postal_code : results.rows[0].postal_code
         }
