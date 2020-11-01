@@ -1,6 +1,9 @@
 @import 'base';
 
 .settings {
+  display: flex;
+  flex-direction: column;
+
   &__title {
     padding-bottom: 0.5rem;
     border-bottom: 0.3rem solid var(--primary-color);

@@ -6,7 +6,7 @@ import { EventListItem } from './EventListItem';
 
 export const EventList = props => {
   const events = props.events.map(event => {
-    const id = props.type === 'repeating' ? event.entry_id : event.id
+    const id = event.entry_id
     return <EventListItem
       key={props.type + id}
       id={id}
