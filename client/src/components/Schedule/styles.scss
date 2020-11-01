@@ -157,8 +157,10 @@
 
   .repeat {
     text-align: center;
-
+    
     &-title {
+      text-align: center;
+      font-weight: bold;
       margin: 0.5rem;
     }
 

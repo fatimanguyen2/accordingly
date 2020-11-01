@@ -48,6 +48,7 @@ export const EventListItem = props => {
 
   return (
     <li className={itemClass}>
+
       <div className='event-list-item__main' onClick={handleToggle}>
         <div className='event-list-item__time' >
           <FontAwesomeIcon className='event-list-item__weather-icon' icon={getWeatherIcon(props.weather)} color={getWeatherColor(props.weather)} />
@@ -55,6 +56,7 @@ export const EventListItem = props => {
         </div>
         <div><p>{props.title}</p></div>
       </div>
+      
       {toggle &&
         <div className='event-list-item__details'>
           <div onClick={() => setToggle(prev => !prev)}>
