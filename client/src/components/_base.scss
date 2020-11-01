@@ -27,11 +27,11 @@ $cloudy-color-gradient: rgba(169, 208, 236, 0.726);
 //Nav Sizes
 $nav-menu-height: 50vh;
 $nav-menu-border: 5vh;
-$nav-menu-translate: calc($nav-menu-translate + (2 * $nav-menu-border));
+$nav-menu-translate: calc(#{$nav-menu-height} + (2 * #{$nav-menu-border}));
 
-$add-menu-height: 50vh;
+$add-menu-height: 90vh;
 $add-menu-border: 5vh;
-$add-menu-translate: calc($nav-menu-translate + (2 * $nav-menu-border));
+$add-menu-translate: calc(#{$add-menu-height} + (2 * #{$add-menu-border}));
 
 
 // For responsive text size

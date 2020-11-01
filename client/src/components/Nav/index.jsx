@@ -37,7 +37,7 @@ export const Nav = props => {
 
   return (
     <div className='nav'>
-      <div className='add-container'>
+      <div className='nav-container'>
         {(addCollapse || !props.loggedIn) &&
           <Fragment>
             <button
@@ -46,7 +46,7 @@ export const Nav = props => {
                 closeAdd();
               }}
               className={
-                classnames('nav--menu', 'button', {
+                classnames('nav-menu', 'button', {
                   'button--collapse': menuCollapse,
                   'button--expand': !menuCollapse,
                 })
@@ -54,7 +54,7 @@ export const Nav = props => {
               <FontAwesomeIcon icon={faBars} />
             </button>
             <div onClick={() => (menuCollapse && toggleMenu())} className={
-                classnames('nav--menu', 'menu-shape', {
+                classnames('nav-menu', 'menu-shape', {
                   'menu-shape--collapse': menuCollapse,
                   'menu-shape--expand': !menuCollapse,
                 })
@@ -75,7 +75,7 @@ export const Nav = props => {
         }
       </div>
 
-      <div>
+      <div className='add-container'>
         {props.loggedIn && menuCollapse &&
           <Fragment>
             <button
@@ -88,7 +88,7 @@ export const Nav = props => {
                 props.clearToEdit();
               }}
               className={
-                classnames('add--menu', 'button', {
+                classnames('add-menu', 'button', {
                   'button--collapse': addCollapse,
                   'button--expand': !addCollapse || props.eventToEdit.entry_id,
                 })
@@ -96,9 +96,9 @@ export const Nav = props => {
               <FontAwesomeIcon icon={faPlus} />
             </button>
             <div onClick={() => (addCollapse && toggleAdd())} className={
-              classnames('add--menu', 'menu-shape', {
-                'menu-shape--collapse': menuCollapse,
-                'menu-shape--expand': !menuCollapse,
+              classnames('add-menu', 'menu-shape', {
+                'menu-shape--collapse': addCollapse,
+                'menu-shape--expand': !addCollapse,
               })
             }></div>
 
