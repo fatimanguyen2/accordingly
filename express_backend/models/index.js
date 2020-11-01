@@ -295,19 +295,12 @@ module.exports = (db) => {
   }
 
   const updateUserAddress = (address, id) => {
-    console.log(`
-    UPDATE users
-    SET address = ${address.street},
-    SET city = ${address.city},
-    SET postal_code = ${address.postal_code},
-    WHERE id = ${id}
-    RETURNING *
-    `)
+
     return db.query(`
     UPDATE users
-    SET address = ${address.street},
-    SET city = ${address.city},
-    SET postal_code = ${address.postal_code},
+    SET address = '${address.street}',
+    city = '${address.city}',
+    postal_code = '${address.postal_code}'
     WHERE id = ${id}
     RETURNING *
     `)
