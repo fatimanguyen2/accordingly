@@ -252,6 +252,7 @@ function App() {
       axios.get('/api/users/2'),
     ])
       .then(all => {
+        console.log(all);
         initialRecommendations = all[1].data;
 
         // Setting app primary color
@@ -277,9 +278,9 @@ function App() {
       // })
   };
 
-  // useEffect(() => {
-  //   getAllData();
-  // }, [])
+  useEffect(() => {
+    getAllData();
+  }, [])
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => setState(prev => ({ ...prev, loggedIn: false }));
