@@ -244,6 +244,7 @@ function App() {
   //   eventToEdit: {}
   // });
 
+<<<<<<< HEAD
 
   // useEffect(() => {
   //   Promise.all([
@@ -270,13 +271,48 @@ function App() {
   //           homeAddress: all[3].data
   //         }))
   //     })
+=======
+  const getAllData = () => {
+    Promise.all([
+      axios.get('/api/users/2/weather'),
+      axios.get('/api/users/2/recommendations'),
+      axios.get('/api/users/2/events'),
+      axios.get('/api/users/2'),
+    ])
+      .then(all => {
+        initialRecommendations = all[1].data;
+
+        // Setting app primary color
+        let colours = setPrimaryColors(all[0].data.mainWeather[0]);
+        document.documentElement.style.setProperty('--primary-color', colours.solid);
+        document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
+
+        setState(prev => (
+          {
+            ...prev,
+            loading: false,
+            weather: all[0].data,
+            recommendations: { ...all[1].data, done: [] },
+            events: all[2].data,
+            homeAddress: all[3].data
+          }))
+      })
+>>>>>>> main
       // .then(() => {
       //   // Setting app primary color
       //   // let colours = setPrimaryColors(state.weather.mainWeather[0]);
       //   document.documentElement.style.setProperty('--primary-color', colours.solid);
       //   document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
       // })
+<<<<<<< HEAD
   // }, [])
+=======
+  };
+
+  useEffect(() => {
+    getAllData();
+  }, [])
+>>>>>>> main
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => setState(prev => ({ ...prev, loggedIn: false }));
