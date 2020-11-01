@@ -45,8 +45,6 @@ let count = 0
 const test6AM = moment("2020-10-31T06")
 ///need refactorging call only one time
 const getForecastCategory = (event) => {
-  count++
-  console.log(count)
   const start = event.start_time;
   const in48h = moment().add(48, 'h');
   if (moment(start).isBefore(in48h)) {
