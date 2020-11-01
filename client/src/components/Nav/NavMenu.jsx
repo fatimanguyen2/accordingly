@@ -13,9 +13,9 @@ export const NavMenu = (props) => {
         {props.loggedIn ?
           <Fragment>
             <li><Link to='/' onClick={() => props.closeMenu()} className={classnames('link', { 'link--active': location.pathname === '/' })}>Home</Link></li>
-            <li><Link to='/schedule' onClick={() => props.closeMenu()}>Schedule</Link></li>
-            <li><Link to='/settings' onClick={() => props.closeMenu()}>Settings</Link></li>
-            <li><Link to='/about' onClick={() => props.closeMenu()}>About</Link></li>
+            <li><Link to='/schedule' onClick={() => props.closeMenu()} className={classnames('link', { 'link--active': location.pathname === '/schedule' })}>Schedule</Link></li>
+            <li><Link to='/settings' onClick={() => props.closeMenu()} className={classnames('link', { 'link--active': location.pathname === '/settings' })}>Settings</Link></li>
+            <li><Link to='/about' onClick={() => props.closeMenu()} className={classnames('link', { 'link--active': location.pathname === '/about' })}>About</Link></li>
             <li>
               <Link to={location.pathname} onClick={() => {
                   props.onSelect('nav menu refresh selected');
@@ -24,15 +24,15 @@ export const NavMenu = (props) => {
                 Refresh <span>{moment(props.time).fromNow()}</span>
               </Link>
             </li>
-            <li><Link to='/' onClick={() => {
+            <li><Link to='/login' onClick={() => {
               props.logout();
               props.closeMenu();
             }}>Logout</Link></li>
           </Fragment> :
           <Fragment>
-            <li><Link to='/login' onClick={() => props.closeMenu()}>Login</Link></li>
-            <li><Link to='/register' onClick={() => props.closeMenu()}>Register</Link></li>
-            <li><Link to='/about'>About</Link></li>
+            <li><Link to='/login' onClick={() => props.closeMenu()} className={classnames('link', { 'link--active': location.pathname === '/login' })}>Login</Link></li>
+            <li><Link to='/register' onClick={() => props.closeMenu()} className={classnames('link', { 'link--active': location.pathname === '/register' })}>Register</Link></li>
+            <li><Link to='/about' onClick={() => props.closeMenu()} className={classnames('link', { 'link--active': location.pathname === '/about' })}>About</Link></li>
           </Fragment>
         }
       </ul>

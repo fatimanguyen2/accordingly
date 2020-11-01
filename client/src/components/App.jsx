@@ -142,13 +142,13 @@ const events = {
           id: 4,
           type_of: "weekly",
           initial: "2020-03-12T04:00:00.000Z",
-          interval: 1
+          interval: 2
         },
         {
           id: 5,
           type_of: "weekly",
           initial: "2020-03-13T04:00:00.000Z",
-          interval: 1
+          interval: 3
         }
       ]
     },
@@ -244,8 +244,7 @@ function App() {
     eventToEdit: {}
   });
 
-
-  useEffect(() => {
+  const getAllData = () => {
     Promise.all([
       axios.get('/api/users/2/weather'),
       axios.get('/api/users/2/recommendations'),
@@ -276,6 +275,10 @@ function App() {
       //   document.documentElement.style.setProperty('--primary-color', colours.solid);
       //   document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
       // })
+  };
+
+  useEffect(() => {
+    getAllData();
   }, [])
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
@@ -324,17 +327,17 @@ function App() {
   const addEvent = (eventObj) => {
     console.log('add event triggered: ');
     console.log(eventObj);
-    // axios.post('/api/users/2/entries/new', eventObj)
-    //   .then(() => setState(prev => ({NEW STATE})))
-    //   .catch(() => console.log('failed to add event'));
+    axios.post('/api/users/2/entries/new', eventObj)
+      .then(() => getAllData())
+      .catch(() => console.log('failed to add event'));
   };
 
   const editEvent = (eventObj) => {
     console.log('update event triggered: ');
     console.log(eventObj);
-    // axios.put(`/api/entries/${eventObj.entry_id}`, eventObj)
-    //   .then(() => setState(prev => ({NEW STATE})))
-    //   .catch(() => console.log('failed to update event'));
+    axios.put(`/api/entries/${eventObj.entry_id}`, eventObj)
+    .then(() => getAllData())
+      .catch(() => console.log('failed to update event'));
   };
 
 
