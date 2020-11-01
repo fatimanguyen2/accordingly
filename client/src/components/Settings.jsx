@@ -3,27 +3,20 @@ import { Redirect } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons';
 
-import './Settings.scss'
+import './Settings.scss';
 import { Button } from './Button';
 import useEndlessForm from '../hooks/useEndlessForm';
-import LocationSearchInput from './LocationSearchInput'
+import LocationSearchInput from './LocationSearchInput';
 
 
 export const Settings = props => {
-  // const [startOfDay, setStartOfDay] = useState('');
-  const [showButton, setShowButton] = useState(false);
-  // const [reRender, setRerender] = useState(false);
+  // const [startOfDay, setStartOfDay] = useState(''); //STRETCH
   const raw_address = `${props.address.address}, ${props.address.city}`
-
-  // const handleChange = (event, cb) => {
-  //   cb(event.target.value);
-  //   setShowButton(true);
-  // };
+  const [showButton, setShowButton] = useState(false);
 
   const handleSave = () => {
-    props.updateAddress(raw_address);
+    props.updateAddress(input.raw_address);
     setShowButton(false);
-    // setRerender(prev => !prev);
   };
 
   const { input, handleInputChange, handleAddress } = useEndlessForm({
@@ -39,8 +32,8 @@ export const Settings = props => {
 
             <div className='settings__home-location'>
               <FontAwesomeIcon className='settings__location-icon' icon={faMapMarkerAlt} />
-              <LocationSearchInput onChange={() => {
-                handleAddress();
+              <LocationSearchInput onChange={(e) => {
+                handleAddress(e);
                 setShowButton(true);
               }} destination={raw_address} />
             </div>

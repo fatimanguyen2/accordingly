@@ -224,7 +224,7 @@ function App() {
   // const [state, setState] = useState({
   //   loading: false,
   //   view: 'home',
-  //   loggedIn: false,
+  //   loggedIn: true,
   //   weather,
   //   recommendations,
   //   events,
