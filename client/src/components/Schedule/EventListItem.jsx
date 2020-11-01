@@ -14,6 +14,7 @@ const DELETE = 'delete';
 export const EventListItem = props => {
   const [toggle, setToggle] = useState(false);
   const [view, setView] = useState(NORMAL); //switch betwen normal view and delete item view for btns
+  const [reRender, setRerender] = useState(false);
 
   // setToggle and collapse other events
   const handleToggle = () => {
@@ -28,7 +29,8 @@ export const EventListItem = props => {
     if (view === NORMAL) {
       setView(DELETE);
     } else {
-      props.deleteEvent(props.type, props.id)
+      props.deleteEvent(props.type, props.id);
+      setRerender(prev => !prev);
     }
   };
 
