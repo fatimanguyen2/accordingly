@@ -221,28 +221,28 @@ const recommendations = {
 let initialRecommendations = {};
 
 function App() {
-  // const [state, setState] = useState({
-  //   loading: false,
-  //   view: 'home',
-  //   loggedIn: true,
-  //   weather,
-  //   recommendations,
-  //   events,
-  //   time: 1603740043000,
-  //   homeAddress,
-  //   eventToEdit: {}
-  // });
   const [state, setState] = useState({
-    loading: true,
+    loading: false,
     view: 'home',
     loggedIn: true,
-    weather: {},
-    recommendations: {},
-    events: {},
+    weather,
+    recommendations,
+    events,
     time: 1603740043000,
-    homeAddress: {},
+    homeAddress,
     eventToEdit: {}
   });
+  // const [state, setState] = useState({
+  //   loading: true,
+  //   view: 'home',
+  //   loggedIn: true,
+  //   weather: {},
+  //   recommendations: {},
+  //   events: {},
+  //   time: 1603740043000,
+  //   homeAddress: {},
+  //   eventToEdit: {}
+  // });
 
   const getAllData = () => {
     Promise.all([
@@ -270,12 +270,12 @@ function App() {
             homeAddress: all[3].data
           }))
       })
-      // .then(() => {
-      //   // Setting app primary color
-      //   // let colours = setPrimaryColors(state.weather.mainWeather[0]);
-      //   document.documentElement.style.setProperty('--primary-color', colours.solid);
-      //   document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
-      // })
+    // .then(() => {
+    //   // Setting app primary color
+    //   // let colours = setPrimaryColors(state.weather.mainWeather[0]);
+    //   document.documentElement.style.setProperty('--primary-color', colours.solid);
+    //   document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
+    // })
   };
 
   useEffect(() => {
@@ -310,7 +310,7 @@ function App() {
   };
 
   const updateAddress = (addressObj) => {
-    axios.put('/api/users/2', {raw_address: addressObj})
+    axios.put('/api/users/2', { raw_address: addressObj })
       .then(() => setState(prev => ({ ...prev, homeAddress: addressObj })))
       .catch(() => console.log('failed to update address'));
   };
@@ -323,7 +323,7 @@ function App() {
       .then(() => {
         setState(prev => ({ ...prev, events: newEventsObj }))
       })
-      .catch(() => console.log('failed delete')); 
+      .catch(() => console.log('failed delete'));
   };
 
   const addEvent = (eventObj) => {
@@ -338,7 +338,7 @@ function App() {
     console.log('update event triggered: ');
     console.log(eventObj);
     axios.put(`/api/users/2/entries/${eventObj.entry_id}`, eventObj)
-    .then(() => getAllData())
+      .then(() => getAllData())
       .catch(() => console.log('failed to update event'));
   };
 
@@ -359,27 +359,27 @@ function App() {
 
 
   return (
-    <main>
-      <Router>
-        <Nav
-          view={state.view}
-          onSelect={(name) => console.log(name)}
-          onSubmit={addEvent}
-          onEdit={editEvent}
-          loggedIn={state.loggedIn}
-          time={state.time}
-          logout={logout}
-          events={state.events}
-          eventToEdit={state.eventToEdit}
-          clearToEdit={clearToEdit}
-        />
+    <main className='page-content'>
+      {state.loading
+        ? <div className='loader'>
+          <h1 className='loader__text'>Loading ...</h1>
+          <div className='loader__animation'></div>
+        </div>
+        : <div>
+          <Router>
+            <Nav
+              view={state.view}
+              onSelect={(name) => console.log(name)}
+              onSubmit={addEvent}
+              onEdit={editEvent}
+              loggedIn={state.loggedIn}
+              time={state.time}
+              logout={logout}
+              events={state.events}
+              eventToEdit={state.eventToEdit}
+              clearToEdit={clearToEdit}
+            />
 
-        {state.loading ?
-          <div className='loader'>
-            <h1 className='loader__text'>Loading ...</h1>
-            <div className='loader__animation'></div>
-          </div> :
-          <div className='page-content'>
             <Switch>
               <Route exact path='/'>
                 <Home
@@ -418,9 +418,9 @@ function App() {
 
               <Route path='*'><h1>404 - Not Found</h1></Route>
             </Switch>
-          </div>
-        }
-      </Router>
+          </Router>
+        </div>
+      }
     </main>
   );
 }
