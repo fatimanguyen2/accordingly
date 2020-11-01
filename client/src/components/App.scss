@@ -71,10 +71,11 @@ h1 {font-size: $h1}
   animation-name: animatebottom;
   animation-duration: 1s;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
   height: 100vh;
+  padding: 1rem 2rem;
 }
 
 @-webkit-keyframes animatebottom {
