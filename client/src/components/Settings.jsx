@@ -15,6 +15,7 @@ export const Settings = props => {
   const [showButton, setShowButton] = useState(false);
 
   const handleSave = () => {
+    console.log(input)
     props.updateAddress(input.raw_address);
     setShowButton(false);
   };
