@@ -21,6 +21,10 @@ export const Nav = props => {
     setAddCollapse(state => !state);
   };
 
+  const openAdd = () => {
+    setAddCollapse(false);
+  };
+
   const closeMenu = () => {
     setMenuCollapse(true);
   };
