@@ -78,13 +78,13 @@ export const EventListItem = props => {
           </div>
           {
             view === NORMAL ?
-              <div>
-                <Button classname='event-list-item__edit-btn' onClick={() => props.onEdit(props.entry_id)}>Edit</Button>
-                <Button classname='event-list-item__trash-btn' onClick={cancel}><FontAwesomeIcon icon={faTrash} /></Button>
+              <div className='event-list-item__btns'>
+                <Button classname='edit' onClick={() => props.onEdit(props.entry_id)}>Edit</Button>
+                <Button classname='trash' onClick={cancel}><FontAwesomeIcon icon={faTrash} /></Button>
               </div> :
-              <div>
-                <Button classname='event-list-item__back-btn' onClick={back}>Back</Button>
-                <Button classname='event-list-item__confirm-delete-btn' onClick={cancel}>Confirm Delete</Button>
+              <div className='event-list-item__btns'>
+                <Button classname='back' onClick={back}>Back</Button>
+                <Button classname='confirm-delete' onClick={cancel}>Confirm Delete</Button>
               </div>
           }
         </div>
