@@ -26,7 +26,7 @@ export const AddEvent = (props) => {
   const start_hour = next_event ? removeSeconds(props.eventToEdit.start_hour) : removeSeconds(getHourFromTime(props.eventToEdit.start_time)) || '';
   const end_hour = next_event? removeSeconds(props.eventToEdit.end_hour) : removeSeconds(getHourFromTime(props.eventToEdit.end_time)) || '';
   const raw_address = entry_id ? (next_event ? `${props.eventToEdit.next_event.address}, ${props.eventToEdit.next_event.city}` : `${props.eventToEdit.address}, ${props.eventToEdit.city}`) : '';
-  const recurrences = giveHTMLID(props.eventToEdit.recurrences || []);
+  const recurrences = giveHTMLID(props.eventToEdit.recurrences || []).map(ele => ele.type_of === 'weekly' ? ({...ele, type_of: moment(ele.initial).format('e')}) : ele);
 
   const { input, repeats, handleInputChange, handleAddress, addRepeat, setRepeat, removeRepeat } = useEndlessForm({
     entry_id,
@@ -58,11 +58,24 @@ export const AddEvent = (props) => {
           return <li key={ele.html_id}>
             Every 
             <label htmlFor={`interval_count_${ele.html_id}`}>Repeat Count</label>
-            <input type="number" min="1" max="12" name={`interval_count_${ele.html_id}`} id={`interval_count_${ele.html_id}`} defaultValue={ele.interval || 0} onChange={handleInputChange} required></input>
+            <input type="number" min="1" max="12" name={`interval_count_${ele.html_id}`} id={`interval_count_${ele.html_id}`} defaultValue={ele.interval || 0} onChange={(e) => {
+                //update the repeat state with correct repeat type
+                const value = e.currentTarget.value;
+                handleInputChange(e)
+                setRepeat(state => {
+                  return state.map(repeat => {
+                    if (repeat.html_id === ele.html_id) {
+                      return {...repeat, interval: value}
+                    } else {
+                      return repeat;
+                    }
+                  })
+                })
+              }} required></input>
             <label htmlFor={`interval_type_${ele.html_id}`}>Repeat Type</label>
             <select name={`interval_type_${ele.html_id}`}
               id={`interval_type_${ele.html_id}`}
-              defaultValue={ele.type_of === 'weekly' ? moment(ele.initial).format('e') : ele.type_of}
+              defaultValue={ele.type_of}
               onChange={(e) => {
                 //update the repeat state with correct repeat type
                 const value = e.currentTarget.value;
@@ -81,13 +94,13 @@ export const AddEvent = (props) => {
               <option value="month">Month</option>
               <option value="year">Year</option>
               <option value="" disabled>----</option>
-              <option value="0">Monday</option>
-              <option value="1">Tuesday</option>
-              <option value="2">Wednesday</option>
-              <option value="3">Thursday</option>
-              <option value="4">Friday</option>
-              <option value="5">Saturday</option>
-              <option value="6">Sunday</option>
+              <option value="1">Monday</option>
+              <option value="2">Tuesday</option>
+              <option value="3">Wednesday</option>
+              <option value="4">Thursday</option>
+              <option value="5">Friday</option>
+              <option value="6">Saturday</option>
+              <option value="0">Sunday</option>
             </select>
             <button id={`delete_repeat_${ele.html_id}`} onClick={(e) => removeRepeat(e, ele.html_id)}><FontAwesomeIcon icon={faTimes} /></button>
           </li>

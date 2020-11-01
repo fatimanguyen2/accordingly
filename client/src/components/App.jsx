@@ -252,6 +252,7 @@ function App() {
       axios.get('/api/users/2'),
     ])
       .then(all => {
+        console.log(all);
         initialRecommendations = all[1].data;
 
         // Setting app primary color
@@ -345,7 +346,8 @@ function App() {
   const openEdit = (entry_id) => {
     // console.log("entry_id " + entry_id);
     // console.log(state.events);
-    const allEvents = [...state.events.repeating, ...state.events.future]
+    const allEvents = [...state.events.repeating, ...state.events.future, ...state.events.today.filter(ele => ele.recurrence_id !== undefined)]
+    console.log(allEvents);
     const eventToEditArr = allEvents.filter(eventItem => eventItem.entry_id === entry_id);
     console.log(eventToEditArr[0]);
     setState(prev => ({ ...prev, eventToEdit: eventToEditArr[0] }))
