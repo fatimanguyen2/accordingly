@@ -40,7 +40,7 @@ module.exports = (
     formatAddressForDb(req.body.raw_address)
       .then(address => {
         if (!address.city.includes('Unorganized')) {
-          return ({...req.body, title: req.entry, ...address})
+          return ({...req.body, title: req.body.entry, ...address})
         } else {
           res.json("Sorry we need at least a city")
         }

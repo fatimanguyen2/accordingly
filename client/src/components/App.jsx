@@ -277,9 +277,9 @@ function App() {
       // })
   };
 
-  // useEffect(() => {
-  //   getAllData();
-  // }, [])
+  useEffect(() => {
+    getAllData();
+  }, [])
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => setState(prev => ({ ...prev, loggedIn: false }));
