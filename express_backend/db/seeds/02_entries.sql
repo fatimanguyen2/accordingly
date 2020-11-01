@@ -12,4 +12,5 @@ VALUES
 ('Skate competition', TRUE, point(43.66858, -79.35459), '453 Broadview Ave', 'Toronto', 'M4K 2N3', 1),
 ('Comicon', FALSE, point(44.22624, -76.49317), '62 5th Field Company Lane', 'Toronto', 'K7L', 3),
 ('Boring convention', FALSE, point(49.38754, -123.14254), '1567 Townline Rd', 'Abbotsford', 'V2T 6E1', 2),
-('Something Cool', TRUE, point(49.259432, -123.100795), '2846 Main St', 'Vancouver', 'V5T 3G2', 2);
+('Something Cool', TRUE, point(49.259432, -123.100795), '2846 Main St', 'Vancouver', 'V5T 3G2', 2),
+('Something Cool2', TRUE, point(49.259432, -123.100795), '2846 Main St', 'Vancouver', 'V5T 3G2', 2);
