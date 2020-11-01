@@ -59,11 +59,11 @@
 }
 
 form.add-menu {
-  animation-name: expand;
+  animation-name: expandAdd;
   animation-duration: 0.2s;
 }
 
-@keyframes expand {
+@keyframes expandAdd {
   from {
     height:0px;
     opacity: 0;
