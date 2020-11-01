@@ -11,6 +11,7 @@ const FUTURE = 'future';
 // Collapse any other toggled event list item when one list item is clicked
 const handleToggle = (id) => { };
 
+
 export const Schedule = props => {
   const [collapseOthers, setCollapseOthers] = useState();
 
@@ -21,6 +22,7 @@ export const Schedule = props => {
           <h1>Schedule</h1>
           {
             props.events[TODAY]
+            && props.events[TODAY].length > 0
             && <EventList
               allEvents={props.events}
               events={props.events[TODAY]}
@@ -31,6 +33,7 @@ export const Schedule = props => {
           </EventList>
           }
           {props.events[REPEATING]
+            && props.events[REPEATING].length > 0
             && <EventList
               events={props.events[REPEATING]}
               type={REPEATING}
@@ -41,6 +44,7 @@ export const Schedule = props => {
           }
           {
             props.events[FUTURE]
+            && props.events[FUTURE].length > 0
             && <EventList
               allEvents={props.events}
               events={props.events[FUTURE]}

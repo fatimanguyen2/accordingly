@@ -10,6 +10,7 @@ export default function RecommendationList(props) {
       description={item.description}
       handleCheck={props.handleCheck}
       type={props.type}
+      reRender={props.reRender}
     />
   });
 

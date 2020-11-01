@@ -27,78 +27,78 @@ const weather = {
 
 const events = {
   today: [
-    {
-      "entry": "morning run",
-      "id": 6,
-      "destination": {
-        "x": 49.259432,
-        "y": -123.100795
-      },
-      "address": "2846 Main St",
-      "city": "Vancouver",
-      "postal_code": "V5T 3G2",
-      "is_outdoor": true,
-      "start_date": "2020-03-05T05:00:00.000Z",
-      "start_hour": "07:00:00",
-      "end_hour": "07:30:00",
-      "entry_id": 2,
-      "type_of": "daily",
-      "initial": "2020-03-05T05:00:00.000Z",
-      "interval": 1,
-      "recurrence_id": 2,
-      "start_time": "2020-10-29T07:00:00",
-      "end_time": "2020-10-29T07:30:00",
-      "leave_by": "2020-10-29T06:36:10-04:00",
-      "weather": "Clouds"
-    },
-    {
-      entry: "commute",
-      id: 4,
-      is_outdoor: true,
-      destination: {
-        x: 49.2301,
-        y: -123.10867
-      },
-      address: "2846 Main St",
-      city: "Vancouver",
-      postal_code: "V5T 3G2",
-      start_date: "2020-03-05T05:00:00.000Z",
-      start_hour: "08:00:00",
-      end_hour: "16:00:00",
-      entry_id: 1,
-      type_of: "weekly",
-      initial: "2020-03-12T04:00:00.000Z",
-      interval: 1,
-      recurrence_id: 1,
-      start_time: "2020-10-29T08:00:00",
-      end_time: "2020-10-29T16:00:00",
-      leave_by: "2020-10-29T07:28:26-04:00",
-      weather: "Thunderstorm"
-    },
-    {
-      entry: "commute",
-      id: 7,
-      is_outdoor: true,
-      destination: {
-        x: 49.2301,
-        y: -123.10867
-      },
-      address: "2846 Main St",
-      city: "Vancouver",
-      postal_code: "V5T 3G2",
-      start_date: "2020-03-05T05:00:00.000Z",
-      start_hour: "08:00:00",
-      end_hour: "16:00:00",
-      entry_id: 1,
-      type_of: "weekly",
-      initial: "2020-03-12T04:00:00.000Z",
-      interval: 1,
-      recurrence_id: 1,
-      start_time: "2020-10-29T08:00:00",
-      end_time: "2020-10-29T16:00:00",
-      leave_by: "2020-10-29T07:28:26-04:00",
-      weather: "Clear"
-    }
+    // {
+    //   "entry": "morning run",
+    //   "id": 6,
+    //   "destination": {
+    //     "x": 49.259432,
+    //     "y": -123.100795
+    //   },
+    //   "address": "2846 Main St",
+    //   "city": "Vancouver",
+    //   "postal_code": "V5T 3G2",
+    //   "is_outdoor": true,
+    //   "start_date": "2020-03-05T05:00:00.000Z",
+    //   "start_hour": "07:00:00",
+    //   "end_hour": "07:30:00",
+    //   "entry_id": 2,
+    //   "type_of": "daily",
+    //   "initial": "2020-03-05T05:00:00.000Z",
+    //   "interval": 1,
+    //   "recurrence_id": 2,
+    //   "start_time": "2020-10-29T07:00:00",
+    //   "end_time": "2020-10-29T07:30:00",
+    //   "leave_by": "2020-10-29T06:36:10-04:00",
+    //   "weather": "Clouds"
+    // },
+    // {
+    //   entry: "commute",
+    //   id: 4,
+    //   is_outdoor: true,
+    //   destination: {
+    //     x: 49.2301,
+    //     y: -123.10867
+    //   },
+    //   address: "2846 Main St",
+    //   city: "Vancouver",
+    //   postal_code: "V5T 3G2",
+    //   start_date: "2020-03-05T05:00:00.000Z",
+    //   start_hour: "08:00:00",
+    //   end_hour: "16:00:00",
+    //   entry_id: 1,
+    //   type_of: "weekly",
+    //   initial: "2020-03-12T04:00:00.000Z",
+    //   interval: 1,
+    //   recurrence_id: 1,
+    //   start_time: "2020-10-29T08:00:00",
+    //   end_time: "2020-10-29T16:00:00",
+    //   leave_by: "2020-10-29T07:28:26-04:00",
+    //   weather: "Thunderstorm"
+    // },
+    // {
+    //   entry: "commute",
+    //   id: 7,
+    //   is_outdoor: true,
+    //   destination: {
+    //     x: 49.2301,
+    //     y: -123.10867
+    //   },
+    //   address: "2846 Main St",
+    //   city: "Vancouver",
+    //   postal_code: "V5T 3G2",
+    //   start_date: "2020-03-05T05:00:00.000Z",
+    //   start_hour: "08:00:00",
+    //   end_hour: "16:00:00",
+    //   entry_id: 1,
+    //   type_of: "weekly",
+    //   initial: "2020-03-12T04:00:00.000Z",
+    //   interval: 1,
+    //   recurrence_id: 1,
+    //   start_time: "2020-10-29T08:00:00",
+    //   end_time: "2020-10-29T16:00:00",
+    //   leave_by: "2020-10-29T07:28:26-04:00",
+    //   weather: "Clear"
+    // }
   ],
   repeating: [
     {
@@ -221,62 +221,62 @@ const recommendations = {
 let initialRecommendations = {};
 
 function App() {
-  // const [state, setState] = useState({
-  //   loading: false,
-  //   view: 'home',
-  //   loggedIn: true,
-  //   weather,
-  //   recommendations,
-  //   events,
-  //   time: 1603740043000,
-  //   homeAddress,
-  //   eventToEdit: {}
-  // });
   const [state, setState] = useState({
-    loading: true,
+    loading: false,
     view: 'home',
     loggedIn: true,
-    weather: {},
-    recommendations: {},
-    events: {},
+    weather,
+    recommendations,
+    events,
     time: 1603740043000,
-    homeAddress: {},
+    homeAddress,
     eventToEdit: {}
   });
+  // const [state, setState] = useState({
+  //   loading: true,
+  //   view: 'home',
+  //   loggedIn: true,
+  //   weather: {},
+  //   recommendations: {},
+  //   events: {},
+  //   time: 1603740043000,
+  //   homeAddress: {},
+  //   eventToEdit: {}
+  // });
 
 
-  useEffect(() => {
-    Promise.all([
-      axios.get('/api/users/2/weather'),
-      axios.get('/api/users/2/recommendations'),
-      axios.get('/api/users/2/events'),
-      axios.get('/api/users/2'),
-    ])
-      .then(all => {
-        initialRecommendations = all[1].data;
+  // useEffect(() => {
+  //   Promise.all([
+  //     axios.get('/api/users/2/weather'),
+  //     axios.get('/api/users/2/recommendations'),
+  //     axios.get('/api/users/2/events'),
+  //     axios.get('/api/users/2'),
+  //   ])
+  //     .then(all => {
+  //       initialRecommendations = all[1].data;
 
-        // Setting app primary color
-        let colours = setPrimaryColors(all[0].data.mainWeather[0]);
-        document.documentElement.style.setProperty('--primary-color', colours.solid);
-        document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
+  //       // Setting app primary color
+  //       let colours = setPrimaryColors(all[0].data.mainWeather[0]);
+  //       document.documentElement.style.setProperty('--primary-color', colours.solid);
+  //       document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
 
-        setState(prev => (
-          {
-            ...prev,
-            loading: false,
-            weather: all[0].data,
-            recommendations: { ...all[1].data, done: [] },
-            events: all[2].data,
-            homeAddress: all[3].data
-          }))
-      })
+  //       setState(prev => (
+  //         {
+  //           ...prev,
+  //           loading: false,
+  //           weather: all[0].data,
+  //           recommendations: { ...all[1].data, done: [] },
+  //           events: all[2].data,
+  //           homeAddress: all[3].data
+  //         }))
+  //     })
       // .then(() => {
       //   // Setting app primary color
       //   // let colours = setPrimaryColors(state.weather.mainWeather[0]);
       //   document.documentElement.style.setProperty('--primary-color', colours.solid);
       //   document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
       // })
-  }, [])
+  // }, [])
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => setState(prev => ({ ...prev, loggedIn: false }));
@@ -284,7 +284,8 @@ function App() {
   // Change state when checking items on recommendation list in home component
   const handleCheck = (id, type) => {
     const item = getItem(id, state.recommendations[type]); //get item object
-    const category = getSuggestionCategory(id, initialRecommendations); //get initial item category of axios request to ensure done itesm go back to right category
+    // const category = getSuggestionCategory(id, initialRecommendations); //get initial item category of axios request to ensure done itesm go back to right category
+    const category = getSuggestionCategory(id, recommendations); //get initial item category of axios request to ensure done itesm go back to right category
     // if item gets checked and is in upcoming/later list, remove from that list and add to done list
     if (type !== 'done') {
       const updatedRecommendationsObj = {
@@ -381,6 +382,7 @@ function App() {
                   weather={state.weather}
                   recommendations={state.recommendations}
                   handleCheck={handleCheck}
+                  events={state.events.today}
                 />
               </Route>
 
