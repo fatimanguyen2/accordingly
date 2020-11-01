@@ -9,7 +9,7 @@ const REPEATING = 'repeating';
 const FUTURE = 'future';
 
 // Collapse any other toggled event list item when one list item is clicked
-const handleToggle = (id) => { };
+const handleToggle = (id) => {};
 
 
 export const Schedule = props => {
