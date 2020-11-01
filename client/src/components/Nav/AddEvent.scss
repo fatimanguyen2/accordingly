@@ -29,32 +29,32 @@
     border: solid $nav-menu-border var(--primary-color);
   }
 
-  a {
-    color: white;
-    text-decoration: none;
-    font-size: 3vh;
-    padding: 10px;
-    padding-left: 2vh;
+//   a {
+//     color: white;
+//     text-decoration: none;
+//     font-size: 3vh;
+//     padding: 10px;
+//     padding-left: 2vh;
 
-    &.link--active {
-      font-weight: 700;
-      font-size: 6vh;
-    }
-  }
+//     &.link--active {
+//       font-weight: 700;
+//       font-size: 6vh;
+//     }
+//   }
   
-  li {
-    margin: 1vh;
-  }
+//   li {
+//     margin: 1vh;
+//   }
 
-  span {
-    font-size: 2vh;
-    color: grey;
-  }
+//   span {
+//     font-size: 2vh;
+//     color: grey;
+//   }
 
-  button {
-    color: white;
-    background: none;
-  }
+//   button {
+//     color: white;
+//     background: none;
+//   }
 }
 
 @keyframes expand {
