@@ -224,7 +224,7 @@ function App() {
   const [state, setState] = useState({
     loading: false,
     view: 'home',
-    loggedIn: true,
+    loggedIn: false,
     weather,
     recommendations,
     events,
@@ -310,7 +310,7 @@ function App() {
   };
 
   const updateAddress = (addressObj) => {
-    axios.put('/api/users/2', addressObj)
+    axios.put('/api/users/2', {raw_address: addressObj})
       .then(() => setState(prev => ({ ...prev, homeAddress: addressObj })))
       .catch(() => console.log('failed to update address'));
   };
