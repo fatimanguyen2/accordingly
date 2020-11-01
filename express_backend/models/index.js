@@ -111,7 +111,6 @@ module.exports = (db) => {
   }
 
   const getRecommendations = (conditions) => {
-    console.log(conditions)
     let nowCond = conditions[0]
     const temp = nowCond.shift()
     let futurCond = conditions[1]
@@ -163,6 +162,7 @@ module.exports = (db) => {
   }
 
   const postEntry = (entry, user_id) => {
+    console.log(entry)
     let newEntryId
     return db.query(`
     INSERT INTO entries(title, is_outdoor, destination, address, city, postal_code, user_id)
