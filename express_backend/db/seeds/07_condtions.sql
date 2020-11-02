@@ -1,7 +1,7 @@
 INSERT INTO
   conditions(name, description)
 VALUES
-('hot', 'Temperature above 25C'),
+('hot', 'Temperature above 25C'),                   
 ('warm', 'Temperature between 18C and 24C'),
 ('temperate', 'Temperature between 10C and 18C'),
 ('cool', 'Temperature between 0C and 10C'),
