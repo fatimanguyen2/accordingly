@@ -7,18 +7,23 @@ import './Register.scss';
 
 import { Button } from './Button';
 import { useControlledInput } from '../hooks/useControlledInput';
+import useEndlessForm from '../hooks/useEndlessForm';
+import LocationSearchInput from './LocationSearchInput';
+
 export const Register = props => {
   const email = useControlledInput('');
   const password = useControlledInput('');
   const passwordConfirmation = useControlledInput('');
   const address = useControlledInput('');
   const startOfDay = useControlledInput('');
+  const { input, handleInputChange, handleAddress } = useEndlessForm('');
 
   return (
     <Fragment>
       {!props.loggedIn ?
         <div className='register'>
-          <h1>Register</h1>
+          <h1 className='register__title'>Register</h1>
+
           <form className='form' autoComplete='off' onSubmit={event => event.preventDefault()}>
 
             <div className='register__email'>
@@ -33,15 +38,16 @@ export const Register = props => {
 
             <div className='register__confirm-password'>
               <label htmlFor='passwordConfirmation'>Confirm Password:</label>
-              <input id='passwordConfirmation' {...passwordConfirmation} input='password' /> <br />
+              <input id='passwordConfirmation' {...passwordConfirmation} input='password' />
             </div>
 
             <div className='register__address'>
-              <label htmlFor='address'><FontAwesomeIcon icon={faMapMarkerAlt} />Home:</label>
-              <input id='address' {...address} /><br />
-              <p className='register____address__desc'>We use your home location as the starting point of the day to predict and prepare your personalized recommendations.</p>
+              {/* <FontAwesomeIcon className='register__address__location-icon' icon={faMapMarkerAlt} /> */}
+              <LocationSearchInput onChange={(e) => {
+                handleAddress(e);
+              }} destination={''} />
             </div>
-
+            <p className='register__address__desc'>We use your home location as the starting point of the day to predict and prepare your personalized recommendations.</p>
             {/* <label htmlFor='startOfDay'><FontAwesomeIcon icon={faClock} />Start of Day:</label>
             <input id='startOfDay' {...startOfDay} type='time' />
             <p>The start of day setting determines when we will send you the daily notification for what to bring and help us know when you are getting ready at home.</p> */}
