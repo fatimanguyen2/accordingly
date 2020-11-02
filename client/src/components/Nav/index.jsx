@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faPlus } from '@fortawesome/free-solid-svg-icons';
 import './Nav.scss';
@@ -21,6 +21,16 @@ export const Nav = props => {
     setAddCollapse(state => !state);
   };
 
+  const openAdd = () => {
+    setAddCollapse(false);
+  };
+
+  useEffect(() => {
+    if (props.eventToEdit.entry_id) {
+      openAdd();
+    }
+  }, [props.eventToEdit]);
+
   const closeMenu = () => {
     setMenuCollapse(true);
   };
@@ -37,7 +47,7 @@ export const Nav = props => {
 
   return (
     <div className='nav'>
-      <div className='nav-container'>
+      <div className={classnames('nav-container', {'empty': menuCollapse && !addCollapse})}>
         {(addCollapse || !props.loggedIn) &&
           <Fragment>
             <button
@@ -75,7 +85,7 @@ export const Nav = props => {
         }
       </div>
 
-      <div className='add-container'>
+      <div className={classnames('add-container', {'empty': addCollapse && !menuCollapse})}>
         {props.loggedIn && menuCollapse &&
           <Fragment>
             <button

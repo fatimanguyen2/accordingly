@@ -1,16 +1,25 @@
 @import '../base';
 
+.add-container {
+  width: 100%;
+
+  &.empty {
+    width: 0%;
+  }
+}
+
 .add-menu {
   background-color: none;
   // opacity: 0.5;
   height: $add-menu-height;
-  width: 80vw;
+  // max-width: 80vh;
+  width: 100%;
   // min-height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0px;
-  transform: translate(-5vh, -10vh);
+  margin: 5vh;
+  // transform: translate(-5vh, -10vh);
   // background-color: pink;
   // position: absolute;
   // animation-name: expand;
@@ -29,6 +38,48 @@
     z-index: -1;
     border: solid $nav-menu-border var(--primary-color);
   }
+
+  label {
+    display: none;
+  }
+
+  ul {
+    max-height: 30vh;
+    overflow: scroll;
+  }
+
+  input {
+    color: white;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid var(--primary-color);
+    
+    &#entry {
+      font-size: 6vh;
+    }
+
+    &#location_search {
+      font-size: 2vh;
+    }
+
+    &#start_date {
+      font-size: 2vh;
+    }
+
+    &#end_date {
+      font-size: 2vh;
+    }
+
+    &#start_hour {
+      font-size: 2vh;
+    }
+
+    &#end_hour {
+      font-size: 2vh;
+    }
+  }
+
+
 
 //   a {
 //     color: white;
@@ -52,15 +103,32 @@
 //     color: grey;
 //   }
 
-//   button {
-//     color: white;
-//     background: none;
-//   }
+  .button {
+
+    &.button--delete--repeat {
+      color: var(--primary-color);
+      background: none;
+    }
+    
+    &.button--repeat {
+      color: var(--primary-color);
+      font-size: 3rem;
+      background: none;
+    }
+
+    &.button--save {
+      color: black;
+      background: var(--primary-color);
+    }
+  }
 }
 
 form.add-menu {
   animation-name: expandAdd;
-  animation-duration: 0.2s;
+  animation-duration: 0.15s;
+  max-width: 50vh;
+  // margin: 2vh;
+  // transform: translate(5vh, 0vh);
 }
 
 @keyframes expandAdd {

@@ -1,5 +1,13 @@
 @import '../base';
 
+.nav-container {
+  width: 100%;
+
+  &.empty {
+    width: 0%;
+  }
+}
+
 .nav-menu {
   background-color: none;
   // opacity: 0.5;
@@ -59,7 +67,9 @@
 
 ul.nav-menu {
   animation-name: expandNav;
-  animation-duration: 0.2s;
+  animation-duration: 0.15s;
+  border-radius: 50%;
+  // background-color: red;
 }
 
 @keyframes expandNav {
