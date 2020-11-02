@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import { Redirect } from "react-router-dom";
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons';
+
+import './Register.scss';
 
 import { Button } from './Button';
 import { useControlledInput } from '../hooks/useControlledInput';
@@ -16,25 +17,34 @@ export const Register = props => {
   return (
     <Fragment>
       {!props.loggedIn ?
-        <div>
+        <div className='register'>
           <h1>Register</h1>
-          <form autoComplete='off' onSubmit={event => event.preventDefault()}>
-            <label htmlFor='email'>Email:</label>
-            <input id='email' {...email} /> <br />
+          <form className='form' autoComplete='off' onSubmit={event => event.preventDefault()}>
 
-            <label htmlFor='password'>Password:</label>
-            <input id='password' {...password} input='password' /> <br />
+            <div className='register__email'>
+              <label htmlFor='email'>Email:</label>
+              <input id='email' {...email} />
+            </div>
 
-            <label htmlFor='passwordConfirmation'>Confirm Password:</label>
-            <input id='passwordConfirmation' {...passwordConfirmation} input='password' /> <br />
+            <div className='register__password'>
+              <label htmlFor='password'>Password:</label>
+              <input id='password' {...password} input='password' />
+            </div>
 
-            <label htmlFor='address'><FontAwesomeIcon icon={faMapMarkerAlt} />Home:</label>
-            <input id='address' {...address} /><br />
-            <p>We use your home location as the starting point of the day to predict and prepare your personalized recommendations.</p>
+            <div className='register__confirm-password'>
+              <label htmlFor='passwordConfirmation'>Confirm Password:</label>
+              <input id='passwordConfirmation' {...passwordConfirmation} input='password' /> <br />
+            </div>
 
-            <label htmlFor='startOfDay'><FontAwesomeIcon icon={faClock} />Start of Day:</label>
+            <div className='register__address'>
+              <label htmlFor='address'><FontAwesomeIcon icon={faMapMarkerAlt} />Home:</label>
+              <input id='address' {...address} /><br />
+              <p className='register____address__desc'>We use your home location as the starting point of the day to predict and prepare your personalized recommendations.</p>
+            </div>
+
+            {/* <label htmlFor='startOfDay'><FontAwesomeIcon icon={faClock} />Start of Day:</label>
             <input id='startOfDay' {...startOfDay} type='time' />
-            <p>The start of day setting determines when we will send you the daily notification for what to bring and help us know when you are getting ready at home.</p>
+            <p>The start of day setting determines when we will send you the daily notification for what to bring and help us know when you are getting ready at home.</p> */}
           </form>
           <Button onClick={props.login}>Register</Button>
         </div> :

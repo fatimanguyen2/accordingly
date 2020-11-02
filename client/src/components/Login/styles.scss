@@ -22,10 +22,10 @@
   }
 
   .form {
-    width: 50%;
+    // width: 50%;
     font-size: $font-size * 1.2;
 
-    &__email {
+    &__email, &__password {
       margin: 1.5rem 0;
       display: flex;
       flex-direction: row;
@@ -35,16 +35,6 @@
       }
     }
 
-    &__password  {
-      margin: 1.5rem 0;
-      display: flex;
-      flex-direction: row;
-
-      input {
-        flex-grow: 2;
-      }
-    }
-    
     input {
       margin-left: 1rem;
       border: none;
