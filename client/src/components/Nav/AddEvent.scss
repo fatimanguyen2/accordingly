@@ -86,7 +86,7 @@
   }
 
   ul {
-    max-height: 30vh;
+    max-height: 25vh;
     overflow: scroll;
   }
 
@@ -117,28 +117,28 @@
     }
     
     &#entry {
-      font-size: 4vh;
+      font-size: 6vh;
       width: auto;
     }
 
     &#location_search {
-      font-size: 2vh;
+      font-size: 3vh;
     }
 
     &#start_date {
-      font-size: 2vh;
+      font-size: 3vh;
     }
 
     &#end_date {
-      font-size: 2vh;
+      font-size: 3vh;
     }
 
     &#start_hour {
-      font-size: 2vh;
+      font-size: 3vh;
     }
 
     &#end_hour {
-      font-size: 2vh;
+      font-size: 3vh;
     }
   }
 
@@ -156,12 +156,18 @@
 //       font-size: 6vh;
 //     }
 //   }
+
+  p {
+    font-size: 3vh;
+    text-align: center;
+  }
   
   li {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     text-align: center;
+    font-size: 3vh;
     
     p {
       margin: 0.5vh;
@@ -171,6 +177,7 @@
     input {
       width: auto;
       margin: 0.5vh;
+      font-size: 3vh;
       // padding: 0.5vh;
     }
 
@@ -181,6 +188,7 @@
       color: white;
       background-color: transparent;
       margin: 0.5vh;
+      font-size: 3vh;
       // padding: 0.5vh;
     }
   }
@@ -197,6 +205,7 @@
       background: none;
       padding: 0px;
       margin: 0.5vh;
+      font-size: 3.5vh;
       // padding: 0.5vh;
     }
     
