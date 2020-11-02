@@ -19,7 +19,7 @@ export const Settings = props => {
     setShowButton(false);
   };
 
-  const { input, handleInputChange, handleAddress } = useEndlessForm({
+  const { input, handleAddress } = useEndlessForm({
     raw_address,
   });
 
