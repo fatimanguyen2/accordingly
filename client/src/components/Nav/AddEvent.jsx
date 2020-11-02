@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faTimes, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import useEndlessForm from '../../hooks/useEndlessForm';
 import { getDateFromTimestamp, giveHTMLID, validateObj, addSeconds, removeSeconds, getHourFromTime } from '../../helpers/selectors';
 import moment from 'moment';
@@ -43,20 +43,27 @@ export const AddEvent = (props) => {
     <form className='add-menu' onSubmit={(e) => e.preventDefault()} >
       <label htmlFor="entry">Title</label>
       <input type="text" name="entry" id="entry" placeholder="Add Title" defaultValue={entry} onChange={handleInputChange} required></input>
-      <LocationSearchInput onChange={handleAddress} destination={raw_address}/>
-      <label htmlFor="start_date">Start Date</label>
-      <input type="date" name="start_date" id="start_date" defaultValue={start_date} onChange={handleInputChange} required></input>
-      <label htmlFor="start_hour">Start Time</label>
-      <input type="time" name="start_hour" id="start_hour" defaultValue={start_hour} onChange={handleInputChange} required></input>
-      <label htmlFor="end_date">End Date</label>
-      <input type="date" name="end_date" id="end_date" defaultValue={end_date} onChange={handleInputChange} required></input>
-      <label htmlFor="end_hour">End Time</label>
-      <input type="time" name="end_hour" id="end_hour" defaultValue={end_hour} onChange={handleInputChange} required></input>
+      <div className='location'>
+        <FontAwesomeIcon icon={faMapMarkerAlt} />
+        <LocationSearchInput onChange={handleAddress} destination={raw_address}/>
+      </div>
+      <div className='start-time'>
+        <label htmlFor="start_date">Start Date</label>
+        <input type="date" name="start_date" id="start_date" defaultValue={start_date} onChange={handleInputChange} required></input>
+        <label htmlFor="start_hour">Start Time</label>
+        <input type="time" name="start_hour" id="start_hour" defaultValue={start_hour} onChange={handleInputChange} required></input>
+      </div>
+      <div className='end-time'>
+        <label htmlFor="end_date">End Date</label>
+        <input type="date" name="end_date" id="end_date" defaultValue={end_date} onChange={handleInputChange} required></input>
+        <label htmlFor="end_hour">End Time</label>
+        <input type="time" name="end_hour" id="end_hour" defaultValue={end_hour} onChange={handleInputChange} required></input>
+      </div>
       <ul>
         {repeats.map(ele => {
           // console.log(ele.type_of);
           return <li key={ele.html_id}>
-            Every 
+            <p>Every</p> 
             <label htmlFor={`interval_count_${ele.html_id}`}>Repeat Count</label>
             <input type="number" min="1" max="12" name={`interval_count_${ele.html_id}`} id={`interval_count_${ele.html_id}`} defaultValue={ele.interval || 0} onChange={(e) => {
                 //update the repeat state with correct repeat type
