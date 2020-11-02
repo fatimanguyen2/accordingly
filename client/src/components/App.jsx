@@ -221,28 +221,28 @@ const recommendations = {
 let initialRecommendations = {};
 
 function App() {
-  const [state, setState] = useState({
-    loading: false,
-    view: 'home',
-    loggedIn: false,
-    weather,
-    recommendations,
-    events,
-    time: 1603740043000,
-    homeAddress,
-    eventToEdit: {}
-  });
   // const [state, setState] = useState({
-  //   loading: true,
+  //   loading: false,
   //   view: 'home',
-  //   loggedIn: true,
-  //   weather: {},
-  //   recommendations: {},
-  //   events: {},
+  //   loggedIn: false,
+  //   weather,
+  //   recommendations,
+  //   events,
   //   time: 1603740043000,
-  //   homeAddress: {},
+  //   homeAddress,
   //   eventToEdit: {}
   // });
+  const [state, setState] = useState({
+    loading: true,
+    view: 'home',
+    loggedIn: true,
+    weather: {},
+    recommendations: {},
+    events: {},
+    time: 1603740043000,
+    homeAddress: {},
+    eventToEdit: {}
+  });
 
   const getAllData = () => {
     Promise.all([
@@ -362,7 +362,7 @@ function App() {
     <main className='page-content'>
       {state.loading
         ? <div className='loader'>
-          <h1 className='loader__text'>Loading ...</h1>
+          {/* <h1 className='loader__text'>Loading ...</h1> */}
           <div className='loader__animation'></div>
         </div>
         : <div>
