@@ -30,7 +30,7 @@ export default function useEndlessForm (inital={}) {
     [e.currentTarget.name]: e.currentTarget.value
   })
 
-  const handleAddress = (address) => setInput({
+  const handleAddress = address => setInput({
     ...input,
     "raw_address": address
   })

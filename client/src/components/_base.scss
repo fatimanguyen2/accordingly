@@ -35,7 +35,7 @@ $add-menu-translate: calc(#{$add-menu-height} + (2 * #{$add-menu-border}));
 
 
 // For responsive text size
-$font-size: 1.2em;
+$font-size: 1.2rem;
 $ratio: 1.25;
 $h5: calc(font-size * $ratio);
 $h4: calc($h5 * $ratio);

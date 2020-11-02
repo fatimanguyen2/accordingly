@@ -149,7 +149,6 @@ module.exports = (db) => {
   }
 
   const makeEntryInactive = (entryID) => {
-    console.log(entryID)
     const query = (`
     UPDATE entries
     SET is_active = FALSE
@@ -296,11 +295,12 @@ module.exports = (db) => {
   }
 
   const updateUserAddress = (address, id) => {
+
     return db.query(`
     UPDATE users
-    SET address = ${address.street},
-    SET city = ${address.city},
-    SET postal_code = ${address.postal_code},
+    SET address = '${address.street}',
+    city = '${address.city}',
+    postal_code = '${address.postal_code}'
     WHERE id = ${id}
     RETURNING *
     `)
