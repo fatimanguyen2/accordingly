@@ -47,7 +47,7 @@ export const Nav = props => {
 
   return (
     <div className='nav'>
-      <div className='nav-container'>
+      <div className={classnames('nav-container', {'empty': menuCollapse && !addCollapse})}>
         {(addCollapse || !props.loggedIn) &&
           <Fragment>
             <button
@@ -85,7 +85,7 @@ export const Nav = props => {
         }
       </div>
 
-      <div className='add-container'>
+      <div className={classnames('add-container', {'empty': addCollapse && !menuCollapse})}>
         {props.loggedIn && menuCollapse &&
           <Fragment>
             <button

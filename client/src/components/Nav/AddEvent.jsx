@@ -102,23 +102,27 @@ export const AddEvent = (props) => {
               <option value="6">Saturday</option>
               <option value="0">Sunday</option>
             </select>
-            <button id={`delete_repeat_${ele.html_id}`} onClick={(e) => removeRepeat(e, ele.html_id)}><FontAwesomeIcon icon={faTimes} /></button>
+            <button id={`delete_repeat_${ele.html_id}`} className="button button--delete--repeat" onClick={(e) => removeRepeat(e, ele.html_id)}><FontAwesomeIcon icon={faTimes} /></button>
           </li>
         })}
       </ul>
 
-      <button id="add_repeat" onClick={addRepeat}><FontAwesomeIcon icon={faPlus} /></button>
+      <button id="add_repeat" className="button button--repeat" onClick={addRepeat}><FontAwesomeIcon icon={faPlus} /></button>
       
-      <button onClick={() => {
-        // event.preventDefault()
-        // event.stopPropagation();
-        // event.nativeEvent.stopImmediatePropagation();
-        // console.log(event.target)
-        const eventObj = {...input, recurrences: repeats, start_hour: addSeconds(input.start_hour), end_hour: addSeconds(input.end_hour)};
-        const pass = validateObj(eventObj, [ 'entry', 'raw_address', 'start_date', 'end_date', 'start_hour', 'end_hour' ]);
-        pass && (input.entry_id ? props.onEdit(eventObj) : props.onSubmit(eventObj));
-        pass && props.closeAdd();
-      }}>{entry_id ? 'Edit' : 'Add'}</button>
+      <button 
+        className="button button--save"
+        onClick={() => {
+          // event.preventDefault()
+          // event.stopPropagation();
+          // event.nativeEvent.stopImmediatePropagation();
+          // console.log(event.target)
+          const eventObj = {...input, recurrences: repeats, start_hour: addSeconds(input.start_hour), end_hour: addSeconds(input.end_hour)};
+          const pass = validateObj(eventObj, [ 'entry', 'raw_address', 'start_date', 'end_date', 'start_hour', 'end_hour' ]);
+          pass && (input.entry_id ? props.onEdit(eventObj) : props.onSubmit(eventObj));
+          pass && props.closeAdd();
+        }}>
+        {entry_id ? 'Edit' : 'Add'}
+      </button>
     </form>
   );
 };
