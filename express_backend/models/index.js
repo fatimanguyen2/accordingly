@@ -299,7 +299,7 @@ module.exports = (db) => {
       SET address = '${address.street}',
       city = '${address.city}',
       postal_code = '${address.postal_code}',
-      location = point(${adress.destination.x}, ${address.destination.y})
+      home_location = point(${address.destination.x}, ${address.destination.y})
       WHERE id = ${id}
       RETURNING *`)
 
@@ -308,7 +308,7 @@ module.exports = (db) => {
     SET address = '${address.street}',
     city = '${address.city}',
     postal_code = '${address.postal_code}',
-    location = point(${adress.destination.x}, ${address.destination.y})
+    home_location = point(${address.destination.x}, ${address.destination.y})
     WHERE id = ${id}
     RETURNING *
     `)

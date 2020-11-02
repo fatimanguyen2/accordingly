@@ -32,6 +32,7 @@ module.exports = (
 
 
   router.put('/:id', function (req, res) {
+    console.log(req.body.raw_address)
     formatAddressForDb(req.body.raw_address)
       .then(address => {
         if (!address.city.includes('Unorganized')) {
