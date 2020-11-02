@@ -20,4 +20,44 @@
     justify-content: center;
     box-shadow: 0 0 1rem var(--primary-color), inset 0 0 1rem var(--primary-color);
   }
+
+  .form {
+    width: 50%;
+    font-size: $font-size * 1.2;
+
+    &__email {
+      margin: 1.5rem 0;
+      display: flex;
+      flex-direction: row;
+      
+      input {
+        flex-grow: 2;
+      }
+    }
+
+    &__password  {
+      margin: 1.5rem 0;
+      display: flex;
+      flex-direction: row;
+
+      input {
+        flex-grow: 2;
+      }
+    }
+    
+    input {
+      margin-left: 1rem;
+      border: none;
+      border-bottom: solid var(--primary-color);
+      background: black;
+      color: white;
+      outline: none;
+      font-size: $font-size;
+    }
+  }
+
+  button {
+    width: 100%;
+    margin: 1rem 0;
+  }
 }
