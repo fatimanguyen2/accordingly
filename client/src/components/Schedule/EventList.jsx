@@ -11,7 +11,6 @@ export const EventList = props => {
       key={props.type + id}
       id={id}
       entry_id={event.entry_id}
-      onEdit={props.onEdit}
       type={props.type}
       title={event.entry}
       start={props.type === 'repeating' ? event.next_event.start_time : event.start_time}
@@ -19,7 +18,9 @@ export const EventList = props => {
       weather={props.type === 'repeating' ? event.next_event.weather : event.weather}
       destination={props.type === 'repeating' ? `${event.next_event.address}, ${event.next_event.city}` : `${event.address}, ${event.city}`}
       recurrences={props.type === 'repeating' ? event.recurrences : getRecurrenceArray(event, props.allEvents)}
+      onEdit={props.onEdit}
       deleteEvent={props.deleteEvent}
+      onToggle={props.onToggle}
     />
   })
 
