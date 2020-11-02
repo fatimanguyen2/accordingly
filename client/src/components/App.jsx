@@ -235,7 +235,7 @@ function App() {
   const [state, setState] = useState({
     loading: true,
     view: 'home',
-    loggedIn: true,
+    loggedIn: false,
     weather: {},
     recommendations: {},
     events: {},
