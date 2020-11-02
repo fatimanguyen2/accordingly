@@ -2,6 +2,7 @@
 
 .add-container {
   width: 100%;
+  max-width: calc(#{($add-menu-height / 2) + ($add-menu-border * 4)});
 
   &.empty {
     width: 0%;
@@ -18,7 +19,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 5vh;
+  align-items: center;
+  // margin: 5vh;
   // transform: translate(-5vh, -10vh);
   // background-color: pink;
   // position: absolute;
@@ -43,19 +45,80 @@
     display: none;
   }
 
+  .start-time {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    input {
+
+      // margin: 5px;
+
+      &#start_date{
+        flex: 0 1 55%;
+      }
+
+      &#start_hour{
+        flex: 0 1 40%;
+      }
+
+    }
+  }
+
+  .end-time {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    input {
+
+      // margin: 5px;
+
+      &#end_date{
+        flex: 0 1 55%;
+      }
+
+      &#end_hour{
+        flex: 0 1 40%;
+      }
+
+    }
+  }
+
   ul {
     max-height: 30vh;
     overflow: scroll;
   }
 
+  .location {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 2vh;
+  }
+
   input {
+    width: 100%;
     color: white;
     background-color: transparent;
     border: none;
     border-bottom: solid var(--primary-color);
+    text-align: center;
+    margin: 1vh;
+
+    &::-webkit-calendar-picker-indicator {
+      filter: invert(100%);
+    }
+
+    &:focus {
+      outline: none;
+      filter: brightness(2);
+      box-shadow: var(--primary-color);
+    }
     
     &#entry {
-      font-size: 6vh;
+      font-size: 4vh;
+      width: auto;
     }
 
     &#location_search {
@@ -94,9 +157,33 @@
 //     }
 //   }
   
-//   li {
-//     margin: 1vh;
-//   }
+  li {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: center;
+    
+    p {
+      margin: 0.5vh;
+      // padding: 0.5vh;
+    }
+
+    input {
+      width: auto;
+      margin: 0.5vh;
+      // padding: 0.5vh;
+    }
+
+    select {
+      border: none;
+      border-bottom: solid var(--primary-color);
+      width: auto;
+      color: white;
+      background-color: transparent;
+      margin: 0.5vh;
+      // padding: 0.5vh;
+    }
+  }
 
 //   span {
 //     font-size: 2vh;
@@ -108,18 +195,25 @@
     &.button--delete--repeat {
       color: var(--primary-color);
       background: none;
+      padding: 0px;
+      margin: 0.5vh;
+      // padding: 0.5vh;
     }
     
     &.button--repeat {
       color: var(--primary-color);
-      font-size: 3rem;
+      font-size: 5vh;
       background: none;
+      width: 70px;
     }
 
     &.button--save {
       color: black;
+      font-size: 3vh;
       background: var(--primary-color);
+      width: 100%;
     }
+    
   }
 }
 
@@ -127,7 +221,7 @@ form.add-menu {
   animation-name: expandAdd;
   animation-duration: 0.15s;
   max-width: 50vh;
-  // margin: 2vh;
+  margin: auto;
   // transform: translate(5vh, 0vh);
 }
 
