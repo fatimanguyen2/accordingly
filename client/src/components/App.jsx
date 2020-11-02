@@ -233,6 +233,7 @@ function App() {
   //   homeAddress,
   //   eventToEdit: {}
   // });
+  const time = Date.now();
   const [state, setState] = useState({
     loading: false,
     view: 'home',
@@ -240,7 +241,7 @@ function App() {
     weather: {},
     recommendations: {},
     events: {},
-    time: 1603740043000,
+    time,
     homeAddress: {},
     eventToEdit: {}
   });
@@ -260,6 +261,8 @@ function App() {
         let colours = setPrimaryColors(all[0].data.mainWeather[0]);
         document.documentElement.style.setProperty('--primary-color', colours.solid);
         document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
+        
+        const time = Date.now();
 
         return setState(prev => (
           {
@@ -268,7 +271,8 @@ function App() {
             weather: all[0].data,
             recommendations: { ...all[1].data, done: [] },
             events: all[2].data,
-            homeAddress: all[3].data
+            homeAddress: all[3].data,
+            time
           }))
       })
     // .then(() => {
@@ -380,7 +384,7 @@ function App() {
           <Router>
             <Nav
               view={state.view}
-              onSelect={(name) => console.log(name)}
+              onSelect={(name) => getAllData()}
               onSubmit={addEvent}
               onEdit={editEvent}
               loggedIn={state.loggedIn}

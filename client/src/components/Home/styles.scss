@@ -51,10 +51,11 @@
         height: 2.7rem;
         transition: all 300ms ease-in;
         border: 0.3rem solid var(--primary-color);
+        word-break: keep-all;
      
-        h1, h3 span, p {
-          display: none
-        }
+        h1, h3 span, p {display: none}
+
+        h3 {margin:0}
       }
   
       .departure-time {

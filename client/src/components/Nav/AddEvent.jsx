@@ -60,6 +60,7 @@ export const AddEvent = (props) => {
         <input type="time" name="end_hour" id="end_hour" defaultValue={end_hour} onChange={handleInputChange} required></input>
       </div>
       <ul>
+        <p>Repeats</p>
         {repeats.map(ele => {
           // console.log(ele.type_of);
           return <li key={ele.html_id}>
@@ -101,13 +102,13 @@ export const AddEvent = (props) => {
               <option value="month">Month</option>
               <option value="year">Year</option>
               <option value="" disabled>----</option>
-              <option value="1">Monday</option>
-              <option value="2">Tuesday</option>
-              <option value="3">Wednesday</option>
-              <option value="4">Thursday</option>
-              <option value="5">Friday</option>
-              <option value="6">Saturday</option>
-              <option value="0">Sunday</option>
+              <option value="1">Mon</option>
+              <option value="2">Tue</option>
+              <option value="3">Wed</option>
+              <option value="4">Thu</option>
+              <option value="5">Fri</option>
+              <option value="6">Sat</option>
+              <option value="0">Sun</option>
             </select>
             <button id={`delete_repeat_${ele.html_id}`} className="button button--delete--repeat" onClick={(e) => removeRepeat(e, ele.html_id)}><FontAwesomeIcon icon={faTimes} /></button>
           </li>
