@@ -1,7 +1,6 @@
 @import '../base';
 
 .login {
-  margin: 1rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,18 +21,15 @@
   }
 
   .form {
-    // width: 50%;
     font-size: $font-size * 1.2;
 
     &__email, &__password {
       margin: 1.5rem 0;
       display: flex;
       flex-direction: row;
-      
-      input {
-        flex-grow: 2;
-      }
     }
+
+    label {white-space: nowrap}
 
     input {
       margin-left: 1rem;
@@ -43,6 +39,7 @@
       color: white;
       outline: none;
       font-size: $font-size;
+      flex-grow: 2;
     }
   }
 
