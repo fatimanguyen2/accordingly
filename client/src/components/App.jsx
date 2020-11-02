@@ -14,6 +14,7 @@ import { Settings } from './Settings';
 import { Register } from './Register';
 
 import { filterEvents, setPrimaryColors, getItem, getSuggestionCategory } from '../helpers/selectors';
+import { LoggedIn } from '../stories/Nav.stories';
 
 const weather = {
   mainWeather: [
@@ -221,28 +222,28 @@ const recommendations = {
 let initialRecommendations = {};
 
 function App() {
+  // const [state, setState] = useState({
+  //   loading: false,
+  //   view: 'home',
+  //   loggedIn: true,
+  //   weather,
+  //   recommendations,
+  //   events,
+  //   time: 1603740043000,
+  //   homeAddress,
+  //   eventToEdit: {}
+  // });
   const [state, setState] = useState({
     loading: false,
     view: 'home',
-    loggedIn: true,
-    weather,
-    recommendations,
-    events,
+    loggedIn: false,
+    weather: {},
+    recommendations: {},
+    events: {},
     time: 1603740043000,
-    homeAddress,
+    homeAddress: {},
     eventToEdit: {}
   });
-  // const [state, setState] = useState({
-  //   loading: true,
-  //   view: 'home',
-  //   loggedIn: true,
-  //   weather: {},
-  //   recommendations: {},
-  //   events: {},
-  //   time: 1603740043000,
-  //   homeAddress: {},
-  //   eventToEdit: {}
-  // });
 
   const getAllData = () => {
     Promise.all([
@@ -255,12 +256,12 @@ function App() {
         console.log(all);
         initialRecommendations = all[1].data;
 
-        // Setting app primary color
+        // // Setting app primary color
         let colours = setPrimaryColors(all[0].data.mainWeather[0]);
         document.documentElement.style.setProperty('--primary-color', colours.solid);
         document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
 
-        setState(prev => (
+        return setState(prev => (
           {
             ...prev,
             loading: false,
@@ -272,25 +273,35 @@ function App() {
       })
     // .then(() => {
     //   // Setting app primary color
-    //   // let colours = setPrimaryColors(state.weather.mainWeather[0]);
+    //   let colours = setPrimaryColors(state.weather.mainWeather[0]);
     //   document.documentElement.style.setProperty('--primary-color', colours.solid);
     //   document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
     // })
   };
 
   useEffect(() => {
-    getAllData();
-  }, [])
+    if (state.loggedIn) {
+      setState(prev => ({ ...prev, loading: true }))
+      getAllData();
+    }
+  }, [state.loggedIn])
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
-  const logout = () => setState(prev => ({ ...prev, loggedIn: false }));
+  const logout = () => {
+    // Change back primary colors
+    document.documentElement.style.setProperty('--primary-color', '#80ffdb');
+    document.documentElement.style.setProperty('--primary-color-gradient', '#80ffdb');
+    setState(prev => ({ ...prev, loggedIn: false }))
+  };
 
   // Change state when checking items on recommendation list in home component
   const handleCheck = (id, type) => {
     const item = getItem(id, state.recommendations[type]); //get item object
     const category = getSuggestionCategory(id, initialRecommendations); //get initial item category of axios request to ensure done itesm go back to right category
+   
     // USE NEXT LINE FOR MOCK
     // const category = getSuggestionCategory(id, recommendations); //get initial item category of axios request to ensure done itesm go back to right category
+    
     // if item gets checked and is in upcoming/later list, remove from that list and add to done list
     if (type !== 'done') {
       const updatedRecommendationsObj = {
@@ -362,7 +373,7 @@ function App() {
     <main className='page-content'>
       {state.loading
         ? <div className='loader'>
-          <h1 className='loader__text'>Loading ...</h1>
+          {/* <h1 className='loader__text'>Loading ...</h1> */}
           <div className='loader__animation'></div>
         </div>
         : <div>

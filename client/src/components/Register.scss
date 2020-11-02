@@ -1,0 +1,86 @@
+@import 'base';
+
+.register {
+  margin: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    padding-bottom: 0.5rem;
+    border-bottom: 0.3rem solid var(--primary-color);
+    width:100%;
+  }
+
+  .form {
+    font-size: $font-size * 1.2;
+    margin: 1rem;
+    width: 100%;
+  }
+  
+  &__email, &__password, &__confirm-password{
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+
+    label {white-space: nowrap;}
+
+    input {
+      flex-grow: 2;
+      margin: 1rem 0;
+      border: none;
+      border-bottom: solid var(--primary-color);
+      background: black;
+      color: white;
+      outline: none;
+      font-size: $font-size;
+    }
+
+  }
+  
+  &__address {
+    display: flex;
+    
+    &__location-icon {
+      margin: 0 1rem 0 0.5rem;
+      font-size: $font-size;
+    }
+  
+    &__desc {
+      font-size: $font-size * 0.9;
+      color: #575757;
+    }
+  }
+
+  .place-autocomplete {
+    width: 100%;
+
+    .location_search_input {
+      width: 80%;
+      background: black;
+      color: white;
+      font-size: $font-size;
+      border: none;
+      border-bottom: solid var(--primary-color);
+      padding: 0.2rem;
+      width: 100%;
+      margin: 1rem 0;
+
+      &:focus {outline:none}
+    }
+  }
+
+  button {width: 100%}
+}
+
+// media querie
+// &__email, &__password, &__confirm-password {
+//   flex-direction: column;
+// margin-bottom: 3rem;
+
+//   input {
+//     margin: 0;
+//     margin-left: 1rem
+//   }
+// }
+// .location_search_input {margin:0; margin-left: 0.5rem; //remove width 100%}

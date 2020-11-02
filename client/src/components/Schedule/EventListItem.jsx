@@ -19,8 +19,8 @@ export const EventListItem = props => {
   // setToggle and collapse other events
   const handleToggle = () => {
     setToggle(prev => !prev);
-    if (toggle) {
-      console.log('hi')
+    if (!toggle) {
+      props.onToggle(props.type, props.id)
     }
   };
 
@@ -37,6 +37,7 @@ export const EventListItem = props => {
   // Undo first delete click when back btn clicked
   const back = () => setView(NORMAL);
 
+  // CLASS NAMES:
   //Build classname for each weather
   const weatherName = changeWeatherName(props.weather);
   // Ensure that background event list item color is weather color unless weather = null or in group 700 of open weather API
@@ -46,19 +47,20 @@ export const EventListItem = props => {
   } else {
     key = 'event-list-item';
   }
-  const itemClass = classNames('event-list-item', {[key + '--untoggled']: toggle === false}, key);
+  const itemClass = classNames('event-list-item', { [key + '--untoggled']: !toggle }, key);
+  const itemMainClass = classNames({ 'event-list-item__main': !toggle, 'event-list-item__main--toggled': toggle });
 
   return (
     <li className={itemClass}>
 
-      <div className='event-list-item__main' onClick={handleToggle}>
+      <div className={itemMainClass} onClick={handleToggle}>
         <div className='event-list-item__time' >
           <FontAwesomeIcon className='event-list-item__weather-icon' icon={getWeatherIcon(props.weather)} color={getWeatherColor(props.weather)} />
           <p>{props.type === 'today' ? moment(props.start).format('HH:mm') : moment(props.start).fromNow()} </p>
         </div>
         <div><p>{props.title}</p></div>
       </div>
-      
+
       {toggle &&
         <div className='event-list-item__details'>
           <div onClick={() => setToggle(prev => !prev)}>
@@ -73,10 +75,10 @@ export const EventListItem = props => {
                 <p> {moment(props.end).format('dddd, MMM Do   HH:mm')}</p>
               </div>
             </div>
-          {
-            props.recurrences ?
-            <RepeatList recurrences={props.recurrences} /> : <div className='repeat-title'><p> Does not repeat </p></div>
-          }
+            {
+              props.recurrences ?
+                <RepeatList recurrences={props.recurrences} /> : <div className='repeat-title'><p> Does not repeat </p></div>
+            }
           </div>
           {
             view === NORMAL ?

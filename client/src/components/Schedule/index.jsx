@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Redirect } from "react-router-dom";
 
 import './styles.scss';
@@ -9,11 +9,22 @@ const REPEATING = 'repeating';
 const FUTURE = 'future';
 
 // Collapse any other toggled event list item when one list item is clicked
-const handleToggle = (id) => {};
+const handleToggle = (id) => { };
 
 
 export const Schedule = props => {
-  const [collapseOthers, setCollapseOthers] = useState();
+  const [collapse, setCollapse] = useState();
+  const [reRender, setRerender] = useState(false);
+
+  useEffect(() => {
+    setRerender(prev => !prev)
+  }, [props])
+
+  const collapseOthers = (type, id) => {
+    console.log('in collapseOthers');
+    // if ()
+    setRerender(true)
+  };
 
   return (
     <Fragment>
@@ -28,9 +39,10 @@ export const Schedule = props => {
               events={props.events[TODAY]}
               type={TODAY}
               deleteEvent={props.deleteEvent}
-              onEdit={props.onEdit}>
+              onEdit={props.onEdit}
+              onToggle={collapseOthers}>
               Today
-          </EventList>
+            </EventList>
           }
           {props.events[REPEATING]
             && props.events[REPEATING].length > 0
@@ -38,7 +50,8 @@ export const Schedule = props => {
               events={props.events[REPEATING]}
               type={REPEATING}
               deleteEvent={props.deleteEvent}
-              onEdit={props.onEdit}>
+              onEdit={props.onEdit}
+              onToggle={collapseOthers}>
               Repeating
             </EventList>
           }
@@ -50,7 +63,8 @@ export const Schedule = props => {
               events={props.events[FUTURE]}
               type={FUTURE}
               deleteEvent={props.deleteEvent}
-              onEdit={props.onEdit}>
+              onEdit={props.onEdit}
+              onToggle={collapseOthers}>
               Future
             </EventList>
           }
