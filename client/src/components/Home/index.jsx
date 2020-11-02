@@ -46,7 +46,7 @@ export const Home = props => {
                 maxTemp={Math.round(props.weather.feels_likeMax)}
                 size={headerSize}
               />
-              {props.events && <EventList events={props.events} />}
+              {props.events? <EventList events={props.events}/> : <div className='no-event'><p>No events today</p></div>}
             </div>
             {props.events && props.events.length > 0 && <DepartureTime departureTime={props.events[0].leave_by} />}
           </header>
