@@ -60,6 +60,7 @@ export const AddEvent = (props) => {
         <input type="time" name="end_hour" id="end_hour" defaultValue={end_hour} onChange={handleInputChange} required></input>
       </div>
       <ul>
+        <p>Repeats</p>
         {repeats.map(ele => {
           // console.log(ele.type_of);
           return <li key={ele.html_id}>
