@@ -86,9 +86,11 @@
   }
 
   .add-container {
+    width: 100vw;
     display: flex;
     flex-direction: column;
-    // justify-content: flex-end;
+    justify-content: flex-end;
+    align-items: flex-end;
   }
 
   .menu-shape {
@@ -115,8 +117,8 @@
       &.add-menu {
         // display: flex;
         // align-items: flex-end;
-        position: fixed;
-        transform: translate(30vh, 0vh);
+        // position: fixed;
+        transform: translate(10vh, 0vh);
       }
     }
 
@@ -136,7 +138,7 @@
         width: calc(#{$add-menu-height} * 2);
         height: calc(#{$add-menu-height} * 2);
         // transform: translate(-30vh, 45vh);
-        transform: translate(calc(-#{$nav-menu-height} + 10vh), calc(#{$nav-menu-height} + 30vh));
+        transform: translate(calc(#{$nav-menu-height} + 50vh), calc(#{$nav-menu-height} + 30vh));
       }
     }
 
