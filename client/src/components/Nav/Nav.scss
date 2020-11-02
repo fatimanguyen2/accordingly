@@ -7,7 +7,7 @@
   justify-content: space-between;
   align-items: center;
   bottom: 5vh;
-  // background: $rainy-color;
+  // background: red;
   background-color: none;
   color: white;
   transform: translate(0px, 15vh);
@@ -30,7 +30,7 @@
     &.nav-menu {
 
       &.button--collapse {
-        transform: translate(0px, -5vh);
+        transform: translate(0px, -10vh);
         height: 8vh;
         padding: 2vh;
       }
@@ -56,7 +56,7 @@
       align-items: flex-end;
 
       &.button--collapse {
-        transform: translate(5vh, -5vh);
+        transform: translate(0vh, -10vh);
         height: 8vh;
         padding: 2vh;
         // justify-content: flex-end;
@@ -64,7 +64,8 @@
   
       &.button--expand {
         height: $add-menu-border;
-        transform: translate(5.5vh, 0.5vh);
+        transform: translate(-0vh, -14vh);
+        // color: green;
         // display: flex;
         // flex-direction: row;
         // justify-content: flex-end;
@@ -118,7 +119,7 @@
         // display: flex;
         // align-items: flex-end;
         // position: fixed;
-        transform: translate(15vh, 5vh);
+        transform: translate(10vh, 0vh);
       }
     }
 
@@ -138,7 +139,7 @@
         width: calc(#{$add-menu-height} * 2);
         height: calc(#{$add-menu-height} * 2);
         // transform: translate(-30vh, 45vh);
-        transform: translate(calc(#{$nav-menu-height} + 50vh), calc(#{$nav-menu-height} + 35vh));
+        transform: translate(calc(#{$nav-menu-height} + 50vh), calc(#{$nav-menu-height} + 30vh));
       }
     }
 

@@ -1,7 +1,8 @@
 @import '../base';
 
 .nav-container {
-  width: 100%;
+  width: auto;
+  // background: red;
 
   &.empty {
     width: 0%;
