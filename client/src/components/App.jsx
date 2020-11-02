@@ -222,28 +222,29 @@ const recommendations = {
 let initialRecommendations = {};
 
 function App() {
-  const [state, setState] = useState({
-    loading: false,
-    view: 'home',
-    loggedIn: true,
-    weather,
-    recommendations,
-    events,
-    time: 1603740043000,
-    homeAddress,
-    eventToEdit: {}
-  });
   // const [state, setState] = useState({
   //   loading: false,
   //   view: 'home',
-  //   loggedIn: false,
-  //   weather: {},
-  //   recommendations: {},
-  //   events: {},
+  //   loggedIn: true,
+  //   weather,
+  //   recommendations,
+  //   events,
   //   time: 1603740043000,
-  //   homeAddress: {},
+  //   homeAddress,
   //   eventToEdit: {}
   // });
+  const time = Date.now();
+  const [state, setState] = useState({
+    loading: false,
+    view: 'home',
+    loggedIn: false,
+    weather: {},
+    recommendations: {},
+    events: {},
+    time,
+    homeAddress: {},
+    eventToEdit: {}
+  });
 
   const getAllData = () => {
     Promise.all([
@@ -260,6 +261,8 @@ function App() {
         let colours = setPrimaryColors(all[0].data.mainWeather[0]);
         document.documentElement.style.setProperty('--primary-color', colours.solid);
         document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
+        
+        const time = Date.now();
 
         return setState(prev => (
           {
@@ -268,7 +271,8 @@ function App() {
             weather: all[0].data,
             recommendations: { ...all[1].data, done: [] },
             events: all[2].data,
-            homeAddress: all[3].data
+            homeAddress: all[3].data,
+            time
           }))
       })
     // .then(() => {
@@ -279,12 +283,12 @@ function App() {
     // })
   };
 
-  // useEffect(() => {
-  //   if (state.loggedIn) {
-  //     setState(prev => ({ ...prev, loading: true }))
-  //     getAllData();
-  //   }
-  // }, [state.loggedIn]);
+  useEffect(() => {
+    if (state.loggedIn) {
+      setState(prev => ({ ...prev, loading: true }))
+      getAllData();
+    }
+  }, [state.loggedIn]);
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => {
@@ -380,7 +384,7 @@ function App() {
           <Router>
             <Nav
               view={state.view}
-              onSelect={(name) => console.log(name)}
+              onSelect={(name) => getAllData()}
               onSubmit={addEvent}
               onEdit={editEvent}
               loggedIn={state.loggedIn}

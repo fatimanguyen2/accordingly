@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import moment from 'moment';
 import { Link, useLocation } from 'react-router-dom';
 import './NavMenu.scss';
@@ -7,6 +7,12 @@ const classnames = require('classnames');
 export const NavMenu = (props) => {
   const location = useLocation();
   // console.log(location);
+  let time = moment(props.time).fromNow();
+
+  useEffect(() => {
+    time = moment(props.time).fromNow();
+  }, [props.time]);
+
   return (
     <Fragment>
       <ul className='nav-menu'>
@@ -21,7 +27,7 @@ export const NavMenu = (props) => {
                   props.onSelect('nav menu refresh selected');
                   // props.closeMenu();
                 }}>
-                Refresh <span>{moment(props.time).fromNow()}</span>
+                Refresh <span>{time}</span>
               </Link>
             </li>
             <li><Link to='/login' onClick={() => {
