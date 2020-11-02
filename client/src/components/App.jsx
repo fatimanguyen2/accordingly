@@ -222,28 +222,28 @@ const recommendations = {
 let initialRecommendations = {};
 
 function App() {
-  const [state, setState] = useState({
-    loading: false,
-    view: 'home',
-    loggedIn: true,
-    weather,
-    recommendations,
-    events,
-    time: 1603740043000,
-    homeAddress,
-    eventToEdit: {}
-  });
   // const [state, setState] = useState({
   //   loading: false,
   //   view: 'home',
-  //   loggedIn: false,
-  //   weather: {},
-  //   recommendations: {},
-  //   events: {},
+  //   loggedIn: true,
+  //   weather,
+  //   recommendations,
+  //   events,
   //   time: 1603740043000,
-  //   homeAddress: {},
+  //   homeAddress,
   //   eventToEdit: {}
   // });
+  const [state, setState] = useState({
+    loading: false,
+    view: 'home',
+    loggedIn: false,
+    weather: {},
+    recommendations: {},
+    events: {},
+    time: 1603740043000,
+    homeAddress: {},
+    eventToEdit: {}
+  });
 
   const getAllData = () => {
     Promise.all([
@@ -279,12 +279,12 @@ function App() {
     // })
   };
 
-  // useEffect(() => {
-  //   if (state.loggedIn) {
-  //     setState(prev => ({ ...prev, loading: true }))
-  //     getAllData();
-  //   }
-  // }, [state.loggedIn])
+  useEffect(() => {
+    if (state.loggedIn) {
+      setState(prev => ({ ...prev, loading: true }))
+      getAllData();
+    }
+  }, [state.loggedIn])
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => {
@@ -297,10 +297,10 @@ function App() {
   // Change state when checking items on recommendation list in home component
   const handleCheck = (id, type) => {
     const item = getItem(id, state.recommendations[type]); //get item object
-    // const category = getSuggestionCategory(id, initialRecommendations); //get initial item category of axios request to ensure done itesm go back to right category
+    const category = getSuggestionCategory(id, initialRecommendations); //get initial item category of axios request to ensure done itesm go back to right category
    
     // USE NEXT LINE FOR MOCK
-    const category = getSuggestionCategory(id, recommendations); //get initial item category of axios request to ensure done itesm go back to right category
+    // const category = getSuggestionCategory(id, recommendations); //get initial item category of axios request to ensure done itesm go back to right category
     
     // if item gets checked and is in upcoming/later list, remove from that list and add to done list
     if (type !== 'done') {
