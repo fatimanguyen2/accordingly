@@ -306,6 +306,16 @@ module.exports = (db) => {
     `)
   }
 
+  const createNewUser = ({ first_name, last_name, email, password, home_location, address, city, postal_code }) => {
+    db.query(`
+    INSERT INTO users(first_name, last_name, email, password, home_location, address, city, postal_code)
+    VALUES
+    ('$1', '$2', '$3', '$4', point(43.69854, -79.41188), '227 Dunvegan Rd', 'Toronto', 'M5P 2P4')
+    RETURNING *
+    `, [first_name, last_name, email, password])
+
+  }
+
   return {
     getUserEvents,
     getUserLocationById,
