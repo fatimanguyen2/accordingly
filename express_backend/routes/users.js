@@ -19,17 +19,29 @@ module.exports = (
       .catch(err => res.json({ msg: err.message }))
   })
 
-  router.put('/:id', function (req, res) {
-    console.log(req.body)
+  router.post('/:id', function (req, res) {
     formatAddressForDb(req.body.raw_address)
-      .then(location => updateUserAddress(location, req.params.id))
       .then(address => {
         if (!address.city.includes('Unorganized')) {
-          return ({...req.body, title: req.body.entry, ...address})
+          return ({...req.body, ...address})
         } else {
           return Promise.reject("Sorry we need at least a city")
         }
       })
+  })
+
+
+  router.put('/:id', function (req, res) {
+    console.log(req.body.raw_address)
+    formatAddressForDb(req.body.raw_address)
+      .then(address => {
+        if (!address.city.includes('Unorganized')) {
+          return ({...req.body, ...address})
+        } else {
+          return Promise.reject("Sorry we need at least a city")
+        }
+      })
+      .then(location => updateUserAddress(location, req.params.id))
       .then(user => res.json(user))
       .catch(err => res.json({ msg: err.message }))
   })

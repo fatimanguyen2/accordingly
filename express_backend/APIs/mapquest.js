@@ -52,7 +52,7 @@ const rawAddressToLocation = (rawAddress) => {
 const formatAddressForDb = (rawAddress) => {
   const formattedAddress = {};
   return rawAddressToLocation(rawAddress)
-    .then(location => {
+  .then(location => {
       formattedAddress.destination = location
       return locationToAddress(location)
     })
