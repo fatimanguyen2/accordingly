@@ -46,12 +46,13 @@ export const EventListItem = props => {
   } else {
     key = 'event-list-item';
   }
-  const itemClass = classNames('event-list-item', {[key + '--untoggled']: toggle === false}, key);
+  const itemClass = classNames('event-list-item', {[key + '--untoggled']: !toggle}, key);
+  const itemMainClass = classNames({'event-list-item__main' : !toggle, 'event-list-item__main--toggled' : toggle});
 
   return (
     <li className={itemClass}>
 
-      <div className='event-list-item__main' onClick={handleToggle}>
+      <div className={itemMainClass} onClick={handleToggle}>
         <div className='event-list-item__time' >
           <FontAwesomeIcon className='event-list-item__weather-icon' icon={getWeatherIcon(props.weather)} color={getWeatherColor(props.weather)} />
           <p>{props.type === 'today' ? moment(props.start).format('HH:mm') : moment(props.start).fromNow()} </p>
