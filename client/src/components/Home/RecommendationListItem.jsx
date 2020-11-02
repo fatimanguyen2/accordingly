@@ -7,7 +7,12 @@ export default function RecommendationItem(props) {
   const checked = props.type === 'done' ? true : false; //ensures that items in done list show as checked and others show as unchecked
   const [toggle, setToggle] = useState(false);
 
-  const buttonClass = classNames('recommendation-list-item ', { 'recommendation-list-item--checked': props.type === 'done' })
+  const buttonClass = classNames('recommendation-list-item ', { 'recommendation-list-item--checked': props.type === 'done' });
+  const toggleClass = classNames('recommendation-list-item__toggle',
+    {
+      'recommendation-list-item__toggle--rotate-up': toggle,
+      'recommendation-list-item__toggle--rotate-down': !toggle
+    });
 
   const onClick = () => {
     props.handleCheck(props.id, props.type);
@@ -22,9 +27,11 @@ export default function RecommendationItem(props) {
           <input type='checkbox' id='item' checked={checked} onChange={() => { }} />
           <label htmlFor='item'>{props.name}</label>
         </div>
-        <FontAwesomeIcon icon={faCaretDown} className='recommendation-list-item__icon' onClick={() => setToggle(prev => !prev)} />
+        <div className={toggleClass} onClick={() => setToggle(prev => !prev)}>
+          <FontAwesomeIcon icon={faCaretDown} />
+        </div>
       </div>
-      {toggle && <div onClick={() => setToggle(prev => !prev)} ><p>{props.description}</p></div>}
+      {toggle && <div className='recommendation-list-item__desc' onClick={() => setToggle(prev => !prev)} ><p>{props.description}</p></div>}
     </li>
   );
 };

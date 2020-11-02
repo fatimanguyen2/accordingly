@@ -43,8 +43,19 @@
     }
   }
 
+  &__register-redirect {
+    margin: 0;
+
+    a {
+      margin: 0;
+      color: white;
+    }
+  }
+
+
   button {
     width: 100%;
     margin: 1rem 0;
   }
+
 }
