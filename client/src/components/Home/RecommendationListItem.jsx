@@ -22,9 +22,11 @@ export default function RecommendationItem(props) {
           <input type='checkbox' id='item' checked={checked} onChange={() => { }} />
           <label htmlFor='item'>{props.name}</label>
         </div>
-        <FontAwesomeIcon icon={faCaretDown} className='recommendation-list-item__icon' onClick={() => setToggle(prev => !prev)} />
+        <div className='recommendation-list-item__icon' onClick={() => setToggle(prev => !prev)}>
+        <FontAwesomeIcon icon={faCaretDown}/>
+        </div>
       </div>
-      {toggle && <div onClick={() => setToggle(prev => !prev)} ><p>{props.description}</p></div>}
+      {toggle && <div className='recommendation-list-item__desc' onClick={() => setToggle(prev => !prev)} ><p>{props.description}</p></div>}
     </li>
   );
 };
