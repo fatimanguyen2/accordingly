@@ -13,9 +13,10 @@ const getWeather = (location) => {
 
 
 const getMainWeather = (location) => {
-
+  console.log(location)
   return getWeather(location)
   .then(data => {
+    console.log(data)
       return {
         mainWeather: data.current.weather.map(condtion => condtion.main),
         feelsLikeTemp: data.current.feels_like,
@@ -42,7 +43,6 @@ const getDetailedForcast = (schedule) => {
   return Promise.all(allForecasts)
 }
 
-let count = 0
 const test6AM = moment("2020-10-31T06")
 ///need refactorging call only one time
 const getForecastCategory = (event) => {
