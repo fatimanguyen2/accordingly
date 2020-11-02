@@ -5,8 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const db = require('./db');
 const dbHelpers = require('./models')(db);
+const googleMaps = require('./APIs/google_map');
 const dataHelpers = require('./helpers/dataHelpers');
-const mapQ = require('./APIs/mapquest');
 const openW = require('./APIs/open_weather');
 
 const indexRouter = require('./routes/index');
@@ -28,7 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/api/users', usersRouter(dbHelpers, dataHelpers, mapQ, openW));
+app.use('/api/users', usersRouter(dbHelpers, dataHelpers, googleMaps, openW));
 app.use('/api/weather', weatherRouter(openW))
 app.use('/api/entries', entriesRouter(dbHelpers))
 
