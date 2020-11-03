@@ -58,5 +58,5 @@ pretty pictures
 2. Install dependencies in both client and server directories using npm install.
 3. Create the database, then set and seed the database using npm run db:reset.
 4. From the client directory: npm start.
-5 .From the server directory: npm run server.
+5. From the server directory: npm run server.
 6. Visit http://localhost:3000/
