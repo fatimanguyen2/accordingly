@@ -13,7 +13,6 @@ const getWeather = (location) => {
 
 
 const getMainWeather = (location) => {
-  console.log(location)
   return getWeather(location)
   .then(data => {
     console.log(data)
