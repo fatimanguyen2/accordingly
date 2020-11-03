@@ -16,193 +16,193 @@ import { fakeEvents, fakeRecommendations } from '../mock/mock';
 
 import { filterEvents, setPrimaryColors, getItem, getSuggestionCategory } from '../helpers/selectors';
 
-const weather = {
-  mainWeather: [
-    "Clear"
-  ],
-  feelsLikeTemp: 7.17,
-  actualTemp: 10.78,
-  feels_likeMin: 7.35,
-  feels_likeMax: 9.02,
-  sunset: 1595296278,
-  sunrise: 1595243663,
-}
+// const weather = {
+//   mainWeather: [
+//     "Clear"
+//   ],
+//   feelsLikeTemp: 7.17,
+//   actualTemp: 10.78,
+//   feels_likeMin: 7.35,
+//   feels_likeMax: 9.02,
+//   sunset: 1595296278,
+//   sunrise: 1595243663,
+// }
 
-const events = {
-  today: [
-    {
-      entry: "Boring convention",
-      id: 6,
-      destination: {
-        x: 49.38754,
-        y: -123.14254
-      },
-      address: "1567 Townline Rd",
-      city: "Abbotsford",
-      postal_code: "V2T 6E1",
-      is_outdoor: false,
-      start_time: '2020-11-03T11:00:00',
-      end_time: "2020-11-12T18:00:00-05:00",
-      entry_id: 11,
-      weather: {
-        mainWeather: [
-          "Clear"
-        ],
-        sunset: 1604450849,
-        sunrise: 1604415868
-      }
-    },
-    {
-      entry: "Boring convention",
-      id: 6,
-      destination: {
-        x: 49.38754,
-        y: -123.14254
-      },
-      address: "1567 Townline Rd",
-      city: "Abbotsford",
-      postal_code: "V2T 6E1",
-      is_outdoor: false,
-      start_time: '2020-11-03T20:00:00',
-      end_time: "2020-11-12T18:00:00-05:00",
-      entry_id: 20,
-      weather: {
-        mainWeather: [
-          "Clear"
-        ],
-        sunset: 1604450849,
-        sunrise: 1604415868
-      }
-    }
-  ],
-  repeating: [
-    {
-      entry: "Commute",
-      entry_id: 1,
-      start_date: "2020-03-05T05:00:00.000Z",
-      start_hour: "08:00:00",
-      end_hour: "16:00:00",
-      next_event: {
-        address: "6078 Manitoba St",
-        city: "Vancouver",
-        start_time: "2020-11-04T08:00:00",
-        end_time: "2020-11-04T16:00:00",
-        destination: {
-          x: 49.2301,
-          y: -123.10867
-        },
-        weather: {
-          mainWeather: [
-            "Clear"
-          ],
-          sunset: 1604450849,
-          sunrise: 1604415868
-        }
-      },
-      recurrences: [
-        {
-          id: 1,
-          type_of: "weekly",
-          initial: "2020-03-09T04:00:00.000Z",
-          interval: 1
-        },
-        {
-          id: 2,
-          type_of: "weekly",
-          initial: "2020-03-10T04:00:00.000Z",
-          interval: 1
-        },
-        {
-          id: 3,
-          type_of: "weekly",
-          initial: "2020-03-11T04:00:00.000Z",
-          interval: 1
-        },
-        {
-          id: 4,
-          type_of: "weekly",
-          initial: "2020-03-12T04:00:00.000Z",
-          interval: 1
-        },
-        {
-          id: 5,
-          type_of: "weekly",
-          initial: "2020-03-13T04:00:00.000Z",
-          interval: 1
-        }
-      ]
-    },
-    {
-      entry: "Morning Run",
-      entry_id: 2,
-      start_date: "2020-03-05T05:00:00.000Z",
-      start_hour: "07:00:00",
-      end_hour: "07:30:00",
-      next_event: {
-        address: "2846 Main St",
-        city: "Vancouver",
-        start_time: "2020-11-04T07:00:00",
-        end_time: "2020-11-04T07:30:00",
-        destination: {
-          x: 49.259432,
-          y: -123.100795
-        },
-        weather: {
-          mainWeather: [
-            "Rain"
-          ],
-          sunset: 1604450842,
-          sunrise: 1604415870
-        }
-      },
-      recurrences: [
-        {
-          id: 6,
-          type_of: "daily",
-          initial: "2020-03-05T05:00:00.000Z",
-          interval: 1
-        }
-      ]
-    }
-  ],
-  future: [
-    {
-      entry: "Boring convention",
-      id: 6,
-      destination: {
-        x: 49.38754,
-        y: -123.14254
-      },
-      address: "1567 Townline Rd",
-      city: "Abbotsford",
-      postal_code: "V2T 6E1",
-      is_outdoor: false,
-      start_time: "2020-11-12T09:00:00-05:00",
-      end_time: "2020-11-12T18:00:00-05:00",
-      entry_id: 11,
-      weather: null
-    }
-  ]
-}
+// const events = {
+//   today: [
+//     {
+//       entry: "Boring convention",
+//       id: 6,
+//       destination: {
+//         x: 49.38754,
+//         y: -123.14254
+//       },
+//       address: "1567 Townline Rd",
+//       city: "Abbotsford",
+//       postal_code: "V2T 6E1",
+//       is_outdoor: false,
+//       start_time: '2020-11-03T11:00:00',
+//       end_time: "2020-11-12T18:00:00-05:00",
+//       entry_id: 11,
+//       weather: {
+//         mainWeather: [
+//           "Clear"
+//         ],
+//         sunset: 1604450849,
+//         sunrise: 1604415868
+//       }
+//     },
+//     {
+//       entry: "Boring convention",
+//       id: 6,
+//       destination: {
+//         x: 49.38754,
+//         y: -123.14254
+//       },
+//       address: "1567 Townline Rd",
+//       city: "Abbotsford",
+//       postal_code: "V2T 6E1",
+//       is_outdoor: false,
+//       start_time: '2020-11-03T20:00:00',
+//       end_time: "2020-11-12T18:00:00-05:00",
+//       entry_id: 20,
+//       weather: {
+//         mainWeather: [
+//           "Clear"
+//         ],
+//         sunset: 1604450849,
+//         sunrise: 1604415868
+//       }
+//     }
+//   ],
+//   repeating: [
+//     {
+//       entry: "Commute",
+//       entry_id: 1,
+//       start_date: "2020-03-05T05:00:00.000Z",
+//       start_hour: "08:00:00",
+//       end_hour: "16:00:00",
+//       next_event: {
+//         address: "6078 Manitoba St",
+//         city: "Vancouver",
+//         start_time: "2020-11-04T08:00:00",
+//         end_time: "2020-11-04T16:00:00",
+//         destination: {
+//           x: 49.2301,
+//           y: -123.10867
+//         },
+//         weather: {
+//           mainWeather: [
+//             "Clear"
+//           ],
+//           sunset: 1604450849,
+//           sunrise: 1604415868
+//         }
+//       },
+//       recurrences: [
+//         {
+//           id: 1,
+//           type_of: "weekly",
+//           initial: "2020-03-09T04:00:00.000Z",
+//           interval: 1
+//         },
+//         {
+//           id: 2,
+//           type_of: "weekly",
+//           initial: "2020-03-10T04:00:00.000Z",
+//           interval: 1
+//         },
+//         {
+//           id: 3,
+//           type_of: "weekly",
+//           initial: "2020-03-11T04:00:00.000Z",
+//           interval: 1
+//         },
+//         {
+//           id: 4,
+//           type_of: "weekly",
+//           initial: "2020-03-12T04:00:00.000Z",
+//           interval: 1
+//         },
+//         {
+//           id: 5,
+//           type_of: "weekly",
+//           initial: "2020-03-13T04:00:00.000Z",
+//           interval: 1
+//         }
+//       ]
+//     },
+//     {
+//       entry: "Morning Run",
+//       entry_id: 2,
+//       start_date: "2020-03-05T05:00:00.000Z",
+//       start_hour: "07:00:00",
+//       end_hour: "07:30:00",
+//       next_event: {
+//         address: "2846 Main St",
+//         city: "Vancouver",
+//         start_time: "2020-11-04T07:00:00",
+//         end_time: "2020-11-04T07:30:00",
+//         destination: {
+//           x: 49.259432,
+//           y: -123.100795
+//         },
+//         weather: {
+//           mainWeather: [
+//             "Rain"
+//           ],
+//           sunset: 1604450842,
+//           sunrise: 1604415870
+//         }
+//       },
+//       recurrences: [
+//         {
+//           id: 6,
+//           type_of: "daily",
+//           initial: "2020-03-05T05:00:00.000Z",
+//           interval: 1
+//         }
+//       ]
+//     }
+//   ],
+//   future: [
+//     {
+//       entry: "Boring convention",
+//       id: 6,
+//       destination: {
+//         x: 49.38754,
+//         y: -123.14254
+//       },
+//       address: "1567 Townline Rd",
+//       city: "Abbotsford",
+//       postal_code: "V2T 6E1",
+//       is_outdoor: false,
+//       start_time: "2020-11-12T09:00:00-05:00",
+//       end_time: "2020-11-12T18:00:00-05:00",
+//       entry_id: 11,
+//       weather: null
+//     }
+//   ]
+// }
 
-const homeAddress = {
-  address: "2846 Main St",
-  city: "Vancouver",
-  postal_code: "V5T 3G2",
-}
+// const homeAddress = {
+//   address: "2846 Main St",
+//   city: "Vancouver",
+//   postal_code: "V5T 3G2",
+// }
 
-const recommendations = {
-  now: [
-    {
-      id: 10,
-      name: "Normal clothing",
-      description: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."Not to hot, not too warm."`
-    }
-  ],
-  upcoming: [{ id: 1, name: 'hat', description: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'Keep that head sheltered from the cold'` }, { id: 2, name: 'suncreen', description: 'It is sunny outside' }],
-  later: [{ id: 3, name: 'top', description: 'layer up' }, { id: 4, name: 'gloves', description: 'It is cold' }],
-  done: []
-}
+// const recommendations = {
+//   now: [
+//     {
+//       id: 10,
+//       name: "Normal clothing",
+//       description: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."Not to hot, not too warm."`
+//     }
+//   ],
+//   upcoming: [{ id: 1, name: 'hat', description: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'Keep that head sheltered from the cold'` }, { id: 2, name: 'suncreen', description: 'It is sunny outside' }],
+//   later: [{ id: 3, name: 'top', description: 'layer up' }, { id: 4, name: 'gloves', description: 'It is cold' }],
+//   done: []
+// }
 let initialRecommendations = {};
 
 function App() {
@@ -318,23 +318,21 @@ function App() {
   const deleteEvent = (scheduleType, id) => {
     let newEventsObj;
     const firstFilteredArr = filterEvents(scheduleType, id, state.events); //new scheduleType arr
-    // If type is today or repeating, ensure that repeating events are deleted in both today and repeating list
-    if (scheduleType === 'repeating') {
-      const secondFilteredArr = filterEvents('today', id, state.events); 
-      newEventsObj = { ...state.events, [scheduleType]: firstFilteredArr, 'today': secondFilteredArr };
+    // // If type is today or repeating, ensure that repeating events are deleted in both today and repeating list
+    // if (scheduleType === 'repeating') {
+    //   const secondFilteredArr = filterEvents('today', id, state.events); 
+    //   newEventsObj = { ...state.events, [scheduleType]: firstFilteredArr, 'today': secondFilteredArr };
 
-    } else if ( scheduleType === 'today') {
-      const secondFilteredArr = filterEvents('repeating', id, state.events); 
-      newEventsObj = { ...state.events, [scheduleType]: firstFilteredArr, 'repeating': secondFilteredArr };
+    // } else if ( scheduleType === 'today') {
+    //   const secondFilteredArr = filterEvents('repeating', id, state.events); 
+    //   newEventsObj = { ...state.events, [scheduleType]: firstFilteredArr, 'repeating': secondFilteredArr };
 
-    } else { //deleting a no-reccurence event from future
+    // } else { //deleting a no-reccurence event from future
       newEventsObj = { ...state.events, [scheduleType]: firstFilteredArr };
-    }
+    // }
     
     axios.delete(`/api/entries/${id}`)
-      .then(() => {
-        setState(prev => ({ ...prev, events: newEventsObj }))
-      })
+      .then(() => getAllData())
       .catch(() => console.log('failed delete'));
   };
 
