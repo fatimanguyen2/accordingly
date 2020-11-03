@@ -3,9 +3,9 @@ Final project of the full stack web development program of Lighthouse Labs
 
 
 ## Team
-  #### * [Fatima Nguyen](https://github.com/fatimanguyen2)
-  #### * [Lanny Rivest](https://github.com/LawfulKami)
-  #### * [Sean Ni](https://github.com/NX915)
+  ### [Fatima Nguyen](https://github.com/fatimanguyen2)
+  ### [Lanny Rivest](https://github.com/LawfulKami)
+  ### [Sean Ni](https://github.com/NX915)
 
 ## What does it look like
 
