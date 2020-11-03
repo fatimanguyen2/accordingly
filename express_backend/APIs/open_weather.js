@@ -15,7 +15,6 @@ const getWeather = (location) => {
 const getMainWeather = (location) => {
   return getWeather(location)
   .then(data => {
-    console.log(data)
       return {
         mainWeather: data.current.weather.map(condtion => condtion.main),
         feelsLikeTemp: data.current.feels_like,
@@ -28,6 +27,7 @@ const getMainWeather = (location) => {
 
 const getDetailedForcast = (schedule) => {
   const allForecasts = schedule.map(step => {
+    console.log(step)
     const hour = step.hours_from_now
     if (hour > 0) {
       return getWeather(step.start_point)

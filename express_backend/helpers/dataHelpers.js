@@ -38,7 +38,6 @@ const formatEntryForFrontEnd = (entry) => {
       .then(weather => ({...formarttedRec[0], next_event : ({...formarttedRec[0].next_event, weather : weather})}))
   } else {
     const formattedEvent = { ...entry[0], start_time: moment(entry[0].trip_start_time).format(), end_time : moment(entry[0].trip_end_time).format()}
-    console.log(formattedEvent)
     return getForecastCategory(formattedEvent)
       .then(weather => {
         const { entry, entry_id, destination, address, city, postal_code, trip_id, start_time, end_time } = formattedEvent;
@@ -77,7 +76,6 @@ const todayFormatting = (rawToday, rawRec, origin) => {
       })
   })
   const fromNow = updateTodayToNow(today)
-  console.log(fromNow)
   const leaveBys = fromNow.map(event => getLeaveBy(origin, event));
   return Promise.all(leaveBys)
   .then(departures => fromNow.map((event, index) => {
