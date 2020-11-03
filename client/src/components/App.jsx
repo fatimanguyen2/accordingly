@@ -12,7 +12,7 @@ import { Schedule } from './Schedule';
 import { About } from './About';
 import { Settings } from './Settings';
 import { Register } from './Register';
-import { fakeEvents, fakeRecommendations } from '../../../docs/mock';
+import { fakeEvents, fakeRecommendations } from '../mock/mock';
 
 import { filterEvents, setPrimaryColors, getItem, getSuggestionCategory } from '../helpers/selectors';
 
