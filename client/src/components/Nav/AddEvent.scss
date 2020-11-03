@@ -100,6 +100,10 @@
   .autocomplete-dropdown-container {
     position: absolute;
     z-index: 2;
+    
+    span {
+      font-size: 3vh;
+    }
   }
 
 
