@@ -32,7 +32,7 @@ export const Home = props => {
 
   return (
     <Fragment>
-      {props.loggedIn || props.isMockData
+      {props.loggedIn
 
         ? <div className='home'>
           <header className={headerSize}>

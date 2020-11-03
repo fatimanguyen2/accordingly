@@ -265,13 +265,6 @@ function App() {
       })
   };
 
-  useEffect(() => {
-    if (state.loggedIn) {
-      setState(prev => ({ ...prev, loading: true }))
-      getAllData();
-    }
-  }, [state.loggedIn]);
-
   // DEMO PURPOSES
   const getMockData = () => {
     Promise.all([
@@ -300,13 +293,18 @@ function App() {
         ))
       })
   };
+  
+  useEffect(() => {
+    if (state.loggedIn) {
+      setState(prev => ({ ...prev, loading: true }))
+      if (state.isMockData) {
+        getMockData()
+      } else {
+        getAllData();
+      }
+    }
+  }, [state.loggedIn]);
 
-  // useEffect(() => {
-  //   if (state.isMockData) {
-  //     setState(prev => ({ ...prev, loading: true }))
-  //     getMockData();
-  //   }
-  // }, [state.isMockData]);
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => {
@@ -385,8 +383,7 @@ function App() {
     setState(prev => ({ ...prev, eventToEdit: {} }))
   };
 
-  const useMock = () => setState(prev => ({ ...prev, isMockData: true }));
-
+  const useMock = () => setState(prev => ({ ...prev, loggedIn:true, isMockData: true }));
 
   return (
     <main className='page-content'>
@@ -415,7 +412,6 @@ function App() {
               <Route exact path='/'>
                 <Home
                   loggedIn={state.loggedIn}
-                  isMockData={state.isMockData}
                   weather={state.weather}
                   recommendations={state.recommendations}
                   handleCheck={handleCheck}
@@ -426,7 +422,6 @@ function App() {
               <Route path='/login'>
                 <Login
                   loggedIn={state.loggedIn}
-                  isMockData={state.isMockData}
                   login={login}
                   demo={useMock} />
               </Route>
@@ -434,7 +429,7 @@ function App() {
               <Route path='/schedule'>
                 <Schedule
                   loggedIn={state.loggedIn}
-                  isMockData={state.isMockData}
+                  // isMockData={state.isMockData}
                   events={state.events}
                   deleteEvent={deleteEvent}
                   onEdit={openEdit}
@@ -444,7 +439,6 @@ function App() {
               <Route path='/register'>
                 <Register
                   loggedIn={state.loggedIn}
-                  isMockData={state.isMockData}
                   login={login}></Register>
               </Route>
 
@@ -455,7 +449,6 @@ function App() {
               <Route path='/settings'>
                 <Settings
                   loggedIn={state.loggedIn}
-                  isMockData={state.isMockData}
                   address={state.homeAddress}
                   updateAddress={updateAddress}>
                 </Settings>

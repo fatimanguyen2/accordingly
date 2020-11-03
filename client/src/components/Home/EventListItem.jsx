@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getWeatherIcon, getWeatherColor } from '../../helpers/selectors';
 
 export default function EventListItem(props) {
+  console.log('home', props.weather)
 
   return (
     <li className='event-list-item'>

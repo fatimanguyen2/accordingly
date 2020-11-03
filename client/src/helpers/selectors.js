@@ -31,6 +31,7 @@ const getEvent = (scheduleType, id, evtObj) => {
 const filterEvents = (scheduleType, id, evtObj) => evtObj[scheduleType].filter(event => event.entry_id !== id);
 
 const getWeatherIcon = (start, weather) => {
+  console.log(weather)
   const startTime= moment(start).unix();
   const icons = {
     Thunderstorm: faBolt,
@@ -55,18 +56,6 @@ const getWeatherIcon = (start, weather) => {
     return icons[weather];
   }
 };
-// const getWeatherIcon = weather => {
-//   const icons = {
-//     Thunderstorm: faBolt,
-//     Drizzle: faCloudRain,
-//     Rain: faCloudShowersHeavy,
-//     Snow: faSnowflake,
-//     Clear: faSun,
-//     Clouds: faCloud,
-//     null: faQuestion
-//   };
-//   return icons[weather];
-// };
 
 const getWeatherColor = (start, weather) => {
   const startTime= moment(start).unix();
@@ -93,19 +82,6 @@ const getWeatherColor = (start, weather) => {
   }
 };
 
-// const getWeatherColor = weather => {
-//   const icons = {
-//     Thunderstorm: 'rgb(151, 118, 223)',
-//     Drizzle: '#0FB2F9',
-//     Rain: '#0FB2F9',
-//     Snow: 'white',
-//     Clear: 'rgb(255,223,109)',
-//     Clouds: 'rgb(184, 184, 184)',
-//     null: 'white'
-//   };
-//   return icons[weather];
-// };
-
 const changeWeatherName = (start, weather) => {
   const startTime= moment(start).unix();
   const names = {
@@ -127,16 +103,6 @@ const changeWeatherName = (start, weather) => {
     return weather;
   }
 };
-
-// const changeWeatherClassname = weather => {
-//   const names = {
-//     Rain: 'Rainy',
-//     Snow: 'Snowy',
-//     Clear: 'Sunny',
-//     Clouds: 'Cloudy'
-//   }
-//   return names[weather] || weather;
-// };
 
 const setPrimaryColors = weather => {
   const now = moment();
@@ -183,21 +149,6 @@ const getHourFromTime = (time = '') => {
   return time.slice(11, 19);
 };
 
-
-// const setPrimaryColors = weather => {
-//   const colors = {
-//     Thunderstorm: {solid: 'rgb(151, 118, 223)', gradient: 'rgba(175,145,239, 0.6)'},
-//     Drizzle: {solid: 'rgb(34,155,206)', gradient: 'rgba(34,155,206, 0.8)'},
-//     Rain: {solid: 'rgb(34,155,206)', gradient: 'rgba(34,155,206, 0.8)'},
-//     Snow: {solid: 'white', gradient: 'rgb(177, 218, 255)'},
-//     Clear: {solid: 'rgb(255,223,109)', gradient: 'rgba(255,223,109,0.8)'},
-//     Clouds: {solid: 'rgb(184, 184, 184)', gradient: 'rgba(169, 208, 236, 0.726)'},
-//     default: {solid: 'white', gradient: 'white'}
-//   }
-
-//   return (colors[weather] && {solid: colors[weather].solid, gradient: colors[weather].gradient} )|| colors.default;
-// };
-
 export {
   getItem,
   getSuggestionCategory,
@@ -207,7 +158,6 @@ export {
   getWeatherIcon,
   getWeatherColor,
   changeWeatherName,
-  // changeWeatherClassname,
   setPrimaryColors,
   getDateFromTimestamp,
   giveHTMLID,

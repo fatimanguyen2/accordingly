@@ -9,7 +9,7 @@ import { Form } from './Form';
 export const Login = props => {
   return (
     <Fragment>
-      {!props.loggedIn || !props.isMockData
+      {!props.loggedIn
         ? <div className='login'>
           <LogoRing />
           <Form login={props.login} demo={props.demo} />

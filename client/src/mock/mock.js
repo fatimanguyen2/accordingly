@@ -23,7 +23,7 @@ const fakeEvents = {
           "end_time": "2020-11-03T23:00:00-04:00",
           "leave_by": "2020-11-03T22:32:45-04:00",
           "weather": {
-              "main": "Rain",
+              "mainWeather": ["Rain"],
               "sunset": 1604450849,
               "sunrise": 1604415868
           }
@@ -44,7 +44,7 @@ const fakeEvents = {
           "entry_id": 14,
           "leave_by": "2020-10-05T20:44:29-04:00",
           "weather": {
-              "main": "Thunderstorm",
+              "mainWeather": ["Thunderstorm"],
               "sunset": 1604443325,
               "sunrise": 1604406356
           }
@@ -67,7 +67,7 @@ const fakeEvents = {
                   "y": -123.108002
               },
               "weather": {
-                  "main": "Clear",
+                  "mainWeather": ["Clear"],
                   "sunset": 1604450849,
                   "sunrise": 1604415868
               }
@@ -121,7 +121,7 @@ const fakeEvents = {
                 "y": -123.108002
             },
             "weather": {
-                "main": "Clouds",
+                "mainWeather": ["Clouds"],
                 "sunset": 1604450849,
                 "sunrise": 1604415868
             }
@@ -176,7 +176,7 @@ const fakeEvents = {
           "end_time": "2020-11-11T22:30:00-05:00",
           "entry_id": 18,
           "weather": {
-              "main": "Clear",
+              "mainWeather": ["Clear"],
               "sunset": 1604450842,
               "sunrise": 1604415870
           }
@@ -196,7 +196,7 @@ const fakeEvents = {
           "end_time": "2020-11-12T18:00:00-05:00",
           "entry_id": 11,
           "weather": {
-            "main": "Snow",
+            "mainWeather": ["Snow"],
             "sunset": 1604450842,
             "sunrise": 1604415870
         }
