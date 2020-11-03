@@ -10,10 +10,15 @@ const FUTURE = 'future';
 
 export const Schedule = props => {
   const [collapse, setCollapse] = useState({});
+  const [reRender, setRerender] = useState(false);
 
   const collapseOthers = (type, id) => {
     setCollapse({type, id});
   };
+
+  useEffect(() => {
+    setRerender(prev => !prev);
+  }, [props.events])
 
   return (
     <Fragment>
