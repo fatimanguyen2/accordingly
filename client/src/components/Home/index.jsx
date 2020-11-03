@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Redirect } from "react-router-dom";
-import { getItem, getSuggestionCategory } from '../../helpers/selectors';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
 import './styles.scss';

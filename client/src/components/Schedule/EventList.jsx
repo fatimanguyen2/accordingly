@@ -21,6 +21,7 @@ export const EventList = props => {
       onEdit={props.onEdit}
       deleteEvent={props.deleteEvent}
       onToggle={props.onToggle}
+      collapse={props.collapse}
     />
   })
 

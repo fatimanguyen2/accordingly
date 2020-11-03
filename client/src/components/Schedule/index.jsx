@@ -8,22 +8,11 @@ const TODAY = 'today';
 const REPEATING = 'repeating';
 const FUTURE = 'future';
 
-// Collapse any other toggled event list item when one list item is clicked
-const handleToggle = (id) => { };
-
-
 export const Schedule = props => {
-  const [collapse, setCollapse] = useState();
-  const [reRender, setRerender] = useState(false);
-
-  useEffect(() => {
-    setRerender(prev => !prev)
-  }, [props])
+  const [collapse, setCollapse] = useState({});
 
   const collapseOthers = (type, id) => {
-    console.log('in collapseOthers');
-    // if ()
-    setRerender(true)
+    setCollapse({type, id});
   };
 
   return (
@@ -40,7 +29,8 @@ export const Schedule = props => {
               type={TODAY}
               deleteEvent={props.deleteEvent}
               onEdit={props.onEdit}
-              onToggle={collapseOthers}>
+              onToggle={collapseOthers}
+              collapse={collapse}>
               Today
             </EventList>
           }
@@ -51,7 +41,8 @@ export const Schedule = props => {
               type={REPEATING}
               deleteEvent={props.deleteEvent}
               onEdit={props.onEdit}
-              onToggle={collapseOthers}>
+              onToggle={collapseOthers}
+              collapse={collapse}>
               Repeating
             </EventList>
           }
@@ -64,7 +55,8 @@ export const Schedule = props => {
               type={FUTURE}
               deleteEvent={props.deleteEvent}
               onEdit={props.onEdit}
-              onToggle={collapseOthers}>
+              onToggle={collapseOthers}
+              collapse={collapse}>
               Future
             </EventList>
           }

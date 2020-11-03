@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import classNames from 'classnames';
 
@@ -12,9 +12,15 @@ const NORMAL = 'normal';
 const DELETE = 'delete';
 
 export const EventListItem = props => {
+  const toggleBoolean = props.type === props.collapse.type && props.id === props.collapse.id ? true : false;
   const [toggle, setToggle] = useState(false);
   const [view, setView] = useState(NORMAL); //switch betwen normal view and delete item view for btns
   const [reRender, setRerender] = useState(false);
+
+  useEffect(() => {
+    setToggle(toggleBoolean)
+    console.log('hi')
+  }, [props.collapse])
 
   // setToggle and collapse other events
   const handleToggle = () => {
