@@ -26,8 +26,9 @@ VALUES
 ('Windbreaker', 'The wind is stronger today.'), --23
 ('Black Ice Warning', 'Conditions suggest risk of falls'), -- 24
 ('Reflective Clothing', 'Poor visibility is mitigated by bright clothing'), --25
-('Normal Clothing', 'It is not too hot nor too warm.') --26
-('Jacket', 'Cooler weather warrants putting on a jacket.') --27
-('Sleeveless Top', 'It is recommended to wear less coverage during hot days') --28
-('Cap', 'Bring a cap to protect from the sun today.') --29
-('Moisture-Wicking Clothing', 'It is hot and humid outside.') --30
+('Normal Clothing', 'It is not too hot nor too warm.'),--26
+('Jacket', 'Cooler weather warrants putting on a jacket.'), --27
+('Sleeveless Top', 'It is recommended to wear less coverage during hot days'), --28
+('Cap', 'Bring a cap to protect from the sun today.'), --29
+('Moisture-Wicking Clothing', 'It is hot and humid outside.'), --30
+('Thick Socks', 'Prevent your feet from being cold during the winter months.'); --31
