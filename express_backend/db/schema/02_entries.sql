@@ -6,6 +6,7 @@ CREATE TABLE entries(
   is_outdoor BOOLEAN,
   created_at TIMESTAMP DEFAULT now(),
   destination POINT NOT NULL,
+  mode VARCHAR NOT NULL,
   is_active BOOLEAN DEFAULT TRUE NOT NULL,
   address VARCHAR(255),
   city VARCHAR(255),

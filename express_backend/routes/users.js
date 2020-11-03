@@ -10,7 +10,7 @@ module.exports = (
     postEntry, getImmediateRecommendations, makeEntryInactive, updateUserAddress }, 
   { createEventList, getTripsToday, getRelativeSchedule, conditionsOfDay, formatEntryForFrontEnd, getNowConditions }, 
   { formatAddressForDb }, 
-  { getMainWeather, getDetailedForcast }
+  { getMainWeather, getDetailedForecast }
   ) => {
 
   router.get('/:id', function (req, res) {
@@ -32,7 +32,6 @@ module.exports = (
 
 
   router.put('/:id', function (req, res) {
-    console.log(req.body.raw_address)
     formatAddressForDb(req.body.raw_address)
       .then(address => {
         if (!address.city.includes('Unorganized')) {
@@ -111,7 +110,7 @@ module.exports = (
         }
       })
       // Happy path event present
-      .then(relSchedule => getDetailedForcast(relSchedule))
+      .then(relSchedule => getDetailedForecast(relSchedule))
       .then(detForecast => conditionsOfDay(detForecast))
       .then(condOfDay => getRecommendations(condOfDay))
       .then(data => res.json(data))

@@ -14,6 +14,7 @@ module.exports = (db) => {
     address,
     city,
     postal_code,
+    mode,
     is_outdoor, 
     trips.* 
     FROM entries
@@ -31,6 +32,7 @@ module.exports = (db) => {
     address,
     city,
     postal_code,
+    mode,
     is_outdoor, 
     recurrences.*, 
     frequencies.*
@@ -49,6 +51,7 @@ module.exports = (db) => {
     address,
     city,
     postal_code,
+    mode,
     is_outdoor, 
     trips.*
     FROM entries
@@ -163,9 +166,9 @@ module.exports = (db) => {
   const postEntry = (entry, user_id) => {
     let newEntryId
     return db.query(`
-    INSERT INTO entries(title, is_outdoor, destination, address, city, postal_code, user_id)
+    INSERT INTO entries(title, is_outdoor, destination, mode, address, city, postal_code, user_id)
       VALUES
-        ($1, null, point(${entry.destination.x}, ${entry.destination.y}), '${entry.street}', '${entry.city}', '${entry.postal_code || null}', ${user_id})
+        ($1, null, point(${entry.destination.x}, ${entry.destination.y}), '${entry.mode}', '${entry.street}', '${entry.city}', '${entry.postal_code || null}', ${user_id})
     RETURNING entries.id
     `, [`${entry.entry}`])
     .then(id => {
@@ -185,6 +188,7 @@ module.exports = (db) => {
       }
     })
     .then(() => getEntryById(newEntryId))
+    .catch(err => console.log(err))
   }
 
   const getEntryById = (id) => {
@@ -193,7 +197,8 @@ module.exports = (db) => {
     SELECT 
     title AS entry, 
     entries.id as entry_id,
-    destination, 
+    destination,
+    mode,
     address,
     city,
     postal_code,
@@ -295,7 +300,6 @@ module.exports = (db) => {
   }
 
   const updateUserAddress = (address, id) => {
-
 
     return db.query(`
     UPDATE users
