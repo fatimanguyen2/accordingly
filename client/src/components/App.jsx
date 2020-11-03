@@ -12,65 +12,92 @@ import { Schedule } from './Schedule';
 import { About } from './About';
 import { Settings } from './Settings';
 import { Register } from './Register';
+import { fakeEvents, fakeRecommendations } from '../mock/mock';
 
 import { filterEvents, setPrimaryColors, getItem, getSuggestionCategory } from '../helpers/selectors';
-import { LoggedIn } from '../stories/Nav.stories';
 
 const weather = {
   mainWeather: [
-    "Thunderstorm"
+    "Clear"
   ],
   feelsLikeTemp: 7.17,
   actualTemp: 10.78,
   feels_likeMin: 7.35,
-  feels_likeMax: 9.02
+  feels_likeMax: 9.02,
+  sunset: 1595296278,
+  sunrise: 1595243663,
 }
 
 const events = {
   today: [
     {
-      entry: "commute",
-      id: 4,
-      is_outdoor: true,
+      entry: "Boring convention",
+      id: 6,
       destination: {
-        x: 49.2301,
-        y: -123.10867
+        x: 49.38754,
+        y: -123.14254
       },
-      address: "2846 Main St",
-      city: "Vancouver",
-      postal_code: "V5T 3G2",
-      start_date: "2020-03-05T05:00:00.000Z",
-      start_hour: "08:00:00",
-      end_hour: "16:00:00",
-      entry_id: 1,
-      type_of: "weekly",
-      initial: "2020-03-12T04:00:00.000Z",
-      interval: 1,
-      recurrence_id: 1,
-      start_time: "2020-10-29T08:00:00",
-      end_time: "2020-10-29T16:00:00",
-      leave_by: "2020-10-29T07:28:26-04:00",
-      weather: "Thunderstorm"
+      address: "1567 Townline Rd",
+      city: "Abbotsford",
+      postal_code: "V2T 6E1",
+      is_outdoor: false,
+      start_time: '2020-11-03T11:00:00',
+      end_time: "2020-11-12T18:00:00-05:00",
+      entry_id: 11,
+      weather: {
+        mainWeather: [
+          "Clear"
+        ],
+        sunset: 1604450849,
+        sunrise: 1604415868
+      }
+    },
+    {
+      entry: "Boring convention",
+      id: 6,
+      destination: {
+        x: 49.38754,
+        y: -123.14254
+      },
+      address: "1567 Townline Rd",
+      city: "Abbotsford",
+      postal_code: "V2T 6E1",
+      is_outdoor: false,
+      start_time: '2020-11-03T20:00:00',
+      end_time: "2020-11-12T18:00:00-05:00",
+      entry_id: 20,
+      weather: {
+        mainWeather: [
+          "Clear"
+        ],
+        sunset: 1604450849,
+        sunrise: 1604415868
+      }
     }
   ],
   repeating: [
     {
-      entry: "commute",
+      entry: "Commute",
       entry_id: 1,
       start_date: "2020-03-05T05:00:00.000Z",
       start_hour: "08:00:00",
       end_hour: "16:00:00",
       next_event: {
-        start_time: "2020-10-30T08:00:00",
-        end_time: "2020-10-30T16:00:00",
+        address: "6078 Manitoba St",
+        city: "Vancouver",
+        start_time: "2020-11-04T08:00:00",
+        end_time: "2020-11-04T16:00:00",
         destination: {
           x: 49.2301,
           y: -123.10867
         },
-        address: "2846 Main St",
-        city: "Vancouver",
-        postal_code: "V5T 3G2",
-        weather: "Drizzle"
+        weather: {
+          mainWeather: [
+            "Clear"
+          ],
+          sunset: 1604450849,
+          sunrise: 1604415868
+        }
       },
       recurrences: [
         {
@@ -95,33 +122,38 @@ const events = {
           id: 4,
           type_of: "weekly",
           initial: "2020-03-12T04:00:00.000Z",
-          interval: 2
+          interval: 1
         },
         {
           id: 5,
           type_of: "weekly",
           initial: "2020-03-13T04:00:00.000Z",
-          interval: 3
+          interval: 1
         }
       ]
     },
     {
-      entry: "morning run",
+      entry: "Morning Run",
       entry_id: 2,
       start_date: "2020-03-05T05:00:00.000Z",
       start_hour: "07:00:00",
       end_hour: "07:30:00",
       next_event: {
-        start_time: "2020-10-30T07:00:00",
-        end_time: "2020-10-30T07:30:00",
+        address: "2846 Main St",
+        city: "Vancouver",
+        start_time: "2020-11-04T07:00:00",
+        end_time: "2020-11-04T07:30:00",
         destination: {
           x: 49.259432,
           y: -123.100795
         },
-        address: "2846 Main St",
-        city: "Vancouver",
-        postal_code: "V5T 3G2",
-        weather: "Snow"
+        weather: {
+          mainWeather: [
+            "Rain"
+          ],
+          sunset: 1604450842,
+          sunrise: 1604415870
+        }
       },
       recurrences: [
         {
@@ -138,15 +170,15 @@ const events = {
       entry: "Boring convention",
       id: 6,
       destination: {
-        x: 49.38654,
-        y: -123.13254
+        x: 49.38754,
+        y: -123.14254
       },
-      address: "2846 Main St",
-      city: "Vancouver",
-      postal_code: "V5T 3G2",
+      address: "1567 Townline Rd",
+      city: "Abbotsford",
+      postal_code: "V2T 6E1",
       is_outdoor: false,
-      start_time: "2020-11-12T14:00:00.000Z",
-      end_time: "2020-11-12T23:00:00.000Z",
+      start_time: "2020-11-12T09:00:00-05:00",
+      end_time: "2020-11-12T18:00:00-05:00",
       entry_id: 11,
       weather: null
     }
@@ -174,6 +206,7 @@ const recommendations = {
 let initialRecommendations = {};
 
 function App() {
+  // MOCK
   // const [state, setState] = useState({
   //   loading: false,
   //   view: 'home',
@@ -185,7 +218,6 @@ function App() {
   //   homeAddress,
   //   eventToEdit: {}
   // });
-
   const time = Date.now();
   const [state, setState] = useState({
     loading: false,
@@ -211,10 +243,10 @@ function App() {
         initialRecommendations = all[1].data;
 
         // // Setting app primary color
-        let colours = setPrimaryColors(all[0].data.mainWeather[0]);
+        let colours = setPrimaryColors(all[0].data);
         document.documentElement.style.setProperty('--primary-color', colours.solid);
         document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
-        
+
         const time = Date.now();
 
         return setState(prev => (
@@ -246,8 +278,8 @@ function App() {
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => {
     // Change back primary colors
-    document.documentElement.style.setProperty('--primary-color', '#80ffdb');
-    document.documentElement.style.setProperty('--primary-color-gradient', '#80ffdb');
+    document.documentElement.style.setProperty('--primary-color', '#ffb700');
+    document.documentElement.style.setProperty('--primary-color-gradient', '#ffb700');
     setState(prev => ({ ...prev, loggedIn: false }))
   };
 

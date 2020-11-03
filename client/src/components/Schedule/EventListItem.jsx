@@ -44,7 +44,7 @@ export const EventListItem = props => {
 
   // CLASS NAMES:
   //Build classname for each weather
-  const weatherName = changeWeatherName(props.weather);
+  const weatherName = changeWeatherName(props.start, props.weather);
   // Ensure that background event list item color is weather color unless weather = null or in group 700 of open weather API
   let key = '';
   if (weatherName !== props.weather || weatherName === 'Thunderstorm' || weatherName === 'Drizzle') {
@@ -60,7 +60,7 @@ export const EventListItem = props => {
 
       <div className={itemMainClass} onClick={handleToggle}>
         <div className='event-list-item__time' >
-          <FontAwesomeIcon className='event-list-item__weather-icon' icon={getWeatherIcon(props.weather)} color={getWeatherColor(props.weather)} />
+          <FontAwesomeIcon className='event-list-item__weather-icon' icon={getWeatherIcon(props.start, props.weather)} color={getWeatherColor(props.start, props.weather)} />
           <p>{props.type === 'today' ? moment(props.start).format('h:mm a') : moment(props.start).fromNow()} </p>
         </div>
         <div><p>{props.title}</p></div>

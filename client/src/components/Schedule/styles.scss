@@ -87,6 +87,16 @@
         filter: brightness(1.3);
       }
     }
+    &--Clear {
+      background: $clear-night-color;
+      color: black;
+      box-shadow: 0 0 0.75rem $clear-night-color;
+
+      &--untoggled:hover {
+        // background: rgb(228, 189, 48);
+        filter: brightness(1.3);
+      }
+    }
     &--Cloudy {
       background: $cloudy-color;
       color: black;
@@ -103,11 +113,14 @@
       flex-direction: row;
       padding: 0 1rem 0 0.3rem;
 
-      &--toggled{
+      &--toggled {
         display: flex;
         flex-direction: row;
         padding: 0 1rem 0 0.3rem;
         justify-content: center;
+
+        .event-list-item__time p {display: none}
+        .event-list-item__weather-icon {margin: 0}
       }
     }
 
@@ -162,8 +175,7 @@
       color: white;
 
       &:hover {
-        // background: #464545;
-        filter: brightness(1.3);
+        background: #464545;
       }
     }
 

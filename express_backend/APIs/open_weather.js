@@ -19,6 +19,8 @@ const getMainWeather = (location) => {
         mainWeather: data.current.weather.map(condtion => condtion.main),
         feelsLikeTemp: data.current.feels_like,
         actualTemp: data.current.temp,
+        sunset: data.current.sunset,
+        sunrise: data.current.sunrise,
         feels_likeMin : Math.min(...data.hourly.filter((hour, index) => index < 12).map(hour => hour.feels_like)),
         feels_likeMax : Math.max(...data.hourly.filter((hour, index) => index < 12).map(hour => hour.feels_like))
       }
@@ -42,8 +44,6 @@ const getDetailedForcast = (schedule) => {
   return Promise.all(allForecasts)
 }
 
-const test6AM = moment("2020-10-31T06")
-///need refactorging call only one time
 const getForecastCategory = (event) => {
   const start = event.start_time;
   const in48h = moment().add(48, 'h');
@@ -51,7 +51,7 @@ const getForecastCategory = (event) => {
     const hour = moment(start).diff(moment(), "hour")
     if (hour >= 0) {
       return getWeather(event.destination)
-        .then(data => data.hourly[hour].weather[0].main)
+        .then(data => ({ mainWeather : [data.hourly[hour].weather[0].main], sunset: data.current.sunset, sunrise: data.current.sunrise}))
     } else {
       return Promise.resolve(null)
     }
@@ -61,7 +61,7 @@ const getForecastCategory = (event) => {
       return Promise.resolve(null)
     }
     return getWeather(event.destination)
-    .then(data => data.daily[day].weather[0].main)
+    .then(data => ({ mainWeather : [data.daily[day].weather[0].main], sunset: data.current.sunset, sunrise: data.current.sunrise}))
   }
 };
 
