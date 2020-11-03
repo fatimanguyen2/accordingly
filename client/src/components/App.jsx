@@ -178,7 +178,7 @@ function App() {
   const [state, setState] = useState({
     loading: false,
     view: 'home',
-    loggedIn: true,
+    loggedIn: false,
     weather,
     recommendations,
     events,
@@ -186,7 +186,7 @@ function App() {
     homeAddress,
     eventToEdit: {}
   });
-  
+
   let colours = setPrimaryColors(weather);
   document.documentElement.style.setProperty('--primary-color', colours.solid);
   document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);

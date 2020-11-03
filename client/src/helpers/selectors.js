@@ -74,10 +74,19 @@ const changeWeatherName = weather => {
   }
 
   if (weather.mainWeather[0] === 'Clear' && isNightTime) {
-    return 'Clear'
+    return 'Clear';
   } else {
     return names[weather] || weather;
   }
+};
+const changeWeatherClassname = weather => {
+  const names = {
+    Rain: 'Rainy',
+    Snow: 'Snowy',
+    Clear: 'Sunny',
+    Clouds: 'Cloudy'
+  }
+  return names[weather] || weather;
 };
 
 const setPrimaryColors = weather => {
@@ -149,11 +158,12 @@ export {
   getWeatherIcon,
   getWeatherColor,
   changeWeatherName,
+  changeWeatherClassname,
+  setPrimaryColors,
   getDateFromTimestamp,
   giveHTMLID,
   validateObj,
   addSeconds,
   removeSeconds,
   getHourFromTime,
-  setPrimaryColors
 };

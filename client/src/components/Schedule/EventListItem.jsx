@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import classNames from 'classnames';
 
-import { getWeatherIcon, getWeatherColor, changeWeatherName } from '../../helpers/selectors';
+import { getWeatherIcon, getWeatherColor, changeWeatherClassname } from '../../helpers/selectors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock, faTrash } from '@fortawesome/free-solid-svg-icons';
 import RepeatList from './RepeatList';
@@ -45,7 +45,7 @@ export const EventListItem = props => {
 
   // CLASS NAMES:
   //Build classname for each weather
-  const weatherName = changeWeatherName(props.weather);
+  const weatherName = changeWeatherClassname(props.weather);
   // Ensure that background event list item color is weather color unless weather = null or in group 700 of open weather API
   let key = '';
   if (weatherName !== props.weather || weatherName === 'Thunderstorm' || weatherName === 'Drizzle') {
