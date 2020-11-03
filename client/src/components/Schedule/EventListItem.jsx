@@ -15,11 +15,10 @@ export const EventListItem = props => {
   const toggleBoolean = props.type === props.collapse.type && props.id === props.collapse.id ? true : false;
   const [toggle, setToggle] = useState(false);
   const [view, setView] = useState(NORMAL); //switch betwen normal view and delete item view for btns
-  const [reRender, setRerender] = useState(false);
+  // const [reRender, setRerender] = useState(false);
 
   useEffect(() => {
     setToggle(toggleBoolean)
-    console.log('hi')
   }, [props.collapse])
 
   // setToggle and collapse other events
@@ -36,7 +35,7 @@ export const EventListItem = props => {
       setView(DELETE);
     } else {
       props.deleteEvent(props.type, props.id);
-      setRerender(prev => !prev);
+      // setRerender(prev => !prev);
     }
   };
 

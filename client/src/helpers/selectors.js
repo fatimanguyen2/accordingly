@@ -28,11 +28,7 @@ const getEvent = (scheduleType, id, evtObj) => {
 };
 
 const filterEvents = (scheduleType, id, evtObj) => {
-  if (scheduleType === 'repeating') {
     return evtObj[scheduleType].filter(event => event.entry_id !== id);
-  } else {
-    return evtObj[scheduleType].filter(event => event.id !== id);
-  }
 };
 
 const getWeatherIcon = weather => {
