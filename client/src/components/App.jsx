@@ -187,10 +187,6 @@ function App() {
   //   homeAddress,
   //   eventToEdit: {}
   // });
-  // let colours = setPrimaryColors(weather);
-  // document.documentElement.style.setProperty('--primary-color', colours.solid);
-  // document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
-  
   const time = Date.now();
   const [state, setState] = useState({
     loading: false,
@@ -259,10 +255,10 @@ function App() {
   // Change state when checking items on recommendation list in home component
   const handleCheck = (id, type) => {
     const item = getItem(id, state.recommendations[type]); //get item object
-    const category = getSuggestionCategory(id, initialRecommendations); //get initial item category of axios request to ensure done itesm go back to right category
+    // const category = getSuggestionCategory(id, initialRecommendations); //get initial item category of axios request to ensure done itesm go back to right category
 
     // USE NEXT LINE FOR MOCK
-    // const category = getSuggestionCategory(id, recommendations); //get initial item category of axios request to ensure done itesm go back to right category
+    const category = getSuggestionCategory(id, recommendations); //get initial item category of axios request to ensure done itesm go back to right category
 
     // if item gets checked and is in upcoming/later list, remove from that list and add to done list
     if (type !== 'done') {
@@ -291,7 +287,7 @@ function App() {
   const deleteEvent = (scheduleType, id) => {
     const filteredArr = filterEvents(scheduleType, id, state.events);
     const newEventsObj = { ...state.events, [scheduleType]: filteredArr };
-
+    
     axios.delete(`/api/entries/${id}`)
       .then(() => {
         setState(prev => ({ ...prev, events: newEventsObj }))
