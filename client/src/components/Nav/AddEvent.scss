@@ -97,6 +97,12 @@
     font-size: 2vh;
   }
 
+  .autocomplete-dropdown-container {
+    position: absolute;
+    z-index: 2;
+  }
+
+
   input {
     width: 100%;
     color: white;
