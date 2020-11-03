@@ -1,7 +1,7 @@
 const fakeEvents = {
   "today": [
       {
-          "entry": "Singing in the rain",
+          "entry": "Singing in the Rain",
           "id": 11,
           "destination": {
               "x": 49.2297911,
@@ -29,7 +29,7 @@ const fakeEvents = {
           }
       },
       {
-          "entry": "AC/DC concert",
+          "entry": "AC/DC Concert",
           "id": 9,
           "destination": {
               "x": 41.8669892,
@@ -52,7 +52,7 @@ const fakeEvents = {
   ],
   "repeating": [
       {
-          "entry": "Friday afternoon hikes",
+          "entry": "Friday Afternoon Hikes",
           "entry_id": 30,
           "start_date": "2020-11-04T05:00:00.000Z",
           "start_hour": "13:05:00",
@@ -60,7 +60,7 @@ const fakeEvents = {
           "next_event": {
               "address": "6080, Manitoba St",
               "city": "Vancouver",
-              "start_time": "2020-11-0613:05:00",
+              "start_time": "2020-11-06T13:00:00", //1604667600
               "end_time": "2020-11-06T16:00:00",
               "destination": {
                   "x": 49.2297911,
@@ -68,8 +68,8 @@ const fakeEvents = {
               },
               "weather": {
                   "mainWeather": ["Clear"],
-                  "sunset": 1604450849,
-                  "sunrise": 1604415868
+                  "sunset": 1604687600,
+                  "sunrise": 1604637600
               }
           },
           "recurrences": [
@@ -114,7 +114,7 @@ const fakeEvents = {
         "next_event": {
             "address": "6080, Manitoba St",
             "city": "Vancouver",
-            "start_time": "2020-11-0613:05:00",
+            "start_time": "2020-11-06T13:05:00",
             "end_time": "2020-11-06T16:00:00",
             "destination": {
                 "x": 49.2297911,
@@ -162,7 +162,7 @@ const fakeEvents = {
   ],
   "future": [
       {
-          "entry": "Date night",
+          "entry": "Date Night",
           "id": 12,
           "destination": {
               "x": 49.2595859,
@@ -182,7 +182,7 @@ const fakeEvents = {
           }
       },
       {
-          "entry": "Winter is coming",
+          "entry": "Winter is Coming",
           "id": 6,
           "destination": {
               "x": 49.38754,
@@ -241,22 +241,22 @@ const fakeRecommendations = {
         {
             "id": 100,
             "name": "Bike Helmet",
-            "description": "It's dangerous to go alone'."
+            "description": "It is dangerous to go alone."
         },
         {
             "id": 101,
             "name": "Sunglasses",
-            "description": "It's dangerous to go alone'."
+            "description": "It's dangerous to go alone."
         },
         {
             "id": 102,
             "name": "Sunscreen",
-            "description": "It's dangerous to go alone'."
+            "description": "It's dangerous to go alone."
         },        
         {
             "id": 104,
             "name": "Sunscreen",
-            "description": "It's dangerous to go alone'."
+            "description": "It's dangerous to go alone."
         },
         {
             "id": 103,

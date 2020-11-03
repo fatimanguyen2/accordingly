@@ -15,8 +15,9 @@ export const EventListItem = props => {
   const toggleBoolean = props.type === props.collapse.type && props.id === props.collapse.id ? true : false;
   const [toggle, setToggle] = useState(false);
   const [view, setView] = useState(NORMAL); //switch betwen normal view and delete item view for btns
-  // const [reRender, setRerender] = useState(false);
 
+  console.log(props.type)
+  console.log(props.start)
   useEffect(() => {
     setToggle(toggleBoolean)
   }, [props.collapse])

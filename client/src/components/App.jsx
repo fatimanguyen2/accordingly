@@ -66,8 +66,8 @@ function App() {
   // DEMO PURPOSES
   const getMockData = () => {
     Promise.all([
-      axios.get('/api/users/2/weather'),
-      axios.get('/api/users/2')
+      axios.get('/api/users/1/weather'),
+      axios.get('/api/users/1')
     ])
       .then(all => {
         const time = Date.now();
@@ -136,6 +136,7 @@ function App() {
   };
 
   const updateAddress = (addressObj) => {
+    console.log(addressObj);
     axios.put('/api/users/2', { raw_address: addressObj })
       .then(() => getAllData())
       .catch(() => console.log('failed to update address'));
@@ -168,8 +169,6 @@ function App() {
 
 
   const openEdit = (entry_id) => {
-    // console.log("entry_id " + entry_id);
-    // console.log(state.events);
     const allEvents = [...state.events.repeating, ...state.events.future, ...state.events.today.filter(ele => ele.recurrence_id === undefined)]
     console.log(allEvents);
     const eventToEditArr = allEvents.filter(eventItem => eventItem.entry_id === entry_id);
