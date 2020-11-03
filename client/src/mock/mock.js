@@ -53,7 +53,7 @@ const fakeEvents = {
   "repeating": [
       {
           "entry": "Friday afternoon hikes",
-          "entry_id": 17,
+          "entry_id": 30,
           "start_date": "2020-11-04T05:00:00.000Z",
           "start_hour": "13:05:00",
           "end_hour": "16:00:00",

@@ -54,7 +54,6 @@ export const EventListItem = props => {
   }
   const itemClass = classNames('event-list-item', { [key + '--untoggled']: !toggle }, key);
   const itemMainClass = classNames({ 'event-list-item__main': !toggle, 'event-list-item__main--toggled': toggle });
-  console.log('schedule', props.weather)
   return (
     <li className={itemClass}>
 
