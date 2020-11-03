@@ -76,7 +76,7 @@ const changeWeatherName = weather => {
   if (weather.mainWeather[0] === 'Clear' && isNightTime) {
     return 'Clear';
   } else {
-    return names[weather] || weather;
+    return names[weather.mainWeather[0]] || weather.mainWeather[0];
   }
 };
 const changeWeatherClassname = weather => {
@@ -105,7 +105,7 @@ const setPrimaryColors = weather => {
   if (weather.mainWeather[0] === 'Clear' && isNightTime) {
     return {solid:'#356DFF', gradient: 'rgba(0,71, 255, 0.8)'}
   } else {
-    return(colors[weather] && {solid: colors[weather].solid, gradient: colors[weather].gradient} )|| colors.default;
+    return(colors[weather.mainWeather[0]] && {solid: colors[weather.mainWeather[0]].solid, gradient: colors[weather.mainWeather[0]].gradient} )|| colors.default;
   }
   
 }

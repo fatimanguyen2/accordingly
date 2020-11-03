@@ -17,7 +17,7 @@ import { filterEvents, setPrimaryColors, getItem, getSuggestionCategory } from '
 
 const weather = {
   mainWeather: [
-    "Clear"
+    "Thunderstorm"
   ],
   feelsLikeTemp: 7.17,
   actualTemp: 10.78,
