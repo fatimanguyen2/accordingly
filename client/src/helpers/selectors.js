@@ -149,6 +149,10 @@ const getHourFromTime = (time = '') => {
   return time.slice(11, 19);
 };
 
+const roundUp = (momentObj, roundBy) => {
+  return momentObj.add(1, roundBy).startOf(roundBy);
+}
+
 export {
   getItem,
   getSuggestionCategory,
@@ -165,4 +169,5 @@ export {
   addSeconds,
   removeSeconds,
   getHourFromTime,
+  roundUp
 };

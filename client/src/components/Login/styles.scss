@@ -18,7 +18,7 @@
     flex-direction: column;
     justify-content: center;
     box-shadow: 0 0 1rem var(--primary-color), inset 0 0 1rem var(--primary-color);
-    animation: 10s infinite linear rainbow;
+    animation: 4s infinite linear rainbow;
   }
 
   @keyframes rainbow {
@@ -28,7 +28,7 @@
     }
     16%   {
       border: 0.4rem solid $clear-night-color;
-      box-shadow: 0 0 4rem $clear-night-color, inset 0 0 1rem $clear-night-color;
+      box-shadow: 0 0 1rem $clear-night-color, inset 0 0 1rem $clear-night-color;
     }
     33%  {
       border: 0.4rem solid $rainy-drizzle-color;
@@ -36,7 +36,7 @@
     }
     49%  {
       border: 0.4rem solid $snowy-color;
-      box-shadow: 0 0 4rem $snowy-color, inset 0 0 1rem $snowy-color;
+      box-shadow: 0 0 1rem $snowy-color, inset 0 0 1rem $snowy-color;
     }
     66% {
       border: 0.4rem solid $cloudy-color;
@@ -44,7 +44,7 @@
     }
     83% {
       border: 0.4rem solid $sunny-color;
-      box-shadow: 0 0 4rem $sunny-color, inset 0 0 1rem $sunny-color;
+      box-shadow: 0 0 1rem $sunny-color, inset 0 0 1rem $sunny-color;
     }
     100%   {
       border: 0.4rem solid $thunderstorm-color;

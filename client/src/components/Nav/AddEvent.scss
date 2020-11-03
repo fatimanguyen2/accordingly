@@ -94,8 +94,54 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: 2vh;
+    font-size: 3vh;
+    border: none;
+    // outline: none;
+    width: 125%;
+
+    input {
+      text-align: left;
+    }
+
+    span {
+      flex: 1 0 3vh;
+    }
+
+    select.mode {
+      padding-left: 2vh;
+      border: none;
+      border-bottom: solid var(--primary-color);
+      width: auto;
+      color: white;
+      background-color: transparent;
+      margin: 1vh;
+      font-size: 3vh;
+      // padding: 0.5vh;
+    }
   }
+  
+
+  select {
+    outline: none;
+
+    &:focus {
+      filter: brightness(2);
+    }
+
+    &:hover {
+      filter: brightness(2);
+    }
+  }
+
+  .autocomplete-dropdown-container {
+    position: absolute;
+    z-index: 2;
+    
+    span {
+      font-size: 3vh;
+    }
+  }
+
 
   input {
     width: 100%;
@@ -105,15 +151,21 @@
     border-bottom: solid var(--primary-color);
     text-align: center;
     margin: 1vh;
+    outline: none;
 
     &::-webkit-calendar-picker-indicator {
       filter: invert(100%);
     }
 
     &:focus {
-      outline: none;
       filter: brightness(2);
       box-shadow: var(--primary-color);
+    }
+
+    &:hover {
+      filter: brightness(2);
+      // background-color: var(--primary-color-gradient);
+      // box-shadow: 0px 2px 3px 0px var(--primary-color);
     }
     
     &#entry {
@@ -199,6 +251,11 @@
 //   }
 
   .button {
+
+    &:hover {
+      filter: brightness(2);
+      
+    }
 
     &.button--delete--repeat {
       color: var(--primary-color);

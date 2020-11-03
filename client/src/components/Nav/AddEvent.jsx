@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTimes, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import useEndlessForm from '../../hooks/useEndlessForm';
-import { getDateFromTimestamp, giveHTMLID, validateObj, addSeconds, removeSeconds, getHourFromTime } from '../../helpers/selectors';
+import { getDateFromTimestamp, giveHTMLID, validateObj, addSeconds, removeSeconds, getHourFromTime, roundUp } from '../../helpers/selectors';
 import moment from 'moment';
 import './AddEvent.scss';
 import LocationSearchInput from '../LocationSearchInput'
@@ -15,16 +15,18 @@ export const AddEvent = (props) => {
   //daily max=99
   //POST /api/users/:user_id/entries/new
   //PUT /api/users/:user_id/entries/:id
+  // console.log('time: ', getDateFromTimestamp(moment().format()));
 
   const entry_id = props.eventToEdit.entry_id || null;
   const next_event = props.eventToEdit.next_event || null;
   const entry = props.eventToEdit.entry || '';
-  const start_date = getDateFromTimestamp(entry_id ? (next_event ? props.eventToEdit.next_event.start_time : props.eventToEdit.start_time) : '');
-  const end_date = getDateFromTimestamp(entry_id ? (next_event ? props.eventToEdit.next_event.end_time : props.eventToEdit.end_time) : '');;
-  const start_hour = next_event ? removeSeconds(props.eventToEdit.start_hour) : removeSeconds(getHourFromTime(props.eventToEdit.start_time)) || '';
-  const end_hour = next_event? removeSeconds(props.eventToEdit.end_hour) : removeSeconds(getHourFromTime(props.eventToEdit.end_time)) || '';
+  const start_date = getDateFromTimestamp(entry_id ? (next_event ? props.eventToEdit.next_event.start_time : props.eventToEdit.start_time) : moment().format());
+  const end_date = getDateFromTimestamp(entry_id ? (next_event ? props.eventToEdit.next_event.end_time : props.eventToEdit.end_time) : moment().format());;
+  const start_hour = next_event ? removeSeconds(props.eventToEdit.start_hour) : removeSeconds(getHourFromTime(props.eventToEdit.start_time)) || roundUp(moment(), 'hour').format('HH:mm');
+  const end_hour = next_event? removeSeconds(props.eventToEdit.end_hour) : removeSeconds(getHourFromTime(props.eventToEdit.end_time)) || roundUp(moment(), 'hour').add(1, 'hour').format('HH:mm');
   const raw_address = entry_id ? (next_event ? `${props.eventToEdit.next_event.address}, ${props.eventToEdit.next_event.city}` : `${props.eventToEdit.address}, ${props.eventToEdit.city}`) : '';
   const recurrences = giveHTMLID(props.eventToEdit.recurrences || []).map(ele => ele.type_of === 'weekly' ? ({...ele, type_of: moment(ele.initial).format('e')}) : ele);
+  const mode = props.mode || 'walking';
 
   const { input, repeats, handleInputChange, handleAddress, addRepeat, setRepeat, removeRepeat } = useEndlessForm({
     entry_id,
@@ -35,15 +37,30 @@ export const AddEvent = (props) => {
     end_hour,
     recurrences,
     raw_address,
+    mode,
   });
 
   return (
     <form className='add-menu' onSubmit={(e) => e.preventDefault()} >
       <label htmlFor="entry">Title</label>
-      <input type="text" name="entry" id="entry" placeholder="Add Title" defaultValue={entry} onChange={handleInputChange} required></input>
+      <input type="text" name="entry" id="entry" placeholder="Event Name" defaultValue={entry} onChange={handleInputChange} autocomplete='off' required></input>
       <div className='location'>
         <FontAwesomeIcon icon={faMapMarkerAlt} />
+        <select name={`mode`}
+          className='mode'
+          id={`mode`}
+          defaultValue={mode}
+          onChange={(e) => {
+            handleInputChange(e)                
+        }}>
+          <option value="walking">Walk</option>
+          <option value="bicycling">Bike</option>
+          <option value="driving">Drive</option>
+          <option value="transit">Transit</option>
+        </select>
+        <span>to</span>
         <LocationSearchInput onChange={handleAddress} destination={raw_address}/>
+        <label htmlFor={`mode`}>Transport Mode</label>
       </div>
       <div className='start-time'>
         <label htmlFor="start_date">Start Date</label>
@@ -127,7 +144,7 @@ export const AddEvent = (props) => {
           pass && (input.entry_id ? props.onEdit(eventObj) : props.onSubmit(eventObj));
           pass && props.closeAdd();
         }}>
-        {entry_id ? 'Edit' : 'Add'}
+        {entry_id ? 'Save' : 'Add'}
       </button>
     </form>
   );
