@@ -43,7 +43,7 @@ export const AddEvent = (props) => {
   return (
     <form className='add-menu' onSubmit={(e) => e.preventDefault()} >
       <label htmlFor="entry">Title</label>
-      <input type="text" name="entry" id="entry" placeholder="Event Name" defaultValue={entry} onChange={handleInputChange} required></input>
+      <input type="text" name="entry" id="entry" placeholder="Event Name" defaultValue={entry} onChange={handleInputChange} autocomplete='off' required></input>
       <div className='location'>
         <FontAwesomeIcon icon={faMapMarkerAlt} />
         <select name={`mode`}
