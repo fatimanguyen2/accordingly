@@ -83,7 +83,7 @@ function App() {
             ...prev,
             loading: false,
             weather: all[0].data,
-            recommendations: fakeRecommendations,
+            recommendations: {...fakeRecommendations, done:[]},
             events: fakeEvents,
             homeAddress: all[1].data,
             time
