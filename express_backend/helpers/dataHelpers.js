@@ -77,6 +77,7 @@ const todayFormatting = (rawToday, rawRec, origin) => {
       })
   })
   const fromNow = updateTodayToNow(today)
+  console.log(fromNow)
   const leaveBys = fromNow.map(event => getLeaveBy(origin, event));
   return Promise.all(leaveBys)
   .then(departures => fromNow.map((event, index) => {

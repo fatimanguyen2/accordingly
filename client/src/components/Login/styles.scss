@@ -18,7 +18,7 @@
     flex-direction: column;
     justify-content: center;
     box-shadow: 0 0 1rem var(--primary-color), inset 0 0 1rem var(--primary-color);
-    animation: 4s infinite rainbow;
+    animation: 4s infinite linear rainbow;
   }
 
   @keyframes rainbow {
