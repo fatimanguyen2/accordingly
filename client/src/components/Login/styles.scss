@@ -18,7 +18,7 @@
     flex-direction: column;
     justify-content: center;
     box-shadow: 0 0 1rem var(--primary-color), inset 0 0 1rem var(--primary-color);
-    animation: 4s infinite linear rainbow;
+    animation: 10s infinite linear rainbow;
   }
 
   @keyframes rainbow {
@@ -88,6 +88,38 @@
   button {
     width: 100%;
     margin: 1rem 0;
+    animation: 10s infinite linear rainbowButton;
   }
 
+}
+
+@keyframes rainbowButton {
+  0%   {
+    background-color: $thunderstorm-color;
+    box-shadow: 0 0 0.5rem $thunderstorm-color, inset 0 0 1rem $thunderstorm-color;
+  }
+  16%   {
+    background-color: $clear-night-color;
+    box-shadow: 0 0 0.5rem $clear-night-color, inset 0 0 1rem $clear-night-color;
+  }
+  32%  {
+    background-color: $rainy-drizzle-color;
+    box-shadow: 0 0 0.5rem $rainy-drizzle-color, inset 0 0 1rem $rainy-drizzle-color;
+  }
+  48%  {
+    background-color: $snowy-color;
+    box-shadow: 0 0 0.5rem $snowy-color, inset 0 0 1rem $snowy-color;
+  }
+  64% {
+    background-color: $cloudy-color;
+    box-shadow: 0 0 0.5rem $cloudy-color, inset 0 0 1rem $cloudy-color;
+  }
+  80% {
+    background-color: $sunny-color;
+    box-shadow: 0 0 0.5rem $sunny-color, inset 0 0 1rem $sunny-color;
+  }
+  100%   {
+    background-color: rgb(151, 118, 223);
+    box-shadow: 0 0 0.5rem rgb(151, 118, 223), inset 0 0 1rem rgb(151, 118, 223);
+  }
 }
