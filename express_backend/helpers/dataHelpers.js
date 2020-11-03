@@ -265,7 +265,6 @@ const getTripsToday = (origin, today) => {
   })
 }
 
-const test6AM = moment("2020-10-31T06")
 
 const getRelativeSchedule = (tripTimes) => {
   return tripTimes.map(travelTimes => {
@@ -276,9 +275,10 @@ const getRelativeSchedule = (tripTimes) => {
   })
 }
 
-const weatherConditions = ({temp, humidity, weather, rain, uvi, wind_speed, visibility}) => {
+const weatherConditions = ({temp, humidity, weather, rain, uvi, wind_speed, visibility, dew_point}) => {
   if (!temp) return [null];
   const result = [qualifyTemp(temp), qualifyHumidity(humidity), "pandemic"]
+  if (dew_point > 22 && temp > 25);
   if (uvi) result.push(qualifyUVI(uvi));
   if (weather.rainy) result.push("rainy");
   if (wind_speed >= 20) result.push("windy");

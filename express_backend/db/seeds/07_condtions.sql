@@ -19,4 +19,4 @@ VALUES
 ('slippery', 'presence of black ice'), --16
 ('low_visib', 'Visibility under 100 meters'), --17
 ('pandemic', 'Covid 19 pandemic'), --18
-('hot & humid', 'Temperature above 25C and high dew point'); --19
+('hot & humid', 'Temperature above 25C and dew point over 22'); --19
