@@ -26,6 +26,7 @@ export const AddEvent = (props) => {
   const end_hour = next_event? removeSeconds(props.eventToEdit.end_hour) : removeSeconds(getHourFromTime(props.eventToEdit.end_time)) || roundUp(moment(), 'hour').add(1, 'hour').format('HH:mm');
   const raw_address = entry_id ? (next_event ? `${props.eventToEdit.next_event.address}, ${props.eventToEdit.next_event.city}` : `${props.eventToEdit.address}, ${props.eventToEdit.city}`) : '';
   const recurrences = giveHTMLID(props.eventToEdit.recurrences || []).map(ele => ele.type_of === 'weekly' ? ({...ele, type_of: moment(ele.initial).format('e')}) : ele);
+  const mode = props.mode || 'walking';
 
   const { input, repeats, handleInputChange, handleAddress, addRepeat, setRepeat, removeRepeat } = useEndlessForm({
     entry_id,
@@ -36,6 +37,7 @@ export const AddEvent = (props) => {
     end_hour,
     recurrences,
     raw_address,
+    mode,
   });
 
   return (
@@ -45,6 +47,18 @@ export const AddEvent = (props) => {
       <div className='location'>
         <FontAwesomeIcon icon={faMapMarkerAlt} />
         <LocationSearchInput onChange={handleAddress} destination={raw_address}/>
+        <label htmlFor={`mode`}>Transport Mode</label>
+        <select name={`mode`}
+          id={`mode`}
+          defaultValue={mode}
+          onChange={(e) => {
+            handleInputChange(e)                
+        }}>
+          <option value="walking">Walk</option>
+          <option value="bicycling">Bike</option>
+          <option value="driving">Drive</option>
+          <option value="transit">Transit</option>
+        </select>
       </div>
       <div className='start-time'>
         <label htmlFor="start_date">Start Date</label>
