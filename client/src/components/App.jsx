@@ -254,10 +254,10 @@ function App() {
   // Change state when checking items on recommendation list in home component
   const handleCheck = (id, type) => {
     const item = getItem(id, state.recommendations[type]); //get item object
-    // const category = getSuggestionCategory(id, initialRecommendations); //get initial item category of axios request to ensure done itesm go back to right category
+    const category = getSuggestionCategory(id, initialRecommendations); //get initial item category of axios request to ensure done itesm go back to right category
 
     // USE NEXT LINE FOR MOCK
-    const category = getSuggestionCategory(id, recommendations); //get initial item category of axios request to ensure done itesm go back to right category
+    // const category = getSuggestionCategory(id, recommendations); //get initial item category of axios request to ensure done itesm go back to right category
 
     // if item gets checked and is in upcoming/later list, remove from that list and add to done list
     if (type !== 'done') {
@@ -284,8 +284,20 @@ function App() {
   };
 
   const deleteEvent = (scheduleType, id) => {
-    const filteredArr = filterEvents(scheduleType, id, state.events);
-    const newEventsObj = { ...state.events, [scheduleType]: filteredArr };
+    let newEventsObj;
+    const firstFilteredArr = filterEvents(scheduleType, id, state.events); //new scheduleType arr
+    // If type is today or repeating, ensure that repeating events are deleted in both today and repeating list
+    if (scheduleType === 'repeating') {
+      const secondFilteredArr = filterEvents('today', id, state.events); 
+      newEventsObj = { ...state.events, [scheduleType]: firstFilteredArr, 'today': secondFilteredArr };
+
+    } else if ( scheduleType === 'today') {
+      const secondFilteredArr = filterEvents('repeating', id, state.events); 
+      newEventsObj = { ...state.events, [scheduleType]: firstFilteredArr, 'repeating': secondFilteredArr };
+
+    } else { //deleting a no-reccurence event from future
+      newEventsObj = { ...state.events, [scheduleType]: firstFilteredArr };
+    }
     
     axios.delete(`/api/entries/${id}`)
       .then(() => {
