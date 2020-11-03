@@ -203,26 +203,31 @@ import { filterEvents, setPrimaryColors, getItem, getSuggestionCategory } from '
 //   later: [{ id: 3, name: 'top', description: 'layer up' }, { id: 4, name: 'gloves', description: 'It is cold' }],
 //   done: []
 // }
+// MOCK
+// const [state, setState] = useState({
+//   loading: false,
+//   view: 'home',
+//   loggedIn: true,
+//   weather,
+//   recommendations,
+//   events,
+//   time: 1603740043000,
+//   homeAddress,
+//   eventToEdit: {}
+// });
+
+// USE NEXT LINE FOR MOCK
+// const category = getSuggestionCategory(id, recommendations); //get initial item category of axios request to ensure done itesm go back to right category
+
 let initialRecommendations = {};
 
 function App() {
-  // MOCK
-  // const [state, setState] = useState({
-  //   loading: false,
-  //   view: 'home',
-  //   loggedIn: true,
-  //   weather,
-  //   recommendations,
-  //   events,
-  //   time: 1603740043000,
-  //   homeAddress,
-  //   eventToEdit: {}
-  // });
   const time = Date.now();
   const [state, setState] = useState({
     loading: false,
     view: 'home',
     loggedIn: false,
+    isMockData: false,
     weather: {},
     recommendations: {},
     events: {},
@@ -239,15 +244,13 @@ function App() {
       axios.get('/api/users/2'),
     ])
       .then(all => {
-        console.log(all);
+        const time = Date.now();
         initialRecommendations = all[1].data;
 
         // // Setting app primary color
         let colours = setPrimaryColors(all[0].data);
         document.documentElement.style.setProperty('--primary-color', colours.solid);
         document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
-
-        const time = Date.now();
 
         return setState(prev => (
           {
@@ -260,12 +263,6 @@ function App() {
             time
           }))
       })
-    // .then(() => {
-    //   // Setting app primary color
-    //   let colours = setPrimaryColors(state.weather.mainWeather[0]);
-    //   document.documentElement.style.setProperty('--primary-color', colours.solid);
-    //   document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
-    // })
   };
 
   useEffect(() => {
@@ -275,21 +272,54 @@ function App() {
     }
   }, [state.loggedIn]);
 
+  // DEMO PURPOSES
+  const getMockData = () => {
+    Promise.all([
+      axios.get('/api/users/2/weather'),
+      axios.get('/api/users/2/events')
+    ])
+      .then(all => {
+        const time = Date.now();
+        initialRecommendations = fakeRecommendations;
+
+        // // Setting app primary color
+        let colours = setPrimaryColors(all[0].data);
+        document.documentElement.style.setProperty('--primary-color', colours.solid);
+        document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
+
+        setState(prev => (
+          {
+            ...prev,
+            loading: false,
+            weather: all[0].data,
+            recommendations: fakeRecommendations,
+            events: fakeEvents,
+            homeAddress: all[1].data,
+            time
+          }
+        ))
+      })
+  };
+
+  // useEffect(() => {
+  //   if (state.isMockData) {
+  //     setState(prev => ({ ...prev, loading: true }))
+  //     getMockData();
+  //   }
+  // }, [state.isMockData]);
+
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => {
     // Change back primary colors
-    document.documentElement.style.setProperty('--primary-color', '#ffb700');
-    document.documentElement.style.setProperty('--primary-color-gradient', '#ffb700');
-    setState(prev => ({ ...prev, loggedIn: false }))
+    document.documentElement.style.setProperty('--primary-color', '#f5f1e3');
+    document.documentElement.style.setProperty('--primary-color-gradient', '#f5f1e3');
+    setState(prev => ({ ...prev, loggedIn: false, isMockData: false }))
   };
 
   // Change state when checking items on recommendation list in home component
   const handleCheck = (id, type) => {
     const item = getItem(id, state.recommendations[type]); //get item object
     const category = getSuggestionCategory(id, initialRecommendations); //get initial item category of axios request to ensure done itesm go back to right category
-
-    // USE NEXT LINE FOR MOCK
-    // const category = getSuggestionCategory(id, recommendations); //get initial item category of axios request to ensure done itesm go back to right category
 
     // if item gets checked and is in upcoming/later list, remove from that list and add to done list
     if (type !== 'done') {
@@ -316,21 +346,9 @@ function App() {
   };
 
   const deleteEvent = (scheduleType, id) => {
-    let newEventsObj;
-    const firstFilteredArr = filterEvents(scheduleType, id, state.events); //new scheduleType arr
-    // // If type is today or repeating, ensure that repeating events are deleted in both today and repeating list
-    // if (scheduleType === 'repeating') {
-    //   const secondFilteredArr = filterEvents('today', id, state.events); 
-    //   newEventsObj = { ...state.events, [scheduleType]: firstFilteredArr, 'today': secondFilteredArr };
+    const filteredArr = filterEvents(scheduleType, id, state.events);
+    const newEventsObj = { ...state.events, [scheduleType]: filteredArr };
 
-    // } else if ( scheduleType === 'today') {
-    //   const secondFilteredArr = filterEvents('repeating', id, state.events); 
-    //   newEventsObj = { ...state.events, [scheduleType]: firstFilteredArr, 'repeating': secondFilteredArr };
-
-    // } else { //deleting a no-reccurence event from future
-      newEventsObj = { ...state.events, [scheduleType]: firstFilteredArr };
-    // }
-    
     axios.delete(`/api/entries/${id}`)
       .then(() => getAllData())
       .catch(() => console.log('failed delete'));
@@ -367,6 +385,8 @@ function App() {
     setState(prev => ({ ...prev, eventToEdit: {} }))
   };
 
+  const useMock = () => setState(prev => ({ ...prev, isMockData: true }));
+
 
   return (
     <main className='page-content'>
@@ -383,6 +403,7 @@ function App() {
               onSubmit={addEvent}
               onEdit={editEvent}
               loggedIn={state.loggedIn}
+              isMockData={state.isMockData}
               time={state.time}
               logout={logout}
               events={state.events}
@@ -394,6 +415,7 @@ function App() {
               <Route exact path='/'>
                 <Home
                   loggedIn={state.loggedIn}
+                  isMockData={state.isMockData}
                   weather={state.weather}
                   recommendations={state.recommendations}
                   handleCheck={handleCheck}
@@ -402,12 +424,17 @@ function App() {
               </Route>
 
               <Route path='/login'>
-                <Login loggedIn={state.loggedIn} login={login} />
+                <Login
+                  loggedIn={state.loggedIn}
+                  isMockData={state.isMockData}
+                  login={login}
+                  demo={useMock} />
               </Route>
 
               <Route path='/schedule'>
                 <Schedule
                   loggedIn={state.loggedIn}
+                  isMockData={state.isMockData}
                   events={state.events}
                   deleteEvent={deleteEvent}
                   onEdit={openEdit}
@@ -415,7 +442,10 @@ function App() {
               </Route>
 
               <Route path='/register'>
-                <Register loggedIn={state.loggedIn} login={login}></Register>
+                <Register
+                  loggedIn={state.loggedIn}
+                  isMockData={state.isMockData}
+                  login={login}></Register>
               </Route>
 
               <Route path='/about'>
@@ -423,7 +453,12 @@ function App() {
               </Route>
 
               <Route path='/settings'>
-                <Settings loggedIn={state.loggedIn} address={state.homeAddress} updateAddress={updateAddress}></Settings>
+                <Settings
+                  loggedIn={state.loggedIn}
+                  isMockData={state.isMockData}
+                  address={state.homeAddress}
+                  updateAddress={updateAddress}>
+                </Settings>
               </Route>
 
               <Route path='*'><h1>404 - Not Found</h1></Route>
