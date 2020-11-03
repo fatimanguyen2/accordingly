@@ -27,7 +27,7 @@ const getMainWeather = (location) => {
     })
 }
 
-const getDetailedForcast = (schedule) => {
+const getDetailedForecast = (schedule) => {
   const allForecasts = schedule.map(step => {
     console.log(step)
     const hour = step.hours_from_now
@@ -70,5 +70,5 @@ module.exports = {
   getWeather,
   getMainWeather,
   getForecastCategory,
-  getDetailedForcast
+  getDetailedForecast
 };
