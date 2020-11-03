@@ -86,7 +86,7 @@ const getWeatherColor = (start, weather) => {
     const isNightTime = startTime < weather.sunrise || startTime > weather.sunset;
 
     if (weather.mainWeather[0] === 'Clear' && isNightTime) {
-      return '#356DFF';
+      return ' #357AFF';
     } else {
       return icons[weather.mainWeather[0]] || 'white';
     }
