@@ -103,6 +103,10 @@ const setPrimaryColors = weather => {
   return (colors[weather] && { solid: colors[weather].solid, gradient: colors[weather].gradient }) || colors.default;
 };
 
+const roundUp = (momentObj, roundBy) => {
+  return momentObj.add(1, roundBy).startOf(roundBy);
+}
+
 export {
   getItem,
   getSuggestionCategory,
@@ -118,5 +122,6 @@ export {
   addSeconds,
   removeSeconds,
   getHourFromTime,
-  setPrimaryColors
+  setPrimaryColors,
+  roundUp
 };

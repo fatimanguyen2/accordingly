@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTimes, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import useEndlessForm from '../../hooks/useEndlessForm';
-import { getDateFromTimestamp, giveHTMLID, validateObj, addSeconds, removeSeconds, getHourFromTime } from '../../helpers/selectors';
+import { getDateFromTimestamp, giveHTMLID, validateObj, addSeconds, removeSeconds, getHourFromTime, roundUp } from '../../helpers/selectors';
 import moment from 'moment';
 import './AddEvent.scss';
 import LocationSearchInput from '../LocationSearchInput'
@@ -15,14 +15,15 @@ export const AddEvent = (props) => {
   //daily max=99
   //POST /api/users/:user_id/entries/new
   //PUT /api/users/:user_id/entries/:id
+  // console.log('time: ', getDateFromTimestamp(moment().format()));
 
   const entry_id = props.eventToEdit.entry_id || null;
   const next_event = props.eventToEdit.next_event || null;
   const entry = props.eventToEdit.entry || '';
-  const start_date = getDateFromTimestamp(entry_id ? (next_event ? props.eventToEdit.next_event.start_time : props.eventToEdit.start_time) : '');
-  const end_date = getDateFromTimestamp(entry_id ? (next_event ? props.eventToEdit.next_event.end_time : props.eventToEdit.end_time) : '');;
-  const start_hour = next_event ? removeSeconds(props.eventToEdit.start_hour) : removeSeconds(getHourFromTime(props.eventToEdit.start_time)) || '';
-  const end_hour = next_event? removeSeconds(props.eventToEdit.end_hour) : removeSeconds(getHourFromTime(props.eventToEdit.end_time)) || '';
+  const start_date = getDateFromTimestamp(entry_id ? (next_event ? props.eventToEdit.next_event.start_time : props.eventToEdit.start_time) : moment().format());
+  const end_date = getDateFromTimestamp(entry_id ? (next_event ? props.eventToEdit.next_event.end_time : props.eventToEdit.end_time) : moment().format());;
+  const start_hour = next_event ? removeSeconds(props.eventToEdit.start_hour) : removeSeconds(getHourFromTime(props.eventToEdit.start_time)) || roundUp(moment(), 'hour').format('HH:mm');
+  const end_hour = next_event? removeSeconds(props.eventToEdit.end_hour) : removeSeconds(getHourFromTime(props.eventToEdit.end_time)) || roundUp(moment(), 'hour').add(1, 'hour').format('HH:mm');
   const raw_address = entry_id ? (next_event ? `${props.eventToEdit.next_event.address}, ${props.eventToEdit.next_event.city}` : `${props.eventToEdit.address}, ${props.eventToEdit.city}`) : '';
   const recurrences = giveHTMLID(props.eventToEdit.recurrences || []).map(ele => ele.type_of === 'weekly' ? ({...ele, type_of: moment(ele.initial).format('e')}) : ele);
 
@@ -127,7 +128,7 @@ export const AddEvent = (props) => {
           pass && (input.entry_id ? props.onEdit(eventObj) : props.onSubmit(eventObj));
           pass && props.closeAdd();
         }}>
-        {entry_id ? 'Edit' : 'Add'}
+        {entry_id ? 'Save' : 'Add'}
       </button>
     </form>
   );
