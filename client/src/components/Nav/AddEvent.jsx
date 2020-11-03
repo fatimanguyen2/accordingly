@@ -43,12 +43,11 @@ export const AddEvent = (props) => {
   return (
     <form className='add-menu' onSubmit={(e) => e.preventDefault()} >
       <label htmlFor="entry">Title</label>
-      <input type="text" name="entry" id="entry" placeholder="Add Title" defaultValue={entry} onChange={handleInputChange} required></input>
+      <input type="text" name="entry" id="entry" placeholder="Event Name" defaultValue={entry} onChange={handleInputChange} required></input>
       <div className='location'>
         <FontAwesomeIcon icon={faMapMarkerAlt} />
-        <LocationSearchInput onChange={handleAddress} destination={raw_address}/>
-        <label htmlFor={`mode`}>Transport Mode</label>
         <select name={`mode`}
+          className='mode'
           id={`mode`}
           defaultValue={mode}
           onChange={(e) => {
@@ -59,6 +58,9 @@ export const AddEvent = (props) => {
           <option value="driving">Drive</option>
           <option value="transit">Transit</option>
         </select>
+        <span>to</span>
+        <LocationSearchInput onChange={handleAddress} destination={raw_address}/>
+        <label htmlFor={`mode`}>Transport Mode</label>
       </div>
       <div className='start-time'>
         <label htmlFor="start_date">Start Date</label>
