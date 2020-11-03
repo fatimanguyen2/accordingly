@@ -32,7 +32,7 @@ export const Home = props => {
 
   return (
     <Fragment>
-      {props.loggedIn
+      {props.loggedIn || props.isMockData
 
         ? <div className='home'>
           <header className={headerSize}>
@@ -44,7 +44,7 @@ export const Home = props => {
                 maxTemp={Math.round(props.weather.feels_likeMax)}
                 size={headerSize}
               />
-              {props.events && props.events.length > 0? <EventList events={props.events}/> : <div className='no-event'><p>No events today</p></div>}
+              {props.events && props.events.length > 0 ? <EventList events={props.events} /> : <div className='no-event'><p>No events today</p></div>}
             </div>
             {props.events && props.events.length > 0 && <DepartureTime departureTime={props.events[0].leave_by} />}
           </header>
@@ -54,14 +54,18 @@ export const Home = props => {
               <Fragment>
                 {!props.recommendations.now ?
                   <Fragment>
-                    {props.recommendations[UPCOMING] && props.recommendations[UPCOMING].length > 0 && <RecommendationList recommendations={props.recommendations[UPCOMING]} handleCheck={props.handleCheck} reRender={reRenderList} type={UPCOMING}>Upcoming </RecommendationList>}
-                    {props.recommendations[LATER] && props.recommendations[LATER].length > 0 && <RecommendationList recommendations={props.recommendations[LATER]} handleCheck={props.handleCheck} reRender={reRenderList} type={LATER}>Later </RecommendationList>}
+                    {props.recommendations[UPCOMING] && props.recommendations[UPCOMING].length > 0
+                      && <RecommendationList recommendations={props.recommendations[UPCOMING]} handleCheck={props.handleCheck} reRender={reRenderList} type={UPCOMING}>Upcoming </RecommendationList>}
+                    {props.recommendations[LATER] && props.recommendations[LATER].length > 0
+                      && <RecommendationList recommendations={props.recommendations[LATER]} handleCheck={props.handleCheck} reRender={reRenderList} type={LATER}>Later </RecommendationList>}
                   </Fragment> :
                   <Fragment>
-                    {props.recommendations[NOW] && props.recommendations[NOW].length > 0 && <RecommendationList recommendations={props.recommendations[NOW]} handleCheck={props.handleCheck} reRender={reRenderList} type={NOW}>Now </RecommendationList>}
+                    {props.recommendations[NOW] && props.recommendations[NOW].length > 0
+                      && <RecommendationList recommendations={props.recommendations[NOW]} handleCheck={props.handleCheck} reRender={reRenderList} type={NOW}>Now </RecommendationList>}
                   </Fragment>
                 }
-                {props.recommendations[DONE] && props.recommendations[DONE].length > 0 && <RecommendationList recommendations={props.recommendations[DONE]} handleCheck={props.handleCheck} reRender={reRenderList} type={DONE}>Done </RecommendationList>}
+                {props.recommendations[DONE] && props.recommendations[DONE].length > 0
+                  && <RecommendationList recommendations={props.recommendations[DONE]} handleCheck={props.handleCheck} reRender={reRenderList} type={DONE}>Done </RecommendationList>}
               </Fragment>
             </section>}
 
