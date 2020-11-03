@@ -18,7 +18,7 @@
     flex-direction: column;
     justify-content: center;
     box-shadow: 0 0 1rem var(--primary-color), inset 0 0 1rem var(--primary-color);
-    animation: 4s infinite linear rainbow;
+    animation: 15s infinite linear rainbow;
   }
 
   @keyframes rainbow {
@@ -72,6 +72,16 @@
       outline: none;
       font-size: $font-size;
       flex-grow: 2;
+
+      &:focus {
+        // outline:none;
+        filter: brightness(2);
+  
+      }
+  
+      &:hover {
+        filter: brightness(2);
+      }
     }
   }
 
@@ -88,7 +98,17 @@
   button {
     width: 100%;
     margin: 1rem 0;
-    // animation: 10s infinite linear rainbowButton;
+    animation: 15s infinite linear rainbowButton;
+    
+    &:focus {
+      // outline:none;
+      filter: brightness(1.2);
+
+    }
+
+    &:hover {
+      filter: brightness(1.2);
+    }
   }
 
 }
