@@ -27,6 +27,7 @@ const getMainWeather = (location) => {
 
 const getDetailedForcast = (schedule) => {
   const allForecasts = schedule.map(step => {
+    console.log(step)
     const hour = step.hours_from_now
     if (hour > 0) {
       return getWeather(step.start_point)
@@ -41,7 +42,6 @@ const getDetailedForcast = (schedule) => {
   return Promise.all(allForecasts)
 }
 
-let count = 0
 const test6AM = moment("2020-10-31T06")
 ///need refactorging call only one time
 const getForecastCategory = (event) => {

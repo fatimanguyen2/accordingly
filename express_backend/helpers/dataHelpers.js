@@ -38,7 +38,6 @@ const formatEntryForFrontEnd = (entry) => {
       .then(weather => ({...formarttedRec[0], next_event : ({...formarttedRec[0].next_event, weather : weather})}))
   } else {
     const formattedEvent = { ...entry[0], start_time: moment(entry[0].trip_start_time).format(), end_time : moment(entry[0].trip_end_time).format()}
-    console.log(formattedEvent)
     return getForecastCategory(formattedEvent)
       .then(weather => {
         const { entry, entry_id, destination, address, city, postal_code, trip_id, start_time, end_time } = formattedEvent;
@@ -264,7 +263,6 @@ const getTripsToday = (origin, today) => {
   })
 }
 
-const test6AM = moment("2020-10-31T06")
 
 const getRelativeSchedule = (tripTimes) => {
   return tripTimes.map(travelTimes => {
@@ -275,9 +273,10 @@ const getRelativeSchedule = (tripTimes) => {
   })
 }
 
-const weatherConditions = ({temp, humidity, weather, rain, uvi, wind_speed, visibility}) => {
+const weatherConditions = ({temp, humidity, weather, rain, uvi, wind_speed, visibility, dew_point}) => {
   if (!temp) return [null];
-  const result = [qualifyTemp(temp), qualifyHumidity(humidity)]
+  const result = [qualifyTemp(temp), qualifyHumidity(humidity), "pandemic"]
+  if (dew_point > 22 && temp > 25);
   if (uvi) result.push(qualifyUVI(uvi));
   if (weather.rainy) result.push("rainy");
   if (wind_speed >= 20) result.push("windy");

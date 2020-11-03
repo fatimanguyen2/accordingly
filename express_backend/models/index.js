@@ -296,14 +296,26 @@ module.exports = (db) => {
 
   const updateUserAddress = (address, id) => {
 
+
     return db.query(`
     UPDATE users
     SET address = '${address.street}',
     city = '${address.city}',
-    postal_code = '${address.postal_code}'
+    postal_code = '${address.postalcode}',
+    home_location = point(${address.destination.x}, ${address.destination.y})
     WHERE id = ${id}
     RETURNING *
     `)
+  }
+
+  const createNewUser = ({ first_name, last_name, email, password, home_location, address, city, postal_code }) => {
+    db.query(`
+    INSERT INTO users(first_name, last_name, email, password, home_location, address, city, postal_code)
+    VALUES
+    ('$1', '$2', '$3', '$4', point(43.69854, -79.41188), '227 Dunvegan Rd', 'Toronto', 'M5P 2P4')
+    RETURNING *
+    `, [first_name, last_name, email, password])
+
   }
 
   return {
