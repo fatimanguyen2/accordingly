@@ -186,6 +186,7 @@ function App() {
     homeAddress,
     eventToEdit: {}
   });
+  
   let colours = setPrimaryColors(weather);
   document.documentElement.style.setProperty('--primary-color', colours.solid);
   document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);

@@ -63,14 +63,43 @@ const getWeatherColor = weather => {
 };
 
 const changeWeatherName = weather => {
+  const now = moment();
+  const isNightTime = now < weather.sunrise || now > weather.sunset;
+
   const names = {
     Rain: 'Rainy',
     Snow: 'Snowy',
     Clear: 'Sunny',
     Clouds: 'Cloudy'
   }
-  return names[weather] || weather;
+
+  if (weather.mainWeather[0] === 'Clear' && isNightTime) {
+    return 'Clear'
+  } else {
+    return names[weather] || weather;
+  }
 };
+
+const setPrimaryColors = weather => {
+  const now = moment();
+  const isNightTime = now < weather.sunrise || now > weather.sunset;
+  const colors = {
+    Thunderstorm: {solid: 'rgb(151, 118, 223)', gradient: 'rgba(175,145,239, 0.6)'},
+    Drizzle: {solid: 'rgb(34,155,206)', gradient: 'rgba(34,155,206, 0.8)'},
+    Rain: {solid: 'rgb(34,155,206)', gradient: 'rgba(34,155,206, 0.8)'},
+    Snow: {solid: 'white', gradient: 'rgb(177, 218, 255)'},
+    Clear: {solid: 'rgb(255,223,109)', gradient: 'rgba(255,223,109,0.8)'},
+    Clouds: {solid: 'rgb(184, 184, 184)', gradient: 'rgba(169, 208, 236, 0.726)'},
+    default: {solid: 'white', gradient: 'white'}
+  }
+
+  if (weather.mainWeather[0] === 'Clear' && isNightTime) {
+    return {solid:'#356DFF', gradient: 'rgba(0,71, 255, 0.8)'}
+  } else {
+    return(colors[weather] && {solid: colors[weather].solid, gradient: colors[weather].gradient} )|| colors.default;
+  }
+  
+}
 
 const getDateFromTimestamp = date => {
   return date.slice(0, 10);
@@ -96,28 +125,6 @@ const getHourFromTime = (time='') => {
   return time.slice(11, 19);
 };
 
-const setPrimaryColors = weather => {
-  let result;
-  const now = moment();
-  const isNightTime = now < weather.sunrise || now > weather.sunset;
-  const colors = {
-    Thunderstorm: {solid: 'rgb(151, 118, 223)', gradient: 'rgba(175,145,239, 0.6)'},
-    Drizzle: {solid: 'rgb(34,155,206)', gradient: 'rgba(34,155,206, 0.8)'},
-    Rain: {solid: 'rgb(34,155,206)', gradient: 'rgba(34,155,206, 0.8)'},
-    Snow: {solid: 'white', gradient: 'rgb(177, 218, 255)'},
-    Clear: {solid: 'rgb(255,223,109)', gradient: 'rgba(255,223,109,0.8)'},
-    Clouds: {solid: 'rgb(184, 184, 184)', gradient: 'rgba(169, 208, 236, 0.726)'},
-    default: {solid: 'white', gradient: 'white'}
-  }
-
-  if (weather.mainWeather[0] === 'Clear' && isNightTime) {
-    result = {solid:'#356DFF', gradient: 'rgba(0,71, 255, 0.8)'}
-  } else {
-    result = (colors[weather] && {solid: colors[weather].solid, gradient: colors[weather].gradient} )|| colors.default;
-  }
-  
-  return result;
-}
 
 // const setPrimaryColors = weather => {
 //   const colors = {

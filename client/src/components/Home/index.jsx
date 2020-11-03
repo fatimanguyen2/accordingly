@@ -38,7 +38,7 @@ export const Home = props => {
           <header className={headerSize}>
             <div className={`${headerSize}__weather-event`}>
               <WeatherRing
-                mainWeather={props.weather.mainWeather && props.weather.mainWeather.length > 0 && props.weather.mainWeather[0]}
+                weather={props.weather} //REFACTOR TO {...props.weather}
                 feelsLikeTemp={Math.round(props.weather.feelsLikeTemp)}
                 minTemp={Math.round(props.weather.feels_likeMin)}
                 maxTemp={Math.round(props.weather.feels_likeMax)}
