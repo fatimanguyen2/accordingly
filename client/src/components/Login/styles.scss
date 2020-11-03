@@ -28,27 +28,27 @@
     }
     16%   {
       border: 0.4rem solid $clear-night-color;
-      box-shadow: 0 0 1rem $clear-night-color, inset 0 0 1rem $clear-night-color;
+      box-shadow: 0 0 4rem $clear-night-color, inset 0 0 1rem $clear-night-color;
     }
-    32%  {
+    33%  {
       border: 0.4rem solid $rainy-drizzle-color;
       box-shadow: 0 0 1rem $rainy-drizzle-color, inset 0 0 1rem $rainy-drizzle-color;
     }
-    48%  {
+    49%  {
       border: 0.4rem solid $snowy-color;
-      box-shadow: 0 0 1rem $snowy-color, inset 0 0 1rem $snowy-color;
+      box-shadow: 0 0 4rem $snowy-color, inset 0 0 1rem $snowy-color;
     }
-    64% {
+    66% {
       border: 0.4rem solid $cloudy-color;
       box-shadow: 0 0 1rem $cloudy-color, inset 0 0 1rem $cloudy-color;
     }
-    80% {
+    83% {
       border: 0.4rem solid $sunny-color;
-      box-shadow: 0 0 1rem $sunny-color, inset 0 0 1rem $sunny-color;
+      box-shadow: 0 0 4rem $sunny-color, inset 0 0 1rem $sunny-color;
     }
     100%   {
-      border: 0.4rem solid rgb(151, 118, 223);
-      box-shadow: 0 0 1rem rgb(151, 118, 223), inset 0 0 1rem rgb(151, 118, 223);
+      border: 0.4rem solid $thunderstorm-color;
+      box-shadow: 0 0 1rem $thunderstorm-color, inset 0 0 1rem $thunderstorm-color;
     }
   }
 
