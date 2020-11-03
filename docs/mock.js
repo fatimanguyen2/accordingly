@@ -204,6 +204,69 @@ const fakeEvents = {
   ]
 }
 
+const fakeRecommendations = {
+    "upcoming": [
+        {
+            "id": 9,
+            "name": "Light gloves",
+            "description": "Keep your hand covered in cool and cold weather conditions."
+        },
+        {
+            "id": 6,
+            "name": "Extra Layers",
+            "description": "Layering up on clothing is recommended as the temperature drops."
+        },
+        {
+            "id": 27,
+            "name": "Jacket",
+            "description": "Cooler weather warrants putting on a jacket."
+        },
+        {
+            "id": 22,
+            "name": "Face Mask",
+            "description": "Do not forget to bring a mask when leaving the house."
+        }
+    ],
+    "later": [
+        {
+            "id": 4,
+            "name": "Long Sleeves Top",
+            "description": "Colder days require more coverage."
+        },
+        {
+            "id": 26,
+            "name": "Normal Clothing",
+            "description": "It is not too hot nor too warm."
+        },
+        {
+            "id": 100,
+            "name": "Bike Helmet",
+            "description": "It's dangerous to go alone'."
+        },
+        {
+            "id": 101,
+            "name": "Sunglasses",
+            "description": "It's dangerous to go alone'."
+        },
+        {
+            "id": 102,
+            "name": "Sunscreen",
+            "description": "It's dangerous to go alone'."
+        },        
+        {
+            "id": 104,
+            "name": "Sunscreen",
+            "description": "It's dangerous to go alone'."
+        },
+        {
+            "id": 103,
+            "name": "Towel",
+            "description": "Always bring a towel'."
+        },
+    ]
+}
+
 module.exports = { 
-  fakeEvents
+  fakeEvents,
+  fakeRecommendations
 }
