@@ -50,7 +50,7 @@ const getForecastCategory = (event) => {
     const hour = moment(start).diff(moment(), "hour")
     if (hour >= 0) {
       return getWeather(event.destination)
-        .then(data => ({ main : data.hourly[hour].weather[0].main, sunset: data.current.sunset, sunrise: data.current.sunrise}))
+        .then(data => ({ mainWeather : [data.hourly[hour].weather[0].main], sunset: data.current.sunset, sunrise: data.current.sunrise}))
     } else {
       return Promise.resolve(null)
     }
@@ -60,7 +60,7 @@ const getForecastCategory = (event) => {
       return Promise.resolve(null)
     }
     return getWeather(event.destination)
-    .then(data => ({ main : data.daily[day].weather[0].main, sunset: data.current.sunset, sunrise: data.current.sunrise}))
+    .then(data => ({ mainWeather : [data.daily[day].weather[0].main], sunset: data.current.sunset, sunrise: data.current.sunrise}))
   }
 };
 
