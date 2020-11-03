@@ -2,8 +2,8 @@
 
 // DOES NOT BREAK CODE IF NOT ASSIGNED
 :root {
-  --primary-color: #80ffdb; 
-  --primary-color-gradient: #80ffdb; 
+  --primary-color: #ffb700; 
+  --primary-color-gradient: #ffb700; 
 }
 
 $font-stack: 'Mulish', sans-serif;
@@ -20,6 +20,9 @@ $snowy-color-gradient: rgb(177, 218, 255);
 
 $sunny-color: rgb(255,223,109);
 $sunny-color-gradient: rgba(255,223,109,0.8);
+
+$clear-night-color: #357AFF;
+$clear-night-gradient: rgba(0,71, 255, 0.8);
 
 $cloudy-color: #D4D4D4;
 $cloudy-color-gradient: rgba(213, 238, 255, 0.726);

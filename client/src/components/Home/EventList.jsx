@@ -5,7 +5,7 @@ import EventListItem from './EventListItem';
 export default function EventList(props) {
   const events = props.events.map(event => {
     return <EventListItem
-      key={event.id}
+      key={event.entry_id}
       title={event.entry}
       start={event.start_time}
       weather={event.weather} //TO FIX

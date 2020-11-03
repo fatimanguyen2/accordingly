@@ -23,24 +23,28 @@
 
   @keyframes rainbow {
     0%   {
-      border: 0.4rem solid rgb(151, 118, 223);
-      box-shadow: 0 0 1rem rgb(151, 118, 223), inset 0 0 1rem rgb(151, 118, 223);
+      border: 0.4rem solid $thunderstorm-color;
+      box-shadow: 0 0 1rem $thunderstorm-color, inset 0 0 1rem $thunderstorm-color;
     }
-    20%  {
-      border: 0.4rem solid rgb(15, 178, 249);
-      box-shadow: 0 0 1rem rgb(15, 178, 249), inset 0 0 1rem rgb(15, 178, 249);
+    16%   {
+      border: 0.4rem solid $clear-night-color;
+      box-shadow: 0 0 1rem $clear-night-color, inset 0 0 1rem $clear-night-color;
     }
-    40%  {
-      border: 0.4rem solid rgb(255, 255, 255);
-      box-shadow: 0 0 1rem rgb(255, 255, 255), inset 0 0 1rem rgb(255, 255, 255);
+    32%  {
+      border: 0.4rem solid $rainy-drizzle-color;
+      box-shadow: 0 0 1rem $rainy-drizzle-color, inset 0 0 1rem $rainy-drizzle-color;
     }
-    60% {
-      border: 0.4rem solid rgb(255,223,109);
-      box-shadow: 0 0 1rem rgb(255,223,109), inset 0 0 1rem rgb(255,223,109);
+    48%  {
+      border: 0.4rem solid $snowy-color;
+      box-shadow: 0 0 1rem $snowy-color, inset 0 0 1rem $snowy-color;
+    }
+    64% {
+      border: 0.4rem solid $cloudy-color;
+      box-shadow: 0 0 1rem $cloudy-color, inset 0 0 1rem $cloudy-color;
     }
     80% {
-      border: 0.4rem solid rgb(168, 168, 168);
-      box-shadow: 0 0 1rem rgb(168, 168, 168), inset 0 0 1rem rgb(168, 168, 168);
+      border: 0.4rem solid $sunny-color;
+      box-shadow: 0 0 1rem $sunny-color, inset 0 0 1rem $sunny-color;
     }
     100%   {
       border: 0.4rem solid rgb(151, 118, 223);

@@ -9,6 +9,10 @@ import EventList from './EventList';
 import { DepartureTime } from '../DepartureTime';
 import RecommendationList from './RecommendationList';
 
+const NOW = 'now';
+const UPCOMING = 'upcoming';
+const LATER = 'later';
+const DONE = 'done';
 
 export const Home = props => {
   const [headerSize, setHeaderSize] = useState('big');
@@ -22,11 +26,6 @@ export const Home = props => {
     }
   })
 
-  const NOW = 'now';
-  const UPCOMING = 'upcoming';
-  const LATER = 'later';
-  const DONE = 'done';
-
   const reRenderList = () => {
     setRender(!render);
   }
@@ -34,18 +33,18 @@ export const Home = props => {
   return (
     <Fragment>
       {props.loggedIn
-        ? <div className='home'>
 
+        ? <div className='home'>
           <header className={headerSize}>
             <div className={`${headerSize}__weather-event`}>
               <WeatherRing
-                mainWeather={props.weather.mainWeather && props.weather.mainWeather[0]}
+                weather={props.weather} //REFACTOR TO {...props.weather}
                 feelsLikeTemp={Math.round(props.weather.feelsLikeTemp)}
                 minTemp={Math.round(props.weather.feels_likeMin)}
                 maxTemp={Math.round(props.weather.feels_likeMax)}
                 size={headerSize}
               />
-              {props.events.length > 0? <EventList events={props.events}/> : <div className='no-event'><p>No events today</p></div>}
+              {props.events && props.events.length > 0? <EventList events={props.events}/> : <div className='no-event'><p>No events today</p></div>}
             </div>
             {props.events && props.events.length > 0 && <DepartureTime departureTime={props.events[0].leave_by} />}
           </header>
