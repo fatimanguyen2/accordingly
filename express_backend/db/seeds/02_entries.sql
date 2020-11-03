@@ -4,7 +4,7 @@ VALUES
 ('Commute', TRUE, point(49.23010, -123.10867), '6078 Manitoba St', 'Vancouver', 'V5Y 3T4', 2),
 ('Morning Run', TRUE, point(49.259432, -123.100795), '2846 Main St', 'Vancouver', 'V5T 3G2', 2),
 ('Skatepark', TRUE, point(43.70564, -79.42154), '613 Roselawn Ave', 'Toronto', 'M5N 1K7', 1),
-('D&d Nights', FALSE, point(43.67398, -79.42789), '1223 Shaw St', 'Toronto', 'M6G 3N7', 3),
+('D&D Nights', FALSE, point(43.67398, -79.42789), '1223 Shaw St', 'Toronto', 'M6G 3N7', 3),
 ('Payday', FALSE, point(43.67740, -79.24621), '97 Crescentwood Rd', 'Toronto', 'M1N 1E4', 4),
 ('Going to see dad', FALSE, point(43.67969, -79.29683), '12 Walter St', 'Toronto', 'M4E 2Z1', 3),
 ('Gymn-a-thon', TRUE, point(43.66808, -79.30635), '187 Boardwalk Dr', 'Toronto', 'M4L 3X9', 5),

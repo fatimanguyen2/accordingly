@@ -277,7 +277,7 @@ const getRelativeSchedule = (tripTimes) => {
 
 const weatherConditions = ({temp, humidity, weather, rain, uvi, wind_speed, visibility}) => {
   if (!temp) return [null];
-  const result = [qualifyTemp(temp), qualifyHumidity(humidity)]
+  const result = [qualifyTemp(temp), qualifyHumidity(humidity), "pandemic"]
   if (uvi) result.push(qualifyUVI(uvi));
   if (weather.rainy) result.push("rainy");
   if (wind_speed >= 20) result.push("windy");
