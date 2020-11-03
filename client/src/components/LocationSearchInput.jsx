@@ -33,7 +33,7 @@ class LocationSearchInput extends React.Component {
         highlightFirstSuggestion={true}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
+          <div className='location_search_container'>
             <label htmlFor='location_search'>Location</label>
             <input
               {...getInputProps({
