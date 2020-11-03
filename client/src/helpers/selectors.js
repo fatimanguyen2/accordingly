@@ -31,7 +31,6 @@ const getEvent = (scheduleType, id, evtObj) => {
 const filterEvents = (scheduleType, id, evtObj) => evtObj[scheduleType].filter(event => event.entry_id !== id);
 
 const getWeatherIcon = (start, weather) => {
-  console.log(weather)
   const startTime= moment(start).unix();
   const icons = {
     Thunderstorm: faBolt,
