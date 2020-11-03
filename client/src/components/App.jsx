@@ -30,48 +30,73 @@ const weather = {
 const events = {
   today: [
     {
-      entry: "commute",
-      id: 4,
-      is_outdoor: true,
+      entry: "Boring convention",
+      id: 6,
       destination: {
-        x: 49.2301,
-        y: -123.10867
+        x: 49.38754,
+        y: -123.14254
       },
-      address: "2846 Main St",
-      city: "Vancouver",
-      postal_code: "V5T 3G2",
-      start_date: "2020-03-05T05:00:00.000Z",
-      start_hour: "08:00:00",
-      end_hour: "16:00:00",
-      entry_id: 1,
-      type_of: "weekly",
-      initial: "2020-03-12T04:00:00.000Z",
-      interval: 1,
-      recurrence_id: 1,
-      start_time: "2020-10-29T08:00:00",
-      end_time: "2020-10-29T16:00:00",
-      leave_by: "2020-10-29T07:28:26-04:00",
-      weather: "Thunderstorm"
+      address: "1567 Townline Rd",
+      city: "Abbotsford",
+      postal_code: "V2T 6E1",
+      is_outdoor: false,
+      start_time: '2020-11-03T11:00:00',
+      end_time: "2020-11-12T18:00:00-05:00",
+      entry_id: 11,
+      weather: {
+        mainWeather: [
+          "Clear"
+        ],
+        sunset: 1604450849,
+        sunrise: 1604415868
+      }
+    },
+    {
+      entry: "Boring convention",
+      id: 6,
+      destination: {
+        x: 49.38754,
+        y: -123.14254
+      },
+      address: "1567 Townline Rd",
+      city: "Abbotsford",
+      postal_code: "V2T 6E1",
+      is_outdoor: false,
+      start_time: '2020-11-03T20:00:00',
+      end_time: "2020-11-12T18:00:00-05:00",
+      entry_id: 20,
+      weather: {
+        mainWeather: [
+          "Clear"
+        ],
+        sunset: 1604450849,
+        sunrise: 1604415868
+      }
     }
   ],
   repeating: [
     {
-      entry: "commute",
+      entry: "Commute",
       entry_id: 1,
       start_date: "2020-03-05T05:00:00.000Z",
       start_hour: "08:00:00",
       end_hour: "16:00:00",
       next_event: {
-        start_time: "2020-10-30T08:00:00",
-        end_time: "2020-10-30T16:00:00",
+        address: "6078 Manitoba St",
+        city: "Vancouver",
+        start_time: "2020-11-04T08:00:00",
+        end_time: "2020-11-04T16:00:00",
         destination: {
           x: 49.2301,
           y: -123.10867
         },
-        address: "2846 Main St",
-        city: "Vancouver",
-        postal_code: "V5T 3G2",
-        weather: "Drizzle"
+        weather: {
+          mainWeather: [
+            "Clear"
+          ],
+          sunset: 1604450849,
+          sunrise: 1604415868
+        }
       },
       recurrences: [
         {
@@ -96,33 +121,38 @@ const events = {
           id: 4,
           type_of: "weekly",
           initial: "2020-03-12T04:00:00.000Z",
-          interval: 2
+          interval: 1
         },
         {
           id: 5,
           type_of: "weekly",
           initial: "2020-03-13T04:00:00.000Z",
-          interval: 3
+          interval: 1
         }
       ]
     },
     {
-      entry: "morning run",
+      entry: "Morning Run",
       entry_id: 2,
       start_date: "2020-03-05T05:00:00.000Z",
       start_hour: "07:00:00",
       end_hour: "07:30:00",
       next_event: {
-        start_time: "2020-10-30T07:00:00",
-        end_time: "2020-10-30T07:30:00",
+        address: "2846 Main St",
+        city: "Vancouver",
+        start_time: "2020-11-04T07:00:00",
+        end_time: "2020-11-04T07:30:00",
         destination: {
           x: 49.259432,
           y: -123.100795
         },
-        address: "2846 Main St",
-        city: "Vancouver",
-        postal_code: "V5T 3G2",
-        weather: "Snow"
+        weather: {
+          mainWeather: [
+            "Rain"
+          ],
+          sunset: 1604450842,
+          sunrise: 1604415870
+        }
       },
       recurrences: [
         {
@@ -139,15 +169,15 @@ const events = {
       entry: "Boring convention",
       id: 6,
       destination: {
-        x: 49.38654,
-        y: -123.13254
+        x: 49.38754,
+        y: -123.14254
       },
-      address: "2846 Main St",
-      city: "Vancouver",
-      postal_code: "V5T 3G2",
+      address: "1567 Townline Rd",
+      city: "Abbotsford",
+      postal_code: "V2T 6E1",
       is_outdoor: false,
-      start_time: "2020-11-12T14:00:00.000Z",
-      end_time: "2020-11-12T23:00:00.000Z",
+      start_time: "2020-11-12T09:00:00-05:00",
+      end_time: "2020-11-12T18:00:00-05:00",
       entry_id: 11,
       weather: null
     }
@@ -175,30 +205,30 @@ const recommendations = {
 let initialRecommendations = {};
 
 function App() {
-  // // MOCK
+  // MOCK
+  const [state, setState] = useState({
+    loading: false,
+    view: 'home',
+    loggedIn: true,
+    weather,
+    recommendations,
+    events,
+    time: 1603740043000,
+    homeAddress,
+    eventToEdit: {}
+  });
+  // const time = Date.now();
   // const [state, setState] = useState({
   //   loading: false,
   //   view: 'home',
   //   loggedIn: false,
-  //   weather,
-  //   recommendations,
-  //   events,
-  //   time: 1603740043000,
-  //   homeAddress,
+  //   weather: {},
+  //   recommendations: {},
+  //   events: {},
+  //   time,
+  //   homeAddress: {},
   //   eventToEdit: {}
   // });
-  const time = Date.now();
-  const [state, setState] = useState({
-    loading: false,
-    view: 'home',
-    loggedIn: false,
-    weather: {},
-    recommendations: {},
-    events: {},
-    time,
-    homeAddress: {},
-    eventToEdit: {}
-  });
 
   const getAllData = () => {
     Promise.all([
@@ -237,12 +267,12 @@ function App() {
     // })
   };
 
-  useEffect(() => {
-    if (state.loggedIn) {
-      setState(prev => ({ ...prev, loading: true }))
-      getAllData();
-    }
-  }, [state.loggedIn]);
+  // useEffect(() => {
+  //   if (state.loggedIn) {
+  //     setState(prev => ({ ...prev, loading: true }))
+  //     getAllData();
+  //   }
+  // }, [state.loggedIn]);
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
   const logout = () => {
@@ -287,7 +317,7 @@ function App() {
   const deleteEvent = (scheduleType, id) => {
     const filteredArr = filterEvents(scheduleType, id, state.events);
     const newEventsObj = { ...state.events, [scheduleType]: filteredArr };
-    
+
     axios.delete(`/api/entries/${id}`)
       .then(() => {
         setState(prev => ({ ...prev, events: newEventsObj }))
