@@ -1,8 +1,8 @@
 INSERT INTO
   entries(title, is_outdoor, destination, mode, address, city, postal_code, user_id)
 VALUES
-('Work', TRUE, point(43.70564, -79.42154), 'walking', '613 Roselawn Ave', 'Toronto', 'M5N 1K7', 2),
 ('Morning Run', TRUE, point(43.67398, -79.42789), 'walking', '1223 Shaw St', 'Toronto', 'M6G 3N7', 2),
+('Work', TRUE, point(43.70564, -79.42154), 'walking', '613 Roselawn Ave', 'Toronto', 'M5N 1K7', 2),
 ('Skatepark', TRUE, point(43.70564, -79.42154), 'walking', '613 Roselawn Ave', 'Toronto', 'M5N 1K7', 1),
 ('D&D Nights', FALSE, point(43.67398, -79.42789), 'walking', '1223 Shaw St', 'Toronto', 'M6G 3N7', 3),
 ('Payday', FALSE, point(43.67740, -79.24621), 'walking', '97 Crescentwood Rd', 'Toronto', 'M1N 1E4', 4),
