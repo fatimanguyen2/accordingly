@@ -48,12 +48,12 @@ export const Nav = props => {
   return (
     <div className='nav'>
       <div className={classnames('nav-container', {'empty': menuCollapse && !addCollapse})}>
-        {props.wait && 
-        <div className='loader'>
+        <div className={
+          classnames('loader', {'loader--wait': props.wait,})
+        }>
           <div className='loader__animation'></div>
           <div className='loader__background'></div>
         </div>
-        }
         {(addCollapse || !props.loggedIn) &&
           <Fragment>
             <button

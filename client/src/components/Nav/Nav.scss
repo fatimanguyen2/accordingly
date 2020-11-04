@@ -14,6 +14,14 @@
   z-index: 2;
 
   .loader {
+    display: none;
+    // opacity: 0;
+
+    &--wait {
+      display: block;
+      // opacity: 1;
+      // animation: fadeIn 0.2s;
+    }
     
     &__animation {
       position: fixed;
@@ -201,14 +209,16 @@
   }
 }
 
-// @keyframes slideFromLeft {
-//   from {
-//     bottom: -100vh;
-//     left: -100vh;
-//   }
+@keyframes fadeIn {
+  from {
+    // bottom: -100vh;
+    // left: -100vh;
+    opacity: 0;
+  }
 
-//   to {
-//     bottom: 0px;
-//     left: 0px;
-//   }
-// }
+  to {
+    // bottom: 0px;
+    // left: 0px;
+    opacity: 1;
+  }
+}
