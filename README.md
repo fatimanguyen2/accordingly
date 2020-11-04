@@ -13,6 +13,11 @@ Let me introduce our app accordingly. It gives our user advice on what to wear o
 
 ![navigation](https://github.com/LawfulKami/accordingly/blob/main/docs/app-navigation.gif?raw=true)
 
+### Login page
+![landingpage](https://github.com/LawfulKami/accordingly/blob/main/docs/login-animation.gif?raw=true)
+
+###
+
 ## Stack
   * React
   * Node.JS
