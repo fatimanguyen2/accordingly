@@ -14,13 +14,13 @@ import { Settings } from './Settings';
 import { Register } from './Register';
 import { fakeEvents, fakeRecommendations } from '../mock/mock';
 
-import { filterEvents, setPrimaryColors, getItem, getSuggestionCategory } from '../helpers/selectors';
+import { setPrimaryColors, getItem, getSuggestionCategory } from '../helpers/selectors';
 
 let initialRecommendations = {};
 
 const weather = {
   mainWeather: [
-    "Clouds"
+    "Thunderstorm"
   ],
   feelsLikeTemp: -4.3,
   actualTemp: -0.89,
@@ -88,7 +88,7 @@ function App() {
         initialRecommendations = fakeRecommendations;
 
         // // Setting app primary color
-        let colours = setPrimaryColors(all[0].data);
+        let colours = setPrimaryColors(weather);
         document.documentElement.style.setProperty('--primary-color', colours.solid);
         document.documentElement.style.setProperty('--primary-color-gradient', colours.gradient);
 
@@ -96,7 +96,7 @@ function App() {
           {
             ...prev,
             loading: false,
-            weather: all[0].data,
+            weather: weather,
             recommendations: { ...fakeRecommendations, done: [] },
             events: fakeEvents,
             homeAddress: all[1].data,
@@ -115,7 +115,7 @@ function App() {
         getAllData();
       }
     }
-  }, [state.loggedIn]);
+  }, [state.loggedIn, state.isMockData]);
 
 
   const login = () => setState(prev => ({ ...prev, loggedIn: true }));
@@ -156,9 +156,8 @@ function App() {
   };
 
   const deleteEvent = (scheduleType, id) => {
-    const filteredArr = filterEvents(scheduleType, id, state.events);
-    const newEventsObj = { ...state.events, [scheduleType]: filteredArr };
-
+    // const filteredArr = filterEvents(scheduleType, id, state.events);
+    // const newEventsObj = { ...state.events, [scheduleType]: filteredArr };
     axios.delete(`/api/entries/${id}`)
       .then(() => getAllData())
       .catch(() => console.log('failed delete'));

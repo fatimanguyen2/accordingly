@@ -71,26 +71,40 @@
   }
 
   button {width: 100%}
+  .location_search {
+    &_container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
 
-  .location_search_input {
-    flex: 1 1 100%;
-    background: black;
-    color: white;
-    font-size: $font-size;
-    border: none;
-    border-bottom: solid var(--primary-color);
-    padding: 0.2rem;
-    margin-left: 0.5rem;
+      label {
+        word-break: keep-all;
+      }
 
-    &:focus {
-      outline:none;
-      filter: brightness(2);
+      &--main {display: flex;}
     }
 
-    &:hover {
-      filter: brightness(2);
+    &_input {
+      flex: 1 1 100%;
+      background: black;
+      color: white;
+      font-size: $font-size;
+      border: none;
+      border-bottom: solid var(--primary-color);
+      padding: 0.2rem;
+      margin-left: 0.5rem;
+  
+      &:focus {
+        outline:none;
+        filter: brightness(2);
+      }
+  
+      &:hover {
+        filter: brightness(2);
+      }
     }
   }
+
 }
 
 // media querie

@@ -45,7 +45,7 @@ export const AddEvent = (props) => {
       <label htmlFor="entry">Title</label>
       <input type="text" name="entry" id="entry" placeholder="Event Name" defaultValue={entry} onChange={handleInputChange} autocomplete='off' required></input>
       <div className='location'>
-        <FontAwesomeIcon icon={faMapMarkerAlt} />
+        <FontAwesomeIcon className='weather-icon' icon={faMapMarkerAlt} />
         <select name={`mode`}
           className='mode'
           id={`mode`}

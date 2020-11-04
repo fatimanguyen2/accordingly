@@ -34,16 +34,18 @@ class LocationSearchInput extends React.Component {
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div className='location_search_container'>
+            <div className='location_search_container--main'>
             <label htmlFor='location_search'>Location</label>
             <input
               {...getInputProps({
                 id: 'location_search',
-                placeholder: 'Search Places ...',
+                placeholder: 'Enter a Location',
                 className: 'location_search_input',
                 onBlur: () => this.handleBlur(),
                 required: true,
               })}
             />
+            </div>
             <div className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}
               {suggestions.map(suggestion => {
