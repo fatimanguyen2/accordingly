@@ -28,8 +28,8 @@ export const Form = (props) => {
           />
         </div>
       </form>
-      <Button onClick={props.login}>Login</Button>
-      <Button onClick={props.demo}>Demo</Button>
+      <Button onClick={() => email.toLowerCase() === 'demo' ? props.demo() : props.login()}>Login</Button>
+      {/* <Button onClick={props.demo}>Demo</Button> */}
     </div>
 
   )
