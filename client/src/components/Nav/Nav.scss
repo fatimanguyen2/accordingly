@@ -89,11 +89,13 @@
 
     &.add-menu {
       // background-color:pink;
-      display: flex;
-      align-items: flex-start;
+      width: auto;
+      // display: flex;
+      // align-items: flex-end;
 
       &.button--collapse {
-        transform: translate(21vh, -10vh);
+        // transform: translate(21vh, -10vh);
+        transform: translate(0vh, -10vh);
         height: 8vh;
         padding: 2vh;
         // justify-content: flex-end;
@@ -101,7 +103,7 @@
   
       &.button--expand {
         height: $add-menu-border;
-        transform: translate(26vh, -14.2vh);
+        transform: translate(0vh, -14.3vh);
         // color: green;
         // display: flex;
         // flex-direction: row;
