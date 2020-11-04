@@ -14,14 +14,6 @@
   z-index: 2;
 
   .loader {
-    position: fixed;
-    opacity: 0.8;
-    width: 200vw;
-    height: 200vh;
-    left: 0px;
-    top: -150vh;
-    background-color: black;
-    z-index: 1;
     
     &__animation {
       position: fixed;
@@ -33,7 +25,19 @@
       border-top: 16px solid #3498db;
       width: 120px;
       height: 120px;
-      animation: 4s infinite linear rainbow;
+      animation: 2s infinite linear rainbow;
+      z-index: 2;
+    }
+
+    &__background {
+      position: fixed;
+      opacity: 0.8;
+      width: 200vw;
+      height: 200vh;
+      left: 0px;
+      top: -150vh;
+      background-color: black;
+      z-index: 1;
     }
   }
 

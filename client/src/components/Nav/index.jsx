@@ -51,6 +51,7 @@ export const Nav = props => {
         {props.wait && 
         <div className='loader'>
           <div className='loader__animation'></div>
+          <div className='loader__background'></div>
         </div>
         }
         {(addCollapse || !props.loggedIn) &&
