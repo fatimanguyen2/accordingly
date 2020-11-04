@@ -3,8 +3,8 @@ INSERT INTO
 VALUES
 ('Water', 'Stay hydrated on warm days.'), --1
 ('A lot of Water', 'Remember to stay hydrated. Hydration is key during hot days.'), --2
-('Short Sleeves Top', 'Warm days allows for less coverage.'), --3
-('Long Sleeves Top', 'Colder days require more coverage.'), --4
+('Short Sleeve Top', 'Warm days allows for less coverage.'), --3
+('Long Sleeve Top', 'Colder days require more coverage.'), --4
 ('Light Clothing', 'It is warm enough to wear only one layer.'), --5
 ('Extra Layers', 'Layering up on clothing is recommended as the temperature drops.'), --6
 ('Winter Coat', 'Cold weather require a thick coat.'), --7
