@@ -254,11 +254,6 @@ const fakeRecommendations = {
             "description": "It's dangerous to go alone."
         },        
         {
-            "id": 104,
-            "name": "Sunscreen",
-            "description": "It's dangerous to go alone."
-        },
-        {
             "id": 103,
             "name": "Towel",
             "description": "Always bring a towel'."
