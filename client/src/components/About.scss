@@ -9,6 +9,7 @@
   &__team-name {
     padding-bottom: 0.5rem;
     border-bottom: 0.3rem solid var(--primary-color);
+    animation: 15s infinite linear rainbowInput;
   }
 
   .logo-ring {
@@ -57,5 +58,6 @@
       box-shadow: 0 0 1rem $thunderstorm-color, inset 0 0 1rem $thunderstorm-color;
     }
   }
+  
 
 }
