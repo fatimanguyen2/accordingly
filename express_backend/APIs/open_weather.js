@@ -29,7 +29,6 @@ const getMainWeather = (location) => {
 
 const getDetailedForecast = (schedule) => {
   const allForecasts = schedule.map(step => {
-    console.log(step)
     const hour = step.hours_from_now
     if (hour > 0) {
       return getWeather(step.start_point)

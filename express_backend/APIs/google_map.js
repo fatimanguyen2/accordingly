@@ -29,7 +29,6 @@ const getDifferentTripTime = (from, destinations) => {
 
 
 const getLeaveBy = (origin, event) => {
-  console.log(event)
    return getTripTime(origin, event.destination, event.mode)
     .then(time => {
       return moment(event.start_time).subtract(time, "s")
