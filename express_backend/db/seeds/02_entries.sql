@@ -12,4 +12,5 @@ VALUES
 ('Skate competition', TRUE, point(43.66858, -79.35459), 'walking', '453 Broadview Ave', 'Toronto', 'M4K 2N3', 1),
 ('Comicon', FALSE, point(44.22624, -76.49317), 'walking', '62 5th Field Company Lane', 'Toronto', 'K7L', 3),
 ('Geeky convention', FALSE, point(43.66858, -79.35459), 'walking', '453 Broadview Ave', 'Toronto', 'M4K 2N3', 2),
-('Hack-a-thon', TRUE, point(43.66858, -79.35459), 'walking', '453 Broadview Ave', 'Toronto', 'M4K 2N3', 2);
+('Hack-a-thon', TRUE, point(43.66858, -79.35459), 'walking', '453 Broadview Ave', 'Toronto', 'M4K 2N3', 2),
+('Game Night', FALSE, point(43.66789, -79.39378), 'walking', '100 Queens Park', 'Toronto', 'M5S 2C6', 2);
