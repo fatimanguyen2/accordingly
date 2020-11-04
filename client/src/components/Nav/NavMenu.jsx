@@ -25,7 +25,8 @@ export const NavMenu = (props) => {
             <li>
               <Link to={location.pathname} onClick={() => {
                   props.onSelect('nav menu refresh selected');
-                  // props.closeMenu();
+                  props.closeMenu();
+                  props.onWait(true);
                 }}>
                 Refresh <span>{time}</span>
               </Link>
