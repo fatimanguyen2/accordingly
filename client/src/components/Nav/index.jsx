@@ -48,8 +48,16 @@ export const Nav = props => {
   return (
     <div className='nav'>
       <div className={classnames('nav-container', {'empty': menuCollapse && !addCollapse})}>
+        {props.wait && 
+        <div className='loader'>
+          <div className='loader__animation'></div>
+        </div>
+        }
         {(addCollapse || !props.loggedIn) &&
           <Fragment>
+            {/* <div className='loader'>
+              <div className='loader__animation'></div>
+            </div> */}
             <button
               onClick={() => {
                 toggleMenu();
@@ -75,8 +83,10 @@ export const Nav = props => {
           <Fragment>
             <NavMenu
               onSelect={props.onSelect}
+              onWait={props.onWait}
               closeMenu={closeMenu}
               loggedIn={props.loggedIn}
+              wait={props.wait}
               time={props.time}
               logout={props.logout}
             />
@@ -116,7 +126,7 @@ export const Nav = props => {
         }
         {(!addCollapse || props.eventToEdit.entry_id) && props.loggedIn &&
           <Fragment>
-            <AddEvent onSubmit={props.onSubmit} onEdit={props.onEdit} eventToEdit={props.eventToEdit} closeAdd={closeAdd} />
+            <AddEvent wait={props.wait} onSubmit={props.onSubmit} onEdit={props.onEdit} eventToEdit={props.eventToEdit} closeAdd={closeAdd} onWait={props.onWait}/>
             <button className='blur-trigger' onClick={closeAll}>BLUR TRIGGER, MAKE ME INVISIBLE AND TAKE UP THE WHOLE REST OF THE SCREEN!</button>
           </Fragment>
         }

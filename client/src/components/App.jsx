@@ -22,6 +22,7 @@ function App() {
   const time = Date.now();
   const [state, setState] = useState({
     loading: false,
+    waiting: false,
     view: 'home',
     loggedIn: false,
     isMockData: false,
@@ -54,6 +55,7 @@ function App() {
           {
             ...prev,
             loading: false,
+            waiting: false,
             weather: all[0].data,
             recommendations: { ...all[1].data, done: [] },
             events: all[2].data,
@@ -66,8 +68,8 @@ function App() {
   // DEMO PURPOSES
   const getMockData = () => {
     Promise.all([
-      axios.get('/api/users/1/weather'),
-      axios.get('/api/users/1')
+      axios.get('/api/users/2/weather'),
+      axios.get('/api/users/2')
     ])
       .then(all => {
         const time = Date.now();
@@ -136,7 +138,6 @@ function App() {
   };
 
   const updateAddress = (addressObj) => {
-    console.log(addressObj);
     axios.put('/api/users/2', { raw_address: addressObj })
       .then(() => getAllData())
       .catch(() => console.log('failed to update address'));
@@ -169,6 +170,8 @@ function App() {
 
 
   const openEdit = (entry_id) => {
+    // console.log("entry_id " + entry_id);
+    // console.log(state.events);
     const allEvents = [...state.events.repeating, ...state.events.future, ...state.events.today.filter(ele => ele.recurrence_id === undefined)]
     console.log(allEvents);
     const eventToEditArr = allEvents.filter(eventItem => eventItem.entry_id === entry_id);
@@ -179,6 +182,10 @@ function App() {
   const clearToEdit = () => {
     setState(prev => ({ ...prev, eventToEdit: {} }))
   };
+
+  const setWaiting = wait => {
+    setState(prev => ({ ...prev, waiting: wait }))
+  }
 
   const useMock = () => setState(prev => ({ ...prev, loggedIn:true, isMockData: true }));
 
@@ -192,10 +199,12 @@ function App() {
         : <div>
           <Router>
             <Nav
+              wait={state.waiting}
               view={state.view}
               onSelect={(name) => getAllData()}
               onSubmit={addEvent}
               onEdit={editEvent}
+              onWait={setWaiting}
               loggedIn={state.loggedIn}
               isMockData={state.isMockData}
               time={state.time}

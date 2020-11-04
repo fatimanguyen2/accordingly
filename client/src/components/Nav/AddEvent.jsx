@@ -143,6 +143,7 @@ export const AddEvent = (props) => {
           const pass = validateObj(eventObj, [ 'entry', 'raw_address', 'start_date', 'end_date', 'start_hour', 'end_hour' ]);
           pass && (input.entry_id ? props.onEdit(eventObj) : props.onSubmit(eventObj));
           pass && props.closeAdd();
+          pass && props.onWait(true);
         }}>
         {entry_id ? 'Save' : 'Add'}
       </button>

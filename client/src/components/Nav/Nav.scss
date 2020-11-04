@@ -13,6 +13,30 @@
   transform: translate(0px, 15vh);
   z-index: 2;
 
+  .loader {
+    position: fixed;
+    opacity: 0.8;
+    width: 200vw;
+    height: 200vh;
+    left: 0px;
+    top: -150vh;
+    background-color: black;
+    z-index: 1;
+    
+    &__animation {
+      position: fixed;
+      left: 51vw;
+      top: -50vh;
+      margin: -75px 0 0 -75px;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 120px;
+      height: 120px;
+      animation: 4s infinite linear rainbow;
+    }
+  }
+
   .button {
     position: relative;
     // padding: 0;
