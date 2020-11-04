@@ -47,7 +47,6 @@
     // padding-left: 5px;
     background: none;
     border: none;
-    border-radius: 30%;
     cursor: pointer;
     
     &:focus {
@@ -57,6 +56,10 @@
     }
 
     &.nav-menu {
+
+      &.button {
+        border-radius: 30%;
+      }
 
       &.button--collapse {
         transform: translate(0px, -10vh);
