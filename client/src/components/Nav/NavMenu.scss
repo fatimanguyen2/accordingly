@@ -67,8 +67,8 @@
 }
 
 ul.nav-menu {
-  animation-name: expandNav;
-  animation-duration: 0.15s;
+  animation: expandNav;
+  animation-duration: 0.1s;
   border-radius: 50%;
   // background-color: red;
 }

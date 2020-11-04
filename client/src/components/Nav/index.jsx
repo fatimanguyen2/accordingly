@@ -56,9 +56,6 @@ export const Nav = props => {
         }
         {(addCollapse || !props.loggedIn) &&
           <Fragment>
-            {/* <div className='loader'>
-              <div className='loader__animation'></div>
-            </div> */}
             <button
               onClick={() => {
                 toggleMenu();
