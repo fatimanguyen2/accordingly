@@ -18,6 +18,18 @@ import { filterEvents, setPrimaryColors, getItem, getSuggestionCategory } from '
 
 let initialRecommendations = {};
 
+const weather = {
+  mainWeather: [
+    "Clouds"
+  ],
+  feelsLikeTemp: -4.3,
+  actualTemp: -0.89,
+  sunset: 1604439507,
+  sunrise: 1604403454,
+  feels_likeMin: -6.05,
+  feels_likeMax: -4.46
+}
+
 function App() {
   const time = Date.now();
   const [state, setState] = useState({
@@ -85,7 +97,7 @@ function App() {
             ...prev,
             loading: false,
             weather: all[0].data,
-            recommendations: {...fakeRecommendations, done:[]},
+            recommendations: { ...fakeRecommendations, done: [] },
             events: fakeEvents,
             homeAddress: all[1].data,
             time
@@ -93,7 +105,7 @@ function App() {
         ))
       })
   };
-  
+
   useEffect(() => {
     if (state.loggedIn) {
       setState(prev => ({ ...prev, loading: true }))
@@ -187,7 +199,7 @@ function App() {
     setState(prev => ({ ...prev, waiting: wait }))
   }
 
-  const useMock = () => setState(prev => ({ ...prev, loggedIn:true, isMockData: true }));
+  const useMock = () => setState(prev => ({ ...prev, loggedIn: true, isMockData: true }));
 
   return (
     <main className='page-content'>
