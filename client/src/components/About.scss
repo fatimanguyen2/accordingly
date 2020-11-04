@@ -3,7 +3,6 @@
 .about {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   height: 100vh;
 
@@ -11,4 +10,52 @@
     padding-bottom: 0.5rem;
     border-bottom: 0.3rem solid var(--primary-color);
   }
+
+  .logo-ring {
+    margin: 2rem 0;
+    border: 0.4rem solid var(--primary-color);
+    border-radius: 50%;
+    text-align: center;
+    width: 15rem;
+    height: 15rem;
+    font-size: $font-size;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 0 1rem var(--primary-color), inset 0 0 1rem var(--primary-color);
+    animation: 15s infinite linear rainbow;
+  }
+
+  @keyframes rainbow {
+    0%   {
+      border: 0.4rem solid $thunderstorm-color;
+      box-shadow: 0 0 1rem $thunderstorm-color, inset 0 0 1rem $thunderstorm-color;
+    }
+    16%   {
+      border: 0.4rem solid $clear-night-color;
+      box-shadow: 0 0 1rem $clear-night-color, inset 0 0 1rem $clear-night-color;
+    }
+    33%  {
+      border: 0.4rem solid $rainy-drizzle-color;
+      box-shadow: 0 0 1rem $rainy-drizzle-color, inset 0 0 1rem $rainy-drizzle-color;
+    }
+    49%  {
+      border: 0.4rem solid $snowy-color;
+      box-shadow: 0 0 1rem $snowy-color, inset 0 0 1rem $snowy-color;
+    }
+    66% {
+      border: 0.4rem solid $cloudy-color;
+      box-shadow: 0 0 1rem $cloudy-color, inset 0 0 1rem $cloudy-color;
+    }
+    83% {
+      border: 0.4rem solid $sunny-color;
+      box-shadow: 0 0 1rem $sunny-color, inset 0 0 1rem $sunny-color;
+    }
+    100%   {
+      border: 0.4rem solid $thunderstorm-color;
+      box-shadow: 0 0 1rem $thunderstorm-color, inset 0 0 1rem $thunderstorm-color;
+    }
+  }
+
 }
