@@ -12,9 +12,7 @@ export const Register = props => {
   const email = useControlledInput('');
   const password = useControlledInput('');
   const passwordConfirmation = useControlledInput('');
-  const address = useControlledInput('');
-  const startOfDay = useControlledInput('');
-  const { input, handleInputChange, handleAddress } = useEndlessForm('');
+  const { input, handleAddress } = useEndlessForm('');
 
   return (
     <Fragment>
@@ -46,9 +44,6 @@ export const Register = props => {
               }} destination={''} />
             </div>
             <p className='register__address__desc'>We use your home location as the starting point of the day to predict and prepare your personalized recommendations.</p>
-            {/* <label htmlFor='startOfDay'><FontAwesomeIcon icon={faClock} />Start of Day:</label>
-            <input id='startOfDay' {...startOfDay} type='time' />
-            <p>The start of day setting determines when we will send you the daily notification for what to bring and help us know when you are getting ready at home.</p> */}
           </form>
           <Button onClick={props.login}>Register</Button>
         </div> :

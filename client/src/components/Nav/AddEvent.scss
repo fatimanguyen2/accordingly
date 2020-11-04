@@ -26,6 +26,10 @@
   // position: absolute;
   // animation-name: expand;
   // animation-duration: 0.2s;
+  .weather-icon {
+    margin-right: 1vh;
+    font-size: 1.5rem;
+  }
 
   .menu-shape {
     position: absolute;
@@ -88,6 +92,10 @@
   ul {
     max-height: 22vh;
     overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150%;
   }
 
   .location {
@@ -105,6 +113,7 @@
 
     span {
       flex: 1 0 3vh;
+      margin: 0 2vh;
     }
 
     select.mode {
@@ -152,6 +161,7 @@
     text-align: center;
     margin: 1vh;
     outline: none;
+    max-width: 380px;
 
     &::-webkit-calendar-picker-indicator {
       filter: invert(100%);
@@ -212,7 +222,8 @@
   p {
     font-size: 3vh;
     text-align: center;
-    margin: 0px;
+    margin: 0;
+    margin-bottom: 1vh;
   }
   
   li {
@@ -223,15 +234,13 @@
     font-size: 3vh;
     
     p {
-      margin: 0.5vh;
-      // padding: 0.5vh;
+      margin: 0.5vh 1vh;
     }
 
     input {
       width: auto;
-      margin: 0.5vh;
+      margin: 0.5vh 1vh;
       font-size: 3vh;
-      // padding: 0.5vh;
     }
 
     select {
@@ -240,9 +249,8 @@
       width: auto;
       color: white;
       background-color: transparent;
-      margin: 0.5vh;
+      margin: 0.5vh 1vh;
       font-size: 3vh;
-      // padding: 0.5vh;
     }
   }
 
@@ -262,7 +270,7 @@
       color: var(--primary-color);
       background: none;
       padding: 0px;
-      margin: 0.5vh;
+      margin: 1vh;
       font-size: 3.5vh;
       // padding: 0.5vh;
     }
@@ -279,6 +287,7 @@
       font-size: 3vh;
       background: var(--primary-color);
       width: 100%;
+      margin: 0.5rem 0 1.5rem 0;
     }
     
   }

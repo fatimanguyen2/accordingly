@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Redirect } from "react-router-dom";
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 

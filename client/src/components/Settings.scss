@@ -34,7 +34,9 @@
   .location_search_container {
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+
+    &--main {display:flex}
 
     label {
       font-size: 2.5vh;
