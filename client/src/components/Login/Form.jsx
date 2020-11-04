@@ -3,8 +3,8 @@ import { Button } from '../Button';
 
 
 export const Form = (props) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('raccoon@gmail.com');
+  const [password, setPassword] = useState('********');
 
   return (
     <div className='form'>
