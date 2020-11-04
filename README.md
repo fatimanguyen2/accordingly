@@ -9,7 +9,9 @@ Let me introduce our app accordingly. It gives our user advice on what to wear o
 
 ## What does it look like
 
-pretty pictures
+### General Navigation
+
+![navigation](https://github.com/LawfulKami/accordingly/blob/main/docs/app-navigation.gif?raw=true)
 
 ## Stack
   * React
