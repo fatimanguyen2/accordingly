@@ -1,3 +1,0 @@
-# Lanny
-# Sean
-# Fatima

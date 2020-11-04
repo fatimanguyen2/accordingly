@@ -9,8 +9,8 @@ VALUES
 ('Extra Layers', 'Layering up on clothing is recommended as the temperature drops.'), --6
 ('Winter Coat', 'Cold weather require a thick coat.'), --7
 ('Shorts', 'Warm days allow for less coverage.'), --8
-('Light gloves', 'Keep your hand covered in cool and cold weather conditions.'), --9
-('Thick gloves', 'Protect your extremities during the winter.'), --10
+('Light Gloves', 'Keep your hand covered in cool and cold weather conditions.'), --9
+('Thick Gloves', 'Protect your extremities during the winter.'), --10
 ('Hat', 'The weather is cool. Keep your head warm.'), --11
 ('Thick Hat', 'Colder temperatures require thicker clothing.'), --12
 ('Light Scarf', 'The temperature is cool enough to cover the neck.'), --13

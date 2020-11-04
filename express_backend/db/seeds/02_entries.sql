@@ -9,7 +9,7 @@ VALUES
 ('Going to see dad', FALSE, point(43.67969, -79.29683), 'walking', '12 Walter St', 'Toronto', 'M4E 2Z1', 3),
 ('Gymn-a-thon', TRUE, point(43.66808, -79.30635), 'walking', '187 Boardwalk Dr', 'Toronto', 'M4L 3X9', 5),
 ('Fundraiser', FALSE, point(43.67969, -79.29683), 'walking', '12 Walter St', 'Toronto', 'M4E 2Z1', 4),
-('Skate competition', TRUE, point(43.66858, -79.35459), 'walking', '453 Broadview Ave', 'Toronto', 'M4K 2N3', 1),
+('Skate Sompetition', TRUE, point(43.66858, -79.35459), 'walking', '453 Broadview Ave', 'Toronto', 'M4K 2N3', 1),
 ('Comicon', FALSE, point(44.22624, -76.49317), 'walking', '62 5th Field Company Lane', 'Toronto', 'K7L', 3),
-('Geeky convention', FALSE, point(43.66858, -79.35459), 'walking', '453 Broadview Ave', 'Toronto', 'M4K 2N3', 2),
+('Geeky Convention', FALSE, point(43.66858, -79.35459), 'walking', '453 Broadview Ave', 'Toronto', 'M4K 2N3', 2),
 ('Hack-a-thon', TRUE, point(43.66858, -79.35459), 'walking', '453 Broadview Ave', 'Toronto', 'M4K 2N3', 2);
