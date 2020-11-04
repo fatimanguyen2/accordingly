@@ -47,6 +47,7 @@
     // padding-left: 5px;
     background: none;
     border: none;
+    border-radius: 30%;
     cursor: pointer;
     
     &:focus {
@@ -84,12 +85,12 @@
     }
 
     &.add-menu {
-      // color:pink;
+      // background-color:pink;
       display: flex;
-      align-items: flex-end;
+      align-items: flex-start;
 
       &.button--collapse {
-        transform: translate(0vh, -10vh);
+        transform: translate(21vh, -10vh);
         height: 8vh;
         padding: 2vh;
         // justify-content: flex-end;
@@ -97,7 +98,7 @@
   
       &.button--expand {
         height: $add-menu-border;
-        transform: translate(-0vh, -14vh);
+        transform: translate(26vh, -14.2vh);
         // color: green;
         // display: flex;
         // flex-direction: row;
