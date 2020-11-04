@@ -61,7 +61,12 @@
         transform: translate(0px, -10vh);
         height: 8vh;
         padding: 2vh;
+       
+        &.logged-out {
+          color: white;
+        }
       }
+
   
       &.button--expand {
         height: $nav-menu-border;
@@ -137,6 +142,11 @@
       cursor: pointer;
       box-shadow: 0 0 7px 1px var(--primary-color);
       
+      &.logged-out {
+        background-color: transparent;
+        box-shadow: none;
+      }
+
       &.nav-menu {
         transform: translate(-10vh, 0vh);
         // animation-duration: 0.2s;

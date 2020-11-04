@@ -65,6 +65,7 @@ export const Nav = props => {
                 classnames('nav-menu', 'button', {
                   'button--collapse': menuCollapse,
                   'button--expand': !menuCollapse,
+                  'logged-out': !props.loggedIn,
                 })
               }>
               <FontAwesomeIcon icon={faBars} />
@@ -73,6 +74,7 @@ export const Nav = props => {
                 classnames('nav-menu', 'menu-shape', {
                   'menu-shape--collapse': menuCollapse,
                   'menu-shape--expand': !menuCollapse,
+                  'logged-out': !props.loggedIn,
                 })
               }></div>
           </Fragment>
