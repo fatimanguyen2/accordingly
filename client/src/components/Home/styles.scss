@@ -202,11 +202,11 @@
         }
 
         &--rotate-up {
-          transform: rotateX(180deg);
+          transform: translate(0rem, -0.3rem) rotateX(180deg);
           transition: 500ms transform;
         }
         &--rotate-down {
-          transform: rotateX(0deg);
+          transform: translate(0vh, -0.3rem) rotateX(0deg);
           transition: 300ms transform;
         }
       }
