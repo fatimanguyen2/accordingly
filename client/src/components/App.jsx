@@ -20,14 +20,14 @@ let initialRecommendations = {};
 
 const weather = {
   mainWeather: [
-    "Thunderstorm"
+    "Rain"
   ],
-  feelsLikeTemp: -4.3,
+  feelsLikeTemp: 4.3,
   actualTemp: -0.89,
   sunset: 1604439507,
   sunrise: 1604403454,
-  feels_likeMin: -6.05,
-  feels_likeMax: -4.46
+  feels_likeMin: -3.05,
+  feels_likeMax: 4.46
 }
 
 function App() {

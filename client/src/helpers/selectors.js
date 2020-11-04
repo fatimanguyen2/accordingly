@@ -104,8 +104,9 @@ const changeWeatherName = (start, weather) => {
 };
 
 const setPrimaryColors = weather => {
-  const now = moment();
+  const now = moment().unix();
   const isNightTime = now < weather.sunrise || now > weather.sunset;
+  console.log(isNightTime)
   const colors = {
     Thunderstorm: { solid: 'rgb(151, 118, 223)', gradient: 'rgba(175,145,239, 0.6)' },
     Drizzle: { solid: 'rgb(34,155,206)', gradient: 'rgba(34,155,206, 0.8)' },
