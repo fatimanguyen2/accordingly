@@ -1,5 +1,5 @@
 # Accordingly
-Let me introduce our app accordingly. It gives our user advice on what to wear or bring according to the environmental factors such as weather, air quality, uv index during their trip/activity so they’re not gonna get caught out in the rain without an umbrella. We like to think of it as the loving advice of a mom or dad would give before you leave home. To accomplish this, our app has two main views, the home and schedule.
+Accordingly gives our user advice on what to wear or bring according to the environmental factors such as weather, air quality, uv index during their trip/activity so they’re not gonna get caught out in the rain without an umbrella. We like to think of it as the loving advice of a mom or dad would give before you leave home. To accomplish this, our app has two main views, the home and schedule.
 
 
 ## Team
