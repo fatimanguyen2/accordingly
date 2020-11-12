@@ -165,16 +165,12 @@ function App() {
   };
 
   const addEvent = (eventObj) => {
-    console.log('add event triggered: ');
-    console.log(eventObj);
     axios.post('/api/users/2/entries', eventObj)
       .then(() => getAllData())
       .catch(() => console.log('failed to add event'));
   };
 
   const editEvent = (eventObj) => {
-    console.log('update event triggered: ');
-    console.log(eventObj);
     axios.put(`/api/users/2/entries/${eventObj.entry_id}`, eventObj)
       .then(() => getAllData())
       .catch(() => console.log('failed to update event'));

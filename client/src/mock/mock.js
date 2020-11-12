@@ -16,11 +16,11 @@ const fakeEvents = {
           "end_hour": "23:59:00",
           "entry_id": 17,
           "type_of": "weekly",
-          "initial": "2020-11-03T05:00:00.000Z",
+          "initial": "2020-11-05T05:00:00.000Z",
           "interval": 1,
           "recurrence_id": 6,
-          "start_time": "2020-11-03T23:05:00-04:00",
-          "end_time": "2020-11-03T23:00:00-04:00",
+          "start_time": "2020-11-05T23:05:00-04:00",
+          "end_time": "2020-11-05T23:00:00-04:00",
           "leave_by": "2020-11-03T22:32:45-04:00",
           "weather": {
               "mainWeather": ["Rain"],
@@ -54,13 +54,13 @@ const fakeEvents = {
         {
           "entry": "Morning Commute",
           "entry_id": 17,
-          "start_date": "2020-11-04T05:00:00.000Z",
+          "start_date": "2020-11-05T05:00:00.000Z",
           "start_hour": "13:00:00",
           "end_hour": "16:00:00",
           "next_event": {
               "address": "6080, Manitoba St",
               "city": "Vancouver",
-              "start_time": "2020-11-05T13:00:00",
+              "start_time": "2020-11-06T13:00:00",
               "end_time": "2020-11-06T16:00:00",
               "destination": {
                   "x": 49.2297911,
@@ -108,7 +108,7 @@ const fakeEvents = {
         {
           "entry": "Friday Afternoon Hike",
           "entry_id": 30,
-          "start_date": "2020-11-04T05:00:00.000Z",
+          "start_date": "2020-11-06T05:00:00.000Z",
           "start_hour": "13:00:00",
           "end_hour": "16:00:00",
           "next_event": {
